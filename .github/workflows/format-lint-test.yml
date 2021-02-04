@@ -30,14 +30,18 @@ jobs:
 
       # Install requirements
       - name: Install requirements
+        shell: bash -l {0}
         run: make dev
 
       - name: Formatting check
+        shell: bash -l {0}
         run: make format
 
       - name: Linting check
+        shell: bash -l {0}
         run: make lint
       
       - name: Unit test
+        shell: bash -l {0}
         run: make test
 

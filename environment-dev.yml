@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
   - pytorch
-  -
+
 dependencies:
   - python=3.8
   - black=20.8b1
