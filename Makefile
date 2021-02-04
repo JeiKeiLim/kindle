@@ -33,6 +33,12 @@ push-doc:
 	git commit --amend -C HEAD
 
 build:
+	rm dist/*
+	python3 setup.py sdist bdist_wheel
+
+build-force:
+	rm dist/*
+	rm -rf build
 	python3 setup.py sdist bdist_wheel
 
 dist:
