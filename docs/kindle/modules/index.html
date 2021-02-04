@@ -1,0 +1,2034 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>kindle.modules API documentation</title>
+<meta name="description" content="PyTorch Module and ModuleGenerator." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>kindle.modules</code></h1>
+</header>
+<section id="section-intro">
+<p>PyTorch Module and ModuleGenerator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;PyTorch Module and ModuleGenerator.&#34;&#34;&#34;
+
+from kindle.modules.base_generator import GeneratorAbstract, ModuleGenerator
+from kindle.modules.bottleneck import Bottleneck, BottleneckGenerator
+from kindle.modules.concat import Concat, ConcatGenerator
+from kindle.modules.conv import Conv, ConvGenerator
+from kindle.modules.dwconv import DWConv, DWConvGenerator
+from kindle.modules.flatten import FlattenGenerator
+from kindle.modules.linear import Linear, LinearGenerator
+from kindle.modules.poolings import (AvgPoolGenerator, GlobalAvgPool,
+                                     GlobalAvgPoolGenerator, MaxPoolGenerator)
+
+__all__ = [
+    &#34;ModuleGenerator&#34;,
+    &#34;GeneratorAbstract&#34;,
+    &#34;Bottleneck&#34;,
+    &#34;Concat&#34;,
+    &#34;Conv&#34;,
+    &#34;DWConv&#34;,
+    &#34;Linear&#34;,
+    &#34;GlobalAvgPool&#34;,
+    &#34;BottleneckGenerator&#34;,
+    &#34;ConcatGenerator&#34;,
+    &#34;ConvGenerator&#34;,
+    &#34;LinearGenerator&#34;,
+    &#34;DWConvGenerator&#34;,
+    &#34;FlattenGenerator&#34;,
+    &#34;MaxPoolGenerator&#34;,
+    &#34;AvgPoolGenerator&#34;,
+    &#34;GlobalAvgPoolGenerator&#34;,
+]</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="kindle.modules.base_generator" href="base_generator.html">kindle.modules.base_generator</a></code></dt>
+<dd>
+<div class="desc"><p>Base Module Generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.bottleneck" href="bottleneck.html">kindle.modules.bottleneck</a></code></dt>
+<dd>
+<div class="desc"><p>Bottleneck(ResNet) module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.concat" href="concat.html">kindle.modules.concat</a></code></dt>
+<dd>
+<div class="desc"><p>Concat module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.conv" href="conv.html">kindle.modules.conv</a></code></dt>
+<dd>
+<div class="desc"><p>Conv module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.dwconv" href="dwconv.html">kindle.modules.dwconv</a></code></dt>
+<dd>
+<div class="desc"><p>DWConv module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.flatten" href="flatten.html">kindle.modules.flatten</a></code></dt>
+<dd>
+<div class="desc"><p>Flatten module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.linear" href="linear.html">kindle.modules.linear</a></code></dt>
+<dd>
+<div class="desc"><p>Linear module, generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.modules.poolings" href="poolings.html">kindle.modules.poolings</a></code></dt>
+<dd>
+<div class="desc"><p>Module generator related to pooling operations …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="kindle.modules.AvgPoolGenerator"><code class="flex name class">
+<span>class <span class="ident">AvgPoolGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Average pooling module generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AvgPoolGenerator(MaxPoolGenerator):
+    &#34;&#34;&#34;Average pooling module generator.&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.poolings.MaxPoolGenerator" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator">MaxPoolGenerator</a></li>
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.AvgPoolGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.poolings.MaxPoolGenerator" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator">MaxPoolGenerator</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.poolings.MaxPoolGenerator.base_module" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator.base_module">base_module</a></code></li>
+<li><code><a title="kindle.modules.poolings.MaxPoolGenerator.compute_out_shape" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.poolings.MaxPoolGenerator.in_channel" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.poolings.MaxPoolGenerator.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.modules.poolings.MaxPoolGenerator.out_channel" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.Bottleneck"><code class="flex name class">
+<span>class <span class="ident">Bottleneck</span></span>
+<span>(</span><span>in_channels: int, out_channels: int, shortcut=True, groups: int = 1, expansion: float = 0.5, activation: Union[str, NoneType] = 'ReLU')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Standard bottleneck block.</p>
+<p>Initialize.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Bottleneck(nn.Module):
+    &#34;&#34;&#34;Standard bottleneck block.&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        shortcut=True,
+        groups: int = 1,
+        expansion: float = 0.5,
+        activation: Union[str, None] = &#34;ReLU&#34;,
+    ) -&gt; None:
+        &#34;&#34;&#34;Initialize.&#34;&#34;&#34;
+        super().__init__()
+        expansion_channel = int(out_channels * expansion)
+
+        self.conv1 = Conv(in_channels, expansion_channel, 1, 1, activation=activation)
+        self.conv2 = Conv(expansion_channel, out_channels, 3, 1, groups=groups)
+        self.shortcut = shortcut and in_channels == out_channels
+
+    def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+        out = self.conv2(self.conv1(x))
+
+        if self.shortcut:
+            out = out + x
+
+        return out</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.Bottleneck.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kindle.modules.Bottleneck.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.Bottleneck.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+    out = self.conv2(self.conv1(x))
+
+    if self.shortcut:
+        out = out + x
+
+    return out</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.BottleneckGenerator"><code class="flex name class">
+<span>class <span class="ident">BottleneckGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bottleneck block generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BottleneckGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Bottleneck block generator.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        return self._get_divisible_channel(self.args[0] * self.width_multiply)
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def base_module(self) -&gt; nn.Module:
+        &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+        return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)
+
+    def compute_out_shape(
+        self, size: Union[list, np.ndarray], repeat: int = 1
+    ) -&gt; List[int]:
+        &#34;&#34;&#34;Compute output shape.&#34;&#34;&#34;
+        with torch.no_grad():
+            module: nn.Module = self(repeat=repeat)
+            module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+            return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1):
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        module = self.base_module(*args)
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.BottleneckGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.BottleneckGenerator.base_module"><code class="name">var <span class="ident">base_module</span> : torch.nn.modules.module.Module</code></dt>
+<dd>
+<div class="desc"><p>Returns module class from kindle.common_modules based on the class name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def base_module(self) -&gt; nn.Module:
+    &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+    return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.BottleneckGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.BottleneckGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    return self._get_divisible_channel(self.args[0] * self.width_multiply)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.BottleneckGenerator.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: Union[list, numpy.ndarray], repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute output shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_out_shape(
+    self, size: Union[list, np.ndarray], repeat: int = 1
+) -&gt; List[int]:
+    &#34;&#34;&#34;Compute output shape.&#34;&#34;&#34;
+    with torch.no_grad():
+        module: nn.Module = self(repeat=repeat)
+        module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+        return list(module_out.shape[-3:])</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.Concat"><code class="flex name class">
+<span>class <span class="ident">Concat</span></span>
+<span>(</span><span>dimension: int = 1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Concatenation module.</p>
+<p>Concatenation module.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dimension</code></strong></dt>
+<dd>concatenation axis.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Concat(nn.Module):
+    &#34;&#34;&#34;Concatenation module.&#34;&#34;&#34;
+
+    def __init__(self, dimension: int = 1) -&gt; None:
+        &#34;&#34;&#34;Concatenation module.
+
+        Args:
+            dimension: concatenation axis.
+        &#34;&#34;&#34;
+        super().__init__()
+        self.dimension = dimension
+
+    def forward(self, x: Union[Tuple[torch.Tensor, ...], List[torch.Tensor]]):
+        &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+        return torch.cat(x, self.dimension)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.Concat.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kindle.modules.Concat.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.Concat.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: Union[Tuple[torch.Tensor, ...], List[torch.Tensor]]) ‑> Callable[..., Any]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, x: Union[Tuple[torch.Tensor, ...], List[torch.Tensor]]):
+    &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+    return torch.cat(x, self.dimension)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.ConcatGenerator"><code class="flex name class">
+<span>class <span class="ident">ConcatGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Concatenation module generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConcatGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Concatenation module generator.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+        # error: Item &#34;int&#34; of &#34;Union[int, List[int]]&#34; has no attribute
+        # &#34;__iter__&#34; (not iterable)
+        return sum([self.in_channels[i] for i in self.from_idx])  # type: ignore
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        return -1
+
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+        return [self.out_channel] + list(size[0][1:])
+
+    def __call__(self, repeat: int = 1):
+        module = Concat(*self.args)
+
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.ConcatGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.ConcatGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    return -1</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.ConcatGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+    # error: Item &#34;int&#34; of &#34;Union[int, List[int]]&#34; has no attribute
+    # &#34;__iter__&#34; (not iterable)
+    return sum([self.in_channels[i] for i in self.from_idx])  # type: ignore</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.ConcatGenerator.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute out shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+    &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+    return [self.out_channel] + list(size[0][1:])</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.Conv"><code class="flex name class">
+<span>class <span class="ident">Conv</span></span>
+<span>(</span><span>in_channels: int, out_channels: int, kernel_size: int, stride: int = 1, padding: Union[int, NoneType] = None, groups: int = 1, activation: Union[str, NoneType] = 'ReLU')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Standard convolution with batch normalization and activation.</p>
+<p>Standard convolution with batch normalization and activation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>input channels.</dd>
+<dt><strong><code>out_channels</code></strong></dt>
+<dd>output channels.</dd>
+<dt><strong><code>kernel_size</code></strong></dt>
+<dd>kernel size.</dd>
+<dt><strong><code>stride</code></strong></dt>
+<dd>stride.</dd>
+<dt><strong><code>padding</code></strong></dt>
+<dd>input padding. If None is given, autopad is applied
+which is identical to padding='SAME' in TensorFlow.</dd>
+<dt><strong><code>groups</code></strong></dt>
+<dd>group convolution.</dd>
+<dt><strong><code>activation</code></strong></dt>
+<dd>activation name. If None is given, nn.Identity is applied
+which is no activation.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Conv(nn.Module):
+    &#34;&#34;&#34;Standard convolution with batch normalization and activation.&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: int,
+        stride: int = 1,
+        padding: Union[int, None] = None,
+        groups: int = 1,
+        activation: Union[str, None] = &#34;ReLU&#34;,
+    ) -&gt; None:
+        &#34;&#34;&#34;Standard convolution with batch normalization and activation.
+
+        Args:
+            in_channels: input channels.
+            out_channels: output channels.
+            kernel_size: kernel size.
+            stride: stride.
+            padding: input padding. If None is given, autopad is applied
+                which is identical to padding=&#39;SAME&#39; in TensorFlow.
+            groups: group convolution.
+            activation: activation name. If None is given, nn.Identity is applied
+                which is no activation.
+        &#34;&#34;&#34;
+        super().__init__()
+        # error: Argument &#34;padding&#34; to &#34;Conv2d&#34; has incompatible type &#34;Union[int, List[int]]&#34;;
+        # expected &#34;Union[int, Tuple[int, int]]&#34;
+        self.conv = nn.Conv2d(
+            in_channels,
+            out_channels,
+            kernel_size,
+            stride,
+            padding=autopad(kernel_size, padding),  # type: ignore
+            groups=groups,
+            bias=False,
+        )
+        self.batch_norm = nn.BatchNorm2d(out_channels)
+        self.activation = Activation(activation)()
+
+    def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+        return self.activation(self.batch_norm(self.conv(x)))
+
+    def fusefoward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Fuse forward.&#34;&#34;&#34;
+        return self.activation(self.conv(x))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.Conv.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kindle.modules.Conv.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.Conv.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+    return self.activation(self.batch_norm(self.conv(x)))</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.Conv.fusefoward"><code class="name flex">
+<span>def <span class="ident">fusefoward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Fuse forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fusefoward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Fuse forward.&#34;&#34;&#34;
+    return self.activation(self.conv(x))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.ConvGenerator"><code class="flex name class">
+<span>class <span class="ident">ConvGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Conv2d generator for parsing module.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConvGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Conv2d generator for parsing module.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        return self._get_divisible_channel(self.args[0] * self.width_multiply)
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def base_module(self) -&gt; nn.Module:
+        &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+        return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)
+
+    @torch.no_grad()
+    def compute_out_shape(
+        self, size: Union[list, np.ndarray], repeat: int = 1
+    ) -&gt; List[int]:
+        module: nn.Module = self(repeat=repeat)
+        module.eval()
+        module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+        return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1):
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        if repeat &gt; 1:
+            stride = 1
+            # Important!: stride only applies at the end of the repeat.
+            if len(args) &gt; 2:
+                stride = args[3]
+                args[3] = 1
+
+            module = []
+            for i in range(repeat):
+                if len(args) &gt; 1 and stride &gt; 1 and i == repeat - 1:
+                    args[3] = stride
+
+                module.append(self.base_module(*args))
+                args[0] = self.out_channel
+        else:
+            module = self.base_module(*args)
+
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.ConvGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.ConvGenerator.base_module"><code class="name">var <span class="ident">base_module</span> : torch.nn.modules.module.Module</code></dt>
+<dd>
+<div class="desc"><p>Returns module class from kindle.common_modules based on the class name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def base_module(self) -&gt; nn.Module:
+    &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+    return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.ConvGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.ConvGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    return self._get_divisible_channel(self.args[0] * self.width_multiply)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.DWConv"><code class="flex name class">
+<span>class <span class="ident">DWConv</span></span>
+<span>(</span><span>in_channels: int, out_channels: int, kernel_size: int, stride: int = 1, padding: Union[int, NoneType] = None, activation: Union[str, NoneType] = 'ReLU')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Depthwise convolution with batch normalization and activation.</p>
+<p>Depthwise convolution with batch normalization and activation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>input channels.</dd>
+<dt><strong><code>out_channels</code></strong></dt>
+<dd>output channels.</dd>
+<dt><strong><code>kernel_size</code></strong></dt>
+<dd>kernel size.</dd>
+<dt><strong><code>stride</code></strong></dt>
+<dd>stride.</dd>
+<dt><strong><code>padding</code></strong></dt>
+<dd>input padding. If None is given, autopad is applied
+which is identical to padding='SAME' in TensorFlow.</dd>
+<dt><strong><code>activation</code></strong></dt>
+<dd>activation name. If None is given, nn.Identity is applied
+which is no activation.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DWConv(nn.Module):
+    &#34;&#34;&#34;Depthwise convolution with batch normalization and activation.&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: int,
+        stride: int = 1,
+        padding: Union[int, None] = None,
+        activation: Union[str, None] = &#34;ReLU&#34;,
+    ) -&gt; None:
+        &#34;&#34;&#34;Depthwise convolution with batch normalization and activation.
+
+        Args:
+            in_channels: input channels.
+            out_channels: output channels.
+            kernel_size: kernel size.
+            stride: stride.
+            padding: input padding. If None is given, autopad is applied
+                which is identical to padding=&#39;SAME&#39; in TensorFlow.
+            activation: activation name. If None is given, nn.Identity is applied
+                which is no activation.
+        &#34;&#34;&#34;
+        super().__init__()
+        # error: Argument &#34;padding&#34; to &#34;Conv2d&#34; has incompatible type &#34;Union[int, List[int]]&#34;;
+        # expected &#34;Union[int, Tuple[int, int]]&#34;
+        self.conv = nn.Conv2d(
+            in_channels,
+            out_channels,
+            kernel_size,
+            stride,
+            padding=autopad(kernel_size, padding),  # type: ignore
+            groups=math.gcd(in_channels, out_channels),
+            bias=False,
+        )
+        self.batch_norm = nn.BatchNorm2d(out_channels)
+        self.activation = Activation(activation)()
+
+    def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+        return self.activation(self.batch_norm(self.conv(x)))
+
+    def fusefoward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Fuse forward.&#34;&#34;&#34;
+        return self.activation(self.conv(x))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.DWConv.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kindle.modules.DWConv.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.DWConv.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+    return self.activation(self.batch_norm(self.conv(x)))</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.DWConv.fusefoward"><code class="name flex">
+<span>def <span class="ident">fusefoward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Fuse forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fusefoward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Fuse forward.&#34;&#34;&#34;
+    return self.activation(self.conv(x))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.DWConvGenerator"><code class="flex name class">
+<span>class <span class="ident">DWConvGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Depth-wise convolution generator for parsing module.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DWConvGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Depth-wise convolution generator for parsing module.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        return self._get_divisible_channel(self.args[0] * self.width_multiply)
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def base_module(self) -&gt; nn.Module:
+        &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+        return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)
+
+    @torch.no_grad()
+    def compute_out_shape(
+        self, size: Union[list, np.ndarray], repeat: int = 1
+    ) -&gt; List[int]:
+        module: nn.Module = self(repeat=repeat)
+        module.eval()
+        module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+        return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1):
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        if repeat &gt; 1:
+            stride = 1
+            # Important!: stride only applies at the end of the repeat.
+            if len(args) &gt; 2:
+                stride = args[3]
+                args[3] = 1
+
+            module = []
+            for i in range(repeat):
+                if len(args) &gt; 1 and stride &gt; 1 and i == repeat - 1:
+                    args[3] = stride
+
+                module.append(self.base_module(*args))
+                args[0] = self.out_channel
+        else:
+            module = self.base_module(*args)
+
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.DWConvGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.DWConvGenerator.base_module"><code class="name">var <span class="ident">base_module</span> : torch.nn.modules.module.Module</code></dt>
+<dd>
+<div class="desc"><p>Returns module class from kindle.common_modules based on the class name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def base_module(self) -&gt; nn.Module:
+    &#34;&#34;&#34;Returns module class from kindle.common_modules based on the class name.&#34;&#34;&#34;
+    return getattr(__import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]), self.name)</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.DWConvGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.DWConvGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    return self._get_divisible_channel(self.args[0] * self.width_multiply)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.FlattenGenerator"><code class="flex name class">
+<span>class <span class="ident">FlattenGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Flatten module generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FlattenGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Flatten module generator.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        return math.prod(self.args)
+
+    @property
+    def in_channel(self) -&gt; int:
+
+        return -1
+
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        return [self.out_channel]
+
+    def __call__(self, repeat: int = 1):
+        return self._get_module(nn.Flatten())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.FlattenGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.in_channel" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.out_channel" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.GeneratorAbstract"><code class="flex name class">
+<span>class <span class="ident">GeneratorAbstract</span></span>
+<span>(</span><span>*args, from_idx: Union[int, List[int]] = -1, in_channels: Tuple[int] = (0,), width_multiply: float = 1.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract Module Generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GeneratorAbstract(ABC):
+    &#34;&#34;&#34;Abstract Module Generator.&#34;&#34;&#34;
+
+    CHANNEL_DIVISOR: int = 8
+
+    def __init__(
+        self,
+        *args,
+        from_idx: Union[int, List[int]] = -1,
+        in_channels: Tuple[int] = (0,),
+        width_multiply: float = 1.0,
+    ):
+        &#34;&#34;&#34;Initialize module generator.
+
+        Args:
+            *args: Module arguments
+            from_idx: Module input index
+            in_channels: Number of input channel
+            width_multiply: Channel width multiply
+        &#34;&#34;&#34;
+        self.args = tuple(args)
+        self.from_idx = from_idx
+        self.in_channels = in_channels
+        self.width_multiply = width_multiply
+
+    @property
+    def name(self) -&gt; str:
+        &#34;&#34;&#34;Module name.&#34;&#34;&#34;
+        return self.__class__.__name__.replace(&#34;Generator&#34;, &#34;&#34;)
+
+    def _get_module(self, module: Union[nn.Module, List[nn.Module]]) -&gt; nn.Module:
+        &#34;&#34;&#34;Get module from __call__ function.&#34;&#34;&#34;
+        if isinstance(module, list):
+            module = nn.Sequential(*module)
+
+        # error: Incompatible types in assignment (expression has type &#34;Union[Tensor, Module, int]&#34;,
+        # variable has type &#34;Union[Tensor, Module]&#34;)
+        # error: List comprehension has incompatible type List[int];
+        # expected List[Union[Tensor, Module]]
+        module.n_params = sum([x.numel() for x in module.parameters()])  # type: ignore
+        # error: Cannot assign to a method
+        module.type = self.name  # type: ignore
+
+        return module
+
+    @classmethod
+    def _get_divisible_channel(cls, n_channel: int) -&gt; int:
+        &#34;&#34;&#34;Get divisible channel by default divisor.
+
+        Args:
+            n_channel: number of channel.
+
+        Returns:
+            Ex) given {n_channel} is 52 and {GeneratorAbstract.CHANNEL_DIVISOR} is 8.,
+                return channel is 56 since ceil(52/8) = 7 and 7*8 = 56
+        &#34;&#34;&#34;
+        return make_divisible(n_channel, divisor=cls.CHANNEL_DIVISOR)
+
+    @property
+    @abstractmethod
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Out channel of the module.&#34;&#34;&#34;
+
+    @property
+    @abstractmethod
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;In channel of the module.&#34;&#34;&#34;
+
+    @abstractmethod
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        &#34;&#34;&#34;Compute output shape when {size} is given.
+
+        Args: input size to compute output shape.
+        &#34;&#34;&#34;
+
+    @abstractmethod
+    def __call__(self, repeat: int = 1):
+        &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.modules.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
+<li><a title="kindle.modules.concat.ConcatGenerator" href="concat.html#kindle.modules.concat.ConcatGenerator">ConcatGenerator</a></li>
+<li><a title="kindle.modules.conv.ConvGenerator" href="conv.html#kindle.modules.conv.ConvGenerator">ConvGenerator</a></li>
+<li><a title="kindle.modules.dwconv.DWConvGenerator" href="dwconv.html#kindle.modules.dwconv.DWConvGenerator">DWConvGenerator</a></li>
+<li><a title="kindle.modules.flatten.FlattenGenerator" href="flatten.html#kindle.modules.flatten.FlattenGenerator">FlattenGenerator</a></li>
+<li><a title="kindle.modules.linear.LinearGenerator" href="linear.html#kindle.modules.linear.LinearGenerator">LinearGenerator</a></li>
+<li><a title="kindle.modules.poolings.GlobalAvgPoolGenerator" href="poolings.html#kindle.modules.poolings.GlobalAvgPoolGenerator">GlobalAvgPoolGenerator</a></li>
+<li><a title="kindle.modules.poolings.MaxPoolGenerator" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator">MaxPoolGenerator</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.GeneratorAbstract.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.GeneratorAbstract.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>In channel of the module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+@abstractmethod
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;In channel of the module.&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.GeneratorAbstract.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Module name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self) -&gt; str:
+    &#34;&#34;&#34;Module name.&#34;&#34;&#34;
+    return self.__class__.__name__.replace(&#34;Generator&#34;, &#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.GeneratorAbstract.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Out channel of the module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+@abstractmethod
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Out channel of the module.&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.GeneratorAbstract.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute output shape when {size} is given.</p>
+<p>Args: input size to compute output shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@abstractmethod
+def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+    &#34;&#34;&#34;Compute output shape when {size} is given.
+
+    Args: input size to compute output shape.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.GlobalAvgPool"><code class="flex name class">
+<span>class <span class="ident">GlobalAvgPool</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Global average pooling module.</p>
+<p>Initialize.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GlobalAvgPool(nn.AdaptiveAvgPool2d):
+    &#34;&#34;&#34;Global average pooling module.&#34;&#34;&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Initialize.&#34;&#34;&#34;
+        super().__init__(output_size=1)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.pooling.AdaptiveAvgPool2d</li>
+<li>torch.nn.modules.pooling._AdaptiveAvgPoolNd</li>
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.GlobalAvgPool.output_size"><code class="name">var <span class="ident">output_size</span> : Union[int, Tuple[int, int]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.GlobalAvgPoolGenerator"><code class="flex name class">
+<span>class <span class="ident">GlobalAvgPoolGenerator</span></span>
+<span>(</span><span>*args, from_idx: Union[int, List[int]] = -1, in_channels: Tuple[int] = (0,), width_multiply: float = 1.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Global average pooling module generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GlobalAvgPoolGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Global average pooling module generator.&#34;&#34;&#34;
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        if isinstance(self.from_idx, int):
+            return self.in_channels[self.from_idx]
+
+        raise Exception()
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        if isinstance(self.from_idx, int):
+            return self.in_channels[self.from_idx]
+
+        raise Exception()
+
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+        return [self.out_channel, 1, 1]
+
+    def __call__(self, repeat: int = 1):
+        return self._get_module(GlobalAvgPool())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.GlobalAvgPoolGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.GlobalAvgPoolGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    if isinstance(self.from_idx, int):
+        return self.in_channels[self.from_idx]
+
+    raise Exception()</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.GlobalAvgPoolGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    if isinstance(self.from_idx, int):
+        return self.in_channels[self.from_idx]
+
+    raise Exception()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.GlobalAvgPoolGenerator.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute out shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+    &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+    return [self.out_channel, 1, 1]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.Linear"><code class="flex name class">
+<span>class <span class="ident">Linear</span></span>
+<span>(</span><span>in_channel: int, out_channel: int, activation: Union[str, NoneType])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Linear module.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>input channels.</dd>
+<dt><strong><code>out_channels</code></strong></dt>
+<dd>output channels.</dd>
+<dt><strong><code>activation</code></strong></dt>
+<dd>activation name. If None is given, nn.Identity is applied
+which is no activation.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Linear(nn.Module):
+    &#34;&#34;&#34;Linear module.&#34;&#34;&#34;
+
+    def __init__(self, in_channel: int, out_channel: int, activation: Union[str, None]):
+        &#34;&#34;&#34;
+
+        Args:
+            in_channels: input channels.
+            out_channels: output channels.
+            activation: activation name. If None is given, nn.Identity is applied
+                which is no activation.
+        &#34;&#34;&#34;
+        super().__init__()
+        self.linear = nn.Linear(in_channel, out_channel)
+        self.activation = Activation(activation)()
+
+    def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+        return self.activation(self.linear(x))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.Linear.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kindle.modules.Linear.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.Linear.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: torch.Tensor) ‑> torch.Tensor</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forward.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+    &#34;&#34;&#34;Forward.&#34;&#34;&#34;
+    return self.activation(self.linear(x))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="kindle.modules.LinearGenerator"><code class="flex name class">
+<span>class <span class="ident">LinearGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Linear (fully connected) module generator for parsing.</p>
+<p>Initailize.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LinearGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Linear (fully connected) module generator for parsing.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        &#34;&#34;&#34;Initailize.&#34;&#34;&#34;
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        return self.args[0]
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        &#34;&#34;&#34;Compute output shape.&#34;&#34;&#34;
+        return [self.out_channel]
+
+    def __call__(self, repeat: int = 1):
+        # TODO: Apply repeat
+        act = self.args[1] if len(self.args) &gt; 1 else None
+
+        return self._get_module(
+            Linear(self.in_channel, self.out_channel, activation=act)
+        )</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.LinearGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.LinearGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    # error: Value of type &#34;Optional[List[int]]&#34; is not indexable
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.LinearGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    return self.args[0]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.LinearGenerator.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute output shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+    &#34;&#34;&#34;Compute output shape.&#34;&#34;&#34;
+    return [self.out_channel]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.MaxPoolGenerator"><code class="flex name class">
+<span>class <span class="ident">MaxPoolGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Max pooling module generator.</p>
+<p>Initialize module generator.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong></dt>
+<dd>Module arguments</dd>
+<dt><strong><code>from_idx</code></strong></dt>
+<dd>Module input index</dd>
+<dt><strong><code>in_channels</code></strong></dt>
+<dd>Number of input channel</dd>
+<dt><strong><code>width_multiply</code></strong></dt>
+<dd>Channel width multiply</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MaxPoolGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Max pooling module generator.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def out_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def in_channel(self) -&gt; int:
+        &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def base_module(self) -&gt; nn.Module:
+        &#34;&#34;&#34;Base module.&#34;&#34;&#34;
+        return getattr(nn, f&#34;{self.name}2d&#34;)
+
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+        with torch.no_grad():
+            module: nn.Module = self(repeat=repeat)
+            module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+            return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1):
+        module = (
+            [self.base_module(*self.args) for _ in range(repeat)]
+            if repeat &gt; 1
+            else self.base_module(*self.args)
+        )
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="kindle.modules.poolings.AvgPoolGenerator" href="poolings.html#kindle.modules.poolings.AvgPoolGenerator">AvgPoolGenerator</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.modules.MaxPoolGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kindle.modules.MaxPoolGenerator.base_module"><code class="name">var <span class="ident">base_module</span> : torch.nn.modules.module.Module</code></dt>
+<dd>
+<div class="desc"><p>Base module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def base_module(self) -&gt; nn.Module:
+    &#34;&#34;&#34;Base module.&#34;&#34;&#34;
+    return getattr(nn, f&#34;{self.name}2d&#34;)</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.MaxPoolGenerator.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get in channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def in_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get in channel size.&#34;&#34;&#34;
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="kindle.modules.MaxPoolGenerator.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Get out channel size.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def out_channel(self) -&gt; int:
+    &#34;&#34;&#34;Get out channel size.&#34;&#34;&#34;
+    return self.in_channels[self.from_idx]  # type: ignore</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kindle.modules.MaxPoolGenerator.compute_out_shape"><code class="name flex">
+<span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute out shape.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+    &#34;&#34;&#34;Compute out shape.&#34;&#34;&#34;
+    with torch.no_grad():
+        module: nn.Module = self(repeat=repeat)
+        module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+        return list(module_out.shape[-3:])</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="kindle.modules.ModuleGenerator"><code class="flex name class">
+<span>class <span class="ident">ModuleGenerator</span></span>
+<span>(</span><span>module_name: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Module generator class.</p>
+<p>Generate module based on the {module_name}</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>module_name</code></strong></dt>
+<dd>{module_name}Generator class must have been implemented.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ModuleGenerator:
+    &#34;&#34;&#34;Module generator class.&#34;&#34;&#34;
+
+    def __init__(self, module_name: str):
+        &#34;&#34;&#34;Generate module based on the {module_name}
+
+        Args:
+            module_name: {module_name}Generator class must have been implemented.
+        &#34;&#34;&#34;
+        self.module_name = module_name
+
+    def __call__(self, *args, **kwargs):
+        # replace getattr
+        return getattr(
+            __import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]),
+            f&#34;{self.module_name}Generator&#34;,
+        )(*args, **kwargs)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="kindle" href="../index.html">kindle</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="kindle.modules.base_generator" href="base_generator.html">kindle.modules.base_generator</a></code></li>
+<li><code><a title="kindle.modules.bottleneck" href="bottleneck.html">kindle.modules.bottleneck</a></code></li>
+<li><code><a title="kindle.modules.concat" href="concat.html">kindle.modules.concat</a></code></li>
+<li><code><a title="kindle.modules.conv" href="conv.html">kindle.modules.conv</a></code></li>
+<li><code><a title="kindle.modules.dwconv" href="dwconv.html">kindle.modules.dwconv</a></code></li>
+<li><code><a title="kindle.modules.flatten" href="flatten.html">kindle.modules.flatten</a></code></li>
+<li><code><a title="kindle.modules.linear" href="linear.html">kindle.modules.linear</a></code></li>
+<li><code><a title="kindle.modules.poolings" href="poolings.html">kindle.modules.poolings</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="kindle.modules.AvgPoolGenerator" href="#kindle.modules.AvgPoolGenerator">AvgPoolGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.AvgPoolGenerator.CHANNEL_DIVISOR" href="#kindle.modules.AvgPoolGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.Bottleneck" href="#kindle.modules.Bottleneck">Bottleneck</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.Bottleneck.dump_patches" href="#kindle.modules.Bottleneck.dump_patches">dump_patches</a></code></li>
+<li><code><a title="kindle.modules.Bottleneck.forward" href="#kindle.modules.Bottleneck.forward">forward</a></code></li>
+<li><code><a title="kindle.modules.Bottleneck.training" href="#kindle.modules.Bottleneck.training">training</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.BottleneckGenerator" href="#kindle.modules.BottleneckGenerator">BottleneckGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.BottleneckGenerator.CHANNEL_DIVISOR" href="#kindle.modules.BottleneckGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.BottleneckGenerator.base_module" href="#kindle.modules.BottleneckGenerator.base_module">base_module</a></code></li>
+<li><code><a title="kindle.modules.BottleneckGenerator.compute_out_shape" href="#kindle.modules.BottleneckGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.BottleneckGenerator.in_channel" href="#kindle.modules.BottleneckGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.BottleneckGenerator.out_channel" href="#kindle.modules.BottleneckGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.Concat" href="#kindle.modules.Concat">Concat</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.Concat.dump_patches" href="#kindle.modules.Concat.dump_patches">dump_patches</a></code></li>
+<li><code><a title="kindle.modules.Concat.forward" href="#kindle.modules.Concat.forward">forward</a></code></li>
+<li><code><a title="kindle.modules.Concat.training" href="#kindle.modules.Concat.training">training</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.ConcatGenerator" href="#kindle.modules.ConcatGenerator">ConcatGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.ConcatGenerator.CHANNEL_DIVISOR" href="#kindle.modules.ConcatGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.ConcatGenerator.compute_out_shape" href="#kindle.modules.ConcatGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.ConcatGenerator.in_channel" href="#kindle.modules.ConcatGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.ConcatGenerator.out_channel" href="#kindle.modules.ConcatGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.Conv" href="#kindle.modules.Conv">Conv</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.Conv.dump_patches" href="#kindle.modules.Conv.dump_patches">dump_patches</a></code></li>
+<li><code><a title="kindle.modules.Conv.forward" href="#kindle.modules.Conv.forward">forward</a></code></li>
+<li><code><a title="kindle.modules.Conv.fusefoward" href="#kindle.modules.Conv.fusefoward">fusefoward</a></code></li>
+<li><code><a title="kindle.modules.Conv.training" href="#kindle.modules.Conv.training">training</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.ConvGenerator" href="#kindle.modules.ConvGenerator">ConvGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.ConvGenerator.CHANNEL_DIVISOR" href="#kindle.modules.ConvGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.ConvGenerator.base_module" href="#kindle.modules.ConvGenerator.base_module">base_module</a></code></li>
+<li><code><a title="kindle.modules.ConvGenerator.in_channel" href="#kindle.modules.ConvGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.ConvGenerator.out_channel" href="#kindle.modules.ConvGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.DWConv" href="#kindle.modules.DWConv">DWConv</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.DWConv.dump_patches" href="#kindle.modules.DWConv.dump_patches">dump_patches</a></code></li>
+<li><code><a title="kindle.modules.DWConv.forward" href="#kindle.modules.DWConv.forward">forward</a></code></li>
+<li><code><a title="kindle.modules.DWConv.fusefoward" href="#kindle.modules.DWConv.fusefoward">fusefoward</a></code></li>
+<li><code><a title="kindle.modules.DWConv.training" href="#kindle.modules.DWConv.training">training</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.DWConvGenerator" href="#kindle.modules.DWConvGenerator">DWConvGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.DWConvGenerator.CHANNEL_DIVISOR" href="#kindle.modules.DWConvGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.DWConvGenerator.base_module" href="#kindle.modules.DWConvGenerator.base_module">base_module</a></code></li>
+<li><code><a title="kindle.modules.DWConvGenerator.in_channel" href="#kindle.modules.DWConvGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.DWConvGenerator.out_channel" href="#kindle.modules.DWConvGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.FlattenGenerator" href="#kindle.modules.FlattenGenerator">FlattenGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.FlattenGenerator.CHANNEL_DIVISOR" href="#kindle.modules.FlattenGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.GeneratorAbstract" href="#kindle.modules.GeneratorAbstract">GeneratorAbstract</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.GeneratorAbstract.CHANNEL_DIVISOR" href="#kindle.modules.GeneratorAbstract.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.GeneratorAbstract.compute_out_shape" href="#kindle.modules.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.GeneratorAbstract.in_channel" href="#kindle.modules.GeneratorAbstract.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.GeneratorAbstract.name" href="#kindle.modules.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.modules.GeneratorAbstract.out_channel" href="#kindle.modules.GeneratorAbstract.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.GlobalAvgPool" href="#kindle.modules.GlobalAvgPool">GlobalAvgPool</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.GlobalAvgPool.output_size" href="#kindle.modules.GlobalAvgPool.output_size">output_size</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.GlobalAvgPoolGenerator" href="#kindle.modules.GlobalAvgPoolGenerator">GlobalAvgPoolGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.GlobalAvgPoolGenerator.CHANNEL_DIVISOR" href="#kindle.modules.GlobalAvgPoolGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.GlobalAvgPoolGenerator.compute_out_shape" href="#kindle.modules.GlobalAvgPoolGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.GlobalAvgPoolGenerator.in_channel" href="#kindle.modules.GlobalAvgPoolGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.GlobalAvgPoolGenerator.out_channel" href="#kindle.modules.GlobalAvgPoolGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.Linear" href="#kindle.modules.Linear">Linear</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.Linear.dump_patches" href="#kindle.modules.Linear.dump_patches">dump_patches</a></code></li>
+<li><code><a title="kindle.modules.Linear.forward" href="#kindle.modules.Linear.forward">forward</a></code></li>
+<li><code><a title="kindle.modules.Linear.training" href="#kindle.modules.Linear.training">training</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.LinearGenerator" href="#kindle.modules.LinearGenerator">LinearGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.LinearGenerator.CHANNEL_DIVISOR" href="#kindle.modules.LinearGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.LinearGenerator.compute_out_shape" href="#kindle.modules.LinearGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.LinearGenerator.in_channel" href="#kindle.modules.LinearGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.LinearGenerator.out_channel" href="#kindle.modules.LinearGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.MaxPoolGenerator" href="#kindle.modules.MaxPoolGenerator">MaxPoolGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.modules.MaxPoolGenerator.CHANNEL_DIVISOR" href="#kindle.modules.MaxPoolGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.modules.MaxPoolGenerator.base_module" href="#kindle.modules.MaxPoolGenerator.base_module">base_module</a></code></li>
+<li><code><a title="kindle.modules.MaxPoolGenerator.compute_out_shape" href="#kindle.modules.MaxPoolGenerator.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.modules.MaxPoolGenerator.in_channel" href="#kindle.modules.MaxPoolGenerator.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.modules.MaxPoolGenerator.out_channel" href="#kindle.modules.MaxPoolGenerator.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kindle.modules.ModuleGenerator" href="#kindle.modules.ModuleGenerator">ModuleGenerator</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

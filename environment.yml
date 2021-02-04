@@ -1,0 +1,12 @@
+name: torch-kindle
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+
+dependencies:
+  - python=3.8
+  - pytorch=1.7.1
+  - torchvision=0.8.2
+  - pip:
+      - tqdm==4.56.0
