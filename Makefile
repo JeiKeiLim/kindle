@@ -18,10 +18,16 @@ dev:
 	pre-commit install --hook-type pre-commit --hook-type pre-push
 
 doc:
+	rm -rf docs/
 	env PYTHONPATH=. pdoc -o docs --html --force kindle/
+	mv docs/kindle/* docs/
+	rmdir docs/kindle
 
 push-doc:
+	rm -rf docs/
 	env PYTHONPATH=. pdoc -o docs --html --force kindle/
+	mv docs/kindle/* docs/
+	rmdir docs/kindle
 	git add docs
 	git add -u docs
 	git commit --amend -C HEAD
