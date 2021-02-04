@@ -38,6 +38,9 @@ jobs:
 
       - name: Formatting check
         run: make format
+
+      - name: Linting check
+        run: make lint
       
       - name: Unit test
         run: make test
