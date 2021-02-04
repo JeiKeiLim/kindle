@@ -31,3 +31,9 @@ push-doc:
 	git add docs
 	git add -u docs
 	git commit --amend -C HEAD
+
+build:
+	python3 setup.py sdist bdist_wheel
+
+dist:
+	python3 -m twine upload dist/*
