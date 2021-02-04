@@ -13,7 +13,7 @@ install:
 	conda env update -p ${CONDA_PREFIX} --file environment.yml
 
 dev:
-	make install
+	conda env update -p ${CONDA_PREFIX} --file environment.yml
 	conda env update -p ${CONDA_PREFIX} --file environment-dev.yml
 	pre-commit install --hook-type pre-commit --hook-type pre-push
 
