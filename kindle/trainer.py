@@ -111,9 +111,10 @@ class TorchTrainer:
 
             pbar = tqdm(enumerate(train_dataloader), total=n_batch)
             for batch, (data, labels) in pbar:
+                data, labels = data.to(self.device), labels.to(self.device)
                 self.optimizer.zero_grad()
 
-                model_out = self.model(data.to(self.device))
+                model_out = self.model(data)
                 loss = self.criterion(model_out, labels)
                 loss.backward()
                 self.optimizer.step()
@@ -159,7 +160,8 @@ class TorchTrainer:
 
         pbar = tqdm(enumerate(test_dataloader), total=n_batch)
         for batch, (data, labels) in pbar:
-            model_out = self.model(data.to(self.device))
+            data, labels = data.to(self.device), labels.to(self.device)
+            model_out = self.model(data)
             running_loss += self.criterion(model_out, labels).item()
 
             # TODO: Modify for multi-label classification.
