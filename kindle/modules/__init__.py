@@ -1,31 +1,17 @@
-"""PyTorch Module and ModuleGenerator."""
+"""PyTorch Modules."""
 
-from kindle.modules.base_generator import GeneratorAbstract, ModuleGenerator
-from kindle.modules.bottleneck import Bottleneck, BottleneckGenerator
-from kindle.modules.concat import Concat, ConcatGenerator
-from kindle.modules.conv import Conv, ConvGenerator
-from kindle.modules.dwconv import DWConv, DWConvGenerator
-from kindle.modules.flatten import FlattenGenerator
-from kindle.modules.linear import Linear, LinearGenerator
-from kindle.modules.poolings import (AvgPoolGenerator, GlobalAvgPool,
-                                     GlobalAvgPoolGenerator, MaxPoolGenerator)
+from kindle.modules.bottleneck import Bottleneck
+from kindle.modules.concat import Concat
+from kindle.modules.conv import Conv
+from kindle.modules.dwconv import DWConv
+from kindle.modules.linear import Linear
+from kindle.modules.poolings import GlobalAvgPool
 
 __all__ = [
-    "ModuleGenerator",
-    "GeneratorAbstract",
     "Bottleneck",
     "Concat",
     "Conv",
     "DWConv",
     "Linear",
     "GlobalAvgPool",
-    "BottleneckGenerator",
-    "ConcatGenerator",
-    "ConvGenerator",
-    "LinearGenerator",
-    "DWConvGenerator",
-    "FlattenGenerator",
-    "MaxPoolGenerator",
-    "AvgPoolGenerator",
-    "GlobalAvgPoolGenerator",
 ]

@@ -1,4 +1,4 @@
-"""Flatten module, generator.
+"""Flatten module generator.
 
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
@@ -9,7 +9,7 @@ from typing import List
 import numpy as np
 from torch import nn
 
-from kindle.modules.base_generator import GeneratorAbstract
+from kindle.generator.base_generator import GeneratorAbstract
 
 
 class FlattenGenerator(GeneratorAbstract):

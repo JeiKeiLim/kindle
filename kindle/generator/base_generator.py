@@ -108,6 +108,6 @@ class ModuleGenerator:
     def __call__(self, *args, **kwargs):
         # replace getattr
         return getattr(
-            __import__("kindle.modules", fromlist=[""]),
+            __import__("kindle.generator", fromlist=[""]),
             f"{self.module_name}Generator",
         )(*args, **kwargs)

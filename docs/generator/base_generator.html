@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>kindle.modules.base_generator API documentation</title>
+<title>kindle.generator.base_generator API documentation</title>
 <meta name="description" content="Base Module Generator …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>kindle.modules.base_generator</code></h1>
+<h1 class="title">Module <code>kindle.generator.base_generator</code></h1>
 </header>
 <section id="section-intro">
 <p>Base Module Generator.</p>
@@ -142,7 +142,7 @@ class ModuleGenerator:
     def __call__(self, *args, **kwargs):
         # replace getattr
         return getattr(
-            __import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]),
+            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
             f&#34;{self.module_name}Generator&#34;,
         )(*args, **kwargs)</code></pre>
 </details>
@@ -156,7 +156,7 @@ class ModuleGenerator:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="kindle.modules.base_generator.GeneratorAbstract"><code class="flex name class">
+<dt id="kindle.generator.base_generator.GeneratorAbstract"><code class="flex name class">
 <span>class <span class="ident">GeneratorAbstract</span></span>
 <span>(</span><span>*args, from_idx: Union[int, List[int]] = -1, in_channels: Tuple[int] = (0,), width_multiply: float = 1.0)</span>
 </code></dt>
@@ -263,25 +263,25 @@ class ModuleGenerator:
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
-<li><a title="kindle.modules.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.modules.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
-<li><a title="kindle.modules.concat.ConcatGenerator" href="concat.html#kindle.modules.concat.ConcatGenerator">ConcatGenerator</a></li>
-<li><a title="kindle.modules.conv.ConvGenerator" href="conv.html#kindle.modules.conv.ConvGenerator">ConvGenerator</a></li>
-<li><a title="kindle.modules.dwconv.DWConvGenerator" href="dwconv.html#kindle.modules.dwconv.DWConvGenerator">DWConvGenerator</a></li>
-<li><a title="kindle.modules.flatten.FlattenGenerator" href="flatten.html#kindle.modules.flatten.FlattenGenerator">FlattenGenerator</a></li>
-<li><a title="kindle.modules.linear.LinearGenerator" href="linear.html#kindle.modules.linear.LinearGenerator">LinearGenerator</a></li>
-<li><a title="kindle.modules.poolings.GlobalAvgPoolGenerator" href="poolings.html#kindle.modules.poolings.GlobalAvgPoolGenerator">GlobalAvgPoolGenerator</a></li>
-<li><a title="kindle.modules.poolings.MaxPoolGenerator" href="poolings.html#kindle.modules.poolings.MaxPoolGenerator">MaxPoolGenerator</a></li>
+<li><a title="kindle.generator.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.generator.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
+<li><a title="kindle.generator.concat.ConcatGenerator" href="concat.html#kindle.generator.concat.ConcatGenerator">ConcatGenerator</a></li>
+<li><a title="kindle.generator.conv.ConvGenerator" href="conv.html#kindle.generator.conv.ConvGenerator">ConvGenerator</a></li>
+<li><a title="kindle.generator.dwconv.DWConvGenerator" href="dwconv.html#kindle.generator.dwconv.DWConvGenerator">DWConvGenerator</a></li>
+<li><a title="kindle.generator.flatten.FlattenGenerator" href="flatten.html#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></li>
+<li><a title="kindle.generator.linear.LinearGenerator" href="linear.html#kindle.generator.linear.LinearGenerator">LinearGenerator</a></li>
+<li><a title="kindle.generator.poolings.GlobalAvgPoolGenerator" href="poolings.html#kindle.generator.poolings.GlobalAvgPoolGenerator">GlobalAvgPoolGenerator</a></li>
+<li><a title="kindle.generator.poolings.MaxPoolGenerator" href="poolings.html#kindle.generator.poolings.MaxPoolGenerator">MaxPoolGenerator</a></li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="kindle.modules.base_generator.GeneratorAbstract.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dt id="kindle.generator.base_generator.GeneratorAbstract.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Instance variables</h3>
 <dl>
-<dt id="kindle.modules.base_generator.GeneratorAbstract.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
+<dt id="kindle.generator.base_generator.GeneratorAbstract.in_channel"><code class="name">var <span class="ident">in_channel</span> : int</code></dt>
 <dd>
 <div class="desc"><p>In channel of the module.</p></div>
 <details class="source">
@@ -294,7 +294,7 @@ def in_channel(self) -&gt; int:
     &#34;&#34;&#34;In channel of the module.&#34;&#34;&#34;</code></pre>
 </details>
 </dd>
-<dt id="kindle.modules.base_generator.GeneratorAbstract.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dt id="kindle.generator.base_generator.GeneratorAbstract.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Module name.</p></div>
 <details class="source">
@@ -307,7 +307,7 @@ def name(self) -&gt; str:
     return self.__class__.__name__.replace(&#34;Generator&#34;, &#34;&#34;)</code></pre>
 </details>
 </dd>
-<dt id="kindle.modules.base_generator.GeneratorAbstract.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
+<dt id="kindle.generator.base_generator.GeneratorAbstract.out_channel"><code class="name">var <span class="ident">out_channel</span> : int</code></dt>
 <dd>
 <div class="desc"><p>Out channel of the module.</p></div>
 <details class="source">
@@ -323,7 +323,7 @@ def out_channel(self) -&gt; int:
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape"><code class="name flex">
+<dt id="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape"><code class="name flex">
 <span>def <span class="ident">compute_out_shape</span></span>(<span>self, size: numpy.ndarray, repeat: int = 1) ‑> List[int]</span>
 </code></dt>
 <dd>
@@ -343,7 +343,7 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
 </dd>
 </dl>
 </dd>
-<dt id="kindle.modules.base_generator.ModuleGenerator"><code class="flex name class">
+<dt id="kindle.generator.base_generator.ModuleGenerator"><code class="flex name class">
 <span>class <span class="ident">ModuleGenerator</span></span>
 <span>(</span><span>module_name: str)</span>
 </code></dt>
@@ -373,7 +373,7 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
     def __call__(self, *args, **kwargs):
         # replace getattr
         return getattr(
-            __import__(&#34;kindle.modules&#34;, fromlist=[&#34;&#34;]),
+            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
             f&#34;{self.module_name}Generator&#34;,
         )(*args, **kwargs)</code></pre>
 </details>
@@ -389,23 +389,23 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="kindle.modules" href="index.html">kindle.modules</a></code></li>
+<li><code><a title="kindle.generator" href="index.html">kindle.generator</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="kindle.modules.base_generator.GeneratorAbstract" href="#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></code></h4>
+<h4><code><a title="kindle.generator.base_generator.GeneratorAbstract" href="#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></code></h4>
 <ul class="">
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.CHANNEL_DIVISOR" href="#kindle.modules.base_generator.GeneratorAbstract.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape" href="#kindle.modules.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.in_channel" href="#kindle.modules.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.out_channel" href="#kindle.modules.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.CHANNEL_DIVISOR" href="#kindle.generator.base_generator.GeneratorAbstract.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" href="#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.in_channel" href="#kindle.generator.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.name" href="#kindle.generator.base_generator.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.out_channel" href="#kindle.generator.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="kindle.modules.base_generator.ModuleGenerator" href="#kindle.modules.base_generator.ModuleGenerator">ModuleGenerator</a></code></h4>
+<h4><code><a title="kindle.generator.base_generator.ModuleGenerator" href="#kindle.generator.base_generator.ModuleGenerator">ModuleGenerator</a></code></h4>
 </li>
 </ul>
 </li>
