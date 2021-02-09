@@ -9,7 +9,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from kindle.generator import GeneratorAbstract
+from kindle.generator.base_generator import GeneratorAbstract
 
 
 class ConvGenerator(GeneratorAbstract):

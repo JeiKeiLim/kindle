@@ -7,7 +7,7 @@ from typing import List
 
 import numpy as np
 
-from kindle.generator import GeneratorAbstract
+from kindle.generator.base_generator import GeneratorAbstract
 from kindle.modules import Concat
 
 
