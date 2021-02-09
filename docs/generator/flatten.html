@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>kindle.modules.flatten API documentation</title>
-<meta name="description" content="Flatten module, generator …" />
+<title>kindle.generator.flatten API documentation</title>
+<meta name="description" content="Flatten module generator …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,10 +19,10 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>kindle.modules.flatten</code></h1>
+<h1 class="title">Module <code>kindle.generator.flatten</code></h1>
 </header>
 <section id="section-intro">
-<p>Flatten module, generator.</p>
+<p>Flatten module generator.</p>
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
@@ -31,7 +31,7 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Flatten module, generator.
+<pre><code class="python">&#34;&#34;&#34;Flatten module generator.
 
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
@@ -42,7 +42,7 @@ from typing import List
 import numpy as np
 from torch import nn
 
-from kindle.modules.base_generator import GeneratorAbstract
+from kindle.generator.base_generator import GeneratorAbstract
 
 
 class FlattenGenerator(GeneratorAbstract):
@@ -76,7 +76,7 @@ class FlattenGenerator(GeneratorAbstract):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="kindle.modules.flatten.FlattenGenerator"><code class="flex name class">
+<dt id="kindle.generator.flatten.FlattenGenerator"><code class="flex name class">
 <span>class <span class="ident">FlattenGenerator</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -121,24 +121,24 @@ class FlattenGenerator(GeneratorAbstract):
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li><a title="kindle.generator.base_generator.GeneratorAbstract" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
 <li>abc.ABC</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="kindle.modules.flatten.FlattenGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dt id="kindle.generator.flatten.FlattenGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Inherited members</h3>
 <ul class="hlist">
-<li><code><b><a title="kindle.modules.base_generator.GeneratorAbstract" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<li><code><b><a title="kindle.generator.base_generator.GeneratorAbstract" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
 <ul class="hlist">
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.in_channel" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.name">name</a></code></li>
-<li><code><a title="kindle.modules.base_generator.GeneratorAbstract.out_channel" href="base_generator.html#kindle.modules.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.in_channel" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.out_channel" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
 </ul>
 </li>
 </ul>
@@ -154,15 +154,15 @@ class FlattenGenerator(GeneratorAbstract):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="kindle.modules" href="index.html">kindle.modules</a></code></li>
+<li><code><a title="kindle.generator" href="index.html">kindle.generator</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="kindle.modules.flatten.FlattenGenerator" href="#kindle.modules.flatten.FlattenGenerator">FlattenGenerator</a></code></h4>
+<h4><code><a title="kindle.generator.flatten.FlattenGenerator" href="#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></code></h4>
 <ul class="">
-<li><code><a title="kindle.modules.flatten.FlattenGenerator.CHANNEL_DIVISOR" href="#kindle.modules.flatten.FlattenGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+<li><code><a title="kindle.generator.flatten.FlattenGenerator.CHANNEL_DIVISOR" href="#kindle.generator.flatten.FlattenGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
 </ul>
 </li>
 </ul>

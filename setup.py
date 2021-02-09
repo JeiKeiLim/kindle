@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name="kindle",
-    version="0.0.4",
+    version="0.0.5",
     packages=setuptools.find_packages(),
     description="PyTorch no-code model builder.",
     long_description=open("README.md").read(),
