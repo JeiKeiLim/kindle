@@ -124,7 +124,7 @@ class GeneratorAbstract(ABC):
         &#34;&#34;&#34;
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
         &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;
 
 
@@ -254,7 +254,7 @@ class ModuleGenerator:
         &#34;&#34;&#34;
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
         &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -266,6 +266,7 @@ class ModuleGenerator:
 <li><a title="kindle.generator.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.generator.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
 <li><a title="kindle.generator.concat.ConcatGenerator" href="concat.html#kindle.generator.concat.ConcatGenerator">ConcatGenerator</a></li>
 <li><a title="kindle.generator.conv.ConvGenerator" href="conv.html#kindle.generator.conv.ConvGenerator">ConvGenerator</a></li>
+<li><a title="kindle.generator.custom_yaml_module.YamlModuleGenerator" href="custom_yaml_module.html#kindle.generator.custom_yaml_module.YamlModuleGenerator">YamlModuleGenerator</a></li>
 <li><a title="kindle.generator.dwconv.DWConvGenerator" href="dwconv.html#kindle.generator.dwconv.DWConvGenerator">DWConvGenerator</a></li>
 <li><a title="kindle.generator.flatten.FlattenGenerator" href="flatten.html#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></li>
 <li><a title="kindle.generator.linear.LinearGenerator" href="linear.html#kindle.generator.linear.LinearGenerator">LinearGenerator</a></li>

@@ -8,6 +8,7 @@ from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.bottleneck import BottleneckGenerator
 from kindle.generator.concat import ConcatGenerator
 from kindle.generator.conv import ConvGenerator
+from kindle.generator.custom_yaml_module import YamlModuleGenerator
 from kindle.generator.dwconv import DWConvGenerator
 from kindle.generator.flatten import FlattenGenerator
 from kindle.generator.linear import LinearGenerator
@@ -27,4 +28,5 @@ __all__ = [
     "AvgPoolGenerator",
     "GlobalAvgPoolGenerator",
     "MaxPoolGenerator",
+    "YamlModuleGenerator",
 ]

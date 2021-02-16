@@ -90,7 +90,7 @@ class GeneratorAbstract(ABC):
         """
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -> nn.Module:
         """Returns nn.Module component."""
 
 

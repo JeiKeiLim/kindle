@@ -42,6 +42,7 @@ and generates PyTorch model accordingly.
 - Contact: lim.jeikei@gmail.com
 &#34;&#34;&#34;
 
+import os
 from typing import Dict, List, Tuple, Type, Union
 
 import numpy as np
@@ -49,7 +50,8 @@ import torch
 import torch.nn as nn
 import yaml
 
-from kindle.generator import FlattenGenerator, ModuleGenerator
+from kindle.generator.base_generator import ModuleGenerator
+from kindle.generator.flatten import FlattenGenerator
 
 
 class Model(nn.Module):
@@ -186,9 +188,15 @@ class ModelParser:
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == &#34;YamlModule&#34;:
+                args_str[0] = args_str[0].split(os.sep)[-1].split(&#34;.&#34;)[0]
+
+            args_str = str(args_str)
+
             log = (
                 f&#34;{i:3d} | {str(idx):&gt;10} | {repeat:3d} | &#34;
-                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {str(args):&gt;20} |&#34;
+                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {args_str:&gt;20} |&#34;
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace(&#34;\n&#34;, &#34;,&#34;)
@@ -455,9 +463,15 @@ to add Test Time Augment.</p></div>
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == &#34;YamlModule&#34;:
+                args_str[0] = args_str[0].split(os.sep)[-1].split(&#34;.&#34;)[0]
+
+            args_str = str(args_str)
+
             log = (
                 f&#34;{i:3d} | {str(idx):&gt;10} | {repeat:3d} | &#34;
-                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {str(args):&gt;20} |&#34;
+                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {args_str:&gt;20} |&#34;
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace(&#34;\n&#34;, &#34;,&#34;)

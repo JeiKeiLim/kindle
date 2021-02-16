@@ -7,6 +7,7 @@ and generates PyTorch model accordingly.
 - Contact: lim.jeikei@gmail.com
 """
 
+import os
 from typing import Dict, List, Tuple, Type, Union
 
 import numpy as np
@@ -14,7 +15,8 @@ import torch
 import torch.nn as nn
 import yaml
 
-from kindle.generator import FlattenGenerator, ModuleGenerator
+from kindle.generator.base_generator import ModuleGenerator
+from kindle.generator.flatten import FlattenGenerator
 
 
 class Model(nn.Module):
@@ -151,9 +153,15 @@ class ModelParser:
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == "YamlModule":
+                args_str[0] = args_str[0].split(os.sep)[-1].split(".")[0]
+
+            args_str = str(args_str)
+
             log = (
                 f"{i:3d} | {str(idx):>10} | {repeat:3d} | "
-                f"{module.n_params:10,d} | {module.type:>15} | {str(args):>20} |"
+                f"{module.n_params:10,d} | {module.type:>15} | {args_str:>20} |"
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace("\n", ",")
