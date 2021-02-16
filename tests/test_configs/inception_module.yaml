@@ -1,0 +1,9 @@
+module:
+    # [from, repeat, module, args]
+    [
+        [-1, 1, Conv, [16, 1, 1]],
+        [0, 1, Conv, [8, 3, 1]],
+        [0, 1, Conv, [8, 5, 1]],
+        [0, 1, Conv, [8, 7, 1]],
+        [[1, 2, 3], 1, Concat, [1]],
+    ]

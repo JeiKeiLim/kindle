@@ -7,14 +7,16 @@ and generates PyTorch model accordingly.
 - Contact: lim.jeikei@gmail.com
 """
 
-from typing import Dict, List, Tuple, Type, Union
+import os
+from typing import Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
 import torch.nn as nn
 import yaml
 
-from kindle.generator import FlattenGenerator, ModuleGenerator
+from kindle.generator.base_generator import ModuleGenerator
+from kindle.generator.flatten import FlattenGenerator
 
 
 class Model(nn.Module):
@@ -93,6 +95,12 @@ class ModelParser:
         ):
             self.input_size = self.cfg["input_size"]
 
+        self.custom_module_paths: Optional[Union[List[str], str]]
+        if "custom_module_paths" in self.cfg:
+            self.custom_module_paths = self.cfg["custom_module_paths"]  # type: ignore
+        else:
+            self.custom_module_paths = None
+
         self.in_channel = self.cfg["input_channel"]
 
         self.depth_multiply = self.cfg["depth_multiple"]
@@ -123,7 +131,9 @@ class ModelParser:
         self.log(len(log) * "-")
 
         for i, (idx, repeat, module, args) in enumerate(self.model_cfg):  # type: ignore
-            module_generator = ModuleGenerator(module)(
+            module_generator = ModuleGenerator(
+                module, custom_module_paths=self.custom_module_paths
+            )(
                 *args,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i > 0 else (self.in_channel,),  # type: ignore
@@ -151,9 +161,15 @@ class ModelParser:
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == "YamlModule":
+                args_str[0] = args_str[0].split(os.sep)[-1].split(".")[0]
+
+            args_str = str(args_str)
+
             log = (
                 f"{i:3d} | {str(idx):>10} | {repeat:3d} | "
-                f"{module.n_params:10,d} | {module.type:>15} | {str(args):>20} |"
+                f"{module.n_params:10,d} | {module.type:>15} | {args_str:>20} |"
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace("\n", ",")

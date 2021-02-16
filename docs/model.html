@@ -42,14 +42,16 @@ and generates PyTorch model accordingly.
 - Contact: lim.jeikei@gmail.com
 &#34;&#34;&#34;
 
-from typing import Dict, List, Tuple, Type, Union
+import os
+from typing import Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
 import torch.nn as nn
 import yaml
 
-from kindle.generator import FlattenGenerator, ModuleGenerator
+from kindle.generator.base_generator import ModuleGenerator
+from kindle.generator.flatten import FlattenGenerator
 
 
 class Model(nn.Module):
@@ -128,6 +130,12 @@ class ModelParser:
         ):
             self.input_size = self.cfg[&#34;input_size&#34;]
 
+        self.custom_module_paths: Optional[Union[List[str], str]]
+        if &#34;custom_module_paths&#34; in self.cfg:
+            self.custom_module_paths = self.cfg[&#34;custom_module_paths&#34;]  # type: ignore
+        else:
+            self.custom_module_paths = None
+
         self.in_channel = self.cfg[&#34;input_channel&#34;]
 
         self.depth_multiply = self.cfg[&#34;depth_multiple&#34;]
@@ -158,7 +166,9 @@ class ModelParser:
         self.log(len(log) * &#34;-&#34;)
 
         for i, (idx, repeat, module, args) in enumerate(self.model_cfg):  # type: ignore
-            module_generator = ModuleGenerator(module)(
+            module_generator = ModuleGenerator(
+                module, custom_module_paths=self.custom_module_paths
+            )(
                 *args,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i &gt; 0 else (self.in_channel,),  # type: ignore
@@ -186,9 +196,15 @@ class ModelParser:
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == &#34;YamlModule&#34;:
+                args_str[0] = args_str[0].split(os.sep)[-1].split(&#34;.&#34;)[0]
+
+            args_str = str(args_str)
+
             log = (
                 f&#34;{i:3d} | {str(idx):&gt;10} | {repeat:3d} | &#34;
-                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {str(args):&gt;20} |&#34;
+                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {args_str:&gt;20} |&#34;
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace(&#34;\n&#34;, &#34;,&#34;)
@@ -397,6 +413,12 @@ to add Test Time Augment.</p></div>
         ):
             self.input_size = self.cfg[&#34;input_size&#34;]
 
+        self.custom_module_paths: Optional[Union[List[str], str]]
+        if &#34;custom_module_paths&#34; in self.cfg:
+            self.custom_module_paths = self.cfg[&#34;custom_module_paths&#34;]  # type: ignore
+        else:
+            self.custom_module_paths = None
+
         self.in_channel = self.cfg[&#34;input_channel&#34;]
 
         self.depth_multiply = self.cfg[&#34;depth_multiple&#34;]
@@ -427,7 +449,9 @@ to add Test Time Augment.</p></div>
         self.log(len(log) * &#34;-&#34;)
 
         for i, (idx, repeat, module, args) in enumerate(self.model_cfg):  # type: ignore
-            module_generator = ModuleGenerator(module)(
+            module_generator = ModuleGenerator(
+                module, custom_module_paths=self.custom_module_paths
+            )(
                 *args,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i &gt; 0 else (self.in_channel,),  # type: ignore
@@ -455,9 +479,15 @@ to add Test Time Augment.</p></div>
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
+            args_str = args.copy()
+            if module.type == &#34;YamlModule&#34;:
+                args_str[0] = args_str[0].split(os.sep)[-1].split(&#34;.&#34;)[0]
+
+            args_str = str(args_str)
+
             log = (
                 f&#34;{i:3d} | {str(idx):&gt;10} | {repeat:3d} | &#34;
-                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {str(args):&gt;20} |&#34;
+                f&#34;{module.n_params:10,d} | {module.type:&gt;15} | {args_str:&gt;20} |&#34;
             )
             if self.input_size is not None:
                 in_size_str = str(in_size).replace(&#34;\n&#34;, &#34;,&#34;)

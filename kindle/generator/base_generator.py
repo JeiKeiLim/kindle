@@ -6,7 +6,7 @@ This module is responsible for GeneratorAbstract and ModuleGenerator.
 - Contact: lim.jeikei@gmail.com
 """
 from abc import ABC, abstractmethod
-from typing import List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 from torch import nn
@@ -90,24 +90,39 @@ class GeneratorAbstract(ABC):
         """
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -> nn.Module:
         """Returns nn.Module component."""
 
 
 class ModuleGenerator:
     """Module generator class."""
 
-    def __init__(self, module_name: str):
+    def __init__(
+        self, module_name: str, custom_module_paths: Optional[Union[str, List]] = None
+    ):
         """Generate module based on the {module_name}
 
         Args:
             module_name: {module_name}Generator class must have been implemented.
+            custom_module_paths: paths to find custom module generators.
+                Default location to find module generator is 'kindle.generator'.
+                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.
         """
         self.module_name = module_name
+        self.generator_paths = ["kindle.generator"]
+        if custom_module_paths is not None:
+            if isinstance(custom_module_paths, str):
+                paths = [custom_module_paths]
+            else:
+                paths = custom_module_paths
+            self.generator_paths += paths
 
     def __call__(self, *args, **kwargs):
-        # replace getattr
-        return getattr(
-            __import__("kindle.generator", fromlist=[""]),
-            f"{self.module_name}Generator",
-        )(*args, **kwargs)
+        generator_name = f"{self.module_name}Generator"
+        for path in self.generator_paths:
+            if hasattr(__import__(path, fromlist=[""]), generator_name):
+                return getattr(__import__(path, fromlist=[""]), generator_name)(
+                    *args, **kwargs
+                )
+
+        raise Exception(f"{generator_name} can not be found.")

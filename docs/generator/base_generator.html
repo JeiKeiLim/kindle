@@ -40,7 +40,7 @@ This module is responsible for GeneratorAbstract and ModuleGenerator.
 - Contact: lim.jeikei@gmail.com
 &#34;&#34;&#34;
 from abc import ABC, abstractmethod
-from typing import List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 from torch import nn
@@ -124,27 +124,42 @@ class GeneratorAbstract(ABC):
         &#34;&#34;&#34;
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
         &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;
 
 
 class ModuleGenerator:
     &#34;&#34;&#34;Module generator class.&#34;&#34;&#34;
 
-    def __init__(self, module_name: str):
+    def __init__(
+        self, module_name: str, custom_module_paths: Optional[Union[str, List]] = None
+    ):
         &#34;&#34;&#34;Generate module based on the {module_name}
 
         Args:
             module_name: {module_name}Generator class must have been implemented.
+            custom_module_paths: paths to find custom module generators.
+                Default location to find module generator is &#39;kindle.generator&#39;.
+                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.
         &#34;&#34;&#34;
         self.module_name = module_name
+        self.generator_paths = [&#34;kindle.generator&#34;]
+        if custom_module_paths is not None:
+            if isinstance(custom_module_paths, str):
+                paths = [custom_module_paths]
+            else:
+                paths = custom_module_paths
+            self.generator_paths += paths
 
     def __call__(self, *args, **kwargs):
-        # replace getattr
-        return getattr(
-            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
-            f&#34;{self.module_name}Generator&#34;,
-        )(*args, **kwargs)</code></pre>
+        generator_name = f&#34;{self.module_name}Generator&#34;
+        for path in self.generator_paths:
+            if hasattr(__import__(path, fromlist=[&#34;&#34;]), generator_name):
+                return getattr(__import__(path, fromlist=[&#34;&#34;]), generator_name)(
+                    *args, **kwargs
+                )
+
+        raise Exception(f&#34;{generator_name} can not be found.&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -254,7 +269,7 @@ class ModuleGenerator:
         &#34;&#34;&#34;
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
         &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -266,6 +281,7 @@ class ModuleGenerator:
 <li><a title="kindle.generator.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.generator.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
 <li><a title="kindle.generator.concat.ConcatGenerator" href="concat.html#kindle.generator.concat.ConcatGenerator">ConcatGenerator</a></li>
 <li><a title="kindle.generator.conv.ConvGenerator" href="conv.html#kindle.generator.conv.ConvGenerator">ConvGenerator</a></li>
+<li><a title="kindle.generator.custom_yaml_module.YamlModuleGenerator" href="custom_yaml_module.html#kindle.generator.custom_yaml_module.YamlModuleGenerator">YamlModuleGenerator</a></li>
 <li><a title="kindle.generator.dwconv.DWConvGenerator" href="dwconv.html#kindle.generator.dwconv.DWConvGenerator">DWConvGenerator</a></li>
 <li><a title="kindle.generator.flatten.FlattenGenerator" href="flatten.html#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></li>
 <li><a title="kindle.generator.linear.LinearGenerator" href="linear.html#kindle.generator.linear.LinearGenerator">LinearGenerator</a></li>
@@ -345,7 +361,7 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
 </dd>
 <dt id="kindle.generator.base_generator.ModuleGenerator"><code class="flex name class">
 <span>class <span class="ident">ModuleGenerator</span></span>
-<span>(</span><span>module_name: str)</span>
+<span>(</span><span>module_name: str, custom_module_paths: Union[str, List, NoneType] = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Module generator class.</p>
@@ -354,6 +370,10 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
 <dl>
 <dt><strong><code>module_name</code></strong></dt>
 <dd>{module_name}Generator class must have been implemented.</dd>
+<dt><strong><code>custom_module_paths</code></strong></dt>
+<dd>paths to find custom module generators.
+Default location to find module generator is 'kindle.generator'.
+If {custom_module_paths} is provided, ModuleGenerator will expand its search area.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -362,20 +382,35 @@ def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
 <pre><code class="python">class ModuleGenerator:
     &#34;&#34;&#34;Module generator class.&#34;&#34;&#34;
 
-    def __init__(self, module_name: str):
+    def __init__(
+        self, module_name: str, custom_module_paths: Optional[Union[str, List]] = None
+    ):
         &#34;&#34;&#34;Generate module based on the {module_name}
 
         Args:
             module_name: {module_name}Generator class must have been implemented.
+            custom_module_paths: paths to find custom module generators.
+                Default location to find module generator is &#39;kindle.generator&#39;.
+                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.
         &#34;&#34;&#34;
         self.module_name = module_name
+        self.generator_paths = [&#34;kindle.generator&#34;]
+        if custom_module_paths is not None:
+            if isinstance(custom_module_paths, str):
+                paths = [custom_module_paths]
+            else:
+                paths = custom_module_paths
+            self.generator_paths += paths
 
     def __call__(self, *args, **kwargs):
-        # replace getattr
-        return getattr(
-            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
-            f&#34;{self.module_name}Generator&#34;,
-        )(*args, **kwargs)</code></pre>
+        generator_name = f&#34;{self.module_name}Generator&#34;
+        for path in self.generator_paths:
+            if hasattr(__import__(path, fromlist=[&#34;&#34;]), generator_name):
+                return getattr(__import__(path, fromlist=[&#34;&#34;]), generator_name)(
+                    *args, **kwargs
+                )
+
+        raise Exception(f&#34;{generator_name} can not be found.&#34;)</code></pre>
 </details>
 </dd>
 </dl>

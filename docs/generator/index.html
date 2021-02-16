@@ -41,6 +41,7 @@ from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.bottleneck import BottleneckGenerator
 from kindle.generator.concat import ConcatGenerator
 from kindle.generator.conv import ConvGenerator
+from kindle.generator.custom_yaml_module import YamlModuleGenerator
 from kindle.generator.dwconv import DWConvGenerator
 from kindle.generator.flatten import FlattenGenerator
 from kindle.generator.linear import LinearGenerator
@@ -60,6 +61,7 @@ __all__ = [
     &#34;AvgPoolGenerator&#34;,
     &#34;GlobalAvgPoolGenerator&#34;,
     &#34;MaxPoolGenerator&#34;,
+    &#34;YamlModuleGenerator&#34;,
 ]</code></pre>
 </details>
 </section>
@@ -81,6 +83,10 @@ __all__ = [
 <dt><code class="name"><a title="kindle.generator.conv" href="conv.html">kindle.generator.conv</a></code></dt>
 <dd>
 <div class="desc"><p>Conv module generator …</p></div>
+</dd>
+<dt><code class="name"><a title="kindle.generator.custom_yaml_module" href="custom_yaml_module.html">kindle.generator.custom_yaml_module</a></code></dt>
+<dd>
+<div class="desc"><p>Module Description …</p></div>
 </dd>
 <dt><code class="name"><a title="kindle.generator.dwconv" href="dwconv.html">kindle.generator.dwconv</a></code></dt>
 <dd>
@@ -865,7 +871,7 @@ def out_channel(self) -&gt; int:
         &#34;&#34;&#34;
 
     @abstractmethod
-    def __call__(self, repeat: int = 1):
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
         &#34;&#34;&#34;Returns nn.Module component.&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -877,6 +883,7 @@ def out_channel(self) -&gt; int:
 <li><a title="kindle.generator.bottleneck.BottleneckGenerator" href="bottleneck.html#kindle.generator.bottleneck.BottleneckGenerator">BottleneckGenerator</a></li>
 <li><a title="kindle.generator.concat.ConcatGenerator" href="concat.html#kindle.generator.concat.ConcatGenerator">ConcatGenerator</a></li>
 <li><a title="kindle.generator.conv.ConvGenerator" href="conv.html#kindle.generator.conv.ConvGenerator">ConvGenerator</a></li>
+<li><a title="kindle.generator.custom_yaml_module.YamlModuleGenerator" href="custom_yaml_module.html#kindle.generator.custom_yaml_module.YamlModuleGenerator">YamlModuleGenerator</a></li>
 <li><a title="kindle.generator.dwconv.DWConvGenerator" href="dwconv.html#kindle.generator.dwconv.DWConvGenerator">DWConvGenerator</a></li>
 <li><a title="kindle.generator.flatten.FlattenGenerator" href="flatten.html#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></li>
 <li><a title="kindle.generator.linear.LinearGenerator" href="linear.html#kindle.generator.linear.LinearGenerator">LinearGenerator</a></li>
@@ -1331,7 +1338,7 @@ def out_channel(self) -&gt; int:
 </dd>
 <dt id="kindle.generator.ModuleGenerator"><code class="flex name class">
 <span>class <span class="ident">ModuleGenerator</span></span>
-<span>(</span><span>module_name: str)</span>
+<span>(</span><span>module_name: str, custom_module_paths: Union[str, List, NoneType] = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Module generator class.</p>
@@ -1340,6 +1347,10 @@ def out_channel(self) -&gt; int:
 <dl>
 <dt><strong><code>module_name</code></strong></dt>
 <dd>{module_name}Generator class must have been implemented.</dd>
+<dt><strong><code>custom_module_paths</code></strong></dt>
+<dd>paths to find custom module generators.
+Default location to find module generator is 'kindle.generator'.
+If {custom_module_paths} is provided, ModuleGenerator will expand its search area.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -1348,21 +1359,121 @@ def out_channel(self) -&gt; int:
 <pre><code class="python">class ModuleGenerator:
     &#34;&#34;&#34;Module generator class.&#34;&#34;&#34;
 
-    def __init__(self, module_name: str):
+    def __init__(
+        self, module_name: str, custom_module_paths: Optional[Union[str, List]] = None
+    ):
         &#34;&#34;&#34;Generate module based on the {module_name}
 
         Args:
             module_name: {module_name}Generator class must have been implemented.
+            custom_module_paths: paths to find custom module generators.
+                Default location to find module generator is &#39;kindle.generator&#39;.
+                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.
         &#34;&#34;&#34;
         self.module_name = module_name
+        self.generator_paths = [&#34;kindle.generator&#34;]
+        if custom_module_paths is not None:
+            if isinstance(custom_module_paths, str):
+                paths = [custom_module_paths]
+            else:
+                paths = custom_module_paths
+            self.generator_paths += paths
 
     def __call__(self, *args, **kwargs):
-        # replace getattr
-        return getattr(
-            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
-            f&#34;{self.module_name}Generator&#34;,
-        )(*args, **kwargs)</code></pre>
+        generator_name = f&#34;{self.module_name}Generator&#34;
+        for path in self.generator_paths:
+            if hasattr(__import__(path, fromlist=[&#34;&#34;]), generator_name):
+                return getattr(__import__(path, fromlist=[&#34;&#34;]), generator_name)(
+                    *args, **kwargs
+                )
+
+        raise Exception(f&#34;{generator_name} can not be found.&#34;)</code></pre>
 </details>
+</dd>
+<dt id="kindle.generator.YamlModuleGenerator"><code class="flex name class">
+<span>class <span class="ident">YamlModuleGenerator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Custom yaml module generator.</p>
+<p>Initialize YamlModuleGenerator.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class YamlModuleGenerator(GeneratorAbstract):
+    &#34;&#34;&#34;Custom yaml module generator.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs) -&gt; None:
+        &#34;&#34;&#34;Initialize YamlModuleGenerator.&#34;&#34;&#34;
+        super().__init__(*args, **kwargs)
+        with open(self.args[0], &#34;r&#34;) as f:
+            self.cfg = yaml.load(f, yaml.FullLoader)
+
+        self.cfg.update(
+            {
+                &#34;input_channel&#34;: self.in_channel,
+                &#34;depth_multiple&#34;: 1.0,
+                &#34;width_multiple&#34;: self.width_multiply,
+                &#34;backbone&#34;: self.cfg.pop(&#34;module&#34;),
+            }
+        )
+        self.module = Model(self.cfg, verbose=False)
+
+    @property
+    def out_channel(self) -&gt; int:
+        temp_in_shape = np.array([self.cfg[&#34;input_channel&#34;], 128, 128])
+        out_shape = self.compute_out_shape(temp_in_shape)
+        return out_shape[0]
+
+    @property
+    def in_channel(self) -&gt; int:
+        if isinstance(self.from_idx, int):
+            return self.in_channels[self.from_idx]
+        return sum([self.in_channels[idx] for idx in self.from_idx])
+
+    @torch.no_grad()
+    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -&gt; List[int]:
+        module = self(repeat=repeat)
+        module.eval()
+        module_out = module(torch.zeros([1, *list(size)]))
+
+        return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1) -&gt; nn.Module:
+        module: Union[List[nn.Module], nn.Module]
+
+        if repeat &gt; 1:
+            # Currently, yaml module must have same in and out channel in order to apply repeat.
+            module = [Model(self.cfg, verbose=False) for _ in range(repeat)]
+        else:
+            module = self.module
+
+        return self._get_module(module)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="kindle.generator.base_generator.GeneratorAbstract" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kindle.generator.YamlModuleGenerator.CHANNEL_DIVISOR"><code class="name">var <span class="ident">CHANNEL_DIVISOR</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="kindle.generator.base_generator.GeneratorAbstract" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></b></code>:
+<ul class="hlist">
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.in_channel" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.in_channel">in_channel</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.name" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.name">name</a></code></li>
+<li><code><a title="kindle.generator.base_generator.GeneratorAbstract.out_channel" href="base_generator.html#kindle.generator.base_generator.GeneratorAbstract.out_channel">out_channel</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
 </section>
@@ -1384,6 +1495,7 @@ def out_channel(self) -&gt; int:
 <li><code><a title="kindle.generator.bottleneck" href="bottleneck.html">kindle.generator.bottleneck</a></code></li>
 <li><code><a title="kindle.generator.concat" href="concat.html">kindle.generator.concat</a></code></li>
 <li><code><a title="kindle.generator.conv" href="conv.html">kindle.generator.conv</a></code></li>
+<li><code><a title="kindle.generator.custom_yaml_module" href="custom_yaml_module.html">kindle.generator.custom_yaml_module</a></code></li>
 <li><code><a title="kindle.generator.dwconv" href="dwconv.html">kindle.generator.dwconv</a></code></li>
 <li><code><a title="kindle.generator.flatten" href="flatten.html">kindle.generator.flatten</a></code></li>
 <li><code><a title="kindle.generator.linear" href="linear.html">kindle.generator.linear</a></code></li>
@@ -1481,6 +1593,12 @@ def out_channel(self) -&gt; int:
 </li>
 <li>
 <h4><code><a title="kindle.generator.ModuleGenerator" href="#kindle.generator.ModuleGenerator">ModuleGenerator</a></code></h4>
+</li>
+<li>
+<h4><code><a title="kindle.generator.YamlModuleGenerator" href="#kindle.generator.YamlModuleGenerator">YamlModuleGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="kindle.generator.YamlModuleGenerator.CHANNEL_DIVISOR" href="#kindle.generator.YamlModuleGenerator.CHANNEL_DIVISOR">CHANNEL_DIVISOR</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
