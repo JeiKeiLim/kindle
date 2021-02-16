@@ -260,7 +260,7 @@ class MyConvGenerator(GeneratorAbstract):
         return self._get_module(module)
 ```
 
-**3. Build a model **
+**3. Build a model**
 ```python
 from kindle import Model
 
