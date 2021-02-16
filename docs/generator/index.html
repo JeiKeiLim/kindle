@@ -1338,7 +1338,7 @@ def out_channel(self) -&gt; int:
 </dd>
 <dt id="kindle.generator.ModuleGenerator"><code class="flex name class">
 <span>class <span class="ident">ModuleGenerator</span></span>
-<span>(</span><span>module_name: str)</span>
+<span>(</span><span>module_name: str, custom_module_paths: Union[str, List, NoneType] = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Module generator class.</p>
@@ -1347,6 +1347,10 @@ def out_channel(self) -&gt; int:
 <dl>
 <dt><strong><code>module_name</code></strong></dt>
 <dd>{module_name}Generator class must have been implemented.</dd>
+<dt><strong><code>custom_module_paths</code></strong></dt>
+<dd>paths to find custom module generators.
+Default location to find module generator is 'kindle.generator'.
+If {custom_module_paths} is provided, ModuleGenerator will expand its search area.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -1355,20 +1359,35 @@ def out_channel(self) -&gt; int:
 <pre><code class="python">class ModuleGenerator:
     &#34;&#34;&#34;Module generator class.&#34;&#34;&#34;
 
-    def __init__(self, module_name: str):
+    def __init__(
+        self, module_name: str, custom_module_paths: Optional[Union[str, List]] = None
+    ):
         &#34;&#34;&#34;Generate module based on the {module_name}
 
         Args:
             module_name: {module_name}Generator class must have been implemented.
+            custom_module_paths: paths to find custom module generators.
+                Default location to find module generator is &#39;kindle.generator&#39;.
+                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.
         &#34;&#34;&#34;
         self.module_name = module_name
+        self.generator_paths = [&#34;kindle.generator&#34;]
+        if custom_module_paths is not None:
+            if isinstance(custom_module_paths, str):
+                paths = [custom_module_paths]
+            else:
+                paths = custom_module_paths
+            self.generator_paths += paths
 
     def __call__(self, *args, **kwargs):
-        # replace getattr
-        return getattr(
-            __import__(&#34;kindle.generator&#34;, fromlist=[&#34;&#34;]),
-            f&#34;{self.module_name}Generator&#34;,
-        )(*args, **kwargs)</code></pre>
+        generator_name = f&#34;{self.module_name}Generator&#34;
+        for path in self.generator_paths:
+            if hasattr(__import__(path, fromlist=[&#34;&#34;]), generator_name):
+                return getattr(__import__(path, fromlist=[&#34;&#34;]), generator_name)(
+                    *args, **kwargs
+                )
+
+        raise Exception(f&#34;{generator_name} can not be found.&#34;)</code></pre>
 </details>
 </dd>
 <dt id="kindle.generator.YamlModuleGenerator"><code class="flex name class">

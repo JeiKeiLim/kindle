@@ -8,7 +8,7 @@ and generates PyTorch model accordingly.
 """
 
 import os
-from typing import Dict, List, Tuple, Type, Union
+from typing import Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
@@ -95,6 +95,12 @@ class ModelParser:
         ):
             self.input_size = self.cfg["input_size"]
 
+        self.custom_module_paths: Optional[Union[List[str], str]]
+        if "custom_module_paths" in self.cfg:
+            self.custom_module_paths = self.cfg["custom_module_paths"]  # type: ignore
+        else:
+            self.custom_module_paths = None
+
         self.in_channel = self.cfg["input_channel"]
 
         self.depth_multiply = self.cfg["depth_multiple"]
@@ -125,7 +131,9 @@ class ModelParser:
         self.log(len(log) * "-")
 
         for i, (idx, repeat, module, args) in enumerate(self.model_cfg):  # type: ignore
-            module_generator = ModuleGenerator(module)(
+            module_generator = ModuleGenerator(
+                module, custom_module_paths=self.custom_module_paths
+            )(
                 *args,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i > 0 else (self.in_channel,),  # type: ignore
