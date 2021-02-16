@@ -103,7 +103,7 @@ def optuna_sample():
         ]
         model_cfg.update({"backbone": backbone})
 
-        model = Model(model_cfg, verbose=True)
+        model = Model(model_cfg, verbose=True).to(device)
         batch_size = trial.suggest_int("batch_size", 8, 256)
         epochs = trial.suggest_int("epochs", 5, 20)
 
