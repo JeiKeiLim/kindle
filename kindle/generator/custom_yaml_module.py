@@ -55,11 +55,9 @@ class YamlModuleGenerator(GeneratorAbstract):
 
     def __call__(self, repeat: int = 1) -> nn.Module:
         module: Union[List[nn.Module], nn.Module]
-        if self.in_channel != self.out_channel:
-            # Currently, yaml module must have same in and out channel in order to apply repeat.
-            repeat = 1
 
         if repeat > 1:
+            # Currently, yaml module must have same in and out channel in order to apply repeat.
             module = [Model(self.cfg, verbose=False) for _ in range(repeat)]
         else:
             module = self.module

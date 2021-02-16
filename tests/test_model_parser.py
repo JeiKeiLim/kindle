@@ -49,4 +49,5 @@ class TestModelParser:
 
 if __name__ == "__main__":
     tester = TestModelParser(verbose=True)
-    tester.test_show_case()
+    # tester.test_show_case()
+    tester.test_example()

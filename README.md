@@ -100,8 +100,67 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 |Linear|Linear|[channel, activation]|
 
 
+# Custom module support
+## Custom module with yaml
+You can make your own custom module with yaml file.
+
+**1. custom_module.yaml**
+```yaml
+module:
+    # [from, repeat, module, args]
+    [
+        [-1, 1, Conv, [16, 1, 1]],
+        [0, 1, Conv, [8, 3, 1]],
+        [0, 1, Conv, [8, 5, 1]],
+        [0, 1, Conv, [8, 7, 1]],
+        [[1, 2, 3], 1, Concat, [1]],
+    ]
+```
+
+**2. model_with_custom_module.yaml**
+```yaml
+input_size: [32, 32]
+input_channel: 3
+
+depth_multiple: 1.0
+width_multiple: 1.0
+
+backbone:
+    [
+        [-1, 1, Conv, [6, 5, 1, 0]],
+        [-1, 1, MaxPool, [2]],
+        [-1, 1, YamlModule, ["custom_module.yaml"]],
+        [-1, 1, MaxPool, [2]],
+        [-1, 1, Flatten, []],
+        [-1, 1, Linear, [120, ReLU]],
+        [-1, 1, Linear, [84, ReLU]],
+        [-1, 1, Linear, [10]]
+    ]
+```
+
+**3. Build model**
+```python
+from kindle import Model
+
+model = Model("model_with_custom_module.yaml"), verbose=True)
+```
+```shell
+idx |       from |   n |     params |          module |            arguments |                       in shape |       out shape |
+---------------------------------------------------------------------------------------------------------------------------------
+  0 |         -1 |   1 |        616 |            Conv |         [6, 5, 1, 0] |                    [3, 32, 32] |     [8, 32, 32] |
+  1 |         -1 |   1 |          0 |         MaxPool |                  [2] |                      [8 32 32] |     [8, 16, 16] |
+  2 |         -1 |   1 |     10,832 |      YamlModule |    ['custom_module'] |                      [8 16 16] |    [24, 16, 16] |
+  3 |         -1 |   1 |          0 |         MaxPool |                  [2] |                     [24 16 16] |      [24, 8, 8] |
+  4 |         -1 |   1 |          0 |         Flatten |                   [] |                       [24 8 8] |          [1536] |
+  5 |         -1 |   1 |    184,440 |          Linear |        [120, 'ReLU'] |                         [1536] |           [120] |
+  6 |         -1 |   1 |     10,164 |          Linear |         [84, 'ReLU'] |                          [120] |            [84] |
+  7 |         -1 |   1 |        850 |          Linear |                 [10] |                           [84] |            [10] |
+Model Summary: 36 layers, 206,902 parameters, 206,902 gradients
+```
+
+
 # Planned features
 * Custom module support
-* Custom module with yaml support
+* ~~Custom module with yaml support~~
 * Use pre-trained model
 * More modules!
