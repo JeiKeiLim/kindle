@@ -25,8 +25,8 @@ doc:
 
 push-doc:
 	mkdocs build
-	git add sites
-	git add -u sites
+	git add docs
+	git add -u docs
 	git commit --amend -C HEAD
 
 build-pypi:

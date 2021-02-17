@@ -11,3 +11,5 @@ plugins:
   - mkapi
 
 theme: ivory
+docs_dir: mkdocs
+site_dir: docs
