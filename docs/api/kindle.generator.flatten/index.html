@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>kindle.generator.flatten &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">kindle.generator</button>
+<ul class="subnav">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.flatten</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorflattenflattengenerator">FlattenGenerator</a></li>
+</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+    <div class="previous"><a href="../kindle.generator.dwconv/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.generator.concat/">Next &raquo;</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>API &raquo; </li><li>kindle.generator</li>
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node" id="kindle.generator.flatten">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object module plain top">
+    <div class="mkapi-object-kind module top">module</div>
+    <h1 id="kindlegeneratorflatten" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">flatten</span></h1>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten" title="Source for kindle.generator.flatten">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Flatten module generator.</p>
+<ul>
+<li>Author: Jongkuk Lim</li>
+<li>Contact: lim.jeikei@gmail.com</li>
+</ul></div>
+    </div>
+  <div class="mkapi-section classes">
+      <div class="mkapi-section-name classes">
+          <span class="mkapi-section-name-body classes">Classes</span> 
+        </div>
+      <div class="mkapi-section-body classes"><ul class="mkapi-items">
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.flatten.FlattenGenerator">FlattenGenerator</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Flatten module generator.<a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator" title="Source for kindle.generator.flatten.FlattenGenerator">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.generator.flatten.FlattenGenerator">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object class code top">
+    <div class="mkapi-object-kind class top">class</div>
+    <h2 id="kindlegeneratorflattenflattengenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.flatten">kindle.generator.flatten</a>.</code><code class="mkapi-object-name">FlattenGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator" title="Source for kindle.generator.flatten.FlattenGenerator">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section bases">
+      <div class="mkapi-section-name bases">
+          <span class="mkapi-section-name-body bases">Bases</span> 
+        </div>
+      <div class="mkapi-section-body bases">
+<span class="mkapi-base"><a href="../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract">kindle.generator.base_generator.GeneratorAbstract</a></span>
+</div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Flatten module generator.</p></div>
+    </div>
+  <div class="mkapi-section attributes">
+      <div class="mkapi-section-name attributes">
+          <span class="mkapi-section-name-body attributes">Attributes</span> 
+        </div>
+      <div class="mkapi-section-body attributes"><ul class="mkapi-items">
+
+
+
+<li class="readonly-property"><code class="mkapi-item-name">name</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
+
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section methods">
+      <div class="mkapi-section-name methods">
+          <span class="mkapi-section-name-body methods">Methods</span> 
+        </div>
+      <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.flatten.FlattenGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator.__call__" title="Source for kindle.generator.flatten.FlattenGenerator.__call__">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.flatten.FlattenGenerator.compute_out_shape">compute_out_shape</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(list of int)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Compute output shape when {size} is given.<a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator.compute_out_shape" title="Source for kindle.generator.flatten.FlattenGenerator.compute_out_shape">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+  <div class="mkapi-members">
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.generator.flatten.FlattenGenerator.compute_out_shape">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlegeneratorflattenflattengeneratorcompute_out_shape" class="mkapi-object-body method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; list of int</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator.compute_out_shape" title="Source for kindle.generator.flatten.FlattenGenerator.compute_out_shape">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Compute output shape when {size} is given.</p>
+<p>Args: input size to compute output shape.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.generator.flatten.FlattenGenerator.__call__">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlegeneratorflattenflattengeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.flatten/#kindle.generator.flatten.FlattenGenerator.__call__" title="Source for kindle.generator.flatten.FlattenGenerator.__call__">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns nn.Module component.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+  </div>
+
+</div></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../kindle.generator.dwconv/" title="kindle.generator.dwconv"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.generator.concat/" title="kindle.generator.concat"><span>Next</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/mkapi.js"></script>
+    <script src="../../search/main.js"></script>
+</body>
+
+</html>

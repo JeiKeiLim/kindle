@@ -1,0 +1,15 @@
+site_name: Kindle
+repo_url: https://github.com/JeiKeiLim/kindle
+
+nav:
+    - Home: index.md
+    - Usages: usages.md
+    - API: mkapi/api/kindle
+
+plugins:
+  - search
+  - mkapi
+
+theme: ivory
+docs_dir: mkdocs
+site_dir: docs

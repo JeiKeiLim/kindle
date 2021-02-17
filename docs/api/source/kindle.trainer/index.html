@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>kindle.trainer &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.trainer/">kindle.trainer</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node">
+<h1 id="" class="mkapi-object mkapi-object-code plain">
+<span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
+<span class="mkapi-object-prefix">kindle.</span><span class="mkapi-object-name">trainer</span>
+<span id="kindle.trainer"></span><a class="mkapi-docs-link" href="../../kindle.trainer">DOCS</a>
+</h1>
+
+<div class="mkapi-code">
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;PyTorch trainer module.</span>
+
+<span class="sd">- Author: Jongkuk Lim</span>
+<span class="sd">- Contact: lim.jeikei@gmail.com</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data.dataloader</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data.sampler</span> <span class="kn">import</span> <span class="n">SequentialSampler</span><span class="p">,</span> <span class="n">SubsetRandomSampler</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+
+<span class="k">def</span> <span class="nf">_get_n_data_from_dataloader</span><span class="p">(</span><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get a number of data in dataloader.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataloader: torch data loader</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A number of data in dataloader</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span> <span class="n">SubsetRandomSampler</span><span class="p">):</span>
+        <span class="n">n_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span> <span class="n">SequentialSampler</span><span class="p">):</span>
+        <span class="n">n_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">data_source</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span> <span class="o">*</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span> <span class="k">if</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span> <span class="k">else</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">n_data</span>
+
+
+<span class="k">def</span> <span class="nf">_get_n_batch_from_dataloader</span><span class="p">(</span><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get a batch number in dataloader.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataloader: torch data loader</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A batch number in dataloader</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_data</span> <span class="o">=</span> <span class="n">_get_n_data_from_dataloader</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="n">n_batch</span> <span class="o">=</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span> <span class="k">if</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span> <span class="k">else</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">n_data</span> <span class="o">//</span> <span class="n">n_batch</span>
+
+
+<span class="k">class</span> <span class="nc">TorchTrainer</span><span class="p">:</span><span id="kindle.trainer.TorchTrainer"></span><a class="mkapi-docs-link" title="kindle.trainer.TorchTrainer" href="../../kindle.trainer/#kindle.trainer.TorchTrainer">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Pytorch Trainer.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">criterion</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">optimizer</span><span class="p">:</span> <span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize TorchTrainer class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model: model to train</span>
+<span class="sd">            criterion: loss function module</span>
+<span class="sd">            optimizer: optimization module</span>
+<span class="sd">            device: torch device</span>
+<span class="sd">            verbose: verbosity level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span id="kindle.trainer.TorchTrainer.train"></span><a class="mkapi-docs-link" title="kindle.trainer.TorchTrainer.train" href="../../kindle.trainer/#kindle.trainer.TorchTrainer.train">DOCS</a>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">train_dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+        <span class="n">n_epoch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">test_dataloader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataLoader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Train model.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            train_dataloader: data loader module which is a iterator that returns (data, labels)</span>
+<span class="sd">            n_epoch: number of total epochs for training</span>
+<span class="sd">            test_dataloader: test data loader</span>
+<span class="sd">            shuffle: shuffle train data on every epoch.</span>
+<span class="sd">                     Sampler must be SubsetRandomSampler to apply shuffle.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            loss and accuracy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">average_loss</span><span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span>
+        <span class="n">n_batch</span> <span class="o">=</span> <span class="n">_get_n_batch_from_dataloader</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epoch</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">shuffle</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">train_dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span> <span class="n">SubsetRandomSampler</span><span class="p">):</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_dataloader</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+
+            <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="n">n_batch</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+                <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                <span class="c1"># TODO: Modify for multi-label classification.</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+                <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Train: [</span><span class="si">{</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">] &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="p">(</span><span class="n">running_loss</span> <span class="o">/</span> <span class="p">(</span><span class="n">batch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="p">(</span><span class="n">correct</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+                <span class="p">)</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">test_dataloader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">)</span>
+
+            <span class="n">average_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">n_batch</span>
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+
+        <span class="k">return</span> <span class="n">average_loss</span><span class="p">,</span> <span class="n">accuracy</span>
+
+    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span><span id="kindle.trainer.TorchTrainer.test"></span><a class="mkapi-docs-link" title="kindle.trainer.TorchTrainer.test" href="../../kindle.trainer/#kindle.trainer.TorchTrainer.test">DOCS</a>
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Test model.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_dataloader: test data loader module which is a iterator that returns (data, labels)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            loss, accuracy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">n_batch</span> <span class="o">=</span> <span class="n">_get_n_batch_from_dataloader</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">)</span>
+
+        <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="n">n_batch</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">running_loss</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="c1"># TODO: Modify for multi-label classification.</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot; Test: </span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">5</span><span class="si">}</span><span class="s2"> Loss: </span><span class="si">{</span><span class="p">(</span><span class="n">running_loss</span> <span class="o">/</span> <span class="p">(</span><span class="n">batch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="p">(</span><span class="n">correct</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">n_batch</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+        <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span>
+</code></pre></div>
+</div>
+</div></div>
+                <footer>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="../../../js/mkapi.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>

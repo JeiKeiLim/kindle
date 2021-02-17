@@ -17,17 +17,14 @@ dev:
 	conda env update -p ${CONDA_PREFIX} --file environment-dev.yml
 	pre-commit install --hook-type pre-commit --hook-type pre-push
 
+doc-server:
+	mkdocs serve
+
 doc:
-	rm -rf docs/
-	env PYTHONPATH=. pdoc -o docs --html --force kindle/
-	mv docs/kindle/* docs/
-	rmdir docs/kindle
+	mkdocs build
 
 push-doc:
-	rm -rf docs/
-	env PYTHONPATH=. pdoc -o docs --html --force kindle/
-	mv docs/kindle/* docs/
-	rmdir docs/kindle
+	mkdocs build
 	git add docs
 	git add -u docs
 	git commit --amend -C HEAD

@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>kindle.model &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2 current"><button class="section nav-item">kindle</button>
+<ul class="subnav">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.model</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodelmodel">Model</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodelmodelparser">ModelParser</a></li>
+</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+    <div class="previous"><a href="../kindle/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.trainer/">Next &raquo;</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>API &raquo; </li><li>kindle</li>
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node" id="kindle.model">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object module plain top">
+    <div class="mkapi-object-kind module top">module</div>
+    <h1 id="kindlemodel" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle/#kindle">kindle</a>.</span><span class="mkapi-object-name">model</span></h1>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model" title="Source for kindle.model">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Kindle Model parser and model.</p>
+<p>This module parses model configuration yaml file
+and generates PyTorch model accordingly.</p>
+<ul>
+<li>Author: Jongkuk Lim</li>
+<li>Contact: lim.jeikei@gmail.com</li>
+</ul></div>
+    </div>
+  <div class="mkapi-section classes">
+      <div class="mkapi-section-name classes">
+          <span class="mkapi-section-name-body classes">Classes</span> 
+        </div>
+      <div class="mkapi-section-body classes"><ul class="mkapi-items">
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.model.Model">Model</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">PyTorch model class.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model" title="Source for kindle.model.Model">&lt;/&gt;</a></span></li>
+
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.model.ModelParser">ModelParser</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Generate PyTorch model from the model yaml file.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.ModelParser" title="Source for kindle.model.ModelParser">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.model.Model">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object class code top">
+    <div class="mkapi-object-kind class top">class</div>
+    <h2 id="kindlemodelmodel" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.model">kindle.model</a>.</code><code class="mkapi-object-name">Model</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">cfg</code>, <code class="mkapi-object-signature">verbose=False</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model" title="Source for kindle.model.Model">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section bases">
+      <div class="mkapi-section-name bases">
+          <span class="mkapi-section-name-body bases">Bases</span> 
+        </div>
+      <div class="mkapi-section-body bases">
+<span class="mkapi-base">torch.nn.modules.module.Module</span>
+</div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>PyTorch model class.</p></div>
+    </div>
+  <div class="mkapi-section methods">
+      <div class="mkapi-section-name methods">
+          <span class="mkapi-section-name-body methods">Methods</span> 
+        </div>
+      <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.add_module">add_module</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">module</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Adds a child module to the current module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.add_module" title="Source for torch.nn.modules.module.Module.add_module">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.apply">apply</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">fn</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Applies <code>fn</code> recursively to every submodule (as returned by <code>.children()</code>)
+as well as self. Typical use includes initializing the parameters of a model
+(see also :ref:<code>nn-init-doc</code>).<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.apply" title="Source for torch.nn.modules.module.Module.apply">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.bfloat16">bfloat16</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to <code>bfloat16</code> datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.bfloat16" title="Source for torch.nn.modules.module.Module.bfloat16">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.buffers">buffers</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">recurse</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(torch.Tensor)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over module buffers.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.buffers" title="Source for torch.nn.modules.module.Module.buffers">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.children">children</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over immediate children modules.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.children" title="Source for torch.nn.modules.module.Module.children">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.cpu">cpu</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Moves all model parameters and buffers to the CPU.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.cpu" title="Source for torch.nn.modules.module.Module.cpu">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.cuda">cuda</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">device</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Moves all model parameters and buffers to the GPU.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.cuda" title="Source for torch.nn.modules.module.Module.cuda">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.double">double</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to <code>double</code> datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.double" title="Source for torch.nn.modules.module.Module.double">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.eval">eval</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Sets the module in evaluation mode.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.eval" title="Source for torch.nn.modules.module.Module.eval">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.extra_repr">extra_repr</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Set the extra representation of the module<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.extra_repr" title="Source for torch.nn.modules.module.Module.extra_repr">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.float">float</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to float datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.float" title="Source for torch.nn.modules.module.Module.float">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.forward">forward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Tensor)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Forward the model.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward" title="Source for kindle.model.Model.forward">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.forward_once">forward_once</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Tensor)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Forward one time only.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward_once" title="Source for kindle.model.Model.forward_once">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.half">half</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to <code>half</code> datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.half" title="Source for torch.nn.modules.module.Module.half">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.load_state_dict">load_state_dict</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">state_dict</code>, <code class="mkapi-object-signature">strict</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(``NamedTuple`` with ``missing_keys`` and ``unexpected_keys`` fields)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Copies parameters and buffers from :attr:<code>state_dict</code> into
+this module and its descendants. If :attr:<code>strict</code> is <code>True</code>, then
+the keys of :attr:<code>state_dict</code> must exactly match the keys returned
+by this module's :meth:<code>~torch.nn.Module.state_dict</code> function.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.load_state_dict" title="Source for torch.nn.modules.module.Module.load_state_dict">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.modules">modules</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over all modules in the network.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.modules" title="Source for torch.nn.modules.module.Module.modules">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.named_buffers">named_buffers</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">prefix</code>, <code class="mkapi-object-signature">recurse</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(string, torch.Tensor)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over module buffers, yielding both the
+name of the buffer as well as the buffer itself.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_buffers" title="Source for torch.nn.modules.module.Module.named_buffers">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.named_children">named_children</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(string, Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over immediate children modules, yielding both
+the name of the module as well as the module itself.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_children" title="Source for torch.nn.modules.module.Module.named_children">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.named_modules">named_modules</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">memo</code>, <code class="mkapi-object-signature">prefix</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(string, Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over all modules in the network, yielding
+both the name of the module as well as the module itself.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_modules" title="Source for torch.nn.modules.module.Module.named_modules">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.named_parameters">named_parameters</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">prefix</code>, <code class="mkapi-object-signature">recurse</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(string, Parameter)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over module parameters, yielding both the
+name of the parameter as well as the parameter itself.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_parameters" title="Source for torch.nn.modules.module.Module.named_parameters">&lt;/&gt;</a></span></li>
+
+<li class="generator"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.parameters">parameters</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">recurse</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Parameter)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over module parameters.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.parameters" title="Source for torch.nn.modules.module.Module.parameters">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_backward_hook">register_backward_hook</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(RemovableHandle)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Registers a backward hook on the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_backward_hook" title="Source for torch.nn.modules.module.Module.register_backward_hook">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_buffer">register_buffer</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">tensor</code>, <code class="mkapi-object-signature">persistent</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Adds a buffer to the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_buffer" title="Source for torch.nn.modules.module.Module.register_buffer">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_forward_hook">register_forward_hook</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(RemovableHandle)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Registers a forward hook on the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_forward_hook" title="Source for torch.nn.modules.module.Module.register_forward_hook">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_forward_pre_hook">register_forward_pre_hook</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(RemovableHandle)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Registers a forward pre-hook on the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_forward_pre_hook" title="Source for torch.nn.modules.module.Module.register_forward_pre_hook">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_parameter">register_parameter</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">param</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Adds a parameter to the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_parameter" title="Source for torch.nn.modules.module.Module.register_parameter">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.requires_grad_">requires_grad_</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">requires_grad</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Change if autograd should record operations on parameters in this
+module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.requires_grad_" title="Source for torch.nn.modules.module.Module.requires_grad_">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.state_dict">state_dict</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">destination</code>, <code class="mkapi-object-signature">prefix</code>, <code class="mkapi-object-signature">keep_vars</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(dict)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns a dictionary containing a whole state of the module.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.state_dict" title="Source for torch.nn.modules.module.Module.state_dict">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.to">to</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Moves and/or casts the parameters and buffers.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.to" title="Source for torch.nn.modules.module.Module.to">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.train">train</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">mode</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Sets the module in training mode.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.train" title="Source for torch.nn.modules.module.Module.train">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.type">type</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">dst_type</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all parameters and buffers to :attr:<code>dst_type</code>.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.type" title="Source for torch.nn.modules.module.Module.type">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.zero_grad">zero_grad</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">set_to_none</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Sets gradients of all model parameters to zero. See similar function
+under :class:<code>torch.optim.Optimizer</code> for more context.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.zero_grad" title="Source for torch.nn.modules.module.Module.zero_grad">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+  <div class="mkapi-members">
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.register_buffer">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleregister_buffer" class="mkapi-object-body method"><code class="mkapi-object-name">register_buffer</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">tensor</code>, <code class="mkapi-object-signature">persistent=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_buffer" title="Source for torch.nn.modules.module.Module.register_buffer">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Adds a buffer to the module.</p>
+<p>This is typically used to register a buffer that should not to be
+considered a model parameter. For example, BatchNorm's <code>running_mean</code>
+is not a parameter, but is part of the module's state. Buffers, by
+default, are persistent and will be saved alongside parameters. This
+behavior can be changed by setting :attr:<code>persistent</code> to <code>False</code>. The
+only difference between a persistent buffer and a non-persistent buffer
+is that the latter will not be a part of this module's
+:attr:<code>state_dict</code>.</p>
+<p>Buffers can be accessed as attributes using given names.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">name</code>
+<span class="mkapi-item-type">(string)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">name of the buffer. The buffer can be accessed
+from this module using the given name</span></li>
+
+<li><code class="mkapi-item-name">tensor</code>
+<span class="mkapi-item-type">(Tensor)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">buffer to be registered.</span></li>
+
+<li><code class="mkapi-item-name">persistent</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">whether the buffer is part of this module's
+:attr:<code>state_dict</code>.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; self.register_buffer('running_mean', torch.zeros(num_features))
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.register_parameter">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleregister_parameter" class="mkapi-object-body method"><code class="mkapi-object-name">register_parameter</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">param</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_parameter" title="Source for torch.nn.modules.module.Module.register_parameter">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Adds a parameter to the module.</p>
+<p>The parameter can be accessed as an attribute using given name.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">name</code>
+<span class="mkapi-item-type">(string)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">name of the parameter. The parameter can be accessed
+from this module using the given name</span></li>
+
+<li><code class="mkapi-item-name">param</code>
+<span class="mkapi-item-type">(Parameter)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">parameter to be added to the module.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.add_module">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleadd_module" class="mkapi-object-body method"><code class="mkapi-object-name">add_module</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">name</code>, <code class="mkapi-object-signature">module</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.add_module" title="Source for torch.nn.modules.module.Module.add_module">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Adds a child module to the current module.</p>
+<p>The module can be accessed as an attribute using the given name.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">name</code>
+<span class="mkapi-item-type">(string)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">name of the child module. The child module can be
+accessed from this module using the given name</span></li>
+
+<li><code class="mkapi-item-name">module</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">child module to be added to the module.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.apply">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleapply" class="mkapi-object-body method"><code class="mkapi-object-name">apply</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">fn</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.apply" title="Source for torch.nn.modules.module.Module.apply">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Applies <code>fn</code> recursively to every submodule (as returned by <code>.children()</code>)
+as well as self. Typical use includes initializing the parameters of a model
+(see also :ref:<code>nn-init-doc</code>).</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; @torch.no_grad()
+&gt;&gt;&gt; def init_weights(m):
+&gt;&gt;&gt;     print(m)
+&gt;&gt;&gt;     if type(m) == nn.Linear:
+&gt;&gt;&gt;         m.weight.fill_(1.0)
+&gt;&gt;&gt;         print(m.weight)
+&gt;&gt;&gt; net = nn.Sequential(nn.Linear(2, 2), nn.Linear(2, 2))
+&gt;&gt;&gt; net.apply(init_weights)
+Linear(in_features=2, out_features=2, bias=True)
+Parameter containing:
+tensor([[ 1.,  1.],
+        [ 1.,  1.]])
+Linear(in_features=2, out_features=2, bias=True)
+Parameter containing:
+tensor([[ 1.,  1.],
+        [ 1.,  1.]])
+Sequential(
+  (0): Linear(in_features=2, out_features=2, bias=True)
+  (1): Linear(in_features=2, out_features=2, bias=True)
+)
+Sequential(
+  (0): Linear(in_features=2, out_features=2, bias=True)
+  (1): Linear(in_features=2, out_features=2, bias=True)
+)
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.cuda">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulecuda" class="mkapi-object-body method"><code class="mkapi-object-name">cuda</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">device=None</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.cuda" title="Source for torch.nn.modules.module.Module.cuda">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Moves all model parameters and buffers to the GPU.</p>
+<p>This also makes associated parameters and buffers different objects. So
+it should be called before constructing optimizer if the module will
+live on GPU while being optimized.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">device</code>
+<span class="mkapi-item-type">(int, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if specified, all parameters will be
+copied to that device</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.cpu">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulecpu" class="mkapi-object-body method"><code class="mkapi-object-name">cpu</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.cpu" title="Source for torch.nn.modules.module.Module.cpu">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Moves all model parameters and buffers to the CPU.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.type">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduletype" class="mkapi-object-body method"><code class="mkapi-object-name">type</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">dst_type</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.type" title="Source for torch.nn.modules.module.Module.type">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Casts all parameters and buffers to :attr:<code>dst_type</code>.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">dst_type</code>
+<span class="mkapi-item-type">(type or string)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">the desired type</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.float">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulefloat" class="mkapi-object-body method"><code class="mkapi-object-name">float</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.float" title="Source for torch.nn.modules.module.Module.float">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Casts all floating point parameters and buffers to float datatype.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.double">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduledouble" class="mkapi-object-body method"><code class="mkapi-object-name">double</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.double" title="Source for torch.nn.modules.module.Module.double">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Casts all floating point parameters and buffers to <code>double</code> datatype.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.half">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulehalf" class="mkapi-object-body method"><code class="mkapi-object-name">half</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.half" title="Source for torch.nn.modules.module.Module.half">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Casts all floating point parameters and buffers to <code>half</code> datatype.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.bfloat16">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulebfloat16" class="mkapi-object-body method"><code class="mkapi-object-name">bfloat16</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.bfloat16" title="Source for torch.nn.modules.module.Module.bfloat16">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Casts all floating point parameters and buffers to <code>bfloat16</code> datatype.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.to">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleto" class="mkapi-object-body method"><code class="mkapi-object-name">to</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.to" title="Source for torch.nn.modules.module.Module.to">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Moves and/or casts the parameters and buffers.</p>
+<p>This can be called as</p>
+<p>.. function:: to(device=None, dtype=None, non_blocking=False)</p>
+<p>.. function:: to(dtype, non_blocking=False)</p>
+<p>.. function:: to(tensor, non_blocking=False)</p>
+<p>.. function:: to(memory_format=torch.channels_last)</p>
+<p>Its signature is similar to :meth:<code>torch.Tensor.to</code>, but only accepts
+floating point desired :attr:<code>dtype</code> s. In addition, this method will
+only cast the floating point parameters and buffers to :attr:<code>dtype</code>
+(if given). The integral parameters and buffers will be moved
+:attr:<code>device</code>, if that is given, but with dtypes unchanged. When
+:attr:<code>non_blocking</code> is set, it tries to convert/move asynchronously
+with respect to the host if possible, e.g., moving CPU Tensors with
+pinned memory to CUDA devices.</p>
+<p>See below for examples.</p>
+<p>.. note::
+    This method modifies the module in-place.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; linear = nn.Linear(2, 2)
+&gt;&gt;&gt; linear.weight
+Parameter containing:
+tensor([[ 0.1913, -0.3420],
+        [-0.5113, -0.2325]])
+&gt;&gt;&gt; linear.to(torch.double)
+Linear(in_features=2, out_features=2, bias=True)
+&gt;&gt;&gt; linear.weight
+Parameter containing:
+tensor([[ 0.1913, -0.3420],
+        [-0.5113, -0.2325]], dtype=torch.float64)
+&gt;&gt;&gt; gpu1 = torch.device(&quot;cuda:1&quot;)
+&gt;&gt;&gt; linear.to(gpu1, dtype=torch.half, non_blocking=True)
+Linear(in_features=2, out_features=2, bias=True)
+&gt;&gt;&gt; linear.weight
+Parameter containing:
+tensor([[ 0.1914, -0.3420],
+        [-0.5112, -0.2324]], dtype=torch.float16, device='cuda:1')
+&gt;&gt;&gt; cpu = torch.device(&quot;cpu&quot;)
+&gt;&gt;&gt; linear.to(cpu)
+Linear(in_features=2, out_features=2, bias=True)
+&gt;&gt;&gt; linear.weight
+Parameter containing:
+tensor([[ 0.1914, -0.3420],
+        [-0.5112, -0.2324]], dtype=torch.float16)
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.register_backward_hook">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleregister_backward_hook" class="mkapi-object-body method"><code class="mkapi-object-name">register_backward_hook</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_backward_hook" title="Source for torch.nn.modules.module.Module.register_backward_hook">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Registers a backward hook on the module.</p>
+<p>.. warning ::</p>
+<pre><code>The current implementation will not have the presented behavior
+for complex :class:`Module` that perform many operations.
+In some failure cases, :attr:`grad_input` and :attr:`grad_output` will only
+contain the gradients for a subset of the inputs and outputs.
+For such :class:`Module`, you should use :func:`torch.Tensor.register_hook`
+directly on a specific input or output to get the required gradients.
+</code></pre>
+<p>The hook will be called every time the gradients with respect to module
+inputs are computed. The hook should have the following signature::</p>
+<pre><code>hook(module, grad_input, grad_output) -&gt; Tensor or None
+</code></pre>
+<p>The :attr:<code>grad_input</code> and :attr:<code>grad_output</code> may be tuples if the
+module has multiple inputs or outputs. The hook should not modify its
+arguments, but it can optionally return a new gradient with respect to
+input that will be used in place of :attr:<code>grad_input</code> in subsequent
+computations. :attr:<code>grad_input</code> will only correspond to the inputs given
+as positional arguments.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(RemovableHandle)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>class:<code>torch.utils.hooks.RemovableHandle</code>:
+    a handle that can be used to remove the added hook by calling
+    <code>handle.remove()</code></p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.register_forward_pre_hook">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleregister_forward_pre_hook" class="mkapi-object-body method"><code class="mkapi-object-name">register_forward_pre_hook</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_forward_pre_hook" title="Source for torch.nn.modules.module.Module.register_forward_pre_hook">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Registers a forward pre-hook on the module.</p>
+<p>The hook will be called every time before :func:<code>forward</code> is invoked.
+It should have the following signature::</p>
+<pre><code>hook(module, input) -&gt; None or modified input
+</code></pre>
+<p>The input contains only the positional arguments given to the module.
+Keyword arguments won't be passed to the hooks and only to the <code>forward</code>.
+The hook can modify the input. User can either return a tuple or a
+single modified value in the hook. We will wrap the value into a tuple
+if a single value is returned(unless that value is already a tuple).</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(RemovableHandle)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>class:<code>torch.utils.hooks.RemovableHandle</code>:
+    a handle that can be used to remove the added hook by calling
+    <code>handle.remove()</code></p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.register_forward_hook">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleregister_forward_hook" class="mkapi-object-body method"><code class="mkapi-object-name">register_forward_hook</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.register_forward_hook" title="Source for torch.nn.modules.module.Module.register_forward_hook">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Registers a forward hook on the module.</p>
+<p>The hook will be called every time after :func:<code>forward</code> has computed an output.
+It should have the following signature::</p>
+<pre><code>hook(module, input, output) -&gt; None or modified output
+</code></pre>
+<p>The input contains only the positional arguments given to the module.
+Keyword arguments won't be passed to the hooks and only to the <code>forward</code>.
+The hook can modify the output. It can modify the input inplace but
+it will not have effect on forward since this is called after
+:func:<code>forward</code> is called.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(RemovableHandle)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>class:<code>torch.utils.hooks.RemovableHandle</code>:
+    a handle that can be used to remove the added hook by calling
+    <code>handle.remove()</code></p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.state_dict">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulestate_dict" class="mkapi-object-body method"><code class="mkapi-object-name">state_dict</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">destination=None</code>, <code class="mkapi-object-signature">prefix=&#39;&#39;</code>, <code class="mkapi-object-signature">keep_vars=False</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.state_dict" title="Source for torch.nn.modules.module.Module.state_dict">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns a dictionary containing a whole state of the module.</p>
+<p>Both parameters and persistent buffers (e.g. running averages) are
+included. Keys are corresponding parameter and buffer names.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(dict)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>e</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; module.state_dict().keys()
+['bias', 'weight']
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.load_state_dict">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleload_state_dict" class="mkapi-object-body method"><code class="mkapi-object-name">load_state_dict</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">state_dict</code>, <code class="mkapi-object-signature">strict=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.load_state_dict" title="Source for torch.nn.modules.module.Module.load_state_dict">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Copies parameters and buffers from :attr:<code>state_dict</code> into
+this module and its descendants. If :attr:<code>strict</code> is <code>True</code>, then
+the keys of :attr:<code>state_dict</code> must exactly match the keys returned
+by this module's :meth:<code>~torch.nn.Module.state_dict</code> function.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">state_dict</code>
+<span class="mkapi-item-type">(dict)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">a dict containing parameters and
+persistent buffers.</span></li>
+
+<li><code class="mkapi-item-name">strict</code>
+<span class="mkapi-item-type">(bool, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">whether to strictly enforce that the keys
+in :attr:<code>state_dict</code> match the keys returned by this module's
+:meth:<code>~torch.nn.Module.state_dict</code> function. Default: <code>True</code></span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(``NamedTuple`` with ``missing_keys`` and ``unexpected_keys`` fields)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>s
+s</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.parameters">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemoduleparameters" class="mkapi-object-body generator"><code class="mkapi-object-name">parameters</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">recurse=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.parameters" title="Source for torch.nn.modules.module.Module.parameters">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over module parameters.</p>
+<p>This is typically passed to an optimizer.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">recurse</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if True, then yields parameters of this module
+and all submodules. Otherwise, yields only parameters that
+are direct members of this module.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(Parameter)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>module parameter</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; for param in model.parameters():
+&gt;&gt;&gt;     print(type(param), param.size())
+&lt;class 'torch.Tensor'&gt; (20L,)
+&lt;class 'torch.Tensor'&gt; (20L, 1L, 5L, 5L)
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.named_parameters">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulenamed_parameters" class="mkapi-object-body generator"><code class="mkapi-object-name">named_parameters</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">prefix=&#39;&#39;</code>, <code class="mkapi-object-signature">recurse=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_parameters" title="Source for torch.nn.modules.module.Module.named_parameters">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over module parameters, yielding both the
+name of the parameter as well as the parameter itself.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">prefix</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">prefix to prepend to all parameter names.</span></li>
+
+<li><code class="mkapi-item-name">recurse</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if True, then yields parameters of this module
+and all submodules. Otherwise, yields only parameters that
+are direct members of this module.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(string, Parameter)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>Tuple containing the name and parameter</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; for name, param in self.named_parameters():
+&gt;&gt;&gt;    if name in ['bias']:
+&gt;&gt;&gt;        print(param.size())
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.buffers">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulebuffers" class="mkapi-object-body generator"><code class="mkapi-object-name">buffers</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">recurse=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.buffers" title="Source for torch.nn.modules.module.Module.buffers">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over module buffers.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">recurse</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if True, then yields buffers of this module
+and all submodules. Otherwise, yields only buffers that
+are direct members of this module.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(torch.Tensor)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>module buffer</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; for buf in model.buffers():
+&gt;&gt;&gt;     print(type(buf), buf.size())
+&lt;class 'torch.Tensor'&gt; (20L,)
+&lt;class 'torch.Tensor'&gt; (20L, 1L, 5L, 5L)
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.named_buffers">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulenamed_buffers" class="mkapi-object-body generator"><code class="mkapi-object-name">named_buffers</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">prefix=&#39;&#39;</code>, <code class="mkapi-object-signature">recurse=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_buffers" title="Source for torch.nn.modules.module.Module.named_buffers">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over module buffers, yielding both the
+name of the buffer as well as the buffer itself.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">prefix</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">prefix to prepend to all buffer names.</span></li>
+
+<li><code class="mkapi-item-name">recurse</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if True, then yields buffers of this module
+and all submodules. Otherwise, yields only buffers that
+are direct members of this module.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(string, torch.Tensor)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>Tuple containing the name and buffer</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; for name, buf in self.named_buffers():
+&gt;&gt;&gt;    if name in ['running_var']:
+&gt;&gt;&gt;        print(buf.size())
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.children">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulechildren" class="mkapi-object-body generator"><code class="mkapi-object-name">children</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.children" title="Source for torch.nn.modules.module.Module.children">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over immediate children modules.</p></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>a child module</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.named_children">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulenamed_children" class="mkapi-object-body generator"><code class="mkapi-object-name">named_children</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_children" title="Source for torch.nn.modules.module.Module.named_children">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over immediate children modules, yielding both
+the name of the module as well as the module itself.</p></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(string, Module)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>Tuple containing a name and child module</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; for name, module in model.named_children():
+&gt;&gt;&gt;     if name in ['conv4', 'conv5']:
+&gt;&gt;&gt;         print(module)
+</code></pre></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.modules">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulemodules" class="mkapi-object-body generator"><code class="mkapi-object-name">modules</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.modules" title="Source for torch.nn.modules.module.Module.modules">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over all modules in the network.</p></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>a module in the network</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Duplicate modules are returned only once. In the following
+example, <code>l</code> will be returned only once.</p>
+</div></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; l = nn.Linear(2, 2)
+&gt;&gt;&gt; net = nn.Sequential(l, l)
+&gt;&gt;&gt; for idx, m in enumerate(net.modules()):
+        print(idx, '-&gt;', m)
+</code></pre>
+<p>0 -&gt; Sequential(
+  (0): Linear(in_features=2, out_features=2, bias=True)
+  (1): Linear(in_features=2, out_features=2, bias=True)
+)
+1 -&gt; Linear(in_features=2, out_features=2, bias=True)</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.named_modules">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object generator code">
+    <div class="mkapi-object-kind generator">generator</div>
+    <h3 id="torchnnmodulesmodulemodulenamed_modules" class="mkapi-object-body generator"><code class="mkapi-object-name">named_modules</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">memo=None</code>, <code class="mkapi-object-signature">prefix=&#39;&#39;</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.named_modules" title="Source for torch.nn.modules.module.Module.named_modules">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Returns an iterator over all modules in the network, yielding
+both the name of the module as well as the module itself.</p></div>
+    </div>
+  <div class="mkapi-section yields">
+      <div class="mkapi-section-name yields">
+          <span class="mkapi-section-name-body yields">Yields</span> <span class="mkapi-item-type">(string, Module)</span>
+        </div>
+      <div class="mkapi-section-body yields"><p>Tuple of name and module</p></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Duplicate modules are returned only once. In the following
+example, <code>l</code> will be returned only once.</p>
+</div></div>
+    </div>
+  <div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Example::</p>
+<pre><code class="language-python">&gt;&gt;&gt; l = nn.Linear(2, 2)
+&gt;&gt;&gt; net = nn.Sequential(l, l)
+&gt;&gt;&gt; for idx, m in enumerate(net.named_modules()):
+        print(idx, '-&gt;', m)
+</code></pre>
+<p>0 -&gt; ('', Sequential(
+  (0): Linear(in_features=2, out_features=2, bias=True)
+  (1): Linear(in_features=2, out_features=2, bias=True)
+))
+1 -&gt; ('0', Linear(in_features=2, out_features=2, bias=True))</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.train">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduletrain" class="mkapi-object-body method"><code class="mkapi-object-name">train</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">mode=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.train" title="Source for torch.nn.modules.module.Module.train">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Sets the module in training mode.</p>
+<p>This has any effect only on certain modules. See documentations of
+particular modules for details of their behaviors in training/evaluation
+mode, if they are affected, e.g. :class:<code>Dropout</code>, :class:<code>BatchNorm</code>,
+etc.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">mode</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">whether to set training mode (<code>True</code>) or evaluation
+mode (<code>False</code>). Default: <code>True</code>.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.eval">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleeval" class="mkapi-object-body method"><code class="mkapi-object-name">eval</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.eval" title="Source for torch.nn.modules.module.Module.eval">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Sets the module in evaluation mode.</p>
+<p>This has any effect only on certain modules. See documentations of
+particular modules for details of their behaviors in training/evaluation
+mode, if they are affected, e.g. :class:<code>Dropout</code>, :class:<code>BatchNorm</code>,
+etc.</p>
+<p>This is equivalent with :meth:<code>self.train(False) &lt;torch.nn.Module.train&gt;</code>.</p></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.requires_grad_">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulerequires_grad_" class="mkapi-object-body method"><code class="mkapi-object-name">requires_grad_</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">requires_grad=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.requires_grad_" title="Source for torch.nn.modules.module.Module.requires_grad_">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Change if autograd should record operations on parameters in this
+module.</p>
+<p>This method sets the parameters' :attr:<code>requires_grad</code> attributes
+in-place.</p>
+<p>This method is helpful for freezing part of the module for finetuning
+or training parts of a model individually (e.g., GAN training).</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">requires_grad</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">whether autograd should record operations on
+parameters in this module. Default: <code>True</code>.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Module)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>self</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.zero_grad">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemodulezero_grad" class="mkapi-object-body method"><code class="mkapi-object-name">zero_grad</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">set_to_none=False</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.zero_grad" title="Source for torch.nn.modules.module.Module.zero_grad">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Sets gradients of all model parameters to zero. See similar function
+under :class:<code>torch.optim.Optimizer</code> for more context.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">set_to_none</code>
+<span class="mkapi-item-type">(bool)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">instead of setting to zero, set the grads to None.
+See :meth:<code>torch.optim.Optimizer.zero_grad</code> for details.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="torch.nn.modules.module.Module.extra_repr">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="torchnnmodulesmodulemoduleextra_repr" class="mkapi-object-body method"><code class="mkapi-object-name">extra_repr</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; str</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.extra_repr" title="Source for torch.nn.modules.module.Module.extra_repr">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Set the extra representation of the module</p>
+<p>To print customized extra information, you should re-implement
+this method in your own modules. Both single-line and multi-line
+strings are acceptable.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model.Model.forward">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodelmodelforward" class="mkapi-object-body method"><code class="mkapi-object-name">forward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Tensor</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward" title="Source for kindle.model.Model.forward">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Forward the model.</p>
+<p>For the time being, this method will only call self.forward_once. Later, we plan
+to add Test Time Augment.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model.Model.forward_once">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodelmodelforward_once" class="mkapi-object-body method"><code class="mkapi-object-name">forward_once</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Tensor</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward_once" title="Source for kindle.model.Model.forward_once">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Forward one time only.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.model.ModelParser">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object class code top">
+    <div class="mkapi-object-kind class top">class</div>
+    <h2 id="kindlemodelmodelparser" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.model">kindle.model</a>.</code><code class="mkapi-object-name">ModelParser</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">cfg=&#39;./model_configs/show_case.yaml&#39;</code>, <code class="mkapi-object-signature">verbose=False</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.ModelParser" title="Source for kindle.model.ModelParser">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Generate PyTorch model from the model yaml file.</p></div>
+    </div>
+  <div class="mkapi-section methods">
+      <div class="mkapi-section-name methods">
+          <span class="mkapi-section-name-body methods">Methods</span> 
+        </div>
+      <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model.ModelParser.log">log</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Log.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.ModelParser.log" title="Source for kindle.model.ModelParser.log">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+  <div class="mkapi-members">
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model.ModelParser.log">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodelmodelparserlog" class="mkapi-object-body method"><code class="mkapi-object-name">log</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.ModelParser.log" title="Source for kindle.model.ModelParser.log">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Log.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+  </div>
+
+</div></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../kindle/" title="kindle"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.trainer/" title="kindle.trainer"><span>Next</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/mkapi.js"></script>
+    <script src="../../search/main.js"></script>
+</body>
+
+</html>
