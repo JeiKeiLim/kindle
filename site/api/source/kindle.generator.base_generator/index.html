@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>kindle.generator.base_generator &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.trainer/">kindle.trainer</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node">
+<h1 id="" class="mkapi-object mkapi-object-code plain">
+<span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
+<span class="mkapi-object-prefix">kindle.generator.</span><span class="mkapi-object-name">base_generator</span>
+<span id="kindle.generator.base_generator"></span><a class="mkapi-docs-link" href="../../kindle.generator.base_generator">DOCS</a>
+</h1>
+
+<div class="mkapi-code">
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Base Module Generator.</span>
+
+<span class="sd">This module is responsible for GeneratorAbstract and ModuleGenerator.</span>
+
+<span class="sd">- Author: Jongkuk Lim</span>
+<span class="sd">- Contact: lim.jeikei@gmail.com</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="kn">from</span> <span class="nn">kindle.torch_utils</span> <span class="kn">import</span> <span class="n">make_divisible</span>
+
+
+<span class="k">class</span> <span class="nc">GeneratorAbstract</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span><span id="kindle.generator.base_generator.GeneratorAbstract"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Abstract Module Generator.&quot;&quot;&quot;</span>
+
+    <span class="n">CHANNEL_DIVISOR</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">from_idx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span>
+        <span class="n">width_multiply</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize module generator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Module arguments</span>
+<span class="sd">            from_idx: Module input index</span>
+<span class="sd">            in_channels: Number of input channel</span>
+<span class="sd">            width_multiply: Channel width multiply</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span> <span class="o">=</span> <span class="n">from_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width_multiply</span> <span class="o">=</span> <span class="n">width_multiply</span>
+
+    <span class="nd">@property</span><span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.name" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name">DOCS</a>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Module name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get module from __call__ function.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">module</span><span class="p">)</span>
+
+        <span class="c1"># error: Incompatible types in assignment (expression has type &quot;Union[Tensor, Module, int]&quot;,</span>
+        <span class="c1"># variable has type &quot;Union[Tensor, Module]&quot;)</span>
+        <span class="c1"># error: List comprehension has incompatible type List[int];</span>
+        <span class="c1"># expected List[Union[Tensor, Module]]</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">n_params</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">parameters</span><span class="p">()])</span>  <span class="c1"># type: ignore</span>
+        <span class="c1"># error: Cannot assign to a method</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># type: ignore</span>
+
+        <span class="k">return</span> <span class="n">module</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_divisible_channel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">n_channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get divisible channel by default divisor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_channel: number of channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Ex) given {n_channel} is 52 and {GeneratorAbstract.CHANNEL_DIVISOR} is 8.,</span>
+<span class="sd">                return channel is 56 since ceil(52/8) = 7 and 7*8 = 56</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">make_divisible</span><span class="p">(</span><span class="n">n_channel</span><span class="p">,</span> <span class="n">divisor</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">CHANNEL_DIVISOR</span><span class="p">)</span>
+
+    <span class="nd">@property</span><span id="kindle.generator.base_generator.GeneratorAbstract.out_channel"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.out_channel" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.out_channel">DOCS</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Out channel of the module.&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span><span id="kindle.generator.base_generator.GeneratorAbstract.in_channel"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.in_channel" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.in_channel">DOCS</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;In channel of the module.&quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span><span id="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">DOCS</a>
+    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Compute output shape when {size} is given.</span>
+
+<span class="sd">        Args: input size to compute output shape.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span><span id="kindle.generator.base_generator.GeneratorAbstract.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.__call__" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.__call__">DOCS</a>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns nn.Module component.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">ModuleGenerator</span><span class="p">:</span><span id="kindle.generator.base_generator.ModuleGenerator"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.ModuleGenerator" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.ModuleGenerator">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Module generator class.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_module_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate module based on the {module_name}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            module_name: {module_name}Generator class must have been implemented.</span>
+<span class="sd">            custom_module_paths: paths to find custom module generators.</span>
+<span class="sd">                Default location to find module generator is &#39;kindle.generator&#39;.</span>
+<span class="sd">                If {custom_module_paths} is provided, ModuleGenerator will expand its search area.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span> <span class="o">=</span> <span class="n">module_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generator_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;kindle.generator&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">custom_module_paths</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">custom_module_paths</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">custom_module_paths</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">paths</span> <span class="o">=</span> <span class="n">custom_module_paths</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generator_paths</span> <span class="o">+=</span> <span class="n">paths</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">generator_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="si">}</span><span class="s2">Generator&quot;</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator_paths</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]),</span> <span class="n">generator_name</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]),</span> <span class="n">generator_name</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                <span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">generator_name</span><span class="si">}</span><span class="s2"> can not be found.&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div></div>
+                <footer>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="../../../js/mkapi.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>
