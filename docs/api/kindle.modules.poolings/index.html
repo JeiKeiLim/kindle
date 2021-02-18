@@ -44,6 +44,7 @@
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../modules/">Modules</a></li>
                     <li class="toctree-l1"><button class="section nav-item">API</button>
 <ul class="subnav">
     <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
@@ -357,8 +358,8 @@ from this module using the given name</span></li>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; self.register_buffer('running_mean', torch.zeros(num_features))
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;running_mean&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_features</span><span class="p">))</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -466,31 +467,31 @@ as well as self. Typical use includes initializing the parameters of a model
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; @torch.no_grad()
-&gt;&gt;&gt; def init_weights(m):
-&gt;&gt;&gt;     print(m)
-&gt;&gt;&gt;     if type(m) == nn.Linear:
-&gt;&gt;&gt;         m.weight.fill_(1.0)
-&gt;&gt;&gt;         print(m.weight)
-&gt;&gt;&gt; net = nn.Sequential(nn.Linear(2, 2), nn.Linear(2, 2))
-&gt;&gt;&gt; net.apply(init_weights)
-Linear(in_features=2, out_features=2, bias=True)
-Parameter containing:
-tensor([[ 1.,  1.],
-        [ 1.,  1.]])
-Linear(in_features=2, out_features=2, bias=True)
-Parameter containing:
-tensor([[ 1.,  1.],
-        [ 1.,  1.]])
-Sequential(
-  (0): Linear(in_features=2, out_features=2, bias=True)
-  (1): Linear(in_features=2, out_features=2, bias=True)
-)
-Sequential(
-  (0): Linear(in_features=2, out_features=2, bias=True)
-  (1): Linear(in_features=2, out_features=2, bias=True)
-)
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">init_weights</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">==</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">fill_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">net</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">init_weights</span><span class="p">)</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">Sequential</span><span class="p">(</span>
+  <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">Sequential</span><span class="p">(</span>
+  <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -746,32 +747,32 @@ pinned memory to CUDA devices.</p>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; linear = nn.Linear(2, 2)
-&gt;&gt;&gt; linear.weight
-Parameter containing:
-tensor([[ 0.1913, -0.3420],
-        [-0.5113, -0.2325]])
-&gt;&gt;&gt; linear.to(torch.double)
-Linear(in_features=2, out_features=2, bias=True)
-&gt;&gt;&gt; linear.weight
-Parameter containing:
-tensor([[ 0.1913, -0.3420],
-        [-0.5113, -0.2325]], dtype=torch.float64)
-&gt;&gt;&gt; gpu1 = torch.device(&quot;cuda:1&quot;)
-&gt;&gt;&gt; linear.to(gpu1, dtype=torch.half, non_blocking=True)
-Linear(in_features=2, out_features=2, bias=True)
-&gt;&gt;&gt; linear.weight
-Parameter containing:
-tensor([[ 0.1914, -0.3420],
-        [-0.5112, -0.2324]], dtype=torch.float16, device='cuda:1')
-&gt;&gt;&gt; cpu = torch.device(&quot;cpu&quot;)
-&gt;&gt;&gt; linear.to(cpu)
-Linear(in_features=2, out_features=2, bias=True)
-&gt;&gt;&gt; linear.weight
-Parameter containing:
-tensor([[ 0.1914, -0.3420],
-        [-0.5112, -0.2324]], dtype=torch.float16)
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">weight</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.1913</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5113</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2325</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">weight</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.1913</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5113</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2325</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gpu1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:1&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">gpu1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">half</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">weight</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.1914</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5112</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2324</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:1&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cpu</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">linear</span><span class="o">.</span><span class="n">weight</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.1914</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5112</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2324</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -793,17 +794,17 @@ tensor([[ 0.1914, -0.3420],
 <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Registers a backward hook on the module.</p>
 <p>.. warning ::</p>
-<pre><code>The current implementation will not have the presented behavior
+<div class="highlight"><pre><span></span><code>The current implementation will not have the presented behavior
 for complex :class:`Module` that perform many operations.
 In some failure cases, :attr:`grad_input` and :attr:`grad_output` will only
 contain the gradients for a subset of the inputs and outputs.
 For such :class:`Module`, you should use :func:`torch.Tensor.register_hook`
 directly on a specific input or output to get the required gradients.
-</code></pre>
+</code></pre></div>
 <p>The hook will be called every time the gradients with respect to module
 inputs are computed. The hook should have the following signature::</p>
-<pre><code>hook(module, grad_input, grad_output) -&gt; Tensor or None
-</code></pre>
+<div class="highlight"><pre><span></span><code>hook(module, grad_input, grad_output) -&gt; Tensor or None
+</code></pre></div>
 <p>The :attr:<code>grad_input</code> and :attr:<code>grad_output</code> may be tuples if the
 module has multiple inputs or outputs. The hook should not modify its
 arguments, but it can optionally return a new gradient with respect to
@@ -840,8 +841,8 @@ as positional arguments.</p></div>
       <div class="mkapi-section-body"><p>Registers a forward pre-hook on the module.</p>
 <p>The hook will be called every time before :func:<code>forward</code> is invoked.
 It should have the following signature::</p>
-<pre><code>hook(module, input) -&gt; None or modified input
-</code></pre>
+<div class="highlight"><pre><span></span><code>hook(module, input) -&gt; None or modified input
+</code></pre></div>
 <p>The input contains only the positional arguments given to the module.
 Keyword arguments won't be passed to the hooks and only to the <code>forward</code>.
 The hook can modify the input. User can either return a tuple or a
@@ -877,8 +878,8 @@ if a single value is returned(unless that value is already a tuple).</p></div>
       <div class="mkapi-section-body"><p>Registers a forward hook on the module.</p>
 <p>The hook will be called every time after :func:<code>forward</code> has computed an output.
 It should have the following signature::</p>
-<pre><code>hook(module, input, output) -&gt; None or modified output
-</code></pre>
+<div class="highlight"><pre><span></span><code>hook(module, input, output) -&gt; None or modified output
+</code></pre></div>
 <p>The input contains only the positional arguments given to the module.
 Keyword arguments won't be passed to the hooks and only to the <code>forward</code>.
 The hook can modify the output. It can modify the input inplace but
@@ -923,9 +924,9 @@ included. Keys are corresponding parameter and buffer names.</p></div>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; module.state_dict().keys()
-['bias', 'weight']
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">module</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1019,11 +1020,11 @@ are direct members of this module.</span></li>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; for param in model.parameters():
-&gt;&gt;&gt;     print(type(param), param.size())
-&lt;class 'torch.Tensor'&gt; (20L,)
-&lt;class 'torch.Tensor'&gt; (20L, 1L, 5L, 5L)
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="n">param</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="s1">&#39;&gt; (20L,)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="s1">&#39;&gt; (20L, 1L, 5L, 5L)</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1072,10 +1073,10 @@ are direct members of this module.</span></li>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; for name, param in self.named_parameters():
-&gt;&gt;&gt;    if name in ['bias']:
-&gt;&gt;&gt;        print(param.size())
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+<span class="o">&gt;&gt;&gt;</span>    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]:</span>
+<span class="o">&gt;&gt;&gt;</span>        <span class="nb">print</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1119,11 +1120,11 @@ are direct members of this module.</span></li>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; for buf in model.buffers():
-&gt;&gt;&gt;     print(type(buf), buf.size())
-&lt;class 'torch.Tensor'&gt; (20L,)
-&lt;class 'torch.Tensor'&gt; (20L, 1L, 5L, 5L)
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">buf</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">buffers</span><span class="p">():</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">buf</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="s1">&#39;&gt; (20L,)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="s1">&#39;&gt; (20L, 1L, 5L, 5L)</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1172,10 +1173,10 @@ are direct members of this module.</span></li>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; for name, buf in self.named_buffers():
-&gt;&gt;&gt;    if name in ['running_var']:
-&gt;&gt;&gt;        print(buf.size())
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">buf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_buffers</span><span class="p">():</span>
+<span class="o">&gt;&gt;&gt;</span>    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;running_var&#39;</span><span class="p">]:</span>
+<span class="o">&gt;&gt;&gt;</span>        <span class="nb">print</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1232,10 +1233,10 @@ the name of the module as well as the module itself.</p></div>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; for name, module in model.named_children():
-&gt;&gt;&gt;     if name in ['conv4', 'conv5']:
-&gt;&gt;&gt;         print(module)
-</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_children</span><span class="p">():</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;conv4&#39;</span><span class="p">,</span> <span class="s1">&#39;conv5&#39;</span><span class="p">]:</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="nb">print</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+</code></pre></div></div>
     </div>
   </div>
 
@@ -1272,11 +1273,11 @@ example, <code>l</code> will be returned only once.</p>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; l = nn.Linear(2, 2)
-&gt;&gt;&gt; net = nn.Sequential(l, l)
-&gt;&gt;&gt; for idx, m in enumerate(net.modules()):
-        print(idx, '-&gt;', m)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">modules</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</code></pre></div>
 <p>0 -&gt; Sequential(
   (0): Linear(in_features=2, out_features=2, bias=True)
   (1): Linear(in_features=2, out_features=2, bias=True)
@@ -1319,11 +1320,11 @@ example, <code>l</code> will be returned only once.</p>
     </div>
   <div class="mkapi-section">
       <div class="mkapi-section-body"><p>Example::</p>
-<pre><code class="language-python">&gt;&gt;&gt; l = nn.Linear(2, 2)
-&gt;&gt;&gt; net = nn.Sequential(l, l)
-&gt;&gt;&gt; for idx, m in enumerate(net.named_modules()):
-        print(idx, '-&gt;', m)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">named_modules</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</code></pre></div>
 <p>0 -&gt; ('', Sequential(
   (0): Linear(in_features=2, out_features=2, bias=True)
   (1): Linear(in_features=2, out_features=2, bias=True)
