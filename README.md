@@ -1,8 +1,14 @@
 # Kindle - PyTorch no-code model builder
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kindle)
+![PyTorch Version](https://img.shields.io/badge/PyTorch-1.7.1-informational)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JeiKeiLim/kindle/format-lint-test)
+![PyPI](https://img.shields.io/pypi/v/kindle)
+![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/JeiKeiLim/kindle)
+
 |`Documentation`|
-|---------------|
-|[Reference Document](https://limjk.ai/kindle)|
+|-------------|
+|[![API reference](https://img.shields.io/badge/api-reference-informational)](https://limjk.ai/kindle/)|
 
 Kindle is an easy model build package for [PyTorch](https://pytorch.org). Building a deep learning model became so simple that almost all model can be made by copy and paste from other existing model codes. So why code? when we can simply build a model with yaml markup file.
 
@@ -11,15 +17,6 @@ Kindle builds a model with no code but yaml file which its method is inspired fr
 ## AutoML with Kindle
 * [Kindle](https://github.com/JeiKeiLim/kindle) offers the easiest way to build your own deep learning architecture. Beyond building a model, AutoML became easier with [Kindle](https://github.com/JeiKeiLim/kindle) and [Optuna](https://optuna.org) or other optimization frameworks.
 * For further information, please refer to [here](https://github.com/JeiKeiLim/kindle/wiki/AutoML-with-kindle-and-optuna)
-
-## Working environment
-* Other Python3 and PyTorch version should be working but we have not checked yet.
-
-| Python | PyTorch |
-|--------|---------|
-| 3.8    | 1.7.1   |
-
-
 
 # Install
 **PyTorch** is required prior to install. Please visit [PyTorch installation guide](https://pytorch.org/get-started/locally/) to install.
