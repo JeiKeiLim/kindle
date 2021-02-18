@@ -4,11 +4,17 @@ repo_url: https://github.com/JeiKeiLim/kindle
 nav:
     - Home: index.md
     - Usages: usages.md
+    - Modules: modules.md
     - API: mkapi/api/kindle
 
 plugins:
   - search
   - mkapi
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
 
 theme: ivory
 docs_dir: mkdocs

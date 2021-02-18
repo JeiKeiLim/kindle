@@ -25,3 +25,4 @@ dependencies:
     - mkdocs==1.1.2
     - mkapi==1.0.14
     - mkdocs-ivory==0.4.6
+    - pymdown-extensions==8.1.1
