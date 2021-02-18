@@ -1,11 +1,5 @@
 # Kindle - PyTorch no-code model builder
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kindle)
-![PyTorch Version](https://img.shields.io/badge/PyTorch-1.7.1-informational)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JeiKeiLim/kindle/format-lint-test)
-![PyPI](https://img.shields.io/pypi/v/kindle)
-![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/JeiKeiLim/kindle)
-
 |`Documentation`|
 |-------------|
 |[![API reference](https://img.shields.io/badge/api-reference-informational)](https://limjk.ai/kindle/)|
@@ -14,11 +8,26 @@ Kindle is an easy model build package for [PyTorch](https://pytorch.org). Buildi
 
 Kindle builds a model with no code but yaml file which its method is inspired from [YOLOv5](https://github.com/ultralytics/yolov5).
 
-## AutoML with Kindle
-* [Kindle](https://github.com/JeiKeiLim/kindle) offers the easiest way to build your own deep learning architecture. Beyond building a model, AutoML became easier with [Kindle](https://github.com/JeiKeiLim/kindle) and [Optuna](https://optuna.org) or other optimization frameworks.
-* For further information, please refer to [here](https://github.com/JeiKeiLim/kindle/wiki/AutoML-with-kindle-and-optuna)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kindle)
+![PyTorch Version](https://img.shields.io/badge/PyTorch-1.7.1-informational)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JeiKeiLim/kindle/format-lint-test)
+![PyPI](https://img.shields.io/pypi/v/kindle)
+![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/JeiKeiLim/kindle)
 
-# Install
+# Contents
+- [Installation](#installation)
+  - [Install with pip](#install-with-pip)
+  - [Install from source](#install-from-source)
+  - [For contributors](#for-contributors)
+- [AutoML with Kindle](#automl-with-kindle)
+- [Usage](#usage)
+- [Supported modules](#supported-modules)
+- [Custom module support](#custom-module-support)
+  - [Custom module with yaml](#custom-module-with-yaml)
+  - [Custom module from source](#custom-module-from-source)
+
+# Installation
+## Install with pip
 **PyTorch** is required prior to install. Please visit [PyTorch installation guide](https://pytorch.org/get-started/locally/) to install.
 
 You can install `kindle` by pip.
@@ -33,6 +42,7 @@ Please visit [Install from source wiki page](https://github.com/JeiKeiLim/kindle
 Please visit [For contributors wiki page](https://github.com/JeiKeiLim/kindle/wiki/For-contributors)
 
 # Usage
+## Build a model
 
 1. Make model yaml file
   - Example model https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
@@ -80,6 +90,10 @@ idx |       from |   n |     params |          module |            arguments |  
   7 |         -1 |   1 |        850 |          Linear |                 [10] |                           [84] |            [10] |
 Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 ```
+
+## AutoML with Kindle
+* [Kindle](https://github.com/JeiKeiLim/kindle) offers the easiest way to build your own deep learning architecture. Beyond building a model, AutoML became easier with [Kindle](https://github.com/JeiKeiLim/kindle) and [Optuna](https://optuna.org) or other optimization frameworks.
+* For further information, please refer to [here](https://github.com/JeiKeiLim/kindle/wiki/AutoML-with-kindle-and-optuna)
 
 # Supported modules
 * Detailed documents can be found [here](https://limjk.ai/kindle/api/kindle.modules/)
