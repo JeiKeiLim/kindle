@@ -4,6 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 
+from kindle.generator.add import AddGenerator
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.bottleneck import BottleneckGenerator
 from kindle.generator.concat import ConcatGenerator
@@ -29,4 +30,5 @@ __all__ = [
     "GlobalAvgPoolGenerator",
     "MaxPoolGenerator",
     "YamlModuleGenerator",
+    "AddGenerator",
 ]

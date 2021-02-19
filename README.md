@@ -108,7 +108,7 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[channel, activation]|
-
+|Add|Add|[]|
 
 # Custom module support
 ## Custom module with yaml
@@ -116,16 +116,21 @@ You can make your own custom module with yaml file.
 
 **1. custom_module.yaml**
 ```yaml
+args: [96, 32]
+
 module:
     # [from, repeat, module, args]
     [
-        [-1, 1, Conv, [16, 1, 1]],
-        [0, 1, Conv, [8, 3, 1]],
-        [0, 1, Conv, [8, 5, 1]],
-        [0, 1, Conv, [8, 7, 1]],
+        [-1, 1, Conv, [arg0, 1, 1]],
+        [0, 1, Conv, [arg1, 3, 1]],
+        [0, 1, Conv, [arg1, 5, 1]],
+        [0, 1, Conv, [arg1, 7, 1]],
         [[1, 2, 3], 1, Concat, [1]],
+        [[0, 4], 1, Add, []],
     ]
 ```
+
+* Arguments of yaml module can be defined as arg0, arg1 ...
 
 **2. model_with_custom_module.yaml**
 ```yaml
@@ -139,7 +144,7 @@ backbone:
     [
         [-1, 1, Conv, [6, 5, 1, 0]],
         [-1, 1, MaxPool, [2]],
-        [-1, 1, YamlModule, ["custom_module.yaml"]],
+        [-1, 1, YamlModule, ["custom_module.yaml", 48, 16]],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],
@@ -147,6 +152,7 @@ backbone:
         [-1, 1, Linear, [10]]
     ]
 ```
+* Note that argument of yaml module can be provided.
 
 **3. Build model**
 ```python
