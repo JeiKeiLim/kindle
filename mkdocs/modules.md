@@ -12,6 +12,7 @@
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[channel, activation]|
+|Add|Add|[]|
 
 ## Design Custom Module with YAML
 You can make your own custom module with yaml file.

@@ -25,7 +25,7 @@ Kindle builds a model with no code but yaml file which its method is inspired fr
 - [Custom module support](#custom-module-support)
   - [Custom module with yaml](#custom-module-with-yaml)
   - [Custom module from source](#custom-module-from-source)
-  
+
 # Installation
 ## Install with pip
 **PyTorch** is required prior to install. Please visit [PyTorch installation guide](https://pytorch.org/get-started/locally/) to install.
@@ -109,7 +109,7 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[channel, activation]|
-
+|Add|Add|[]|
 
 # Custom module support
 ## Custom module with yaml
