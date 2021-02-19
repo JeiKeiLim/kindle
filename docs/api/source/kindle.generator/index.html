@@ -59,6 +59,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
@@ -71,6 +72,7 @@
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
@@ -112,6 +114,7 @@
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">kindle.generator.add</span> <span class="kn">import</span> <span class="n">AddGenerator</span>
 <span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span><span class="p">,</span> <span class="n">ModuleGenerator</span>
 <span class="kn">from</span> <span class="nn">kindle.generator.bottleneck</span> <span class="kn">import</span> <span class="n">BottleneckGenerator</span>
 <span class="kn">from</span> <span class="nn">kindle.generator.concat</span> <span class="kn">import</span> <span class="n">ConcatGenerator</span>
@@ -137,6 +140,7 @@
     <span class="s2">&quot;GlobalAvgPoolGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MaxPoolGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;YamlModuleGenerator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddGenerator&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </code></pre></div>
 </div>

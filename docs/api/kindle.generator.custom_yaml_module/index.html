@@ -59,12 +59,14 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
     <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.custom_yaml_module</a>
 <ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorcustom_yaml_moduleconvert_yaml_args">convert_yaml_args</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorcustom_yaml_moduleyamlmodulegenerator">YamlModuleGenerator</a></li>
 </ul></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.conv/">kindle.generator.conv</a></li>
@@ -74,6 +76,7 @@
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
@@ -132,6 +135,62 @@
 
 
 </ul></div>
+    </div>
+  <div class="mkapi-section functions">
+      <div class="mkapi-section-name functions">
+          <span class="mkapi-section-name-body functions">Functions</span> 
+        </div>
+      <div class="mkapi-section-body functions"><ul class="mkapi-items">
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.generator.custom_yaml_module.convert_yaml_args">convert_yaml_args</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">data</code>, <code class="mkapi-object-signature">args</code>, <code class="mkapi-object-signature">inplace</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(list)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Convert yaml data with argument value.<a class="mkapi-src-link" href="../source/kindle.generator.custom_yaml_module/#kindle.generator.custom_yaml_module.convert_yaml_args" title="Source for kindle.generator.custom_yaml_module.convert_yaml_args">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.generator.custom_yaml_module.convert_yaml_args">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object function code top">
+    <div class="mkapi-object-kind function top">function</div>
+    <h2 id="kindlegeneratorcustom_yaml_moduleconvert_yaml_args" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.generator.custom_yaml_module">kindle.generator.custom_yaml_module</a>.</code><code class="mkapi-object-name">convert_yaml_args</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">data</code>, <code class="mkapi-object-signature">args</code>, <code class="mkapi-object-signature">inplace=True</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.custom_yaml_module/#kindle.generator.custom_yaml_module.convert_yaml_args" title="Source for kindle.generator.custom_yaml_module.convert_yaml_args">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Convert yaml data with argument value.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">data</code>
+<span class="mkapi-item-type">(list)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">list or tuple that might contain string of 'arg0', 'arg1' ...</span></li>
+
+<li><code class="mkapi-item-name">args</code>
+<span class="mkapi-item-type">(list or tuple)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">argument values to replace with 'arg0', 'arg1' ...</span></li>
+
+<li><code class="mkapi-item-name">inplace</code>
+<span class="mkapi-item-type">(bool, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">if False, it will not overwrite value.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(list)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>overwritten values by replacing 'arg0', 'arg1' ... to args[0], args[1] ...</p></div>
     </div>
   </div>
 

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.modules.poolings &mdash; Kindle</title>
+    <title>kindle.generator.add &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -103,29 +103,50 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">poolings</span>
-<span id="kindle.modules.poolings"></span><a class="mkapi-docs-link" href="../../kindle.modules.poolings">DOCS</a>
+<span class="mkapi-object-prefix">kindle.generator.</span><span class="mkapi-object-name">add</span>
+<span id="kindle.generator.add"></span><a class="mkapi-docs-link" href="../../kindle.generator.add">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module generator related to pooling operations.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module Description.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
+<span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
+<span class="kn">from</span> <span class="nn">kindle.modules.add</span> <span class="kn">import</span> <span class="n">Add</span>
 
-<span class="k">class</span> <span class="nc">GlobalAvgPool</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">):</span><span id="kindle.modules.poolings.GlobalAvgPool"></span><a class="mkapi-docs-link" title="kindle.modules.poolings.GlobalAvgPool" href="../../kindle.modules.poolings/#kindle.modules.poolings.GlobalAvgPool">DOCS</a>
-    <span class="sd">&quot;&quot;&quot;Global average pooling module.</span>
 
-<span class="sd">    Arguments: []</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">AddGenerator</span><span class="p">(</span><span class="n">GeneratorAbstract</span><span class="p">):</span><span id="kindle.generator.add.AddGenerator"></span><a class="mkapi-docs-link" title="kindle.generator.add.AddGenerator" href="../../kindle.generator.add/#kindle.generator.add.AddGenerator">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Add module generator.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add module generator.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Add must have more than 2 inputs.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_channel</span>
+
+    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span><span id="kindle.generator.add.AddGenerator.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.add.AddGenerator.compute_out_shape" href="../../kindle.generator.add/#kindle.generator.add.AddGenerator.compute_out_shape">DOCS</a>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span><span id="kindle.generator.add.AddGenerator.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.add.AddGenerator.__call__" href="../../kindle.generator.add/#kindle.generator.add.AddGenerator.__call__">DOCS</a>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div></div>

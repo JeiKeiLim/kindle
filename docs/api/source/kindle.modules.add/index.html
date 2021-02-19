@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.modules.poolings &mdash; Kindle</title>
+    <title>kindle.modules.add &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -103,29 +103,47 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">poolings</span>
-<span id="kindle.modules.poolings"></span><a class="mkapi-docs-link" href="../../kindle.modules.poolings">DOCS</a>
+<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">add</span>
+<span id="kindle.modules.add"></span><a class="mkapi-docs-link" href="../../kindle.modules.add">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module generator related to pooling operations.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module Description.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
 
-<span class="k">class</span> <span class="nc">GlobalAvgPool</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">):</span><span id="kindle.modules.poolings.GlobalAvgPool"></span><a class="mkapi-docs-link" title="kindle.modules.poolings.GlobalAvgPool" href="../../kindle.modules.poolings/#kindle.modules.poolings.GlobalAvgPool">DOCS</a>
-    <span class="sd">&quot;&quot;&quot;Global average pooling module.</span>
+<span class="k">class</span> <span class="nc">Add</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.add.Add"></span><a class="mkapi-docs-link" title="kindle.modules.add.Add" href="../../kindle.modules.add/#kindle.modules.add.Add">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Add module for Kindle.&quot;&quot;&quot;</span>
 
-<span class="sd">    Arguments: []</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize module.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nd">@classmethod</span><span id="kindle.modules.add.Add.forward"></span><a class="mkapi-docs-link" title="kindle.modules.add.Add.forward" href="../../kindle.modules.add/#kindle.modules.add.Add.forward">DOCS</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add inputs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: list of torch tensors</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            sum of all x&#39;s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 </div>
 </div></div>
