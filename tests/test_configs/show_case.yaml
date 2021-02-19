@@ -18,7 +18,7 @@ backbone:
         [[-1, 2], 1, Concat, [1]],
         [-1, 3, DWConv, [64, 3, 1]],
         [-1, 1, AvgPool, [3, 2, 1]],
-        [-1, 1, YamlModule, ["tests/test_configs/inception_module.yaml"]],
+        [-1, 1, YamlModule, ["tests/test_configs/inception_module.yaml", 48, 16]],
         [-1, 1, GlobalAvgPool, []],
 
         [-1, 1, Flatten, []],

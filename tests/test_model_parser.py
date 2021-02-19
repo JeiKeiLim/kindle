@@ -25,7 +25,7 @@ class TestModelParser:
             verbose=verbose,
         )
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
-        assert count_model_params(model) == 168866
+        assert count_model_params(model) == 180034
 
     def test_vgg(self, verbose: bool = False):
         """Test vgg model."""
@@ -46,5 +46,5 @@ class TestModelParser:
 
 if __name__ == "__main__":
     tester = TestModelParser()
-    # tester.test_show_case(verbose=True)
-    tester.test_example(verbose=True)
+    tester.test_show_case(verbose=True)
+    # tester.test_example(verbose=True)
