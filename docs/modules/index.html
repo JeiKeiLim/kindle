@@ -64,6 +64,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator/">kindle.generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.concat/">kindle.generator.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
@@ -76,6 +77,7 @@
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules/">kindle.modules</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.linear/">kindle.modules.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
@@ -161,21 +163,32 @@
 <td>Linear</td>
 <td>[channel, activation]</td>
 </tr>
+<tr>
+<td>Add</td>
+<td>Add</td>
+<td>[]</td>
+</tr>
 </tbody>
 </table>
 <h2 id="design-custom-module-with-yaml">Design Custom Module with YAML</h2>
 <p>You can make your own custom module with yaml file.</p>
 <p><strong>1. custom_module.yaml</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">module</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">96</span><span class="p p-Indicator">,</span> <span class="nv">32</span><span class="p p-Indicator">]</span>
+
+<span class="nt">module</span><span class="p">:</span>
     <span class="c1"># [from, repeat, module, args]</span>
     <span class="p p-Indicator">[</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">16</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="nv">7</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">7</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[[</span><span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">],</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Concat</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">4</span><span class="p p-Indicator">],</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Add</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[]],</span>
     <span class="p p-Indicator">]</span>
 </code></pre></div></p>
+<ul>
+<li>Arguments of yaml module can be defined as arg0, arg1 ...</li>
+</ul>
 <p><strong>2. model_with_custom_module.yaml</strong>
 <div class="highlight"><pre><span></span><code><span class="nt">input_size</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">32</span><span class="p p-Indicator">,</span> <span class="nv">32</span><span class="p p-Indicator">]</span>
 <span class="nt">input_channel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
@@ -187,14 +200,15 @@
     <span class="p p-Indicator">[</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">YamlModule</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="s">&quot;custom_module.yaml&quot;</span><span class="p p-Indicator">]],</span>
+        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">YamlModule</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="s">&quot;custom_module.yaml&quot;</span><span class="p p-Indicator">,</span> <span class="nv">48</span><span class="p p-Indicator">,</span> <span class="nv">16</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Flatten</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">120</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">84</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
         <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">]]</span>
     <span class="p p-Indicator">]</span>
-</code></pre></div></p>
+</code></pre></div>
+* Note that argument of yaml module can be provided.</p>
 <p><strong>3. Build model</strong>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
 

@@ -5,11 +5,10 @@
 """
 
 import setuptools
-from setuptools import setup
 
-setup(
+setuptools.setup(
     name="kindle",
-    version="0.1.0",
+    version="0.1.1",
     packages=setuptools.find_packages(),
     description="PyTorch no-code model builder.",
     long_description=open("README.md").read(),

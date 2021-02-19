@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>kindle.modules.conv &mdash; Kindle</title>
+    <title>kindle.modules.add &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -72,14 +72,14 @@
 <ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.modules.add</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesaddadd">Add</a></li>
+</ul></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.modules.conv</a>
-<ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesconvconv">Conv</a></li>
-</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
 </ul></li>
 </ul></li>
@@ -89,8 +89,8 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.modules.bottleneck/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.modules.poolings/">Next &raquo;</a></div>
+    <div class="previous"><a href="../kindle.modules.dwconv/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.modules.concat/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -105,19 +105,19 @@
     <li>API &raquo; </li><li>kindle.modules</li>
 </ul>
 </nav>
-                <div id="content"><div class="mkapi-node" id="kindle.modules.conv">
+                <div id="content"><div class="mkapi-node" id="kindle.modules.add">
 <div class='mkapi-object-container'>
   <div class="mkapi-object module plain top">
     <div class="mkapi-object-kind module top">module</div>
-    <h1 id="kindlemodulesconv" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.modules/#kindle.modules">kindle.modules</a>.</span><span class="mkapi-object-name">conv</span></h1>
+    <h1 id="kindlemodulesadd" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.modules/#kindle.modules">kindle.modules</a>.</span><span class="mkapi-object-name">add</span></h1>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv" title="Source for kindle.modules.conv">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.modules.add/#kindle.modules.add" title="Source for kindle.modules.add">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Conv module.</p>
+      <div class="mkapi-section-body"><p>Module Description.</p>
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
@@ -128,9 +128,9 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.modules.conv.Conv">Conv</a></code>
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.modules.add.Add">Add</a></code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Standard convolution with batch normalization and activation.<a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv" title="Source for kindle.modules.conv.Conv">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Add module for Kindle.<a class="mkapi-src-link" href="../source/kindle.modules.add/#kindle.modules.add.Add" title="Source for kindle.modules.add.Add">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -139,14 +139,14 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.modules.conv.Conv">
+<div class="mkapi-node" id="kindle.modules.add.Add">
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlemodulesconvconv" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.modules.conv">kindle.modules.conv</a>.</code><code class="mkapi-object-name">Conv</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">in_channels</code>, <code class="mkapi-object-signature">out_channels</code>, <code class="mkapi-object-signature">kernel_size</code>, <code class="mkapi-object-signature">stride=1</code>, <code class="mkapi-object-signature">padding=None</code>, <code class="mkapi-object-signature">groups=1</code>, <code class="mkapi-object-signature">activation=&#39;ReLU&#39;</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlemodulesaddadd" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.modules.add">kindle.modules.add</a>.</code><code class="mkapi-object-name">Add</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv" title="Source for kindle.modules.conv.Conv">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.modules.add/#kindle.modules.add.Add" title="Source for kindle.modules.add.Add">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -159,8 +159,7 @@
 </div>
     </div>
   <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Standard convolution with batch normalization and activation.</p>
-<p>Arguments: [channel, kernel_size, stride, padding, groups, activation]</p></div>
+      <div class="mkapi-section-body"><p>Add module for Kindle.</p></div>
     </div>
   <div class="mkapi-section methods">
       <div class="mkapi-section-name methods">
@@ -213,13 +212,9 @@ as well as self. Typical use includes initializing the parameters of a model
 <span class="mkapi-item-type">(Module)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to float datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.float" title="Source for torch.nn.modules.module.Module.float">&lt;/&gt;</a></span></li>
 
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.modules.conv.Conv.forward">forward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
+<li class="classmethod"><code class="mkapi-item-name"><a href="#kindle.modules.add.Add.forward">forward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(Tensor)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Forward.<a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv.forward" title="Source for kindle.modules.conv.Conv.forward">&lt;/&gt;</a></span></li>
-
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.modules.conv.Conv.fusefoward">fusefoward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(Tensor)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Fuse forward.<a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv.fusefoward" title="Source for kindle.modules.conv.Conv.fusefoward">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Add inputs.<a class="mkapi-src-link" href="../source/kindle.modules.add/#kindle.modules.add.Add.forward" title="Source for kindle.modules.add.Add.forward">&lt;/&gt;</a></span></li>
 
 <li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.half">half</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(Module)</span>
@@ -1515,39 +1510,37 @@ strings are acceptable.</p></div>
     </div>
   
     <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.modules.conv.Conv.forward">
+      <div class="mkapi-node" id="kindle.modules.add.Add.forward">
 <div class='mkapi-object-container'>
-  <div class="mkapi-object method code">
-    <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlemodulesconvconvforward" class="mkapi-object-body method"><code class="mkapi-object-name">forward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Tensor</span></h3>
+  <div class="mkapi-object classmethod code">
+    <div class="mkapi-object-kind classmethod">classmethod</div>
+    <h3 id="kindlemodulesaddaddforward" class="mkapi-object-body classmethod"><code class="mkapi-object-name">forward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code></h3>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv.forward" title="Source for kindle.modules.conv.Conv.forward">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.modules.add/#kindle.modules.add.Add.forward" title="Source for kindle.modules.add.Add.forward">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Forward.</p></div>
+      <div class="mkapi-section-body"><p>Add inputs.</p></div>
     </div>
-  </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">x</code>
+<span class="mkapi-item-type">(Union((tensor, ...), list of tensor))</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">list of torch tensors</span></li>
 
-</div>
+
+</ul></div>
     </div>
-  
-    <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.modules.conv.Conv.fusefoward">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object method code">
-    <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlemodulesconvconvfusefoward" class="mkapi-object-body method"><code class="mkapi-object-name">fusefoward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Tensor</span></h3>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.modules.conv/#kindle.modules.conv.Conv.fusefoward" title="Source for kindle.modules.conv.Conv.fusefoward">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Fuse forward.</p></div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Tensor)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>sum of all x's</p></div>
     </div>
   </div>
 
@@ -1559,8 +1552,8 @@ strings are acceptable.</p></div>
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.modules.bottleneck/" title="kindle.modules.bottleneck"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.modules.poolings/" title="kindle.modules.poolings"><span>Next</span></a></div>
+        <div class="previous"><a href="../kindle.modules.dwconv/" title="kindle.modules.dwconv"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.modules.concat/" title="kindle.modules.concat"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>
