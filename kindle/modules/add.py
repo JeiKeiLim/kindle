@@ -31,6 +31,6 @@ class Add(nn.Module):
         """
         result = x[0]
         for i in range(1, len(x)):
-            result += x[i]
+            result = result + x[i]
 
         return result
