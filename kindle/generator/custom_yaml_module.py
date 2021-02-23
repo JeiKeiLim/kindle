@@ -48,7 +48,7 @@ class YamlModuleGenerator(GeneratorAbstract):
         """Initialize YamlModuleGenerator."""
         super().__init__(*args, **kwargs)
         with open(self.args[0], "r") as f:
-            self.cfg = yaml.load(f, yaml.FullLoader)
+            self.cfg = yaml.load(f, yaml.SafeLoader)
 
         for i in range(1, len(self.args)):
             self.cfg["args"][i - 1] = self.args[i]
