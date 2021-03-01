@@ -13,6 +13,7 @@
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[channel, activation]|
 |Add|Add|[]|
+|UpSample|UpSample|[]|
 
 ## Design Custom Module with YAML
 You can make your own custom module with yaml file.

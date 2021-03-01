@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.generator &mdash; Kindle</title>
+    <title>kindle.generator.upsample &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -104,47 +104,49 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.</span><span class="mkapi-object-name">generator</span>
-<span id="kindle.generator"></span><a class="mkapi-docs-link" href="../../kindle.generator">DOCS</a>
+<span class="mkapi-object-prefix">kindle.generator.</span><span class="mkapi-object-name">upsample</span>
+<span id="kindle.generator.upsample"></span><a class="mkapi-docs-link" href="../../kindle.generator.upsample">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;PyTorch Module Generator for parsing model yaml file.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;UpSample module generator.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">kindle.generator.add</span> <span class="kn">import</span> <span class="n">AddGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span><span class="p">,</span> <span class="n">ModuleGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.bottleneck</span> <span class="kn">import</span> <span class="n">BottleneckGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.concat</span> <span class="kn">import</span> <span class="n">ConcatGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.conv</span> <span class="kn">import</span> <span class="n">ConvGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.custom_yaml_module</span> <span class="kn">import</span> <span class="n">YamlModuleGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.dwconv</span> <span class="kn">import</span> <span class="n">DWConvGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.flatten</span> <span class="kn">import</span> <span class="n">FlattenGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.linear</span> <span class="kn">import</span> <span class="n">LinearGenerator</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.poolings</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AvgPoolGenerator</span><span class="p">,</span>
-                                       <span class="n">GlobalAvgPoolGenerator</span><span class="p">,</span>
-                                       <span class="n">MaxPoolGenerator</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">kindle.generator.upsample</span> <span class="kn">import</span> <span class="n">UpSampleGenerator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;ModuleGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GeneratorAbstract&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;BottleneckGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ConcatGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ConvGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;DWConvGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;FlattenGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LinearGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AvgPoolGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GlobalAvgPoolGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MaxPoolGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;YamlModuleGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AddGenerator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;UpSampleGenerator&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
+
+
+<span class="k">class</span> <span class="nc">UpSampleGenerator</span><span class="p">(</span><span class="n">GeneratorAbstract</span><span class="p">):</span><span id="kindle.generator.upsample.UpSampleGenerator"></span><a class="mkapi-docs-link" title="kindle.generator.upsample.UpSampleGenerator" href="../../kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;UpSample module generator.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channel</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+
+    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">)</span>
+        <span class="n">module_out</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">size</span><span class="p">)]))</span>
+
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">module_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span><span id="kindle.generator.upsample.UpSampleGenerator.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.upsample.UpSampleGenerator.__call__" href="../../kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator.__call__">DOCS</a>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 </code></pre></div>
 </div>
 </div></div>
