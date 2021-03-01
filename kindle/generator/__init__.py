@@ -16,6 +16,7 @@ from kindle.generator.linear import LinearGenerator
 from kindle.generator.poolings import (AvgPoolGenerator,
                                        GlobalAvgPoolGenerator,
                                        MaxPoolGenerator)
+from kindle.generator.upsample import UpSampleGenerator
 
 __all__ = [
     "ModuleGenerator",
@@ -31,4 +32,5 @@ __all__ = [
     "MaxPoolGenerator",
     "YamlModuleGenerator",
     "AddGenerator",
+    "UpSampleGenerator",
 ]

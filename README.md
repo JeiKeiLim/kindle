@@ -109,6 +109,7 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[channel, activation]|
 |Add|Add|[]|
+|UpSample|UpSample|[]|
 
 # Custom module support
 ## Custom module with yaml
