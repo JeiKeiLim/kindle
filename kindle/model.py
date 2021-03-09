@@ -15,7 +15,7 @@ import torch
 import torch.nn as nn
 import yaml
 
-from kindle.generator.base_generator import ModuleGenerator
+from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.flatten import FlattenGenerator
 
 
@@ -106,7 +106,11 @@ class ModelParser:
         self.depth_multiply = self.cfg["depth_multiple"]
         self.width_multiply = self.cfg["width_multiple"]
 
-        self.model_cfg: List[Union[int, str, float]] = self.cfg["backbone"]  # type: ignore
+        self.backbone_cfg: List[Union[int, str, float]] = self.cfg["backbone"]  # type: ignore
+        if "head" in self.cfg:
+            self.head_cfg: Optional[List[Union[int, str, float]]] = self.cfg["head"]  # type: ignore
+        else:
+            self.head_cfg = None
 
         self.model, self.output_save = self._parse_model()
 
@@ -115,7 +119,9 @@ class ModelParser:
         if self.verbose:
             print(msg)
 
-    def _parse_model(self) -> Tuple[nn.Sequential, List[int]]:
+    def _parse_model(  # pylint: disable=too-many-locals
+        self,
+    ) -> Tuple[nn.Sequential, List[int]]:
         """Parse model."""
         in_channels: List[int] = []
         in_sizes: List[int] = []
@@ -130,7 +136,16 @@ class ModelParser:
         self.log(log)
         self.log(len(log) * "-")
 
-        for i, (idx, repeat, module, args) in enumerate(self.model_cfg):  # type: ignore
+        if self.head_cfg is not None:
+            model_cfg = self.backbone_cfg + self.head_cfg
+        else:
+            model_cfg = self.backbone_cfg
+
+        channel_divisor = GeneratorAbstract.CHANNEL_DIVISOR
+        for i, (idx, repeat, module, args) in enumerate(model_cfg):  # type: ignore
+            if i >= len(self.backbone_cfg):
+                GeneratorAbstract.CHANNEL_DIVISOR = 1
+
             module_generator = ModuleGenerator(
                 module, custom_module_paths=self.custom_module_paths
             )(
@@ -144,7 +159,10 @@ class ModelParser:
             )
 
             if isinstance(module_generator, FlattenGenerator):
-                module_generator.args = in_sizes[idx]  # type: ignore
+                if self.input_size is not None:
+                    module_generator.args = in_sizes[idx]  # type: ignore
+                else:
+                    module_generator.args = [in_channels[idx]]  # type: ignore
 
             module = module_generator(repeat=repeat)
             module.module_idx, module.from_idx = i, idx
@@ -179,7 +197,7 @@ class ModelParser:
             output_save.extend(
                 [x % i for x in ([idx] if isinstance(idx, int) else idx) if x != -1]
             )
-
+        GeneratorAbstract.CHANNEL_DIVISOR = channel_divisor
         parsed_model = nn.Sequential(*layers)
         n_param = sum([x.numel() for x in parsed_model.parameters()])
         n_grad = sum([x.numel() for x in parsed_model.parameters() if x.requires_grad])
