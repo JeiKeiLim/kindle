@@ -43,8 +43,18 @@ class TestModelParser:
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
         assert count_model_params(model) == 137862
 
+    def test_gap_model(self, verbose: bool = False):
+        """Test example model."""
+        model = Model(
+            os.path.join("tests", "test_configs", "gap_test_model.yaml"),
+            verbose=verbose,
+        )
+        assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
+        assert count_model_params(model) == 5476
+
 
 if __name__ == "__main__":
     tester = TestModelParser()
     tester.test_show_case(verbose=True)
+    tester.test_gap_model(verbose=True)
     # tester.test_example(verbose=True)
