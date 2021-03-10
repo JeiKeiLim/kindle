@@ -8,7 +8,7 @@ and generates PyTorch model accordingly.
 """
 
 import os
-from typing import Dict, List, Optional, Tuple, Type, Union
+from typing import Any, Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
@@ -119,6 +119,67 @@ class ModelParser:
         if self.verbose:
             print(msg)
 
+    def _log_parse(
+        self,
+        info: Optional[Tuple[int, int, int]] = None,
+        module: Optional[nn.Module] = None,
+        module_generator: Optional[GeneratorAbstract] = None,
+        args: Optional[List[Any]] = None,
+        in_size: Optional[Union[np.ndarray, List]] = None,
+        out_size: Optional[List[int]] = None,
+        head: bool = False,
+    ) -> None:
+        """Print log message for parsing modules.
+
+        Args:
+            info: (i, idx, repeat) Current parsing information.
+            module: Parsed module.
+            module_generator: Module generator used to generate module.
+            args: Arguments of the module.
+            in_size: Input size of the module.
+                    Only required when {self.input_size} is not None.
+            out_size: Output size of the module
+                    Only required when {self.input_size} is not None.
+            head: Print head(Column names) message only.
+        """
+        if head:
+            log = (
+                f"{'idx':>3} | {'from':>10} | {'n':>3} | {'params':>8} |"
+                f" {'module':>15} | {'arguments':>20} |"
+                f" {'in_channel':>10} | {'out_channel':>11} |"
+            )
+            if self.input_size is not None:
+                log += f" {'in shape':>30} | {'out shape':>15} |"
+            log += f"\n{len(log) * '-'}"
+        else:
+            assert (
+                info is not None
+                and module is not None
+                and module_generator is not None
+                and args is not None
+            ), "info, module, and module_generator must be provided to generate log string."
+            i, idx, repeat = info
+
+            args = args.copy()
+            if module.type == "YamlModule":
+                args[0] = args[0].split(os.sep)[-1].split(".")[0]
+
+            args_str = str(args)
+            log = (
+                f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
+                f" {module.n_params:8,d} | {module.type:>15} | {args_str:>20} |"
+                f" {module_generator.in_channel:>10} | {module_generator.out_channel:>11} |"
+            )
+            if (
+                self.input_size is not None
+                and in_size is not None
+                and out_size is not None
+            ):
+                in_size_str = str(in_size).replace("\n", ",")
+                log += f" {in_size_str:>30} | {str(out_size):>15} |"
+
+        self.log(log)
+
     def _parse_model(  # pylint: disable=too-many-locals
         self,
     ) -> Tuple[nn.Sequential, List[int]]:
@@ -127,14 +188,7 @@ class ModelParser:
         in_sizes: List[int] = []
         layers: List[nn.Module] = []
         output_save: List[int] = []
-        log: str = (
-            f"{'idx':>3} | {'from':>10} | {'n':>3} | {'params':>10} "
-            f"| {'module':>15} | {'arguments':>20} |"
-        )
-        if self.input_size is not None:
-            log += f" {'in shape':>30} | {'out shape':>15} |"
-        self.log(log)
-        self.log(len(log) * "-")
+        self._log_parse(head=True)
 
         if self.head_cfg is not None:
             model_cfg = self.backbone_cfg + self.head_cfg
@@ -175,28 +229,25 @@ class ModelParser:
                 )
                 out_size = module_generator.compute_out_shape(in_size, repeat=repeat)
                 in_sizes.append(out_size)
+            else:
+                in_size, out_size = None, None
 
             in_channels.append(module_generator.out_channel)
             layers.append(module)
 
-            args_str = args.copy()
-            if module.type == "YamlModule":
-                args_str[0] = args_str[0].split(os.sep)[-1].split(".")[0]
-
-            args_str = str(args_str)
-
-            log = (
-                f"{i:3d} | {str(idx):>10} | {repeat:3d} | "
-                f"{module.n_params:10,d} | {module.type:>15} | {args_str:>20} |"
-            )
-            if self.input_size is not None:
-                in_size_str = str(in_size).replace("\n", ",")
-                log += f" {in_size_str:>30} | {str(out_size):>15} |"
-            self.log(log)
-
             output_save.extend(
                 [x % i for x in ([idx] if isinstance(idx, int) else idx) if x != -1]
             )
+
+            self._log_parse(
+                info=(i, idx, repeat),
+                module=module,
+                module_generator=module_generator,
+                args=args,
+                in_size=in_size,
+                out_size=out_size,
+            )
+
         GeneratorAbstract.CHANNEL_DIVISOR = channel_divisor
         parsed_model = nn.Sequential(*layers)
         n_param = sum([x.numel() for x in parsed_model.parameters()])
@@ -205,6 +256,7 @@ class ModelParser:
         self.log(
             f"Model Summary: {len(list(parsed_model.modules())):,d} "
             f"layers, {n_param:,d} parameters, {n_grad:,d} gradients"
+            f"\n"
         )
 
         return parsed_model, output_save

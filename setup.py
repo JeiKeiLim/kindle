@@ -8,7 +8,7 @@ import setuptools
 
 setuptools.setup(
     name="kindle",
-    version="0.1.4",
+    version="0.1.5",
     packages=setuptools.find_packages(),
     description="PyTorch no-code model builder.",
     long_description=open("README.md").read(),
