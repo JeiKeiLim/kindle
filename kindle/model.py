@@ -165,11 +165,23 @@ class ModelParser:
                 args[0] = args[0].split(os.sep)[-1].split(".")[0]
 
             args_str = str(args)
+            args_str_list = []
+            for j in range(0, len(args_str), 20):
+                end_idx = j + 20
+                args_str_list.append(args_str[j:end_idx])
+            args_str = args_str_list[0]
             log = (
                 f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
                 f" {module.n_params:8,d} | {module.type:>15} | {args_str:>20} |"
                 f" {module_generator.in_channel:>10} | {module_generator.out_channel:>11} |"
             )
+            for j in range(1, len(args_str_list)):
+                log += (
+                    f"\n{'':>3} | {'':>10} | {'':>3} |"
+                    f" {'':>8} | {'':>15} | {args_str_list[j]:>20} |"
+                    f" {'':>10} | {'':>11} |"
+                )
+
             if (
                 self.input_size is not None
                 and in_size is not None

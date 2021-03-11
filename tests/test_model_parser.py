@@ -57,4 +57,4 @@ if __name__ == "__main__":
     tester = TestModelParser()
     tester.test_show_case(verbose=True)
     tester.test_gap_model(verbose=True)
-    # tester.test_example(verbose=True)
+    tester.test_example(verbose=True)
