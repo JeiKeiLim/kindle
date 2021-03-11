@@ -168,7 +168,7 @@ class ModelParser:
             args_str_list = []
             for j in range(0, len(args_str), 20):
                 end_idx = j + 20
-                args_str_list.append(args_str[i:end_idx])
+                args_str_list.append(args_str[j:end_idx])
             args_str = args_str_list[0]
             log = (
                 f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
