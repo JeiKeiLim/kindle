@@ -68,7 +68,7 @@ def test_model_example():
     test_loss, test_accuracy = trainer.test(test_loader)
 
     print(test_loss, test_accuracy)
-    assert test_accuracy > 0.35 and test_loss < 1.7
+    assert test_accuracy > 0.30 and test_loss < 1.8
 
 
 def test_model_showcase():
@@ -101,5 +101,5 @@ def test_model_gap_model():
 
 if __name__ == "__main__":
     # test_model_showcase()
-    # test_model_example()
-    test_model_gap_model()
+    test_model_example()
+    # test_model_gap_model()

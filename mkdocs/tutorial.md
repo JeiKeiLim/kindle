@@ -22,7 +22,7 @@ Kindle builds a PyTorch model with yaml file.
     !!! note
         `backbone` and `head` consist of `module` list.
   
-    - `module`: (List[int, int, str, List]) [`from index`, `repeat`, `module name`, `module arguments`]
+    - `module`: (List[(int or List[int]), int, str, List]) [`from index`, `repeat`, `module name`, `module arguments`]
         - `from index`: Index number of the input for the module. -1 represents a previous module. 
                         Index number of `head` is continued from `backbone`.
                         First module in `backbone` must have -1 `from index` value which represents input image.
