@@ -50,7 +50,7 @@ class TestModelParser:
             verbose=verbose,
         )
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
-        assert count_model_params(model) == 5476
+        assert count_model_params(model) == 20148
 
 
 if __name__ == "__main__":

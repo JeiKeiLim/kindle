@@ -43,12 +43,11 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../tutorial/">Tutorial</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../usages/">Usages</a></li>
                     <li class="toctree-l1 current"><a class="nav-item current" href="./">Modules</a>
 <ul class="subnav">
 <li class="toctree-l2"><a class="nav-item toc" href="#supported-modules-summary">Supported Modules Summary</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#design-custom-module-with-yaml">Design Custom Module with YAML</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#design-custom-module-from-source">Design Custom Module from Source</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">API</button>
 <ul class="subnav">
@@ -175,176 +174,7 @@
 <td>[]</td>
 </tr>
 </tbody>
-</table>
-<h2 id="design-custom-module-with-yaml">Design Custom Module with YAML</h2>
-<p>You can make your own custom module with yaml file.</p>
-<p><strong>1. custom_module.yaml</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">96</span><span class="p p-Indicator">,</span> <span class="nv">32</span><span class="p p-Indicator">]</span>
-
-<span class="nt">module</span><span class="p">:</span>
-    <span class="c1"># [from, repeat, module, args]</span>
-    <span class="p p-Indicator">[</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">arg1</span><span class="p p-Indicator">,</span> <span class="nv">7</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[[</span><span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">],</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Concat</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[[</span><span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">4</span><span class="p p-Indicator">],</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Add</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[]],</span>
-    <span class="p p-Indicator">]</span>
-</code></pre></div></p>
-<ul>
-<li>Arguments of yaml module can be defined as arg0, arg1 ...</li>
-</ul>
-<p><strong>2. model_with_custom_module.yaml</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">input_size</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">32</span><span class="p p-Indicator">,</span> <span class="nv">32</span><span class="p p-Indicator">]</span>
-<span class="nt">input_channel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-
-<span class="nt">depth_multiple</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="nt">width_multiple</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-
-<span class="nt">backbone</span><span class="p">:</span>
-    <span class="p p-Indicator">[</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Conv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">YamlModule</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="s">&quot;custom_module.yaml&quot;</span><span class="p p-Indicator">,</span> <span class="nv">48</span><span class="p p-Indicator">,</span> <span class="nv">16</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Flatten</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">120</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">84</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">]]</span>
-    <span class="p p-Indicator">]</span>
-</code></pre></div>
-* Note that argument of yaml module can be provided.</p>
-<p><strong>3. Build model</strong>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;model_with_custom_module.yaml&quot;</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>idx <span class="p">|</span>       from <span class="p">|</span>   n <span class="p">|</span>     params <span class="p">|</span>          module <span class="p">|</span>            arguments <span class="p">|</span>                       <span class="k">in</span> shape <span class="p">|</span>       out shape <span class="p">|</span>
----------------------------------------------------------------------------------------------------------------------------------
-  <span class="m">0</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>        <span class="m">616</span> <span class="p">|</span>            Conv <span class="p">|</span>         <span class="o">[</span><span class="m">6</span>, <span class="m">5</span>, <span class="m">1</span>, <span class="m">0</span><span class="o">]</span> <span class="p">|</span>                    <span class="o">[</span><span class="m">3</span>, <span class="m">32</span>, <span class="m">32</span><span class="o">]</span> <span class="p">|</span>     <span class="o">[</span><span class="m">8</span>, <span class="m">32</span>, <span class="m">32</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">1</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         MaxPool <span class="p">|</span>                  <span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="p">|</span>                      <span class="o">[</span><span class="m">8</span> <span class="m">32</span> <span class="m">32</span><span class="o">]</span> <span class="p">|</span>     <span class="o">[</span><span class="m">8</span>, <span class="m">16</span>, <span class="m">16</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">2</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>     <span class="m">10</span>,832 <span class="p">|</span>      YamlModule <span class="p">|</span>    <span class="o">[</span><span class="s1">&#39;custom_module&#39;</span><span class="o">]</span> <span class="p">|</span>                      <span class="o">[</span><span class="m">8</span> <span class="m">16</span> <span class="m">16</span><span class="o">]</span> <span class="p">|</span>    <span class="o">[</span><span class="m">24</span>, <span class="m">16</span>, <span class="m">16</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">3</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         MaxPool <span class="p">|</span>                  <span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="p">|</span>                     <span class="o">[</span><span class="m">24</span> <span class="m">16</span> <span class="m">16</span><span class="o">]</span> <span class="p">|</span>      <span class="o">[</span><span class="m">24</span>, <span class="m">8</span>, <span class="m">8</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">4</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         Flatten <span class="p">|</span>                   <span class="o">[]</span> <span class="p">|</span>                       <span class="o">[</span><span class="m">24</span> <span class="m">8</span> <span class="m">8</span><span class="o">]</span> <span class="p">|</span>          <span class="o">[</span><span class="m">1536</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">5</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>    <span class="m">184</span>,440 <span class="p">|</span>          Linear <span class="p">|</span>        <span class="o">[</span><span class="m">120</span>, <span class="s1">&#39;ReLU&#39;</span><span class="o">]</span> <span class="p">|</span>                         <span class="o">[</span><span class="m">1536</span><span class="o">]</span> <span class="p">|</span>           <span class="o">[</span><span class="m">120</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">6</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>     <span class="m">10</span>,164 <span class="p">|</span>          Linear <span class="p">|</span>         <span class="o">[</span><span class="m">84</span>, <span class="s1">&#39;ReLU&#39;</span><span class="o">]</span> <span class="p">|</span>                          <span class="o">[</span><span class="m">120</span><span class="o">]</span> <span class="p">|</span>            <span class="o">[</span><span class="m">84</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">7</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>        <span class="m">850</span> <span class="p">|</span>          Linear <span class="p">|</span>                 <span class="o">[</span><span class="m">10</span><span class="o">]</span> <span class="p">|</span>                           <span class="o">[</span><span class="m">84</span><span class="o">]</span> <span class="p">|</span>            <span class="o">[</span><span class="m">10</span><span class="o">]</span> <span class="p">|</span>
-Model Summary: <span class="m">36</span> layers, <span class="m">206</span>,902 parameters, <span class="m">206</span>,902 gradients
-</code></pre></div></p>
-<h2 id="design-custom-module-from-source">Design Custom Module from Source</h2>
-<p>You can make your own custom module from the source.</p>
-<p><strong>1. custom_module_model.yaml</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">input_size</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">32</span><span class="p p-Indicator">,</span> <span class="nv">32</span><span class="p p-Indicator">]</span>
-<span class="nt">input_channel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-
-<span class="nt">depth_multiple</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="nt">width_multiple</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-
-<span class="nt">custom_module_paths</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;tests.test_custom_module&quot;</span><span class="p p-Indicator">]</span>  <span class="c1"># Paths to the custom modules of the source</span>
-
-<span class="nt">backbone</span><span class="p">:</span>
-    <span class="c1"># [from, repeat, module, args]</span>
-    <span class="p p-Indicator">[</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MyConv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MyConv</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">16</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">SiLU</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">MaxPool</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Flatten</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">120</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">84</span><span class="p p-Indicator">,</span> <span class="nv">ReLU</span><span class="p p-Indicator">]],</span>
-        <span class="p p-Indicator">[</span><span class="nv">-1</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">Linear</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">]]</span>
-    <span class="p p-Indicator">]</span>
-</code></pre></div></p>
-<p><strong>2. Write</strong> <strong><em>PyTorch</em></strong> <strong>module and</strong> <strong><em>ModuleGenerator</em></strong></p>
-<p>tests/test_custom_module.py
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
-
-<span class="kn">from</span> <span class="nn">kindle.generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
-<span class="kn">from</span> <span class="nn">kindle.torch_utils</span> <span class="kn">import</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">autopad</span>
-
-
-<span class="k">class</span> <span class="nc">MyConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">activation</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ReLU&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="n">convs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">convs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
-                    <span class="n">in_channels</span><span class="p">,</span>
-                    <span class="n">in_channels</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="k">else</span> <span class="n">out_channels</span><span class="p">,</span>
-                    <span class="n">kernel_size</span><span class="p">,</span>
-                    <span class="n">padding</span><span class="o">=</span><span class="n">autopad</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">),</span>
-                    <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">convs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="n">activation</span><span class="p">)()</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
-
-
-<span class="k">class</span> <span class="nc">MyConvGenerator</span><span class="p">(</span><span class="n">GeneratorAbstract</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_divisible_channel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">width_multiply</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;from_idx can not be a list.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">]</span>
-
-    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="n">module</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">)</span>
-        <span class="n">module</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-        <span class="n">module_out</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">size</span><span class="p">)]))</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">module_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">in_channel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_channel</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
-        <span class="k">if</span> <span class="n">repeat</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">module</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyConv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeat</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">module</span> <span class="o">=</span> <span class="n">MyConv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-</code></pre></div></p>
-<p><strong>3. Build a model</strong>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;custom_module_model.yaml&quot;</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>idx <span class="p">|</span>       from <span class="p">|</span>   n <span class="p">|</span>     params <span class="p">|</span>          module <span class="p">|</span>            arguments <span class="p">|</span>                       <span class="k">in</span> shape <span class="p">|</span>       out shape <span class="p">|</span>
----------------------------------------------------------------------------------------------------------------------------------
-  <span class="m">0</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>      <span class="m">1</span>,066 <span class="p">|</span>          MyConv <span class="p">|</span>            <span class="o">[</span><span class="m">6</span>, <span class="m">5</span>, <span class="m">3</span><span class="o">]</span> <span class="p">|</span>                    <span class="o">[</span><span class="m">3</span>, <span class="m">32</span>, <span class="m">32</span><span class="o">]</span> <span class="p">|</span>     <span class="o">[</span><span class="m">8</span>, <span class="m">32</span>, <span class="m">32</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">1</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         MaxPool <span class="p">|</span>                  <span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="p">|</span>                      <span class="o">[</span><span class="m">8</span> <span class="m">32</span> <span class="m">32</span><span class="o">]</span> <span class="p">|</span>     <span class="o">[</span><span class="m">8</span>, <span class="m">16</span>, <span class="m">16</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">2</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>      <span class="m">3</span>,488 <span class="p">|</span>          MyConv <span class="p">|</span>   <span class="o">[</span><span class="m">16</span>, <span class="m">3</span>, <span class="m">5</span>, <span class="s1">&#39;SiLU&#39;</span><span class="o">]</span> <span class="p">|</span>                      <span class="o">[</span><span class="m">8</span> <span class="m">16</span> <span class="m">16</span><span class="o">]</span> <span class="p">|</span>    <span class="o">[</span><span class="m">16</span>, <span class="m">16</span>, <span class="m">16</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">3</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         MaxPool <span class="p">|</span>                  <span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="p">|</span>                     <span class="o">[</span><span class="m">16</span> <span class="m">16</span> <span class="m">16</span><span class="o">]</span> <span class="p">|</span>      <span class="o">[</span><span class="m">16</span>, <span class="m">8</span>, <span class="m">8</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">4</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>          <span class="m">0</span> <span class="p">|</span>         Flatten <span class="p">|</span>                   <span class="o">[]</span> <span class="p">|</span>                       <span class="o">[</span><span class="m">16</span> <span class="m">8</span> <span class="m">8</span><span class="o">]</span> <span class="p">|</span>          <span class="o">[</span><span class="m">1024</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">5</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>    <span class="m">123</span>,000 <span class="p">|</span>          Linear <span class="p">|</span>        <span class="o">[</span><span class="m">120</span>, <span class="s1">&#39;ReLU&#39;</span><span class="o">]</span> <span class="p">|</span>                         <span class="o">[</span><span class="m">1024</span><span class="o">]</span> <span class="p">|</span>           <span class="o">[</span><span class="m">120</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">6</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>     <span class="m">10</span>,164 <span class="p">|</span>          Linear <span class="p">|</span>         <span class="o">[</span><span class="m">84</span>, <span class="s1">&#39;ReLU&#39;</span><span class="o">]</span> <span class="p">|</span>                          <span class="o">[</span><span class="m">120</span><span class="o">]</span> <span class="p">|</span>            <span class="o">[</span><span class="m">84</span><span class="o">]</span> <span class="p">|</span>
-  <span class="m">7</span> <span class="p">|</span>         -1 <span class="p">|</span>   <span class="m">1</span> <span class="p">|</span>        <span class="m">850</span> <span class="p">|</span>          Linear <span class="p">|</span>                 <span class="o">[</span><span class="m">10</span><span class="o">]</span> <span class="p">|</span>                           <span class="o">[</span><span class="m">84</span><span class="o">]</span> <span class="p">|</span>            <span class="o">[</span><span class="m">10</span><span class="o">]</span> <span class="p">|</span>
-Model Summary: <span class="m">29</span> layers, <span class="m">138</span>,568 parameters, <span class="m">138</span>,568 gradients
-</code></pre></div></p></div>
+</table></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../usages/" title="Usages"><span>Previous</span></a></div>
