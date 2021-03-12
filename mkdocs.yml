@@ -3,6 +3,7 @@ repo_url: https://github.com/JeiKeiLim/kindle
 
 nav:
     - Home: index.md
+    - Tutorial: tutorial.md
     - Usages: usages.md
     - Modules: modules.md
     - API: mkapi/api/kindle

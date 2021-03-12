@@ -211,6 +211,11 @@ class ModelParser:
         for i, (idx, repeat, module, args) in enumerate(model_cfg):  # type: ignore
             if i >= len(self.backbone_cfg):
                 GeneratorAbstract.CHANNEL_DIVISOR = 1
+                width_multiply = 1.0
+                depth_multiply = 1.0
+            else:
+                width_multiply = float(self.width_multiply)  # type: ignore
+                depth_multiply = float(self.depth_multiply)  # type: ignore
 
             module_generator = ModuleGenerator(
                 module, custom_module_paths=self.custom_module_paths
@@ -218,11 +223,9 @@ class ModelParser:
                 *args,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i > 0 else (self.in_channel,),  # type: ignore
-                width_multiply=self.width_multiply,
+                width_multiply=width_multiply,
             )
-            repeat = (
-                max(round(repeat * self.depth_multiply), 1) if repeat > 1 else repeat
-            )
+            repeat = max(round(repeat * depth_multiply), 1) if repeat > 1 else repeat
 
             if isinstance(module_generator, FlattenGenerator):
                 if self.input_size is not None:

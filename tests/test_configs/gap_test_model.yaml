@@ -1,7 +1,7 @@
 input_channel: 3
 
 depth_multiple: 1.0
-width_multiple: 1.0
+width_multiple: 2.0
 
 backbone:
     # [from, repeat, module, args]
