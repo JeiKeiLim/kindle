@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.generator.linear &mdash; Kindle</title>
+    <title>kindle.generator.identity &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -106,12 +106,14 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.generator.</span><span class="mkapi-object-name">linear</span>
-<span id="kindle.generator.linear"></span><a class="mkapi-docs-link" href="../../kindle.generator.linear">DOCS</a>
+<span class="mkapi-object-prefix">kindle.generator.</span><span class="mkapi-object-name">identity</span>
+<span id="kindle.generator.identity"></span><a class="mkapi-docs-link" href="../../kindle.generator.identity">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Linear module generator.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Identity module that returns raw input.</span>
+
+<span class="sd">This module can be used for the reusability of the input layer.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
@@ -119,40 +121,30 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 
 <span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
-<span class="kn">from</span> <span class="nn">kindle.modules</span> <span class="kn">import</span> <span class="n">Linear</span>
 
 
-<span class="k">class</span> <span class="nc">LinearGenerator</span><span class="p">(</span><span class="n">GeneratorAbstract</span><span class="p">):</span><span id="kindle.generator.linear.LinearGenerator"></span><a class="mkapi-docs-link" title="kindle.generator.linear.LinearGenerator" href="../../kindle.generator.linear/#kindle.generator.linear.LinearGenerator">DOCS</a>
-    <span class="sd">&quot;&quot;&quot;Linear (fully connected) module generator for parsing.&quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">IdentityGenerator</span><span class="p">(</span><span class="n">GeneratorAbstract</span><span class="p">):</span><span id="kindle.generator.identity.IdentityGenerator"></span><a class="mkapi-docs-link" title="kindle.generator.identity.IdentityGenerator" href="../../kindle.generator.identity/#kindle.generator.identity.IdentityGenerator">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Identity module.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initailize.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="nd">@property</span><span id="kindle.generator.linear.LinearGenerator.out_channel"></span><a class="mkapi-docs-link" title="kindle.generator.linear.LinearGenerator.out_channel" href="../../kindle.generator.linear/#kindle.generator.linear.LinearGenerator.out_channel">DOCS</a>
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get out channel size.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channel</span>
 
-    <span class="nd">@property</span><span id="kindle.generator.linear.LinearGenerator.in_channel"></span><a class="mkapi-docs-link" title="kindle.generator.linear.LinearGenerator.in_channel" href="../../kindle.generator.linear/#kindle.generator.linear.LinearGenerator.in_channel">DOCS</a>
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get in channel size.&quot;&quot;&quot;</span>
-        <span class="c1"># error: Value of type &quot;Optional[List[int]]&quot; is not indexable</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
 
-    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span><span id="kindle.generator.linear.LinearGenerator.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.linear.LinearGenerator.compute_out_shape" href="../../kindle.generator.linear/#kindle.generator.linear.LinearGenerator.compute_out_shape">DOCS</a>
-        <span class="sd">&quot;&quot;&quot;Compute output shape.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">out_channel</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span><span id="kindle.generator.identity.IdentityGenerator.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.identity.IdentityGenerator.compute_out_shape" href="../../kindle.generator.identity/#kindle.generator.identity.IdentityGenerator.compute_out_shape">DOCS</a>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span><span id="kindle.generator.linear.LinearGenerator.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.linear.LinearGenerator.__call__" href="../../kindle.generator.linear/#kindle.generator.linear.LinearGenerator.__call__">DOCS</a>
-        <span class="c1"># TODO: Apply repeat</span>
-        <span class="n">act</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in_channel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_channel</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">act</span><span class="p">)</span>
-        <span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span><span id="kindle.generator.identity.IdentityGenerator.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.identity.IdentityGenerator.__call__" href="../../kindle.generator.identity/#kindle.generator.identity.IdentityGenerator.__call__">DOCS</a>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">())</span>
 </code></pre></div>
 </div>
 </div></div>

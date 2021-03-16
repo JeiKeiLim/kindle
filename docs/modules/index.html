@@ -71,6 +71,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.identity/">kindle.generator.identity</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.poolings/">kindle.generator.poolings</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
@@ -121,7 +122,7 @@
 <tr>
 <td>Conv</td>
 <td>Conv -&gt; BatchNorm -&gt; Activation</td>
-<td>[channel, kernel size, stride, padding, activation]</td>
+<td>[channel, kernel size, stride, padding, groups, activation]</td>
 </tr>
 <tr>
 <td>DWConv</td>
@@ -171,6 +172,11 @@
 <tr>
 <td>UpSample</td>
 <td>UpSample</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Identity</td>
 <td>[]</td>
 </tr>
 </tbody>
