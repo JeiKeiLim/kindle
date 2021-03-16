@@ -3,7 +3,7 @@
 
 |Module|Components|Arguments|
 |-|-|-|
-|Conv|Conv -> BatchNorm -> Activation|[channel, kernel size, stride, padding, activation]|
+|Conv|Conv -> BatchNorm -> Activation|[channel, kernel size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[channel, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[channel, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
@@ -14,4 +14,5 @@
 |Linear|Linear|[channel, activation]|
 |Add|Add|[]|
 |UpSample|UpSample|[]|
+|Identity|Identity|[]|
 

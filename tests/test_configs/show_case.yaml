@@ -7,6 +7,7 @@ width_multiple: 0.5
 backbone:
     # [from, repeat, module, args]
     [
+        [-1, 1, Identity, []],
         # Conv argument: [out_channel, kernel_size, stride, padding_size]
         # if padding_size is not given or null, the padding_size will be auto adjusted as padding='SAME' in TensorFlow
         [-1, 2, Conv, [16, 3, 1, null]],
@@ -15,9 +16,9 @@ backbone:
         [-1, 1, UpSample, []],
         [-1, 1, Conv, [16, 3, 2]],
         [-1, 1, Bottleneck, [32, True]],
-        [0, 4, Conv, [16, 3, 2]],
+        [1, 4, Conv, [16, 3, 2]],
         # Concat argument: [axis]
-        [[-1, 4], 1, Concat, [1]],
+        [[-1, 5], 1, Concat, [1]],
         [-1, 3, DWConv, [64, 3, 1]],
         [-1, 1, AvgPool, [3, 2, 1]],
         [-1, 1, YamlModule, ["tests/test_configs/inception_module.yaml", 48, 16]],
@@ -27,7 +28,7 @@ backbone:
         # Linear argument: [out_channel, activation]
         [-1, 1, Linear, [1024, ReLU]],
         [-1, 1, Linear, [128, ReLU]],
-        [[-1, 11], 1, Concat, [1]],
+        [[-1, 12], 1, Concat, [1]],
         [-1, 1, Flatten, []],
 
         [-1, 1, Linear, [10, Softmax]]

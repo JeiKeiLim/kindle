@@ -99,7 +99,7 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 
 |Module|Components|Arguments|
 |-|-|-|
-|Conv|Conv -> BatchNorm -> Activation|[channel, kernel size, stride, padding, activation]|
+|Conv|Conv -> BatchNorm -> Activation|[channel, kernel size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[channel, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[channel, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
@@ -110,6 +110,7 @@ Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 |Linear|Linear|[channel, activation]|
 |Add|Add|[]|
 |UpSample|UpSample|[]|
+|Identity|Identity|[]|
 
 # Custom module support
 ## Custom module with yaml
