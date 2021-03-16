@@ -12,6 +12,7 @@ from kindle.generator.conv import ConvGenerator
 from kindle.generator.custom_yaml_module import YamlModuleGenerator
 from kindle.generator.dwconv import DWConvGenerator
 from kindle.generator.flatten import FlattenGenerator
+from kindle.generator.identity import IdentityGenerator
 from kindle.generator.linear import LinearGenerator
 from kindle.generator.poolings import (AvgPoolGenerator,
                                        GlobalAvgPoolGenerator,
@@ -33,4 +34,5 @@ __all__ = [
     "YamlModuleGenerator",
     "AddGenerator",
     "UpSampleGenerator",
+    "IdentityGenerator",
 ]
