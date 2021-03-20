@@ -58,7 +58,6 @@
     <li class="toctree-l2 current"><button class="section nav-item">kindle.generator</button>
 <ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -133,7 +132,7 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="abstract-class"><code class="mkapi-item-name"><a href="#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">from_idx</code>, <code class="mkapi-object-signature">in_channels</code>, <code class="mkapi-object-signature">width_multiply</code><code class="mkapi-object-parenthesis">)</code>
+<li class="abstract-class"><code class="mkapi-item-name"><a href="#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">keyword_args</code>, <code class="mkapi-object-signature">from_idx</code>, <code class="mkapi-object-signature">in_channels</code>, <code class="mkapi-object-signature">width_multiply</code><code class="mkapi-object-parenthesis">)</code>
 
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Abstract Module Generator.<a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract" title="Source for kindle.generator.base_generator.GeneratorAbstract">&lt;/&gt;</a></span></li>
 
@@ -152,7 +151,7 @@
 <div class='mkapi-object-container'>
   <div class="mkapi-object abstract-class code top">
     <div class="mkapi-object-kind abstract-class top">abstract class</div>
-    <h2 id="kindlegeneratorbase_generatorgeneratorabstract" class="mkapi-object-body abstract-class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.base_generator">kindle.generator.base_generator</a>.</code><code class="mkapi-object-name">GeneratorAbstract</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">from_idx=-1</code>, <code class="mkapi-object-signature">in_channels=(0,)</code>, <code class="mkapi-object-signature">width_multiply=1.0</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlegeneratorbase_generatorgeneratorabstract" class="mkapi-object-body abstract-class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.base_generator">kindle.generator.base_generator</a>.</code><code class="mkapi-object-name">GeneratorAbstract</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">keyword_args=None</code>, <code class="mkapi-object-signature">from_idx=-1</code>, <code class="mkapi-object-signature">in_channels=(0,)</code>, <code class="mkapi-object-signature">width_multiply=1.0</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
     <a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract" title="Source for kindle.generator.base_generator.GeneratorAbstract">&lt;/&gt;</a>
@@ -173,6 +172,11 @@
 <span class="mkapi-item-type">(int)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">In channel of the module.<span id="kindle.generator.base_generator.GeneratorAbstract.in_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.in_channel" title="Source for kindle.generator.base_generator.GeneratorAbstract.in_channel">&lt;/&gt;</a></span></li>
 
+
+
+<li class="abstract-readonly-property"><code class="mkapi-item-name">kwargs</code>
+<span class="mkapi-item-type">(dict(str: any))</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Generate keyword argument of the module.<span id="kindle.generator.base_generator.GeneratorAbstract.kwargs"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.kwargs" title="Source for kindle.generator.base_generator.GeneratorAbstract.kwargs">&lt;/&gt;</a></span></li>
 
 <li class="readonly-property"><code class="mkapi-item-name">name</code>
 <span class="mkapi-item-type">(str)</span>

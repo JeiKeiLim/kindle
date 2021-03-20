@@ -58,7 +58,6 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -118,7 +117,7 @@
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -140,11 +139,15 @@
     <span class="k">def</span> <span class="nf">in_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">from_idx</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_kwargs</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span><span id="kindle.generator.identity.IdentityGenerator.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.identity.IdentityGenerator.compute_out_shape" href="../../kindle.generator.identity/#kindle.generator.identity.IdentityGenerator.compute_out_shape">DOCS</a>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span><span id="kindle.generator.identity.IdentityGenerator.__call__"></span><a class="mkapi-docs-link" title="kindle.generator.identity.IdentityGenerator.__call__" href="../../kindle.generator.identity/#kindle.generator.identity.IdentityGenerator.__call__">DOCS</a>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">))</span>
 </code></pre></div>
 </div>
 </div></div>

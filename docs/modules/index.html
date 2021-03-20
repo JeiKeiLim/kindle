@@ -48,6 +48,16 @@
                     <li class="toctree-l1 current"><a class="nav-item current" href="./">Modules</a>
 <ul class="subnav">
 <li class="toctree-l2"><a class="nav-item toc" href="#supported-modules-summary">Supported Modules Summary</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#conv">Conv</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#dwconv">DWConv</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#bottleneck">Bottleneck</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#avgpool">AvgPool</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#maxpool">MaxPool</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#flatten">Flatten</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#concat">Concat</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#linear">Linear</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#upsample">UpSample</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#yamlmodule">YamlModule</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">API</button>
 <ul class="subnav">
@@ -61,7 +71,6 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator/">kindle.generator</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -122,17 +131,17 @@
 <tr>
 <td>Conv</td>
 <td>Conv -&gt; BatchNorm -&gt; Activation</td>
-<td>[channel, kernel size, stride, padding, groups, activation]</td>
+<td>[out_channels, kernel_size, stride, padding, groups, activation]</td>
 </tr>
 <tr>
 <td>DWConv</td>
 <td>DWConv -&gt; BatchNorm -&gt; Activation</td>
-<td>[channel, kernel_size, stride, padding, activation]</td>
+<td>[out_channels, kernel_size, stride, padding, activation]</td>
 </tr>
 <tr>
 <td>Bottleneck</td>
 <td>Expansion ConvBNAct -&gt; ConvBNAct</td>
-<td>[channel, shortcut, groups, expansion, activation]</td>
+<td>[out_channels, shortcut, groups, expansion, activation]</td>
 </tr>
 <tr>
 <td>AvgPool</td>
@@ -162,7 +171,7 @@
 <tr>
 <td>Linear</td>
 <td>Linear</td>
-<td>[channel, activation]</td>
+<td>[out_channels, activation]</td>
 </tr>
 <tr>
 <td>Add</td>
@@ -178,9 +187,393 @@
 <td>Identity</td>
 <td>Identity</td>
 <td>[]</td>
+</tr>
+<tr>
+<td>YamlModule</td>
+<td>Custom module from yaml file</td>
+<td>['yaml/file/path', arg0, arg1, ...]</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+<h2 id="conv">Conv</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td></td>
+<td>(n, n) kernel size</td>
+</tr>
+<tr>
+<td>stride</td>
+<td>int</td>
+<td>1</td>
+<td>Conv stride</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>int</td>
+<td>None</td>
+<td>Conv padding. If None, auto-padding will be applied which generates same width and height of the input</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>int</td>
+<td>1</td>
+<td>Group convolution size. If 1, no group convolution</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html">https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html</a> for further detail.</li>
+</ul>
+<h2 id="dwconv">DWConv</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td></td>
+<td>(n, n) kernel size</td>
+</tr>
+<tr>
+<td>stride</td>
+<td>int</td>
+<td>1</td>
+<td>Conv stride</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>int</td>
+<td>None</td>
+<td>Conv padding. If None, auto-padding will be applied which generates same width and height of the input</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>DWConv is identical to Conv but with force grouped convolution.</li>
+</ul>
+<h2 id="bottleneck">Bottleneck</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>shortcut</td>
+<td>bool</td>
+<td>True</td>
+<td>Use shortcut. Only applied when in_channels and out_channels are same.</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>int</td>
+<td>1</td>
+<td>Group convolution size. If 1, no group convolution</td>
+</tr>
+<tr>
+<td>expansion</td>
+<td>int</td>
+<td>0.5</td>
+<td>Expansion(squeeze) ratio.</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="avgpool">AvgPool</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>stride</td>
+<td>int or None</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>padding</td>
+<td>int</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>ceil_mode</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td>count_include_pad</td>
+<td>bool</td>
+<td>True</td>
+<td></td>
+</tr>
+<tr>
+<td>divisor_override</td>
+<td>bool or None</td>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.AvgPool2d.html">https://pytorch.org/docs/stable/generated/torch.nn.AvgPool2d.html</a> for further detail.</li>
+</ul>
+<h2 id="maxpool">MaxPool</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>stride</td>
+<td>int or None</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>padding</td>
+<td>int</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>dilation</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>return_indices</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td>ceil_mode</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html">https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html</a> for further detail.</li>
+</ul>
+<h2 id="flatten">Flatten</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start_dim</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>end_dim</td>
+<td>int</td>
+<td>-1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html">https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html</a> for further detail.</li>
+</ul>
+<h2 id="concat">Concat</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dimension</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="linear">Linear</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="upsample">UpSample</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>size</td>
+<td>int or None</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>scale_factor</td>
+<td>int or None</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>mode</td>
+<td>str</td>
+<td>nearest</td>
+<td></td>
+</tr>
+<tr>
+<td>align_corners</td>
+<td>bool or None</td>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.Upsample.html">https://pytorch.org/docs/stable/generated/torch.nn.Upsample.html</a> for further detail.</li>
+</ul>
+<h2 id="yamlmodule">YamlModule</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verbose</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>yaml file path and argument configured in yaml module can not be passed through keyword argument.</li>
+</ul></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../usages/" title="Usages"><span>Previous</span></a></div>
