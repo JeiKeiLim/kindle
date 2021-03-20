@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 import torch
@@ -41,11 +41,18 @@ class MaxPoolGenerator(GeneratorAbstract):
             module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
             return list(module_out.shape[-3:])
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        kwargs = self._get_kwargs(self.base_module, self.args)
+
+        return kwargs
+
     def __call__(self, repeat: int = 1):
+
         module = (
-            [self.base_module(*self.args) for _ in range(repeat)]
+            [self.base_module(**self.kwargs) for _ in range(repeat)]
             if repeat > 1
-            else self.base_module(*self.args)
+            else self.base_module(**self.kwargs)
         )
         return self._get_module(module)
 
@@ -72,6 +79,10 @@ class GlobalAvgPoolGenerator(GeneratorAbstract):
             return self.in_channels[self.from_idx]
 
         raise Exception()
+
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        return self._get_kwargs(GlobalAvgPool, self.args)
 
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         """Compute out shape."""

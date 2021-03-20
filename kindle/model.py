@@ -19,6 +19,27 @@ from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.flatten import FlattenGenerator
 
 
+def split_str_line(msg: str, line_limit: int = 30) -> List[str]:
+    """Split string with a maximum length of the line.
+
+    Ex) split_str_line("hello world", line_limit=5)
+        will return ["hello", " worl", "d"]
+
+    Args:
+        msg: message to split.
+        line_limit: limit length of the line.
+
+    Returns:
+        list of the split message.
+    """
+    msg_list = []
+    for j in range(0, len(msg), line_limit):
+        end_idx = j + line_limit
+        msg_list.append(msg[j:end_idx])
+
+    return msg_list
+
+
 class Model(nn.Module):
     """PyTorch model class."""
 
@@ -106,9 +127,9 @@ class ModelParser:
         self.depth_multiply = self.cfg["depth_multiple"]
         self.width_multiply = self.cfg["width_multiple"]
 
-        self.backbone_cfg: List[Union[int, str, float]] = self.cfg["backbone"]  # type: ignore
+        self.backbone_cfg: List[List] = self.cfg["backbone"]  # type: ignore
         if "head" in self.cfg:
-            self.head_cfg: Optional[List[Union[int, str, float]]] = self.cfg["head"]  # type: ignore
+            self.head_cfg: Optional[List[List]] = self.cfg["head"]  # type: ignore
         else:
             self.head_cfg = None
 
@@ -119,12 +140,13 @@ class ModelParser:
         if self.verbose:
             print(msg)
 
-    def _log_parse(
+    def _log_parse(  # pylint: disable=too-many-locals
         self,
         info: Optional[Tuple[int, int, int]] = None,
         module: Optional[nn.Module] = None,
         module_generator: Optional[GeneratorAbstract] = None,
         args: Optional[List[Any]] = None,
+        kwargs: Optional[Dict[str, Any]] = None,
         in_size: Optional[Union[np.ndarray, List]] = None,
         out_size: Optional[List[int]] = None,
         head: bool = False,
@@ -143,14 +165,14 @@ class ModelParser:
             head: Print head(Column names) message only.
         """
         if head:
-            log = (
+            log = [
                 f"{'idx':>3} | {'from':>10} | {'n':>3} | {'params':>8} |"
-                f" {'module':>15} | {'arguments':>20} |"
+                f" {'module':>15} | {'arguments':>35} |"
                 f" {'in_channel':>10} | {'out_channel':>11} |"
-            )
+            ]
             if self.input_size is not None:
-                log += f" {'in shape':>30} | {'out shape':>15} |"
-            log += f"\n{len(log) * '-'}"
+                log[0] += f" {'in shape':>15} | {'out shape':>15} |"
+            log.append(f"{len(log[0]) * '-'}")
         else:
             assert (
                 info is not None
@@ -165,20 +187,24 @@ class ModelParser:
                 args[0] = args[0].split(os.sep)[-1].split(".")[0]
 
             args_str = str(args)
-            args_str_list = []
-            for j in range(0, len(args_str), 20):
-                end_idx = j + 20
-                args_str_list.append(args_str[j:end_idx])
-            args_str = args_str_list[0]
-            log = (
+            if kwargs is not None:
+                args_str += ", "
+                for key, val in kwargs.items():
+                    args_str += f"{key}: {val}, "
+
+                args_str = args_str[:-2]
+
+            args_str_list = split_str_line(args_str, line_limit=35)
+
+            log = [
                 f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
-                f" {module.n_params:8,d} | {module.type:>15} | {args_str:>20} |"
+                f" {module.n_params:8,d} | {module.type:>15} | {args_str_list[0]:>35} |"
                 f" {module_generator.in_channel:>10} | {module_generator.out_channel:>11} |"
-            )
+            ]
             for j in range(1, len(args_str_list)):
-                log += (
-                    f"\n{'':>3} | {'':>10} | {'':>3} |"
-                    f" {'':>8} | {'':>15} | {args_str_list[j]:>20} |"
+                log.append(
+                    f"{'':>3} | {'':>10} | {'':>3} |"
+                    f" {'':>8} | {'':>15} | {args_str_list[j]:>35} |"
                     f" {'':>10} | {'':>11} |"
                 )
 
@@ -188,9 +214,24 @@ class ModelParser:
                 and out_size is not None
             ):
                 in_size_str = str(in_size).replace("\n", ",")
-                log += f" {in_size_str:>30} | {str(out_size):>15} |"
+                in_size_str_list = split_str_line(in_size_str, line_limit=15)
 
-        self.log(log)
+                log[0] += f" {in_size_str_list[0]:>15} | {str(out_size):>15} |"
+
+                for j in range(1, len(in_size_str_list)):
+                    append_msg = f" {in_size_str_list[j]:>15} | {'':>15} |"
+                    if j < len(log):
+                        log[j] += append_msg
+                    else:
+                        append_msg = (
+                            f"{'':>3} | {'':>10} | {'':>3} |"
+                            f" {'':>8} | {'':>15} | {'':>35} |"
+                            f" {'':>10} | {'':>11} |"
+                        ) + append_msg
+
+                        log.append(append_msg)
+
+        self.log("\n".join(log))
 
     def _parse_model(  # pylint: disable=too-many-locals
         self,
@@ -208,7 +249,13 @@ class ModelParser:
             model_cfg = self.backbone_cfg
 
         channel_divisor = GeneratorAbstract.CHANNEL_DIVISOR
-        for i, (idx, repeat, module, args) in enumerate(model_cfg):  # type: ignore
+        for i, module_cfg in enumerate(model_cfg):  # type: ignore
+            if len(module_cfg) > 4:
+                idx, repeat, module, args, kwargs = module_cfg
+            else:
+                idx, repeat, module, args = module_cfg
+                kwargs = None
+
             if i >= len(self.backbone_cfg):
                 GeneratorAbstract.CHANNEL_DIVISOR = 1
                 width_multiply = 1.0
@@ -221,6 +268,7 @@ class ModelParser:
                 module, custom_module_paths=self.custom_module_paths
             )(
                 *args,
+                keyword_args=kwargs,
                 from_idx=idx,
                 in_channels=tuple(in_channels) if i > 0 else (self.in_channel,),  # type: ignore
                 width_multiply=width_multiply,
@@ -229,9 +277,9 @@ class ModelParser:
 
             if isinstance(module_generator, FlattenGenerator):
                 if self.input_size is not None:
-                    module_generator.args = in_sizes[idx]  # type: ignore
+                    module_generator.in_shape = in_sizes[idx]  # type: ignore
                 else:
-                    module_generator.args = [in_channels[idx]]  # type: ignore
+                    module_generator.in_shape = [in_channels[idx], 1, 1]  # type: ignore
 
             module = module_generator(repeat=repeat)
             module.module_idx, module.from_idx = i, idx
@@ -259,6 +307,7 @@ class ModelParser:
                 module=module,
                 module_generator=module_generator,
                 args=args,
+                kwargs=kwargs,
                 in_size=in_size,
                 out_size=out_size,
             )

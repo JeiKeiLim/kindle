@@ -17,7 +17,9 @@ class Linear(nn.Module):
     Arguments: [channel, activation]
     """
 
-    def __init__(self, in_channel: int, out_channel: int, activation: Union[str, None]):
+    def __init__(
+        self, in_channels: int, out_channels: int, activation: Union[str, None]
+    ):
         """
 
         Args:
@@ -27,7 +29,7 @@ class Linear(nn.Module):
                 which is no activation.
         """
         super().__init__()
-        self.linear = nn.Linear(in_channel, out_channel)
+        self.linear = nn.Linear(in_channels, out_channels)
         self.activation = Activation(activation)()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

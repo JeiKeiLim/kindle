@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 
@@ -33,10 +33,15 @@ class LinearGenerator(GeneratorAbstract):
         """Compute output shape."""
         return [self.out_channel]
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        act = self.args[1] if len(self.args) > 1 else None
+        args = [self.in_channel, self.out_channel, act]
+        kwargs = self._get_kwargs(Linear, args)
+
+        return kwargs
+
     def __call__(self, repeat: int = 1):
         # TODO: Apply repeat
-        act = self.args[1] if len(self.args) > 1 else None
 
-        return self._get_module(
-            Linear(self.in_channel, self.out_channel, activation=act)
-        )
+        return self._get_module(Linear(**self.kwargs))

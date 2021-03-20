@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 from copy import deepcopy
-from typing import List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 import torch
@@ -64,7 +64,6 @@ class YamlModuleGenerator(GeneratorAbstract):
                 "backbone": self.cfg.pop("module"),
             }
         )
-        self.module = Model(self.cfg, verbose=False)
 
     @property
     def out_channel(self) -> int:
@@ -86,13 +85,20 @@ class YamlModuleGenerator(GeneratorAbstract):
 
         return list(module_out.shape[-3:])
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        kwargs = {"verbose": False}
+        if self.keyword_args is not None and "verbose" in self.keyword_args:
+            kwargs["verbose"] = self.keyword_args["verbose"]
+        return kwargs
+
     def __call__(self, repeat: int = 1) -> nn.Module:
         module: Union[List[nn.Module], nn.Module]
 
         if repeat > 1:
             # Currently, yaml module must have same in and out channel in order to apply repeat.
-            module = [Model(self.cfg, verbose=True) for _ in range(repeat)]
+            module = [Model(self.cfg, **self.kwargs) for _ in range(repeat)]
         else:
-            module = self.module
+            module = Model(self.cfg, **self.kwargs)
 
         return self._get_module(module)

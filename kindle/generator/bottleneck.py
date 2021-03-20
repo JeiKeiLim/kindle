@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List, Union
+from typing import Any, Dict, List, Union
 
 import numpy as np
 import torch
@@ -43,7 +43,13 @@ class BottleneckGenerator(GeneratorAbstract):
             module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
             return list(module_out.shape[-3:])
 
-    def __call__(self, repeat: int = 1):
+    @property
+    def kwargs(self) -> Dict[str, Any]:
         args = [self.in_channel, self.out_channel, *self.args[1:]]
-        module = self.base_module(*args)
+        kwargs = self._get_kwargs(self.base_module, args)
+
+        return kwargs
+
+    def __call__(self, repeat: int = 1):
+        module = self.base_module(**self.kwargs)
         return self._get_module(module)

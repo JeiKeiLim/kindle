@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 import torch
@@ -27,6 +27,14 @@ class UpSampleGenerator(GeneratorAbstract):
     def in_channel(self) -> int:
         return self.in_channels[self.from_idx]  # type: ignore
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        kwargs = self._get_kwargs(nn.Upsample, self.args)
+        if kwargs["scale_factor"] is None:
+            kwargs["scale_factor"] = 2  # Default scale factor is 2
+
+        return kwargs
+
     @torch.no_grad()
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         module = self(repeat=repeat)
@@ -35,4 +43,4 @@ class UpSampleGenerator(GeneratorAbstract):
         return list(module_out.shape[1:])
 
     def __call__(self, repeat: int = 1) -> nn.Module:
-        return self._get_module(nn.Upsample(scale_factor=2))
+        return self._get_module(nn.Upsample(**self.kwargs))

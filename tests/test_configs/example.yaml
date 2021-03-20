@@ -8,12 +8,17 @@ backbone:
     # Example model in PyTorch Tutorial (https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)
     # [from, repeat, module, args]
     [
-        [-1, 1, Conv, [6, 5, 1, 0]],
+        [-1, 1, Conv, [6, 5, 1, 0], {activation: LeakyReLU}],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Conv, [16, 5, 1, 0]],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],
         [-1, 1, Linear, [84, ReLU]],
-        [-1, 1, Linear, [10]]
     ]
+
+head:
+  [
+    [-1, 1, Linear, [10]]
+  ]
+

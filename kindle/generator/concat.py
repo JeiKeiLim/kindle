@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 
@@ -30,11 +30,15 @@ class ConcatGenerator(GeneratorAbstract):
         """Get in channel size."""
         return -1
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        return self._get_kwargs(Concat, self.args)
+
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         """Compute out shape."""
         return [self.out_channel] + list(size[0][1:])
 
     def __call__(self, repeat: int = 1):
-        module = Concat(*self.args)
+        module = Concat(**self.kwargs)
 
         return self._get_module(module)

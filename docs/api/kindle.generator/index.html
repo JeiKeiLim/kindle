@@ -59,7 +59,6 @@
 <ul class="subnav">
     <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator</a>
 <ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratordwconv">dwconv</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorflatten">flatten</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratoradd">add</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorconcat">concat</a></li>
@@ -72,7 +71,6 @@
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratoridentity">identity</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorpoolings">poolings</a></li>
 </ul></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.dwconv/">kindle.generator.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -104,7 +102,7 @@
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
     <div class="previous"><a href="../kindle.torch_utils/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.generator.dwconv/">Next &raquo;</a></div>
+    <div class="next"><a href="../kindle.generator.flatten/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -135,40 +133,6 @@
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
-</ul></div>
-    </div>
-  </div>
-
-</div>
-
-<div class="mkapi-node" id="kindle.generator.dwconv">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object module plain top">
-    <div class="mkapi-object-kind module top">module</div>
-    <h2 id="kindlegeneratordwconv" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name"><a href="../kindle.generator.dwconv/#kindle.generator.dwconv">dwconv</a></span></h2>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.dwconv/#kindle.generator.dwconv" title="Source for kindle.generator.dwconv">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section">
-      <div class="mkapi-section-body"><p>DWConv module generator.</p>
-<ul>
-<li>Author: Jongkuk Lim</li>
-<li>Contact: lim.jeikei@gmail.com</li>
-</ul></div>
-    </div>
-  <div class="mkapi-section classes">
-      <div class="mkapi-section-name classes">
-          <span class="mkapi-section-name-body classes">Classes</span> 
-        </div>
-      <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="../kindle.generator.dwconv#kindle.generator.dwconv.DWConvGenerator">DWConvGenerator</a></code>
-
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Depth-wise convolution generator for parsing module.<a class="mkapi-src-link" href="../source/kindle.generator.dwconv/#kindle.generator.dwconv.DWConvGenerator" title="Source for kindle.generator.dwconv.DWConvGenerator">&lt;/&gt;</a></span></li>
-
-
 </ul></div>
     </div>
   </div>
@@ -369,7 +333,7 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="abstract-class"><code class="mkapi-item-name"><a href="../kindle.generator.base_generator#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">from_idx</code>, <code class="mkapi-object-signature">in_channels</code>, <code class="mkapi-object-signature">width_multiply</code><code class="mkapi-object-parenthesis">)</code>
+<li class="abstract-class"><code class="mkapi-item-name"><a href="../kindle.generator.base_generator#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">keyword_args</code>, <code class="mkapi-object-signature">from_idx</code>, <code class="mkapi-object-signature">in_channels</code>, <code class="mkapi-object-signature">width_multiply</code><code class="mkapi-object-parenthesis">)</code>
 
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Abstract Module Generator.<a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract" title="Source for kindle.generator.base_generator.GeneratorAbstract">&lt;/&gt;</a></span></li>
 
@@ -491,6 +455,10 @@
 
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Conv2d generator for parsing module.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator" title="Source for kindle.generator.conv.ConvGenerator">&lt;/&gt;</a></span></li>
 
+<li class="class"><code class="mkapi-item-name"><a href="../kindle.generator.conv#kindle.generator.conv.DWConvGenerator">DWConvGenerator</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Depth-wise convolution generator for parsing module.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.DWConvGenerator" title="Source for kindle.generator.conv.DWConvGenerator">&lt;/&gt;</a></span></li>
+
 
 </ul></div>
     </div>
@@ -577,7 +545,7 @@
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../kindle.torch_utils/" title="kindle.torch_utils"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.generator.dwconv/" title="kindle.generator.dwconv"><span>Next</span></a></div>
+        <div class="next"><a href="../kindle.generator.flatten/" title="kindle.generator.flatten"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

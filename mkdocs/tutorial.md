@@ -30,6 +30,7 @@ Kindle builds a PyTorch model with yaml file.
         - `repeat`: Repeat number of the module. Ex) When Conv module has `repeat: 2`, this module will perform Conv operation twice (Input -> Conv -> Conv). 
         - `module_name`: Name of the module. Pre-built modules are descried [here](modules.md).
         - `module_arguments`: Arguments of the module. Each module takes pre-defined arguments. Pre-built module arguments are descried [here](modules.md).
+        - `module_keyword_arguments`: Keyword argument of the module. Pre-built module keyword arguments are descried [here](modules.md).
 
 
 ### Example
@@ -41,11 +42,10 @@ depth_multiple: 1.0
 width_multiple: 1.0
 
 backbone:
-    # [from, repeat, module, args]
     [
-        [-1, 1, Conv, [8, 3, 1]],
+        [-1, 1, Conv, [6, 5, 1, 0], {activation: LeakyReLU}],
         [-1, 1, MaxPool, [2]],
-        [-1, 1, Conv, [16, 3, 1]],
+        [-1, 1, Conv, [16, 5, 1, 0]],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],
@@ -53,9 +53,30 @@ backbone:
     ]
 
 head:
-    [
+  [
         [-1, 1, Linear, [10]]
-    ]
+  ]
+```
+
+### Build a model
+```python
+from kindle import Model
+
+model = Model("example.yaml"), verbose=True)
+```
+
+```shell
+idx |       from |   n |   params |          module |                           arguments | in_channel | out_channel |        in shape |       out shape |
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+  0 |         -1 |   1 |      616 |            Conv | [6, 5, 1, 0], activation: LeakyReLU |          3 |           8 |     [3, 32, 32] |     [8, 32, 32] |
+  1 |         -1 |   1 |        0 |         MaxPool |                                 [2] |          8 |           8 |       [8 32 32] |     [8, 16, 16] |
+  2 |         -1 |   1 |    3,232 |            Conv |                       [16, 5, 1, 0] |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
+  3 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
+  4 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
+  5 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
+  6 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
+  7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
+Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 ```
 
 
@@ -153,7 +174,7 @@ backbone:
 
 tests/test_custom_module.py
 ```python
-from typing import List, Union
+from typing import List, Union, Dict, Any
 
 import numpy as np
 import torch
@@ -206,6 +227,11 @@ class MyConvGenerator(GeneratorAbstract):
         if isinstance(self.from_idx, list):
             raise Exception("from_idx can not be a list.")
         return self.in_channels[self.from_idx]
+    
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        return self._get_kwargs(MyConv, args)
 
     @torch.no_grad()
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
@@ -215,11 +241,10 @@ class MyConvGenerator(GeneratorAbstract):
         return list(module_out.shape[-3:])
 
     def __call__(self, repeat: int = 1) -> nn.Module:
-        args = [self.in_channel, self.out_channel, *self.args[1:]]
         if repeat > 1:
-            module = [MyConv(*args) for _ in range(repeat)]
+            module = [MyConv(**self.kwargs) for _ in range(repeat)]
         else:
-            module = MyConv(*args)
+            module = MyConv(**self.kwargs)
 
         return self._get_module(module)
 ```
@@ -231,15 +256,15 @@ from kindle import Model
 model = Model("custom_module_model.yaml"), verbose=True)
 ```
 ```shell
-idx |       from |   n |     params |          module |            arguments |                       in shape |       out shape |
----------------------------------------------------------------------------------------------------------------------------------
-  0 |         -1 |   1 |      1,066 |          MyConv |            [6, 5, 3] |                    [3, 32, 32] |     [8, 32, 32] |
-  1 |         -1 |   1 |          0 |         MaxPool |                  [2] |                      [8 32 32] |     [8, 16, 16] |
-  2 |         -1 |   1 |      3,488 |          MyConv |   [16, 3, 5, 'SiLU'] |                      [8 16 16] |    [16, 16, 16] |
-  3 |         -1 |   1 |          0 |         MaxPool |                  [2] |                     [16 16 16] |      [16, 8, 8] |
-  4 |         -1 |   1 |          0 |         Flatten |                   [] |                       [16 8 8] |          [1024] |
-  5 |         -1 |   1 |    123,000 |          Linear |        [120, 'ReLU'] |                         [1024] |           [120] |
-  6 |         -1 |   1 |     10,164 |          Linear |         [84, 'ReLU'] |                          [120] |            [84] |
-  7 |         -1 |   1 |        850 |          Linear |                 [10] |                           [84] |            [10] |
+idx |       from |   n |   params |          module |                           arguments | in_channel | out_channel |        in shape |       out shape |
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+  0 |         -1 |   1 |    1,066 |          MyConv |                           [6, 5, 3] |          3 |           8 |     [3, 32, 32] |     [8, 32, 32] |
+  1 |         -1 |   1 |        0 |         MaxPool |                                 [2] |          8 |           8 |       [8 32 32] |     [8, 16, 16] |
+  2 |         -1 |   1 |    3,488 |          MyConv |                  [16, 3, 5, 'SiLU'] |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
+  3 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
+  4 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
+  5 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
+  6 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
+  7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
 Model Summary: 29 layers, 138,568 parameters, 138,568 gradients
 ```
