@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 import math
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 from torch import nn
@@ -17,18 +17,25 @@ class FlattenGenerator(GeneratorAbstract):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.in_shape = [
+            -1,
+        ]
 
     @property
     def out_channel(self) -> int:
-        return math.prod(self.args)
+        return math.prod(self.in_shape)
 
     @property
     def in_channel(self) -> int:
-
         return -1
+
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        kwargs = self._get_kwargs(nn.Flatten, self.args)
+        return kwargs
 
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         return [self.out_channel]
 
     def __call__(self, repeat: int = 1):
-        return self._get_module(nn.Flatten())
+        return self._get_module(nn.Flatten(**self.kwargs))

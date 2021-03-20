@@ -5,7 +5,7 @@ This module can be used for the reusability of the input layer.
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 import torch.nn as nn
@@ -27,8 +27,12 @@ class IdentityGenerator(GeneratorAbstract):
     def in_channel(self) -> int:
         return self.in_channels[self.from_idx]  # type: ignore
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        return self._get_kwargs(nn.Identity, self.args)
+
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         return list(size)
 
     def __call__(self, repeat: int = 1) -> nn.Module:
-        return self._get_module(nn.Identity())
+        return self._get_module(nn.Identity(**self.kwargs))

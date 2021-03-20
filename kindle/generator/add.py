@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List
+from typing import Any, Dict, List
 
 import numpy as np
 from torch import nn
@@ -29,6 +29,10 @@ class AddGenerator(GeneratorAbstract):
     @property
     def in_channel(self) -> int:
         return self.out_channel
+
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        return self._get_kwargs(Add, self.args)
 
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         return list(size)

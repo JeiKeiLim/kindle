@@ -55,17 +55,20 @@ depth_multiple: 1.0
 width_multiple: 1.0
 
 backbone:
-    # [from, repeat, module, args]
     [
-        [-1, 1, Conv, [6, 5, 1, 0]],
+        [-1, 1, Conv, [6, 5, 1, 0], {activation: LeakyReLU}],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Conv, [16, 5, 1, 0]],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],
         [-1, 1, Linear, [84, ReLU]],
-        [-1, 1, Linear, [10]]
     ]
+
+head:
+  [
+      [-1, 1, Linear, [10]]
+  ]
 ```
 
 2. Build the model with **kindle**
@@ -77,40 +80,42 @@ model = Model("model.yaml"), verbose=True)
 ```
 
 ```shell
-idx |       from |   n |     params |          module |            arguments |                       in shape |       out shape |
----------------------------------------------------------------------------------------------------------------------------------
-  0 |         -1 |   1 |        616 |            Conv |         [6, 5, 1, 0] |                    [3, 32, 32] |     [8, 32, 32] |
-  1 |         -1 |   1 |          0 |         MaxPool |                  [2] |                      [8 32 32] |     [8, 16, 16] |
-  2 |         -1 |   1 |      3,232 |            Conv |        [16, 5, 1, 0] |                      [8 16 16] |    [16, 16, 16] |
-  3 |         -1 |   1 |          0 |         MaxPool |                  [2] |                     [16 16 16] |      [16, 8, 8] |
-  4 |         -1 |   1 |          0 |         Flatten |                   [] |                       [16 8 8] |          [1024] |
-  5 |         -1 |   1 |    123,000 |          Linear |        [120, 'ReLU'] |                         [1024] |           [120] |
-  6 |         -1 |   1 |     10,164 |          Linear |         [84, 'ReLU'] |                          [120] |            [84] |
-  7 |         -1 |   1 |        850 |          Linear |                 [10] |                           [84] |            [10] |
+idx |       from |   n |   params |          module |                           arguments | in_channel | out_channel |        in shape |       out shape |
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+  0 |         -1 |   1 |      616 |            Conv | [6, 5, 1, 0], activation: LeakyReLU |          3 |           8 |     [3, 32, 32] |     [8, 32, 32] |
+  1 |         -1 |   1 |        0 |         MaxPool |                                 [2] |          8 |           8 |       [8 32 32] |     [8, 16, 16] |
+  2 |         -1 |   1 |    3,232 |            Conv |                       [16, 5, 1, 0] |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
+  3 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
+  4 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
+  5 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
+  6 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
+  7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
 Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
 ```
 
 ## AutoML with Kindle
 * [Kindle](https://github.com/JeiKeiLim/kindle) offers the easiest way to build your own deep learning architecture. Beyond building a model, AutoML became easier with [Kindle](https://github.com/JeiKeiLim/kindle) and [Optuna](https://optuna.org) or other optimization frameworks.
-* For further information, please refer to [here](https://github.com/JeiKeiLim/kindle/wiki/AutoML-with-kindle-and-optuna)
+* For further information, please refer to [https://limjk.ai/kindle/usages/#automl-with-optuna](https://limjk.ai/kindle/usages/#automl-with-optuna)
 
 # Supported modules
-* Detailed documents can be found [here](https://limjk.ai/kindle/api/kindle.modules/)
+* Detailed documents can be found [https://limjk.ai/kindle/modules/](https://limjk.ai/kindle/modules/)
 
 |Module|Components|Arguments|
-|-|-|-|
-|Conv|Conv -> BatchNorm -> Activation|[channel, kernel size, stride, padding, groups, activation]|
-|DWConv|DWConv -> BatchNorm -> Activation|[channel, kernel_size, stride, padding, activation]|
-|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[channel, shortcut, groups, expansion, activation]
+|------|----------|---------|
+|Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
+|DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
+|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
-|Linear|Linear|[channel, activation]|
+|Linear|Linear|[out_channels, activation]|
 |Add|Add|[]|
 |UpSample|UpSample|[]|
 |Identity|Identity|[]|
+|YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
+
 
 # Custom module support
 ## Custom module with yaml
@@ -207,7 +212,7 @@ backbone:
 
 tests/test_custom_module.py
 ```python
-from typing import List, Union
+from typing import List, Union, Dict, Any
 
 import numpy as np
 import torch
@@ -261,6 +266,11 @@ class MyConvGenerator(GeneratorAbstract):
             raise Exception("from_idx can not be a list.")
         return self.in_channels[self.from_idx]
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        return self._get_kwargs(MyConv, args)
+
     @torch.no_grad()
     def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
         module = self(repeat=repeat)
@@ -269,11 +279,10 @@ class MyConvGenerator(GeneratorAbstract):
         return list(module_out.shape[-3:])
 
     def __call__(self, repeat: int = 1) -> nn.Module:
-        args = [self.in_channel, self.out_channel, *self.args[1:]]
         if repeat > 1:
-            module = [MyConv(*args) for _ in range(repeat)]
+            module = [MyConv(**self.kwargs) for _ in range(repeat)]
         else:
-            module = MyConv(*args)
+            module = MyConv(**self.kwargs)
 
         return self._get_module(module)
 ```
@@ -285,21 +294,22 @@ from kindle import Model
 model = Model("custom_module_model.yaml"), verbose=True)
 ```
 ```shell
-idx |       from |   n |     params |          module |            arguments |                       in shape |       out shape |
----------------------------------------------------------------------------------------------------------------------------------
-  0 |         -1 |   1 |      1,066 |          MyConv |            [6, 5, 3] |                    [3, 32, 32] |     [8, 32, 32] |
-  1 |         -1 |   1 |          0 |         MaxPool |                  [2] |                      [8 32 32] |     [8, 16, 16] |
-  2 |         -1 |   1 |      3,488 |          MyConv |   [16, 3, 5, 'SiLU'] |                      [8 16 16] |    [16, 16, 16] |
-  3 |         -1 |   1 |          0 |         MaxPool |                  [2] |                     [16 16 16] |      [16, 8, 8] |
-  4 |         -1 |   1 |          0 |         Flatten |                   [] |                       [16 8 8] |          [1024] |
-  5 |         -1 |   1 |    123,000 |          Linear |        [120, 'ReLU'] |                         [1024] |           [120] |
-  6 |         -1 |   1 |     10,164 |          Linear |         [84, 'ReLU'] |                          [120] |            [84] |
-  7 |         -1 |   1 |        850 |          Linear |                 [10] |                           [84] |            [10] |
+idx |       from |   n |   params |          module |                           arguments | in_channel | out_channel |        in shape |       out shape |
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+  0 |         -1 |   1 |    1,066 |          MyConv |                           [6, 5, 3] |          3 |           8 |     [3, 32, 32] |     [8, 32, 32] |
+  1 |         -1 |   1 |        0 |         MaxPool |                                 [2] |          8 |           8 |       [8 32 32] |     [8, 16, 16] |
+  2 |         -1 |   1 |    3,488 |          MyConv |                  [16, 3, 5, 'SiLU'] |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
+  3 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
+  4 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
+  5 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
+  6 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
+  7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
 Model Summary: 29 layers, 138,568 parameters, 138,568 gradients
 ```
 
 # Planned features
 * ~~Custom module support~~
 * ~~Custom module with yaml support~~
+* Graphical model file generator
 * Use pre-trained model
 * More modules!

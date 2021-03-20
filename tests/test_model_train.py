@@ -100,6 +100,6 @@ def test_model_gap_model():
 
 
 if __name__ == "__main__":
-    # test_model_showcase()
+    test_model_showcase()
     test_model_example()
-    # test_model_gap_model()
+    test_model_gap_model()

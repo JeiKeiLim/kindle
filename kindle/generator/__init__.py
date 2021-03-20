@@ -8,9 +8,8 @@ from kindle.generator.add import AddGenerator
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.bottleneck import BottleneckGenerator
 from kindle.generator.concat import ConcatGenerator
-from kindle.generator.conv import ConvGenerator
+from kindle.generator.conv import ConvGenerator, DWConvGenerator
 from kindle.generator.custom_yaml_module import YamlModuleGenerator
-from kindle.generator.dwconv import DWConvGenerator
 from kindle.generator.flatten import FlattenGenerator
 from kindle.generator.identity import IdentityGenerator
 from kindle.generator.linear import LinearGenerator

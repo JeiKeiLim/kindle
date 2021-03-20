@@ -3,7 +3,7 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import List, Union
+from typing import Any, Dict, List, Union
 
 import numpy as np
 import torch
@@ -34,6 +34,13 @@ class ConvGenerator(GeneratorAbstract):
         """Returns module class from kindle.common_modules based on the class name."""
         return getattr(__import__("kindle.modules", fromlist=[""]), self.name)
 
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        kwargs = self._get_kwargs(self.base_module, args)
+
+        return kwargs
+
     @torch.no_grad()
     def compute_out_shape(
         self, size: Union[list, np.ndarray], repeat: int = 1
@@ -44,22 +51,27 @@ class ConvGenerator(GeneratorAbstract):
         return list(module_out.shape[-3:])
 
     def __call__(self, repeat: int = 1):
-        args = [self.in_channel, self.out_channel, *self.args[1:]]
+        kwargs = self.kwargs
+
         if repeat > 1:
             stride = 1
             # Important!: stride only applies at the end of the repeat.
-            if len(args) > 2:
-                stride = args[3]
-                args[3] = 1
+            if kwargs["stride"] > 1:
+                stride = kwargs["stride"]
+                kwargs["stride"] = 1
 
             module = []
             for i in range(repeat):
-                if len(args) > 1 and stride > 1 and i == repeat - 1:
-                    args[3] = stride
+                if stride > 1 and i == repeat - 1:
+                    kwargs["stride"] = stride
 
-                module.append(self.base_module(*args))
-                args[0] = self.out_channel
+                module.append(self.base_module(**kwargs))
+                kwargs["in_channels"] = self.out_channel
         else:
-            module = self.base_module(*args)
+            module = self.base_module(**kwargs)
 
         return self._get_module(module)
+
+
+class DWConvGenerator(ConvGenerator):
+    """Depth-wise convolution generator for parsing module."""

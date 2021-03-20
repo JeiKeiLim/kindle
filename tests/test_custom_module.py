@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 import os
-from typing import List, Union
+from typing import Any, Dict, List, Union
 
 import numpy as np
 import torch
@@ -66,12 +66,17 @@ class MyConvGenerator(GeneratorAbstract):
         module_out = module(torch.zeros([1, *list(size)]))
         return list(module_out.shape[-3:])
 
-    def __call__(self, repeat: int = 1) -> nn.Module:
+    @property
+    def kwargs(self) -> Dict[str, Any]:
         args = [self.in_channel, self.out_channel, *self.args[1:]]
+        kwargs = self._get_kwargs(MyConv, args)
+        return kwargs
+
+    def __call__(self, repeat: int = 1) -> nn.Module:
         if repeat > 1:
-            module = [MyConv(*args) for _ in range(repeat)]
+            module = [MyConv(**self.kwargs) for _ in range(repeat)]
         else:
-            module = MyConv(*args)
+            module = MyConv(**self.kwargs)
 
         return self._get_module(module)
 

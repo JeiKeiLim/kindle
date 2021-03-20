@@ -5,8 +5,9 @@ This module is responsible for GeneratorAbstract and ModuleGenerator.
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
+import inspect
 from abc import ABC, abstractmethod
-from typing import List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 from torch import nn
@@ -22,6 +23,7 @@ class GeneratorAbstract(ABC):
     def __init__(
         self,
         *args,
+        keyword_args: Optional[Dict[str, Any]] = None,
         from_idx: Union[int, List[int]] = -1,
         in_channels: Tuple[int] = (0,),
         width_multiply: float = 1.0,
@@ -35,6 +37,7 @@ class GeneratorAbstract(ABC):
             width_multiply: Channel width multiply
         """
         self.args = tuple(args)
+        self.keyword_args = keyword_args
         self.from_idx = from_idx
         self.in_channels = in_channels
         self.width_multiply = width_multiply
@@ -72,6 +75,42 @@ class GeneratorAbstract(ABC):
         """
         return make_divisible(n_channel, divisor=cls.CHANNEL_DIVISOR)
 
+    def _get_kwargs(
+        self, module_type: Any, args: Union[Tuple[Any, ...], List[Any]]
+    ) -> Dict[str, Any]:
+        """Get keyword argument with default argument values.
+
+        Args:
+            module_type: module class. Ex) nn.Conv
+            args: ordered argument values
+
+        Returns:
+            converted keyword argument dictionary
+            from the ordered argument values.
+        """
+        arg_spec = inspect.getfullargspec(module_type)
+        kwarg_names = arg_spec.args
+        if "self" in kwarg_names:
+            kwarg_names.remove("self")
+
+        if arg_spec.defaults is None:  # No keyword arguments
+            arg_values = [
+                None,
+            ] * len(kwarg_names)
+        else:
+            arg_values = [
+                None,
+            ] * (len(kwarg_names) - len(arg_spec.defaults))
+            arg_values += list(arg_spec.defaults)
+        arg_values[: len(args)] = args
+
+        kwarg_dict = dict(zip(kwarg_names, arg_values))
+        if self.keyword_args is not None:
+            for key, val in self.keyword_args.items():
+                kwarg_dict[key] = val
+
+        return kwarg_dict
+
     @property
     @abstractmethod
     def out_channel(self) -> int:
@@ -92,6 +131,11 @@ class GeneratorAbstract(ABC):
     @abstractmethod
     def __call__(self, repeat: int = 1) -> nn.Module:
         """Returns nn.Module component."""
+
+    @property
+    @abstractmethod
+    def kwargs(self) -> Dict[str, Any]:
+        """Generate keyword argument of the module."""
 
 
 class ModuleGenerator:
@@ -117,12 +161,12 @@ class ModuleGenerator:
                 paths = custom_module_paths
             self.generator_paths += paths
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, keyword_args: Optional[Dict[str, Any]] = None, **kwargs):
         generator_name = f"{self.module_name}Generator"
         for path in self.generator_paths:
             if hasattr(__import__(path, fromlist=[""]), generator_name):
                 return getattr(__import__(path, fromlist=[""]), generator_name)(
-                    *args, **kwargs
+                    *args, keyword_args=keyword_args, **kwargs
                 )
 
         raise Exception(f"{generator_name} can not be found.")
