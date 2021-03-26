@@ -10,7 +10,9 @@ backbone:
     [
         [-1, 1, Conv, [6, 5, 1, 0], {activation: LeakyReLU}],
         [-1, 1, MaxPool, [2]],
-        [-1, 1, Conv, [16, 5, 1, 0]],
+        [-1, 1, nn.Conv2d, [16, 5, 1, 2], {bias: False}],
+        [-1, 1, nn.BatchNorm2d, []],
+        [-1, 1, nn.ReLU, []],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],

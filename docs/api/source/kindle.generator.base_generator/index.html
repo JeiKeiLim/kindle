@@ -61,6 +61,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.nn/">kindle.generator.nn</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.upsample/">kindle.generator.upsample</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
@@ -170,7 +171,7 @@
         <span class="c1"># expected List[Union[Tensor, Module]]</span>
         <span class="n">module</span><span class="o">.</span><span class="n">n_params</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">parameters</span><span class="p">()])</span>  <span class="c1"># type: ignore</span>
         <span class="c1"># error: Cannot assign to a method</span>
-        <span class="n">module</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># type: ignore</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># type: ignore</span>
 
         <span class="k">return</span> <span class="n">module</span>
 
@@ -274,11 +275,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">generator_paths</span> <span class="o">+=</span> <span class="n">paths</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">keyword_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">generator_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="si">}</span><span class="s2">Generator&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;nn.&quot;</span><span class="p">):</span>
+            <span class="n">generator_name</span> <span class="o">=</span> <span class="s2">&quot;TorchNNModuleGenerator&quot;</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;module_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">generator_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="si">}</span><span class="s2">Generator&quot;</span>
+
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;keyword_args&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keyword_args</span>
+
         <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator_paths</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]),</span> <span class="n">generator_name</span><span class="p">):</span>
                 <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]),</span> <span class="n">generator_name</span><span class="p">)(</span>
-                    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">keyword_args</span><span class="o">=</span><span class="n">keyword_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
                 <span class="p">)</span>
 
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">generator_name</span><span class="si">}</span><span class="s2"> can not be found.&quot;</span><span class="p">)</span>

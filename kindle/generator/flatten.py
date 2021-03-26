@@ -3,7 +3,6 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-import math
 from typing import Any, Dict, List
 
 import numpy as np
@@ -23,7 +22,7 @@ class FlattenGenerator(GeneratorAbstract):
 
     @property
     def out_channel(self) -> int:
-        return math.prod(self.in_shape)
+        return np.prod(self.in_shape)
 
     @property
     def in_channel(self) -> int:
