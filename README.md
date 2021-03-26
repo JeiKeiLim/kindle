@@ -119,6 +119,9 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |UpSample|UpSample|[]|
 |Identity|Identity|[]|
 |YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
+|nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
+
+* **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
 
 
 # Custom module support
