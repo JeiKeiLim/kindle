@@ -74,6 +74,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.nn/">kindle.generator.nn</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.upsample/">kindle.generator.upsample</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
@@ -193,8 +194,17 @@
 <td>Custom module from yaml file</td>
 <td>['yaml/file/path', arg0, arg1, ...]</td>
 </tr>
+<tr>
+<td>nn.{module_name}</td>
+<td>PyTorch torch.nn.* module</td>
+<td>Please refer to <a href="https://pytorch.org/docs/stable/nn.html">https://pytorch.org/docs/stable/nn.html</a></td>
+</tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>nn.{module_name} is currently experimental. This might change in the future release. Use with caution.</p>
+</div>
 <h2 id="conv">Conv</h2>
 <table>
 <thead>

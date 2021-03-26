@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>kindle.generator.linear &mdash; Kindle</title>
+    <title>kindle.generator.nn &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -61,11 +61,11 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.nn/">kindle.generator.nn</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.linear</a>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.nn</a>
 <ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorlinearlineargenerator">LinearGenerator</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratornntorchnnmodulegenerator">TorchNNModuleGenerator</a></li>
 </ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.upsample/">kindle.generator.upsample</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
@@ -92,8 +92,8 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.generator.nn/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.generator.upsample/">Next &raquo;</a></div>
+    <div class="previous"><a href="../kindle.generator.concat/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.generator.linear/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -108,19 +108,25 @@
     <li>API &raquo; </li><li>kindle.generator</li>
 </ul>
 </nav>
-                <div id="content"><div class="mkapi-node" id="kindle.generator.linear">
+                <div id="content"><div class="mkapi-node" id="kindle.generator.nn">
 <div class='mkapi-object-container'>
   <div class="mkapi-object module plain top">
     <div class="mkapi-object-kind module top">module</div>
-    <h1 id="kindlegeneratorlinear" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">linear</span></h1>
+    <h1 id="kindlegeneratornn" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">nn</span></h1>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear" title="Source for kindle.generator.linear">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.nn/#kindle.generator.nn" title="Source for kindle.generator.nn">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Linear module generator.</p>
+      <div class="mkapi-section-body"><p>torch.nn module generator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Experimental feature.
+This might change in future release.
+Use with caution.</p>
+</div>
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
@@ -131,9 +137,9 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.linear.LinearGenerator">LinearGenerator</a></code>
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.nn.TorchNNModuleGenerator">TorchNNModuleGenerator</a></code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Linear (fully connected) module generator for parsing.<a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator" title="Source for kindle.generator.linear.LinearGenerator">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">torch.nn module generator.<a class="mkapi-src-link" href="../source/kindle.generator.nn/#kindle.generator.nn.TorchNNModuleGenerator" title="Source for kindle.generator.nn.TorchNNModuleGenerator">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -142,14 +148,14 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.generator.linear.LinearGenerator">
+<div class="mkapi-node" id="kindle.generator.nn.TorchNNModuleGenerator">
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlegeneratorlinearlineargenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.linear">kindle.generator.linear</a>.</code><code class="mkapi-object-name">LinearGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlegeneratornntorchnnmodulegenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.nn">kindle.generator.nn</a>.</code><code class="mkapi-object-name">TorchNNModuleGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">module_name</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator" title="Source for kindle.generator.linear.LinearGenerator">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.nn/#kindle.generator.nn.TorchNNModuleGenerator" title="Source for kindle.generator.nn.TorchNNModuleGenerator">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -162,7 +168,7 @@
 </div>
     </div>
   <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Linear (fully connected) module generator for parsing.</p></div>
+      <div class="mkapi-section-body"><p>torch.nn module generator.</p></div>
     </div>
   <div class="mkapi-section attributes">
       <div class="mkapi-section-name attributes">
@@ -171,19 +177,13 @@
       <div class="mkapi-section-body attributes"><ul class="mkapi-items">
 
 
-<li class="readonly-property"><code class="mkapi-item-name">in_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get in channel size.<span id="kindle.generator.linear.LinearGenerator.in_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.in_channel" title="Source for kindle.generator.linear.LinearGenerator.in_channel">&lt;/&gt;</a></span></li>
+
 
 
 
 <li class="readonly-property"><code class="mkapi-item-name">name</code>
 <span class="mkapi-item-type">(str)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
-
-<li class="readonly-property"><code class="mkapi-item-name">out_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get out channel size.<span id="kindle.generator.linear.LinearGenerator.out_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.out_channel" title="Source for kindle.generator.linear.LinearGenerator.out_channel">&lt;/&gt;</a></span></li>
 
 
 
@@ -194,13 +194,9 @@
           <span class="mkapi-section-name-body methods">Methods</span> 
         </div>
       <div class="mkapi-section-body methods"><ul class="mkapi-items">
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.linear.LinearGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
-
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.__call__" title="Source for kindle.generator.linear.LinearGenerator.__call__">&lt;/&gt;</a></span></li>
-
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.linear.LinearGenerator.compute_out_shape">compute_out_shape</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(list of int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Compute output shape.<a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.compute_out_shape" title="Source for kindle.generator.linear.LinearGenerator.compute_out_shape">&lt;/&gt;</a></span></li>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.nn.TorchNNModuleGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.nn/#kindle.generator.nn.TorchNNModuleGenerator.__call__" title="Source for kindle.generator.nn.TorchNNModuleGenerator.__call__">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -210,34 +206,14 @@
   <div class="mkapi-members">
   
     <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.generator.linear.LinearGenerator.compute_out_shape">
+      <div class="mkapi-node" id="kindle.generator.nn.TorchNNModuleGenerator.__call__">
 <div class='mkapi-object-container'>
   <div class="mkapi-object method code">
     <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlegeneratorlinearlineargeneratorcompute_out_shape" class="mkapi-object-body method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; list of int</span></h3>
+    <h3 id="kindlegeneratornntorchnnmodulegeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Module</span></h3>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.compute_out_shape" title="Source for kindle.generator.linear.LinearGenerator.compute_out_shape">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Compute output shape.</p></div>
-    </div>
-  </div>
-
-</div>
-    </div>
-  
-    <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.generator.linear.LinearGenerator.__call__">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object method code">
-    <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlegeneratorlinearlineargeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code></h3>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.linear/#kindle.generator.linear.LinearGenerator.__call__" title="Source for kindle.generator.linear.LinearGenerator.__call__">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.nn/#kindle.generator.nn.TorchNNModuleGenerator.__call__" title="Source for kindle.generator.nn.TorchNNModuleGenerator.__call__">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -254,8 +230,8 @@
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.generator.nn/" title="kindle.generator.nn"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.generator.upsample/" title="kindle.generator.upsample"><span>Next</span></a></div>
+        <div class="previous"><a href="../kindle.generator.concat/" title="kindle.generator.concat"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.generator.linear/" title="kindle.generator.linear"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>
