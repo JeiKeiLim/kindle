@@ -133,6 +133,11 @@ class ModelParser:
         else:
             self.head_cfg = None
 
+        if "channel_divisor" in self.cfg:
+            self.channel_divisor: int = self.cfg["channel_divisor"]  # type: ignore
+        else:
+            self.channel_divisor = GeneratorAbstract.CHANNEL_DIVISOR
+
         self.model, self.output_save = self._parse_model()
 
     def log(self, msg: str):
@@ -249,6 +254,7 @@ class ModelParser:
             model_cfg = self.backbone_cfg
 
         channel_divisor = GeneratorAbstract.CHANNEL_DIVISOR
+        GeneratorAbstract.CHANNEL_DIVISOR = self.channel_divisor
         for i, module_cfg in enumerate(model_cfg):  # type: ignore
             if len(module_cfg) > 4:
                 idx, repeat, module, args, kwargs = module_cfg
