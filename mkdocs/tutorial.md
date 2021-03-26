@@ -14,6 +14,11 @@ Kindle builds a PyTorch model with yaml file.
 
 - `depth_multiple`: (float) Depth multiplication factor.
 - `width_multiple`: (float) Width multiplication factor.
+- `channel_divisor`: (int) (Optional) (Default: 8) Channel divisor. When `width_multiple` is adjusted, number of channel is changed to multiple of `channel_divisor`.
+    
+    !!! note
+        ex) If `width_multiple` is 0.5 and the output channel of the module is assigned to 24, the actual output channel is `16` instead of `12`.
+
 - `custom_module_paths`: (List[str]) (Optional) Custom module python script path list.
   
 - `backbone`: (List[`module`]) Model layers. 
@@ -45,7 +50,9 @@ backbone:
     [
         [-1, 1, Conv, [6, 5, 1, 0], {activation: LeakyReLU}],
         [-1, 1, MaxPool, [2]],
-        [-1, 1, Conv, [16, 5, 1, 0]],
+        [-1, 1, nn.Conv2d, [16, 5, 1, 2], {bias: False}],
+        [-1, 1, nn.BatchNorm2d, []],
+        [-1, 1, nn.ReLU, []],
         [-1, 1, MaxPool, [2]],
         [-1, 1, Flatten, []],
         [-1, 1, Linear, [120, ReLU]],
@@ -70,13 +77,15 @@ idx |       from |   n |   params |          module |                           
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
   0 |         -1 |   1 |      616 |            Conv | [6, 5, 1, 0], activation: LeakyReLU |          3 |           8 |     [3, 32, 32] |     [8, 32, 32] |
   1 |         -1 |   1 |        0 |         MaxPool |                                 [2] |          8 |           8 |       [8 32 32] |     [8, 16, 16] |
-  2 |         -1 |   1 |    3,232 |            Conv |                       [16, 5, 1, 0] |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
-  3 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
-  4 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
-  5 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
-  6 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
-  7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
-Model Summary: 21 layers, 137,862 parameters, 137,862 gradients
+  2 |         -1 |   1 |    3,200 |       nn.Conv2d |          [16, 5, 1, 2], bias: False |          8 |          16 |       [8 16 16] |    [16, 16, 16] |
+  3 |         -1 |   1 |       32 |  nn.BatchNorm2d |                                  [] |         16 |          16 |      [16 16 16] |    [16, 16, 16] |
+  4 |         -1 |   1 |        0 |         nn.ReLU |                                  [] |         16 |          16 |      [16 16 16] |    [16, 16, 16] |
+  5 |         -1 |   1 |        0 |         MaxPool |                                 [2] |         16 |          16 |      [16 16 16] |      [16, 8, 8] |
+  6 |         -1 |   1 |        0 |         Flatten |                                  [] |         -1 |        1024 |        [16 8 8] |          [1024] |
+  7 |         -1 |   1 |  123,000 |          Linear |                       [120, 'ReLU'] |       1024 |         120 |          [1024] |           [120] |
+  8 |         -1 |   1 |   10,164 |          Linear |                        [84, 'ReLU'] |        120 |          84 |           [120] |            [84] |
+  9 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
+Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 ```
 
 

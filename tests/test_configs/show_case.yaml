@@ -11,6 +11,7 @@ backbone:
         # Conv argument: [out_channel, kernel_size, stride, padding_size]
         # if padding_size is not given or null, the padding_size will be auto adjusted as padding='SAME' in TensorFlow
         [-1, 2, Conv, [16, 3, 1, null], {activation: LeakyReLU}],
+        [-1, 1, nn.Conv2d, [32, 3, 1], {padding: 1}],
         # MaxPool argument: [kernel_size, stride, padding_size]
         [-1, 1, MaxPool, [2]],
         [-1, 1, UpSample, []],
@@ -27,8 +28,9 @@ backbone:
         [-1, 1, Flatten, []],
         # Linear argument: [out_channel, activation]
         [-1, 1, Linear, [1024, ReLU]],
-        [-1, 1, Linear, [128, ReLU]],
-        [[-1, 12], 1, Concat, [1]],
+        [-1, 1, nn.Linear, [128]],
+        [-1, 1, nn.ReLU, []],
+        [[-1, 13], 1, Concat, [1]],
         [-1, 1, Flatten, []],
 
         [-1, 1, Linear, [10, Softmax]]

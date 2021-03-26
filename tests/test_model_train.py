@@ -85,6 +85,18 @@ def test_model_showcase():
     assert test_accuracy > 0.18 and test_loss < 2.3
 
 
+def test_model_nn_model():
+    epochs = 1
+
+    model, trainer = get_trainer(os.path.join("tests", "test_configs", "nn_model.yaml"))
+    train_loader, test_loader = prepare_cifar10()
+    trainer.train(train_loader, n_epoch=epochs)
+    test_loss, test_accuracy = trainer.test(test_loader)
+
+    print(test_loss, test_accuracy)
+    assert test_accuracy > 0.18 and test_loss < 2.3
+
+
 def test_model_gap_model():
     epochs = 1
 
@@ -100,6 +112,7 @@ def test_model_gap_model():
 
 
 if __name__ == "__main__":
+    test_model_nn_model()
     test_model_showcase()
-    test_model_example()
-    test_model_gap_model()
+    # test_model_example()
+    # test_model_gap_model()

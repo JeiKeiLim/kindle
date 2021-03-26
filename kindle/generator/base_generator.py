@@ -58,7 +58,7 @@ class GeneratorAbstract(ABC):
         # expected List[Union[Tensor, Module]]
         module.n_params = sum([x.numel() for x in module.parameters()])  # type: ignore
         # error: Cannot assign to a method
-        module.type = self.name  # type: ignore
+        module.name = self.name  # type: ignore
 
         return module
 
@@ -162,11 +162,18 @@ class ModuleGenerator:
             self.generator_paths += paths
 
     def __call__(self, *args, keyword_args: Optional[Dict[str, Any]] = None, **kwargs):
-        generator_name = f"{self.module_name}Generator"
+        if self.module_name.startswith("nn."):
+            generator_name = "TorchNNModuleGenerator"
+            kwargs["module_name"] = self.module_name
+        else:
+            generator_name = f"{self.module_name}Generator"
+
+        kwargs["keyword_args"] = keyword_args
+
         for path in self.generator_paths:
             if hasattr(__import__(path, fromlist=[""]), generator_name):
                 return getattr(__import__(path, fromlist=[""]), generator_name)(
-                    *args, keyword_args=keyword_args, **kwargs
+                    *args, **kwargs
                 )
 
         raise Exception(f"{generator_name} can not be found.")

@@ -25,7 +25,16 @@ class TestModelParser:
             verbose=verbose,
         )
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
-        assert count_model_params(model) == 181810
+        assert count_model_params(model) == 185298
+
+    def test_nn_model(self, verbose: bool = False):
+        """Test nn model."""
+        model = Model(
+            os.path.join("tests", "test_configs", "nn_model.yaml"),
+            verbose=verbose,
+        )
+        assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
+        assert count_model_params(model) == 28506
 
     def test_vgg(self, verbose: bool = False):
         """Test vgg model."""
@@ -55,6 +64,7 @@ class TestModelParser:
 
 if __name__ == "__main__":
     tester = TestModelParser()
+    tester.test_nn_model(verbose=True)
     tester.test_show_case(verbose=True)
     tester.test_gap_model(verbose=True)
     tester.test_example(verbose=True)

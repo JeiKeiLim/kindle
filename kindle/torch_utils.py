@@ -108,16 +108,16 @@ class Activation:
         Returns:
             nn.Identity if {type} is None.
         """
-        self.type = act_type
-        self.args = [1] if self.type == "Softmax" else []
+        self.name = act_type
+        self.args = [1] if self.name == "Softmax" else []
 
     def __call__(self) -> nn.Module:
-        if self.type is None:
+        if self.name is None:
             return nn.Identity()
-        if hasattr(nn, self.type):
-            return getattr(nn, self.type)(*self.args)
+        if hasattr(nn, self.name):
+            return getattr(nn, self.name)(*self.args)
 
-        return ast.literal_eval(self.type)()
+        return ast.literal_eval(self.name)()
 
 
 def count_model_params(
