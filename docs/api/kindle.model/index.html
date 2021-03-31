@@ -277,8 +277,8 @@ as well as self. Typical use includes initializing the parameters of a model
 <span class="mkapi-item-type">(Module)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Casts all floating point parameters and buffers to float datatype.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.float" title="Source for torch.nn.modules.module.Module.float">&lt;/&gt;</a></span></li>
 
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.forward">forward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(Tensor)</span>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.forward">forward</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code>, <code class="mkapi-object-signature">augment_func</code>, <code class="mkapi-object-signature">n_augment</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Union(tensor, list of tensor))</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Forward the model.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward" title="Source for kindle.model.Model.forward">&lt;/&gt;</a></span></li>
 
 <li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.forward_once">forward_once</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code>
@@ -1583,7 +1583,7 @@ strings are acceptable.</p></div>
 <div class='mkapi-object-container'>
   <div class="mkapi-object method code">
     <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlemodelmodelforward" class="mkapi-object-body method"><code class="mkapi-object-name">forward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Tensor</span></h3>
+    <h3 id="kindlemodelmodelforward" class="mkapi-object-body method"><code class="mkapi-object-name">forward</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">x</code>, <code class="mkapi-object-signature">augment_func=None</code>, <code class="mkapi-object-signature">n_augment=3</code><code class="mkapi-object-parenthesis">)</code></h3>
   </div>
   <div class="mkapi-src-link">
     <a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.forward" title="Source for kindle.model.Model.forward">&lt;/&gt;</a>
@@ -1594,6 +1594,41 @@ strings are acceptable.</p></div>
       <div class="mkapi-section-body"><p>Forward the model.</p>
 <p>For the time being, this method will only call self.forward_once. Later, we plan
 to add Test Time Augment.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">x</code>
+<span class="mkapi-item-type">(Tensor or ndarray)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">model input. When augment_func is given,
+{X} can be either torch.Tensor or np.ndarray.
+However, output of augmentation function must emit torch.Tensor.</span></li>
+
+<li><code class="mkapi-item-name">augment_func</code>
+<span class="mkapi-item-type">(Union(list of callable, callable, nonetype), optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">augmentation function.
+If list of functions is given, TTA will be applied by original input {X} and
+{X} with each augmentation functions.
+Output shape will be (len({AUGMENT_FUNC})+1, batch_size, output_size).<br>
+If single function is given, TTA will be applied by original input {X} and
+{X} {AUGMENT_FUNC} applied by {N_AUGMENT} times.
+Output shape will be ({N_AUGMENT}+1, batch_size, output_size)</span></li>
+
+<li><code class="mkapi-item-name">n_augment</code>
+<span class="mkapi-item-type">(int, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">number of augmentations to apply on TTA augmentation.
+Only applies when single augmentation function is given.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Union(tensor, list of tensor))</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>Model output.</p></div>
     </div>
   </div>
 

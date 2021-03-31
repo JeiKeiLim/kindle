@@ -121,7 +121,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -172,13 +172,53 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_save</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">output_save</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span><span id="kindle.model.Model.forward"></span><a class="mkapi-docs-link" title="kindle.model.Model.forward" href="../../kindle.model/#kindle.model.Model.forward">DOCS</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span id="kindle.model.Model.forward"></span><a class="mkapi-docs-link" title="kindle.model.Model.forward" href="../../kindle.model/#kindle.model.Model.forward">DOCS</a>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">augment_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_augment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Forward the model.</span>
 
 <span class="sd">        For the time being, this method will only call self.forward_once. Later, we plan</span>
 <span class="sd">        to add Test Time Augment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: model input. When augment_func is given,</span>
+<span class="sd">                {X} can be either torch.Tensor or np.ndarray.</span>
+<span class="sd">                However, output of augmentation function must emit torch.Tensor.</span>
+
+<span class="sd">            augment_func: augmentation function.</span>
+<span class="sd">                        If list of functions is given, TTA will be applied by original input {X} and</span>
+<span class="sd">                        {X} with each augmentation functions.</span>
+<span class="sd">                        Output shape will be (len({AUGMENT_FUNC})+1, batch_size, output_size).</span>
+
+<span class="sd">                        If single function is given, TTA will be applied by original input {X} and</span>
+<span class="sd">                        {X} {AUGMENT_FUNC} applied by {N_AUGMENT} times.</span>
+<span class="sd">                        Output shape will be ({N_AUGMENT}+1, batch_size, output_size)</span>
+
+<span class="sd">            n_augment: number of augmentations to apply on TTA augmentation.</span>
+<span class="sd">                       Only applies when single augmentation function is given.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Model output.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">augment_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">augment_func</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">funcs</span> <span class="o">=</span> <span class="n">augment_func</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">augment_func</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_augment</span><span class="p">)]</span>
+
+            <span class="n">y_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">aug_func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="n">y_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+            <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">y_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">),</span> <span class="s2">&quot;Input must be torch tensor for non-TTA&quot;</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">y</span>
 
     <span class="k">def</span> <span class="nf">forward_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span><span id="kindle.model.Model.forward_once"></span><a class="mkapi-docs-link" title="kindle.model.Model.forward_once" href="../../kindle.model/#kindle.model.Model.forward_once">DOCS</a>
         <span class="sd">&quot;&quot;&quot;Forward one time only.&quot;&quot;&quot;</span>

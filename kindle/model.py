@@ -8,7 +8,7 @@ and generates PyTorch model accordingly.
 """
 
 import os
-from typing import Any, Dict, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
@@ -59,13 +59,53 @@ class Model(nn.Module):
         self.model = self.model_parser.model
         self.output_save = self.model_parser.output_save
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self,
+        x: Union[torch.Tensor, np.ndarray],
+        augment_func: Optional[Union[List[Callable], Callable]] = None,
+        n_augment: int = 3,
+    ) -> Union[torch.Tensor, List[torch.Tensor]]:
         """Forward the model.
 
         For the time being, this method will only call self.forward_once. Later, we plan
         to add Test Time Augment.
+
+        Args:
+            x: model input. When augment_func is given,
+                {X} can be either torch.Tensor or np.ndarray.
+                However, output of augmentation function must emit torch.Tensor.
+
+            augment_func: augmentation function.
+                        If list of functions is given, TTA will be applied by original input {X} and
+                        {X} with each augmentation functions.
+                        Output shape will be (len({AUGMENT_FUNC})+1, batch_size, output_size).
+
+                        If single function is given, TTA will be applied by original input {X} and
+                        {X} {AUGMENT_FUNC} applied by {N_AUGMENT} times.
+                        Output shape will be ({N_AUGMENT}+1, batch_size, output_size)
+
+            n_augment: number of augmentations to apply on TTA augmentation.
+                       Only applies when single augmentation function is given.
+
+        Returns:
+            Model output.
         """
-        return self.forward_once(x)
+        if augment_func is not None:
+            if isinstance(augment_func, list):
+                funcs = augment_func
+            else:
+                funcs = [augment_func for _ in range(n_augment)]
+
+            y_list = [self.forward_once(aug_func(x)) for aug_func in funcs]
+            if isinstance(x, torch.Tensor):
+                y_list.append(self.forward_once(x))
+
+            y = torch.stack(y_list)
+        else:
+            assert isinstance(x, torch.Tensor), "Input must be torch tensor for non-TTA"
+            y = self.forward_once(x)
+
+        return y
 
     def forward_once(self, x: torch.Tensor) -> torch.Tensor:
         """Forward one time only."""
