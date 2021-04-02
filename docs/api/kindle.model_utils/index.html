@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>kindle.model_utils &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../tutorial/">Tutorial</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../modules/">Modules</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2 current"><button class="section nav-item">kindle</button>
+<ul class="subnav">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.model_utils</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodel_utilssplit_str_line">split_str_line</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodel_utilsmodelprofiler">ModelProfiler</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodel_utilsmodelinfologger">ModelInfoLogger</a></li>
+</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.nn/">kindle.generator.nn</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.upsample/">kindle.generator.upsample</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.identity/">kindle.generator.identity</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+    <div class="previous"><a href="../kindle/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.model/">Next &raquo;</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>API &raquo; </li><li>kindle</li>
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node" id="kindle.model_utils">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object module plain top">
+    <div class="mkapi-object-kind module top">module</div>
+    <h1 id="kindlemodel_utils" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle/#kindle">kindle</a>.</span><span class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils">model_utils</a></span></h1>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils" title="Source for kindle.model_utils">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Utilities for Kindle Model.</p>
+<ul>
+<li>Author: Jongkuk Lim</li>
+<li>Contact: lim.jeikei@gmail.com</li>
+</ul></div>
+    </div>
+  <div class="mkapi-section classes">
+      <div class="mkapi-section-name classes">
+          <span class="mkapi-section-name-body classes">Classes</span> 
+        </div>
+      <div class="mkapi-section-body classes"><ul class="mkapi-items">
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.model_utils.ModelProfiler">ModelProfiler</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Model time consumption profiler.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler" title="Source for kindle.model_utils.ModelProfiler">&lt;/&gt;</a></span></li>
+
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.model_utils.ModelInfoLogger">ModelInfoLogger</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Kindle model information logger.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger" title="Source for kindle.model_utils.ModelInfoLogger">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section functions">
+      <div class="mkapi-section-name functions">
+          <span class="mkapi-section-name-body functions">Functions</span> 
+        </div>
+      <div class="mkapi-section-body functions"><ul class="mkapi-items">
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.model_utils.split_str_line">split_str_line</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code>, <code class="mkapi-object-signature">line_limit</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(list of str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Split string with a maximum length of the line.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.split_str_line" title="Source for kindle.model_utils.split_str_line">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.model_utils.split_str_line">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object function code top">
+    <div class="mkapi-object-kind function top">function</div>
+    <h2 id="kindlemodel_utilssplit_str_line" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="../kindle.model/#kindle.model_utils">kindle.model_utils</a>.</code><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.split_str_line">split_str_line</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code>, <code class="mkapi-object-signature">line_limit=30</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.split_str_line" title="Source for kindle.model_utils.split_str_line">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Split string with a maximum length of the line.</p>
+<p>Ex) split_str_line("hello world", line_limit=5)
+    will return ["hello", " worl", "d"]</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">msg</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">message to split.</span></li>
+
+<li><code class="mkapi-item-name">line_limit</code>
+<span class="mkapi-item-type">(int, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">limit length of the line.</span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section returns">
+      <div class="mkapi-section-name returns">
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(list of str)</span>
+        </div>
+      <div class="mkapi-section-body returns"><p>list of the split message.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.model_utils.ModelProfiler">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object class code top">
+    <div class="mkapi-object-kind class top">class</div>
+    <h2 id="kindlemodel_utilsmodelprofiler" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="../kindle.model/#kindle.model_utils">kindle.model_utils</a>.</code><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.ModelProfiler">ModelProfiler</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code>, <code class="mkapi-object-signature">n_run=100</code>, <code class="mkapi-object-signature">input_size=(128, 128)</code>, <code class="mkapi-object-signature">batch_size=1</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler" title="Source for kindle.model_utils.ModelProfiler">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Model time consumption profiler.</p></div>
+    </div>
+  <div class="mkapi-section attributes">
+      <div class="mkapi-section-name attributes">
+          <span class="mkapi-section-name-body attributes">Attributes</span> 
+        </div>
+      <div class="mkapi-section-body attributes"><ul class="mkapi-items">
+
+<li class="readonly-property"><code class="mkapi-item-name">mean_run_time</code>
+<span class="mkapi-item-type">(float)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Mean time of the inference.<span id="kindle.model_utils.ModelProfiler.mean_run_time"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.mean_run_time" title="Source for kindle.model_utils.ModelProfiler.mean_run_time">&lt;/&gt;</a></span></li>
+
+
+
+
+
+<li class="readonly-property"><code class="mkapi-item-name">result_array</code>
+<span class="mkapi-item-type">(ndarray)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Profiling time result array.<span id="kindle.model_utils.ModelProfiler.result_array"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.result_array" title="Source for kindle.model_utils.ModelProfiler.result_array">&lt;/&gt;</a></span></li>
+
+<li class="readonly-property"><code class="mkapi-item-name">running_ratio</code>
+<span class="mkapi-item-type">(ndarray)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Running time consumption ratio of the modules.<span id="kindle.model_utils.ModelProfiler.running_ratio"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.running_ratio" title="Source for kindle.model_utils.ModelProfiler.running_ratio">&lt;/&gt;</a></span></li>
+
+<li class="readonly-property"><code class="mkapi-item-name">sorted_index</code>
+<span class="mkapi-item-type">(ndarray)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Sorted indices by time consumption of the modules.<br>
+Ex) First index element is the slowest module index.<span id="kindle.model_utils.ModelProfiler.sorted_index"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.sorted_index" title="Source for kindle.model_utils.ModelProfiler.sorted_index">&lt;/&gt;</a></span></li>
+
+<li class="readonly-property"><code class="mkapi-item-name">std_run_time</code>
+<span class="mkapi-item-type">(float)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Standard deviation time of the inference.<span id="kindle.model_utils.ModelProfiler.std_run_time"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.std_run_time" title="Source for kindle.model_utils.ModelProfiler.std_run_time">&lt;/&gt;</a></span></li>
+
+<li class="readonly-property"><code class="mkapi-item-name">total_run_time</code>
+<span class="mkapi-item-type">(float)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Total running time.<span id="kindle.model_utils.ModelProfiler.total_run_time"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.total_run_time" title="Source for kindle.model_utils.ModelProfiler.total_run_time">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section methods">
+      <div class="mkapi-section-name methods">
+          <span class="mkapi-section-name-body methods">Methods</span> 
+        </div>
+      <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model_utils.ModelProfiler.print_result">print_result</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">sort_by_rank</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Print profiling result.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.print_result" title="Source for kindle.model_utils.ModelProfiler.print_result">&lt;/&gt;</a></span></li>
+
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model_utils.ModelProfiler.run">run</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">verbose</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Run profiling.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.run" title="Source for kindle.model_utils.ModelProfiler.run">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+  <div class="mkapi-members">
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model_utils.ModelProfiler.run">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodel_utilsmodelprofilerrun" class="mkapi-object-body method"><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.ModelProfiler.run">run</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">verbose=True</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.run" title="Source for kindle.model_utils.ModelProfiler.run">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Run profiling.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">verbose</code>
+<span class="mkapi-item-type">(bool, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">print profiling result at the end.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model_utils.ModelProfiler.print_result">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodel_utilsmodelprofilerprint_result" class="mkapi-object-body method"><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.ModelProfiler.print_result">print_result</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">sort_by_rank=False</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelProfiler.print_result" title="Source for kindle.model_utils.ModelProfiler.print_result">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Print profiling result.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">sort_by_rank</code>
+<span class="mkapi-item-type">(bool, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">print sorted by time consumption rank.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.model_utils.ModelInfoLogger">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object class code top">
+    <div class="mkapi-object-kind class top">class</div>
+    <h2 id="kindlemodel_utilsmodelinfologger" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="../kindle.model/#kindle.model_utils">kindle.model_utils</a>.</code><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.ModelInfoLogger">ModelInfoLogger</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">log_shapes=False</code><code class="mkapi-object-parenthesis">)</code></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger" title="Source for kindle.model_utils.ModelInfoLogger">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Kindle model information logger.</p>
+<p>This class is used once only on parsing the model.</p></div>
+    </div>
+  <div class="mkapi-section attributes">
+      <div class="mkapi-section-name attributes">
+          <span class="mkapi-section-name-body attributes">Attributes</span> 
+        </div>
+      <div class="mkapi-section-body attributes"><ul class="mkapi-items">
+<li class="readonly-property"><code class="mkapi-item-name">head</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Head message that contains column names.<span id="kindle.model_utils.ModelInfoLogger.head"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger.head" title="Source for kindle.model_utils.ModelInfoLogger.head">&lt;/&gt;</a></span></li>
+
+<li class="readonly-property"><code class="mkapi-item-name">info</code>
+<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Model information containing head and messages.<span id="kindle.model_utils.ModelInfoLogger.info"></span><a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger.info" title="Source for kindle.model_utils.ModelInfoLogger.info">&lt;/&gt;</a></span></li>
+
+
+
+
+</ul></div>
+    </div>
+  <div class="mkapi-section methods">
+      <div class="mkapi-section-name methods">
+          <span class="mkapi-section-name-body methods">Methods</span> 
+        </div>
+      <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.model_utils.ModelInfoLogger.add">add</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">info</code>, <code class="mkapi-object-signature">module</code>, <code class="mkapi-object-signature">module_generator</code>, <code class="mkapi-object-signature">args</code>, <code class="mkapi-object-signature">kwargs</code>, <code class="mkapi-object-signature">in_size</code>, <code class="mkapi-object-signature">out_size</code><code class="mkapi-object-parenthesis">)</code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Add module logging information.<a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger.add" title="Source for kindle.model_utils.ModelInfoLogger.add">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+  <div class="mkapi-members">
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.model_utils.ModelInfoLogger.add">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlemodel_utilsmodelinfologgeradd" class="mkapi-object-body method"><code class="mkapi-object-name"><a href="../kindle.model/#kindle.model_utils.ModelInfoLogger.add">add</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">info</code>, <code class="mkapi-object-signature">module</code>, <code class="mkapi-object-signature">module_generator</code>, <code class="mkapi-object-signature">args</code>, <code class="mkapi-object-signature">kwargs=None</code>, <code class="mkapi-object-signature">in_size=None</code>, <code class="mkapi-object-signature">out_size=None</code><code class="mkapi-object-parenthesis">)</code></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.model_utils/#kindle.model_utils.ModelInfoLogger.add" title="Source for kindle.model_utils.ModelInfoLogger.add">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Add module logging information.</p></div>
+    </div>
+  <div class="mkapi-section parameters">
+      <div class="mkapi-section-name parameters">
+          <span class="mkapi-section-name-body parameters">Parameters</span> 
+        </div>
+      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
+<li><code class="mkapi-item-name">info</code>
+<span class="mkapi-item-type">(int, int, int)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">(i, idx, repeat) Current parsing information.</span></li>
+
+<li><code class="mkapi-item-name">module</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Parsed module.</span></li>
+
+<li><code class="mkapi-item-name">module_generator</code>
+<span class="mkapi-item-type">(<a href="../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract">GeneratorAbstract</a>)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module generator used to generate module.</span></li>
+
+<li><code class="mkapi-item-name">args</code>
+<span class="mkapi-item-type">(list of any)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Arguments of the module.</span></li>
+
+<li><code class="mkapi-item-name">kwargs</code>
+<span class="mkapi-item-type">(dict(str: any), optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Keyword arguments of the module.</span></li>
+
+<li><code class="mkapi-item-name">in_size</code>
+<span class="mkapi-item-type">(ndarray, list, or NoneType, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Input size of the module.
+Only required when {self.input_size} is not None.</span></li>
+
+<li><code class="mkapi-item-name">out_size</code>
+<span class="mkapi-item-type">(list of int, optional)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Output size of the module
+Only required when {self.input_size} is not None.</span></li>
+
+
+</ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+  </div>
+
+</div></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../kindle/" title="kindle"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.model/" title="kindle.model"><span>Next</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/mkapi.js"></script>
+    <script src="../../search/main.js"></script>
+</body>
+
+</html>
