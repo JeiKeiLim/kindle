@@ -16,7 +16,7 @@ import yaml
 
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.flatten import FlattenGenerator
-from kindle.model_utils import ModelInfoLogger, ModelProfiler
+from kindle.utils.model_utils import ModelInfoLogger, ModelProfiler
 
 
 class Model(nn.Module):

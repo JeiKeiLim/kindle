@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 import numpy as np
 
 from kindle.generator.base_generator import GeneratorAbstract
-from kindle.modules import Concat
+from kindle.modules.concat import Concat
 
 
 class ConcatGenerator(GeneratorAbstract):

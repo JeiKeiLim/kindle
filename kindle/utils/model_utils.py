@@ -3,6 +3,8 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
+from __future__ import annotations
+
 import os
 import time
 from typing import (TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple,
@@ -13,10 +15,8 @@ import torch
 import torch.nn as nn
 from tqdm import tqdm
 
-from kindle.generator import GeneratorAbstract
-
 if TYPE_CHECKING:
-    from kindle import Model
+    from kindle.generator.base_generator import GeneratorAbstract
 
 
 def split_str_line(msg: str, line_limit: int = 30) -> List[str]:
@@ -45,7 +45,7 @@ class ModelProfiler:
 
     def __init__(
         self,
-        model: "Model",
+        model: nn.Module,
         n_run: int = 100,
         input_size: Tuple[int, int] = (128, 128),
         batch_size: int = 1,
@@ -66,7 +66,7 @@ class ModelProfiler:
             self.model.model_parser.cfg["input_channel"],  # type: ignore
         )
 
-        if "input_size" in self.model.model_parser.cfg:
+        if "input_size" in self.model.model_parser.cfg:  # type: ignore
             self.input_size += tuple(self.model.model_parser.cfg["input_size"])  # type: ignore
         else:
             self.input_size += input_size
@@ -136,7 +136,7 @@ class ModelProfiler:
 
         for run_idx in tqdm(range(self.n_run), desc="Profiling ..."):
             self.n_running = run_idx
-            self.model.forward_once(model_input, profile_func=self._profile_func)
+            self.model.forward_once(model_input, profile_func=self._profile_func)  # type: ignore
 
         if verbose:
             self.print_result()
@@ -272,7 +272,7 @@ class ModelInfoLogger:
         self,
         info: Tuple[int, int, int],
         module: nn.Module,
-        module_generator: GeneratorAbstract,
+        module_generator: "GeneratorAbstract",
         args: List[Any],
         kwargs: Optional[Dict[str, Any]] = None,
         in_size: Optional[Union[np.ndarray, List]] = None,

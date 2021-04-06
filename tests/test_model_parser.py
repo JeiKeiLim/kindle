@@ -9,7 +9,7 @@ import os
 import torch
 
 from kindle.model import Model
-from kindle.torch_utils import count_model_params
+from kindle.utils.torch_utils import count_model_params
 
 
 class TestModelParser:

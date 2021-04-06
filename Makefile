@@ -4,6 +4,9 @@ format:
 	docformatter -i -r . --wrap-summaries 88 --wrap-descriptions 88
 
 lint:
+ifeq ($(clean), true)
+	rm -r .mypy_cache .pytest_cache
+endif
 	env PYTHONPATH=. pytest --pylint --flake8 --mypy --ignore tests
 
 test:

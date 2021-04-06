@@ -10,7 +10,7 @@ import torch
 from torch import nn
 
 from kindle.generator.base_generator import GeneratorAbstract
-from kindle.modules import GlobalAvgPool
+from kindle.modules.poolings import GlobalAvgPool
 
 
 class MaxPoolGenerator(GeneratorAbstract):

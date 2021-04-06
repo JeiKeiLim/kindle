@@ -9,7 +9,8 @@ from typing import Union
 import torch
 from torch import nn
 
-from kindle.torch_utils import Activation, autopad
+from kindle.modules.activation import Activation
+from kindle.utils.torch_utils import autopad
 
 
 class Conv(nn.Module):
