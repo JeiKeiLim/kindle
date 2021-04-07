@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.model_utils &mdash; Kindle</title>
+    <title>kindle.utils.model_utils &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -51,10 +51,14 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../../kindle/">kindle</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../kindle.model_utils/">kindle.model_utils</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.model/">kindle.model</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.trainer/">kindle.trainer</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.utils</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
@@ -79,6 +83,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.activation/">kindle.modules.activation</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.poolings/">kindle.modules.poolings</a></li>
@@ -107,8 +112,8 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.</span><span class="mkapi-object-name">model_utils</span>
-<span id="kindle.model_utils"></span><a class="mkapi-docs-link" href="../../kindle.model_utils">DOCS</a>
+<span class="mkapi-object-prefix">kindle.utils.</span><span class="mkapi-object-name">model_utils</span>
+<span id="kindle.utils.model_utils"></span><a class="mkapi-docs-link" href="../../kindle.utils.model_utils">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
@@ -117,6 +122,8 @@
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span><span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span>
@@ -127,13 +134,11 @@
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span> <span class="nn">kindle.generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
-
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">kindle.generator.base_generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
 
 
-<span class="k">def</span> <span class="nf">split_str_line</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span><span id="kindle.model_utils.split_str_line"></span><a class="mkapi-docs-link" title="kindle.model_utils.split_str_line" href="../../kindle.model_utils/#kindle.model_utils.split_str_line">DOCS</a>
+<span class="k">def</span> <span class="nf">split_str_line</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span><span id="kindle.utils.model_utils.split_str_line"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.split_str_line" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.split_str_line">DOCS</a>
     <span class="sd">&quot;&quot;&quot;Split string with a maximum length of the line.</span>
 
 <span class="sd">    Ex) split_str_line(&quot;hello world&quot;, line_limit=5)</span>
@@ -154,12 +159,12 @@
     <span class="k">return</span> <span class="n">msg_list</span>
 
 
-<span class="k">class</span> <span class="nc">ModelProfiler</span><span class="p">:</span><span id="kindle.model_utils.ModelProfiler"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler">DOCS</a>
+<span class="k">class</span> <span class="nc">ModelProfiler</span><span class="p">:</span><span id="kindle.utils.model_utils.ModelProfiler"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler">DOCS</a>
     <span class="sd">&quot;&quot;&quot;Model time consumption profiler.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">model</span><span class="p">:</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
         <span class="n">n_run</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
         <span class="n">input_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
         <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -180,7 +185,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;input_channel&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;input_size&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">cfg</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;input_size&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">cfg</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model_parser</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;input_size&quot;</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+=</span> <span class="n">input_size</span>
@@ -191,27 +196,27 @@
         <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_running</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.result_array"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.result_array" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.result_array">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.result_array"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.result_array" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.result_array">DOCS</a>
     <span class="k">def</span> <span class="nf">result_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Profiling time result array.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile_result</span><span class="p">])</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.mean_run_time"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.mean_run_time" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.mean_run_time">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.mean_run_time"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.mean_run_time" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.mean_run_time">DOCS</a>
     <span class="k">def</span> <span class="nf">mean_run_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Mean time of the inference.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_array</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.std_run_time"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.std_run_time" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.std_run_time">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.std_run_time"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.std_run_time" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.std_run_time">DOCS</a>
     <span class="k">def</span> <span class="nf">std_run_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Standard deviation time of the inference.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_array</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.total_run_time"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.total_run_time" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.total_run_time">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.total_run_time"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.total_run_time" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.total_run_time">DOCS</a>
     <span class="k">def</span> <span class="nf">total_run_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Total running time.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_array</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.sorted_index"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.sorted_index" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.sorted_index">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.sorted_index"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.sorted_index" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.sorted_index">DOCS</a>
     <span class="k">def</span> <span class="nf">sorted_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Sorted indices by time consumption of the modules.</span>
 
@@ -219,7 +224,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_array</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelProfiler.running_ratio"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.running_ratio" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.running_ratio">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelProfiler.running_ratio"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.running_ratio" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.running_ratio">DOCS</a>
     <span class="k">def</span> <span class="nf">running_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Running time consumption ratio of the modules.&quot;&quot;&quot;</span>
         <span class="n">result_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_array</span>
@@ -232,7 +237,7 @@
 
         <span class="k">return</span> <span class="n">result_out</span>
 
-    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span><span id="kindle.model_utils.ModelProfiler.run"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.run" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.run">DOCS</a>
+    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span><span id="kindle.utils.model_utils.ModelProfiler.run"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.run" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.run">DOCS</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Run profiling.</span>
 
@@ -250,12 +255,12 @@
 
         <span class="k">for</span> <span class="n">run_idx</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_run</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Profiling ...&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_running</span> <span class="o">=</span> <span class="n">run_idx</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">profile_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_profile_func</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward_once</span><span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">profile_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_profile_func</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_result</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">print_result</span><span class="p">(</span>  <span class="c1"># pylint: disable=too-many-locals</span><span id="kindle.model_utils.ModelProfiler.print_result"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelProfiler.print_result" href="../../kindle.model_utils/#kindle.model_utils.ModelProfiler.print_result">DOCS</a>
+    <span class="k">def</span> <span class="nf">print_result</span><span class="p">(</span>  <span class="c1"># pylint: disable=too-many-locals</span><span id="kindle.utils.model_utils.ModelProfiler.print_result"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.print_result" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.print_result">DOCS</a>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sort_by_rank</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Print profiling result.</span>
@@ -352,7 +357,7 @@
         <span class="k">return</span> <span class="n">y</span>
 
 
-<span class="k">class</span> <span class="nc">ModelInfoLogger</span><span class="p">:</span><span id="kindle.model_utils.ModelInfoLogger"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelInfoLogger" href="../../kindle.model_utils/#kindle.model_utils.ModelInfoLogger">DOCS</a>
+<span class="k">class</span> <span class="nc">ModelInfoLogger</span><span class="p">:</span><span id="kindle.utils.model_utils.ModelInfoLogger"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelInfoLogger" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelInfoLogger">DOCS</a>
     <span class="sd">&quot;&quot;&quot;Kindle model information logger.</span>
 
 <span class="sd">    This class is used once only on parsing the model.</span>
@@ -363,7 +368,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">log_shapes</span> <span class="o">=</span> <span class="n">log_shapes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_log_msg</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelInfoLogger.head"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelInfoLogger.head" href="../../kindle.model_utils/#kindle.model_utils.ModelInfoLogger.head">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelInfoLogger.head"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelInfoLogger.head" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelInfoLogger.head">DOCS</a>
     <span class="k">def</span> <span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Head message that contains column names.&quot;&quot;&quot;</span>
         <span class="n">log</span> <span class="o">=</span> <span class="p">(</span>
@@ -377,16 +382,16 @@
 
         <span class="k">return</span> <span class="n">log</span>
 
-    <span class="nd">@property</span><span id="kindle.model_utils.ModelInfoLogger.info"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelInfoLogger.info" href="../../kindle.model_utils/#kindle.model_utils.ModelInfoLogger.info">DOCS</a>
+    <span class="nd">@property</span><span id="kindle.utils.model_utils.ModelInfoLogger.info"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelInfoLogger.info" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelInfoLogger.info">DOCS</a>
     <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Model information containing head and messages.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_log_msg</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span id="kindle.model_utils.ModelInfoLogger.add"></span><a class="mkapi-docs-link" title="kindle.model_utils.ModelInfoLogger.add" href="../../kindle.model_utils/#kindle.model_utils.ModelInfoLogger.add">DOCS</a>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span id="kindle.utils.model_utils.ModelInfoLogger.add"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelInfoLogger.add" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelInfoLogger.add">DOCS</a>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">info</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
         <span class="n">module</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
-        <span class="n">module_generator</span><span class="p">:</span> <span class="n">GeneratorAbstract</span><span class="p">,</span>
+        <span class="n">module_generator</span><span class="p">:</span> <span class="s2">&quot;GeneratorAbstract&quot;</span><span class="p">,</span>
         <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
         <span class="n">kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">in_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>kindle.generator.upsample &mdash; Kindle</title>
+    <title>kindle.modules.activation &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -60,18 +60,15 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
 </ul></li>
-    <li class="toctree-l2 current"><button class="section nav-item">kindle.generator</button>
-<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.nn/">kindle.generator.nn</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.linear/">kindle.generator.linear</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.upsample</a>
-<ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorupsampleupsamplegenerator">UpSampleGenerator</a></li>
-</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.upsample/">kindle.generator.upsample</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
@@ -79,14 +76,17 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.identity/">kindle.generator.identity</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.poolings/">kindle.generator.poolings</a></li>
 </ul></li>
-    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
-<ul class="subnav hide">
+    <li class="toctree-l2 current"><button class="section nav-item">kindle.modules</button>
+<ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.activation/">kindle.modules.activation</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.modules.activation</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesactivationactivation">Activation</a></li>
+</ul></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
@@ -98,8 +98,8 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.generator.linear/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.generator.base_generator/">Next &raquo;</a></div>
+    <div class="previous"><a href="../kindle.modules.linear/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.modules.bottleneck/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -111,22 +111,22 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>API &raquo; </li><li>kindle.generator</li>
+    <li>API &raquo; </li><li>kindle.modules</li>
 </ul>
 </nav>
-                <div id="content"><div class="mkapi-node" id="kindle.generator.upsample">
+                <div id="content"><div class="mkapi-node" id="kindle.modules.activation">
 <div class='mkapi-object-container'>
   <div class="mkapi-object module plain top">
     <div class="mkapi-object-kind module top">module</div>
-    <h1 id="kindlegeneratorupsample" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">upsample</span></h1>
+    <h1 id="kindlemodulesactivation" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.modules/#kindle.modules">kindle.modules</a>.</span><span class="mkapi-object-name">activation</span></h1>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.upsample/#kindle.generator.upsample" title="Source for kindle.generator.upsample">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.modules.activation/#kindle.modules.activation" title="Source for kindle.modules.activation">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>UpSample module generator.</p>
+      <div class="mkapi-section-body"><p>Module Description.</p>
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
@@ -137,9 +137,9 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.upsample.UpSampleGenerator">UpSampleGenerator</a></code>
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.modules.activation.Activation">Activation</a></code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">UpSample module generator.<a class="mkapi-src-link" href="../source/kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator" title="Source for kindle.generator.upsample.UpSampleGenerator">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Convert string activation name to the activation class.<a class="mkapi-src-link" href="../source/kindle.modules.activation/#kindle.modules.activation.Activation" title="Source for kindle.modules.activation.Activation">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -148,88 +148,27 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.generator.upsample.UpSampleGenerator">
+<div class="mkapi-node" id="kindle.modules.activation.Activation">
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlegeneratorupsampleupsamplegenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.upsample">kindle.generator.upsample</a>.</code><code class="mkapi-object-name">UpSampleGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlemodulesactivationactivation" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.modules.activation">kindle.modules.activation</a>.</code><code class="mkapi-object-name">Activation</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">act_type</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator" title="Source for kindle.generator.upsample.UpSampleGenerator">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section bases">
-      <div class="mkapi-section-name bases">
-          <span class="mkapi-section-name-body bases">Bases</span> 
-        </div>
-      <div class="mkapi-section-body bases">
-<span class="mkapi-base"><a href="../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract">kindle.generator.base_generator.GeneratorAbstract</a></span>
-</div>
-    </div>
-  <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>UpSample module generator.</p></div>
-    </div>
-  <div class="mkapi-section attributes">
-      <div class="mkapi-section-name attributes">
-          <span class="mkapi-section-name-body attributes">Attributes</span> 
-        </div>
-      <div class="mkapi-section-body attributes"><ul class="mkapi-items">
-
-
-
-
-<li class="readonly-property"><code class="mkapi-item-name">name</code>
-<span class="mkapi-item-type">(str)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
-
-
-
-</ul></div>
-    </div>
-  <div class="mkapi-section methods">
-      <div class="mkapi-section-name methods">
-          <span class="mkapi-section-name-body methods">Methods</span> 
-        </div>
-      <div class="mkapi-section-body methods"><ul class="mkapi-items">
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.upsample.UpSampleGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(Module)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator.__call__" title="Source for kindle.generator.upsample.UpSampleGenerator.__call__">&lt;/&gt;</a></span></li>
-
-
-</ul></div>
-    </div>
-  </div>
-
-  <div class="mkapi-members">
-  
-    <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.generator.upsample.UpSampleGenerator.__call__">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object method code">
-    <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlegeneratorupsampleupsamplegeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Module</span></h3>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.upsample/#kindle.generator.upsample.UpSampleGenerator.__call__" title="Source for kindle.generator.upsample.UpSampleGenerator.__call__">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.modules.activation/#kindle.modules.activation.Activation" title="Source for kindle.modules.activation.Activation">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Returns nn.Module component.</p></div>
+      <div class="mkapi-section-body"><p>Convert string activation name to the activation class.</p></div>
     </div>
-  </div>
-
-</div>
-    </div>
-  
   </div>
 
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.generator.linear/" title="kindle.generator.linear"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.generator.base_generator/" title="kindle.generator.base_generator"><span>Next</span></a></div>
+        <div class="previous"><a href="../kindle.modules.linear/" title="kindle.modules.linear"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.modules.bottleneck/" title="kindle.modules.bottleneck"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

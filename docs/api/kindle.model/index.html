@@ -51,14 +51,18 @@
     <li class="toctree-l2 current"><button class="section nav-item">kindle</button>
 <ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.model_utils/">kindle.model_utils</a></li>
     <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.model</a>
 <ul class="subnav">
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodelmodel">Model</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodelmodelparser">ModelParser</a></li>
 </ul></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.utils</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
@@ -83,6 +87,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.activation/">kindle.modules.activation</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
@@ -94,7 +99,7 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.model_utils/">&laquo; Previous</a></div>
+    <div class="previous"><a href="../kindle/">&laquo; Previous</a></div>
     <div class="next"><a href="../kindle.trainer/">Next &raquo;</a></div>
 </div>
         </aside>
@@ -271,7 +276,7 @@ name of the parameter as well as the parameter itself.<a class="mkapi-src-link" 
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns an iterator over module parameters.<a class="mkapi-src-link" href="../source/torch.nn.modules.module/#torch.nn.modules.module.Module.parameters" title="Source for torch.nn.modules.module.Module.parameters">&lt;/&gt;</a></span></li>
 
 <li class="method"><code class="mkapi-item-name"><a href="#kindle.model.Model.profile">profile</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">verbose</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(<a href="./#kindle.model_utils.ModelProfiler">ModelProfiler</a>)</span>
+<span class="mkapi-item-type">(<a href="../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler">ModelProfiler</a>)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Run model profiler.<a class="mkapi-src-link" href="../source/kindle.model/#kindle.model.Model.profile" title="Source for kindle.model.Model.profile">&lt;/&gt;</a></span></li>
 
 <li class="method"><code class="mkapi-item-name"><a href="#torch.nn.modules.module.Module.register_backward_hook">register_backward_hook</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">hook</code><code class="mkapi-object-parenthesis">)</code>
@@ -1615,7 +1620,7 @@ Only applies when single augmentation function is given.</span></li>
     </div>
   <div class="mkapi-section returns">
       <div class="mkapi-section-name returns">
-          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(<a href="./#kindle.model_utils.ModelProfiler">ModelProfiler</a>)</span>
+          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(<a href="../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler">ModelProfiler</a>)</span>
         </div>
       <div class="mkapi-section-body returns"><p>ModelProfiler instance which contains profiling result.</p></div>
     </div>
@@ -1703,7 +1708,7 @@ Only applies when single augmentation function is given.</span></li>
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.model_utils/" title="kindle.model_utils"><span>Previous</span></a></div>
+        <div class="previous"><a href="../kindle/" title="kindle"><span>Previous</span></a></div>
         <div class="next"><a href="../kindle.trainer/" title="kindle.trainer"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
