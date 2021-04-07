@@ -12,7 +12,8 @@ from torch import nn
 
 from kindle import Model
 from kindle.generator import GeneratorAbstract
-from kindle.torch_utils import Activation, autopad, count_model_params
+from kindle.modules import Activation
+from kindle.utils.torch_utils import autopad, count_model_params
 
 
 class MyConv(nn.Module):

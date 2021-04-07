@@ -1,5 +1,6 @@
 """PyTorch Modules."""
 
+from kindle.modules.activation import Activation
 from kindle.modules.add import Add
 from kindle.modules.bottleneck import Bottleneck
 from kindle.modules.concat import Concat
@@ -16,4 +17,5 @@ __all__ = [
     "DWConv",
     "Linear",
     "GlobalAvgPool",
+    "Activation",
 ]

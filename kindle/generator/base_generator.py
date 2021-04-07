@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 from torch import nn
 
-from kindle.torch_utils import make_divisible
+from kindle.utils.torch_utils import make_divisible
 
 
 class GeneratorAbstract(ABC):

@@ -58,7 +58,12 @@
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle/">kindle</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.model/">kindle.model</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.trainer/">kindle.trainer</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.torch_utils/">kindle.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.utils</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
@@ -83,6 +88,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.activation/">kindle.modules.activation</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.poolings/">kindle.modules.poolings</a></li>
@@ -292,7 +298,7 @@ Model Summary: <span class="m">36</span> layers, <span class="m">206</span>,902 
     <span class="p p-Indicator">]</span>
 </code></pre></div></p>
 <p><strong>2. Write</strong> <strong><em>PyTorch</em></strong> <strong>module and</strong> <strong><em>ModuleGenerator</em></strong></p>
-<p>tests/test_custom_module.py
+<p>tests/test_custom_module.py</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -300,17 +306,18 @@ Model Summary: <span class="m">36</span> layers, <span class="m">206</span>,902 
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
 <span class="kn">from</span> <span class="nn">kindle.generator</span> <span class="kn">import</span> <span class="n">GeneratorAbstract</span>
-<span class="kn">from</span> <span class="nn">kindle.torch_utils</span> <span class="kn">import</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">autopad</span>
+<span class="kn">from</span> <span class="nn">kindle.utils.torch_utils</span> <span class="kn">import</span> <span class="n">autopad</span>
+<span class="kn">from</span> <span class="nn">kindle.modules.activation</span> <span class="kn">import</span> <span class="n">Activation</span>
 
 
 <span class="k">class</span> <span class="nc">MyConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">activation</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ReLU&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">activation</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ReLU&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">convs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -366,7 +373,7 @@ Model Summary: <span class="m">36</span> layers, <span class="m">206</span>,902 
             <span class="n">module</span> <span class="o">=</span> <span class="n">MyConv</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <p><strong>3. Build a model</strong>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
 

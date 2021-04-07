@@ -4,13 +4,11 @@
 - Contact: lim.jeikei@gmail.com
 """
 
-import ast
 import math
 from typing import List, Tuple, Union
 
 import numpy as np
 import torch
-from torch import nn
 from torch.utils.data.sampler import SubsetRandomSampler
 
 
@@ -94,30 +92,6 @@ def autopad(
         kernel_size = [kernel_size]
 
     return padding or [x // 2 for x in kernel_size]
-
-
-class Activation:
-    """Convert string activation name to the activation class."""
-
-    def __init__(self, act_type: Union[str, None]) -> None:
-        """Convert string activation name to the activation class.
-
-        Args:
-            act_type: Activation name.
-
-        Returns:
-            nn.Identity if {type} is None.
-        """
-        self.name = act_type
-        self.args = [1] if self.name == "Softmax" else []
-
-    def __call__(self) -> nn.Module:
-        if self.name is None:
-            return nn.Identity()
-        if hasattr(nn, self.name):
-            return getattr(nn, self.name)(*self.args)
-
-        return ast.literal_eval(self.name)()
 
 
 def count_model_params(

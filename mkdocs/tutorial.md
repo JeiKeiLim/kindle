@@ -182,6 +182,7 @@ backbone:
 **2. Write** ***PyTorch*** **module and** ***ModuleGenerator***
 
 tests/test_custom_module.py
+
 ```python
 from typing import List, Union, Dict, Any
 
@@ -190,17 +191,18 @@ import torch
 from torch import nn
 
 from kindle.generator import GeneratorAbstract
-from kindle.torch_utils import Activation, autopad
+from kindle.utils.torch_utils import autopad
+from kindle.modules.activation import Activation
 
 
 class MyConv(nn.Module):
     def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        kernel_size: int,
-        n: int,
-        activation: Union[str, None] = "ReLU",
+            self,
+            in_channels: int,
+            out_channels: int,
+            kernel_size: int,
+            n: int,
+            activation: Union[str, None] = "ReLU",
     ) -> None:
         super().__init__()
         convs = []
@@ -236,7 +238,7 @@ class MyConvGenerator(GeneratorAbstract):
         if isinstance(self.from_idx, list):
             raise Exception("from_idx can not be a list.")
         return self.in_channels[self.from_idx]
-    
+
     @property
     def kwargs(self) -> Dict[str, Any]:
         args = [self.in_channel, self.out_channel, *self.args[1:]]

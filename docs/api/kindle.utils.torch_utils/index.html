@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>kindle.torch_utils &mdash; Kindle</title>
+    <title>kindle.utils.torch_utils &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -48,19 +48,23 @@
                     <li class="toctree-l1"><a class="nav-item" href="../../modules/">Modules</a></li>
                     <li class="toctree-l1"><button class="section nav-item">API</button>
 <ul class="subnav">
-    <li class="toctree-l2 current"><button class="section nav-item">kindle</button>
-<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.model/">kindle.model</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.torch_utils</a>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">kindle.utils</button>
 <ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilssplit_dataset_index">split_dataset_index</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilsmodel_info">model_info</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilsmake_divisible">make_divisible</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilsautopad">autopad</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilsactivation">Activation</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindletorch_utilscount_model_params">count_model_params</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.utils.torch_utils</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilstorch_utilssplit_dataset_index">split_dataset_index</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilstorch_utilsmodel_info">model_info</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilstorch_utilsmake_divisible">make_divisible</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilstorch_utilsautopad">autopad</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilstorch_utilscount_model_params">count_model_params</a></li>
 </ul></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
@@ -86,6 +90,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.activation/">kindle.modules.activation</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.conv/">kindle.modules.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.poolings/">kindle.modules.poolings</a></li>
@@ -97,7 +102,7 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.trainer/">&laquo; Previous</a></div>
+    <div class="previous"><a href="../kindle.utils.model_utils/">&laquo; Previous</a></div>
     <div class="next"><a href="../kindle.generator/">Next &raquo;</a></div>
 </div>
         </aside>
@@ -110,17 +115,17 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>API &raquo; </li><li>kindle</li>
+    <li>API &raquo; </li><li>kindle.utils</li>
 </ul>
 </nav>
-                <div id="content"><div class="mkapi-node" id="kindle.torch_utils">
+                <div id="content"><div class="mkapi-node" id="kindle.utils.torch_utils">
 <div class='mkapi-object-container'>
   <div class="mkapi-object module plain top">
     <div class="mkapi-object-kind module top">module</div>
-    <h1 id="kindletorch_utils" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle/#kindle">kindle</a>.</span><span class="mkapi-object-name">torch_utils</span></h1>
+    <h1 id="kindleutilstorch_utils" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.utils/#kindle.utils">kindle.utils</a>.</span><span class="mkapi-object-name">torch_utils</span></h1>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils" title="Source for kindle.torch_utils">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils" title="Source for kindle.utils.torch_utils">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -131,42 +136,30 @@
 <li>Contact: lim.jeikei@gmail.com</li>
 </ul></div>
     </div>
-  <div class="mkapi-section classes">
-      <div class="mkapi-section-name classes">
-          <span class="mkapi-section-name-body classes">Classes</span> 
-        </div>
-      <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.torch_utils.Activation">Activation</a></code>
-
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Convert string activation name to the activation class.<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.Activation" title="Source for kindle.torch_utils.Activation">&lt;/&gt;</a></span></li>
-
-
-</ul></div>
-    </div>
   <div class="mkapi-section functions">
       <div class="mkapi-section-name functions">
           <span class="mkapi-section-name-body functions">Functions</span> 
         </div>
       <div class="mkapi-section-body functions"><ul class="mkapi-items">
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.torch_utils.autopad">autopad</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">kernel_size</code>, <code class="mkapi-object-signature">padding</code><code class="mkapi-object-parenthesis">)</code>
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.torch_utils.autopad">autopad</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">kernel_size</code>, <code class="mkapi-object-signature">padding</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(Union(int, list of int))</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Auto padding calculation for pad='same' in TensorFlow.<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.autopad" title="Source for kindle.torch_utils.autopad">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Auto padding calculation for pad='same' in TensorFlow.<a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.autopad" title="Source for kindle.utils.torch_utils.autopad">&lt;/&gt;</a></span></li>
 
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.torch_utils.count_model_params">count_model_params</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code><code class="mkapi-object-parenthesis">)</code>
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.torch_utils.count_model_params">count_model_params</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Count model's parameters.<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.count_model_params" title="Source for kindle.torch_utils.count_model_params">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Count model's parameters.<a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.count_model_params" title="Source for kindle.utils.torch_utils.count_model_params">&lt;/&gt;</a></span></li>
 
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.torch_utils.make_divisible">make_divisible</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_channel</code>, <code class="mkapi-object-signature">divisor</code><code class="mkapi-object-parenthesis">)</code>
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.torch_utils.make_divisible">make_divisible</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_channel</code>, <code class="mkapi-object-signature">divisor</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Convert {n_channel} to divisible by {divisor}<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.make_divisible" title="Source for kindle.torch_utils.make_divisible">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Convert {n_channel} to divisible by {divisor}<a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.make_divisible" title="Source for kindle.utils.torch_utils.make_divisible">&lt;/&gt;</a></span></li>
 
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.torch_utils.model_info">model_info</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code>, <code class="mkapi-object-signature">verbose</code><code class="mkapi-object-parenthesis">)</code>
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.torch_utils.model_info">model_info</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code>, <code class="mkapi-object-signature">verbose</code><code class="mkapi-object-parenthesis">)</code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Print out model info.<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.model_info" title="Source for kindle.torch_utils.model_info">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Print out model info.<a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.model_info" title="Source for kindle.utils.torch_utils.model_info">&lt;/&gt;</a></span></li>
 
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.torch_utils.split_dataset_index">split_dataset_index</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_data</code>, <code class="mkapi-object-signature">split_ratio</code><code class="mkapi-object-parenthesis">)</code>
+<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.torch_utils.split_dataset_index">split_dataset_index</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_data</code>, <code class="mkapi-object-signature">split_ratio</code><code class="mkapi-object-parenthesis">)</code>
 <span class="mkapi-item-type">(SubsetRandomSampler, SubsetRandomSampler)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Split dataset indices with split_ratio.<a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.split_dataset_index" title="Source for kindle.torch_utils.split_dataset_index">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Split dataset indices with split_ratio.<a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.split_dataset_index" title="Source for kindle.utils.torch_utils.split_dataset_index">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -175,14 +168,14 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.torch_utils.split_dataset_index">
+<div class="mkapi-node" id="kindle.utils.torch_utils.split_dataset_index">
 <div class='mkapi-object-container'>
   <div class="mkapi-object function code top">
     <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindletorch_utilssplit_dataset_index" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">split_dataset_index</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_data</code>, <code class="mkapi-object-signature">split_ratio=0.1</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindleutilstorch_utilssplit_dataset_index" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.torch_utils">kindle.utils.torch_utils</a>.</code><code class="mkapi-object-name">split_dataset_index</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_data</code>, <code class="mkapi-object-signature">split_ratio=0.1</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.split_dataset_index" title="Source for kindle.torch_utils.split_dataset_index">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.split_dataset_index" title="Source for kindle.utils.torch_utils.split_dataset_index">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -216,14 +209,14 @@ SubsetRandomSampler (0 ~ {split_ratio})</p></div>
 
 </div>
 
-<div class="mkapi-node" id="kindle.torch_utils.model_info">
+<div class="mkapi-node" id="kindle.utils.torch_utils.model_info">
 <div class='mkapi-object-container'>
   <div class="mkapi-object function code top">
     <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindletorch_utilsmodel_info" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">model_info</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code>, <code class="mkapi-object-signature">verbose=False</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindleutilstorch_utilsmodel_info" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.torch_utils">kindle.utils.torch_utils</a>.</code><code class="mkapi-object-name">model_info</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code>, <code class="mkapi-object-signature">verbose=False</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.model_info" title="Source for kindle.torch_utils.model_info">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.model_info" title="Source for kindle.utils.torch_utils.model_info">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -234,14 +227,14 @@ SubsetRandomSampler (0 ~ {split_ratio})</p></div>
 
 </div>
 
-<div class="mkapi-node" id="kindle.torch_utils.make_divisible">
+<div class="mkapi-node" id="kindle.utils.torch_utils.make_divisible">
 <div class='mkapi-object-container'>
   <div class="mkapi-object function code top">
     <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindletorch_utilsmake_divisible" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">make_divisible</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_channel</code>, <code class="mkapi-object-signature">divisor=8</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindleutilstorch_utilsmake_divisible" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.torch_utils">kindle.utils.torch_utils</a>.</code><code class="mkapi-object-name">make_divisible</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">n_channel</code>, <code class="mkapi-object-signature">divisor=8</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.make_divisible" title="Source for kindle.torch_utils.make_divisible">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.make_divisible" title="Source for kindle.utils.torch_utils.make_divisible">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -275,14 +268,14 @@ SubsetRandomSampler (0 ~ {split_ratio})</p></div>
 
 </div>
 
-<div class="mkapi-node" id="kindle.torch_utils.autopad">
+<div class="mkapi-node" id="kindle.utils.torch_utils.autopad">
 <div class='mkapi-object-container'>
   <div class="mkapi-object function code top">
     <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindletorch_utilsautopad" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">autopad</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">kernel_size</code>, <code class="mkapi-object-signature">padding=None</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Union(int, list of int)</span></h2>
+    <h2 id="kindleutilstorch_utilsautopad" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.torch_utils">kindle.utils.torch_utils</a>.</code><code class="mkapi-object-name">autopad</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">kernel_size</code>, <code class="mkapi-object-signature">padding=None</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Union(int, list of int)</span></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.autopad" title="Source for kindle.torch_utils.autopad">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.autopad" title="Source for kindle.utils.torch_utils.autopad">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -293,32 +286,14 @@ SubsetRandomSampler (0 ~ {split_ratio})</p></div>
 
 </div>
 
-<div class="mkapi-node" id="kindle.torch_utils.Activation">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object class code top">
-    <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindletorch_utilsactivation" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">Activation</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">act_type</code><code class="mkapi-object-parenthesis">)</code></h2>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.Activation" title="Source for kindle.torch_utils.Activation">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Convert string activation name to the activation class.</p></div>
-    </div>
-  </div>
-
-</div>
-
-<div class="mkapi-node" id="kindle.torch_utils.count_model_params">
+<div class="mkapi-node" id="kindle.utils.torch_utils.count_model_params">
 <div class='mkapi-object-container'>
   <div class="mkapi-object function code top">
     <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindletorch_utilscount_model_params" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.torch_utils">kindle.torch_utils</a>.</code><code class="mkapi-object-name">count_model_params</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; int</span></h2>
+    <h2 id="kindleutilstorch_utilscount_model_params" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.torch_utils">kindle.utils.torch_utils</a>.</code><code class="mkapi-object-name">count_model_params</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; int</span></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.torch_utils/#kindle.torch_utils.count_model_params" title="Source for kindle.torch_utils.count_model_params">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.utils.torch_utils/#kindle.utils.torch_utils.count_model_params" title="Source for kindle.utils.torch_utils.count_model_params">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -330,7 +305,7 @@ SubsetRandomSampler (0 ~ {split_ratio})</p></div>
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.trainer/" title="kindle.trainer"><span>Previous</span></a></div>
+        <div class="previous"><a href="../kindle.utils.model_utils/" title="kindle.utils.model_utils"><span>Previous</span></a></div>
         <div class="next"><a href="../kindle.generator/" title="kindle.generator"><span>Next</span></a></div>
     </div>
     <div class="footer-note">

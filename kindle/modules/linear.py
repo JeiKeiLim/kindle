@@ -8,7 +8,7 @@ from typing import Union
 import torch
 from torch import nn
 
-from kindle.torch_utils import Activation
+from kindle.modules.activation import Activation
 
 
 class Linear(nn.Module):

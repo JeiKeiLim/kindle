@@ -14,5 +14,6 @@ So why code? when we can simply build a model with yaml markup file.
 from kindle import generator, modules
 from kindle.model import Model
 from kindle.trainer import TorchTrainer
+from kindle.utils import ModelProfiler
 
-__all__ = ["modules", "generator", "Model", "TorchTrainer"]
+__all__ = ["modules", "generator", "Model", "TorchTrainer", "ModelProfiler"]
