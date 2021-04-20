@@ -63,6 +63,7 @@
     <li class="toctree-l2 current"><button class="section nav-item">kindle.generator</button>
 <ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -83,6 +84,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
@@ -190,7 +192,7 @@
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
 
 <li class="abstract-readonly-property"><code class="mkapi-item-name">out_channel</code>
-<span class="mkapi-item-type">(int)</span>
+<span class="mkapi-item-type">(Union(int, list of int))</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Out channel of the module.<span id="kindle.generator.base_generator.GeneratorAbstract.out_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.out_channel" title="Source for kindle.generator.base_generator.GeneratorAbstract.out_channel">&lt;/&gt;</a></span></li>
 
 
@@ -207,7 +209,7 @@
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.__call__" title="Source for kindle.generator.base_generator.GeneratorAbstract.__call__">&lt;/&gt;</a></span></li>
 
 <li class="abstract-method"><code class="mkapi-item-name"><a href="#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">compute_out_shape</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(list of int)</span>
+<span class="mkapi-item-type">(Union(list of int, list of list of int))</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Compute output shape when {size} is given.<a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" title="Source for kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">&lt;/&gt;</a></span></li>
 
 
@@ -222,7 +224,7 @@
 <div class='mkapi-object-container'>
   <div class="mkapi-object abstract-method code">
     <div class="mkapi-object-kind abstract-method">abstract method</div>
-    <h3 id="kindlegeneratorbase_generatorgeneratorabstractcompute_out_shape" class="mkapi-object-body abstract-method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; list of int</span></h3>
+    <h3 id="kindlegeneratorbase_generatorgeneratorabstractcompute_out_shape" class="mkapi-object-body abstract-method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Union(list of int, list of list of int)</span></h3>
   </div>
   <div class="mkapi-src-link">
     <a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" title="Source for kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">&lt;/&gt;</a>

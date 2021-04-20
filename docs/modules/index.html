@@ -58,6 +58,8 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#linear">Linear</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#upsample">UpSample</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#yamlmodule">YamlModule</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#pretrained">Pretrained</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#pretrainedfeaturemap">PretrainedFeatureMap</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">API</button>
 <ul class="subnav">
@@ -76,6 +78,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -92,6 +95,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../api/kindle.modules.concat/">kindle.modules.concat</a></li>
@@ -204,6 +208,16 @@
 <td>nn.{module_name}</td>
 <td>PyTorch torch.nn.* module</td>
 <td>Please refer to <a href="https://pytorch.org/docs/stable/nn.html">https://pytorch.org/docs/stable/nn.html</a></td>
+</tr>
+<tr>
+<td>Pretrained</td>
+<td>timm.create_model</td>
+<td>[model_name, features_only, pretrained]</td>
+</tr>
+<tr>
+<td>PreTrainedFeatureMap</td>
+<td>Bypass feature layer map from <code>Pretrained</code></td>
+<td>[feature_idx]</td>
 </tr>
 </tbody>
 </table>
@@ -589,7 +603,57 @@
 </table>
 <ul>
 <li>yaml file path and argument configured in yaml module can not be passed through keyword argument.</li>
-</ul></div>
+</ul>
+<h2 id="pretrained">Pretrained</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model_name</td>
+<td>str</td>
+<td></td>
+<td>Please refer to <a href="https://rwightman.github.io/pytorch-image-models/results">https://rwightman.github.io/pytorch-image-models/results</a> for supported models.</td>
+</tr>
+<tr>
+<td>features_only</td>
+<td>bool</td>
+<td>False</td>
+<td>If True, return value of the module will be list of each feature maps.</td>
+</tr>
+<tr>
+<td>pretrained</td>
+<td>bool</td>
+<td>True</td>
+<td>use pretrained weight</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pretrainedfeaturemap">PretrainedFeatureMap</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature_idx</td>
+<td>int</td>
+<td>-1</td>
+<td>Index of the feature maps</td>
+</tr>
+</tbody>
+</table></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../usages/" title="Usages"><span>Previous</span></a></div>

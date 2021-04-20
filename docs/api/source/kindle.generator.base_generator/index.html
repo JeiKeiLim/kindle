@@ -63,6 +63,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -79,6 +80,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
@@ -232,7 +234,7 @@
 
     <span class="nd">@property</span><span id="kindle.generator.base_generator.GeneratorAbstract.out_channel"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.out_channel" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.out_channel">DOCS</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">out_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Out channel of the module.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span><span id="kindle.generator.base_generator.GeneratorAbstract.in_channel"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.in_channel" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.in_channel">DOCS</a>
@@ -241,7 +243,9 @@
         <span class="sd">&quot;&quot;&quot;In channel of the module.&quot;&quot;&quot;</span>
 
     <span class="nd">@abstractmethod</span><span id="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape"></span><a class="mkapi-docs-link" title="kindle.generator.base_generator.GeneratorAbstract.compute_out_shape" href="../../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.compute_out_shape">DOCS</a>
-    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">compute_out_shape</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]:</span>
         <span class="sd">&quot;&quot;&quot;Compute output shape when {size} is given.</span>
 
 <span class="sd">        Args: input size to compute output shape.</span>

@@ -63,6 +63,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -80,6 +81,7 @@
 <ul class="subnav">
     <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.modules</a>
 <ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulespretrained">pretrained</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesdwconv">dwconv</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesadd">add</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesconcat">concat</a></li>
@@ -89,6 +91,7 @@
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulesconv">conv</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindlemodulespoolings">poolings</a></li>
 </ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
@@ -106,7 +109,7 @@
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
     <div class="previous"><a href="../kindle.generator.poolings/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.modules.dwconv/">Next &raquo;</a></div>
+    <div class="next"><a href="../kindle.modules.pretrained/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -134,6 +137,46 @@
 <div class="mkapi-docstring">
 <div class="mkapi-section">
       <div class="mkapi-section-body"><p>PyTorch Modules.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mkapi-node" id="kindle.modules.pretrained">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object module plain top">
+    <div class="mkapi-object-kind module top">module</div>
+    <h2 id="kindlemodulespretrained" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="#kindle.modules">kindle.modules</a>.</span><span class="mkapi-object-name"><a href="../kindle.modules.pretrained/#kindle.modules.pretrained">pretrained</a></span></h2>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.modules.pretrained/#kindle.modules.pretrained" title="Source for kindle.modules.pretrained">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Pretrained module.</p>
+<p>Pre-trained model downloaded from https://github.com/rwightman/pytorch-image-models
+Please refer to https://rwightman.github.io/pytorch-image-models/ for the supported model overview.</p>
+<ul>
+<li>Author: Jongkuk Lim</li>
+<li>Contact: lim.jeikei@gmail.com</li>
+</ul></div>
+    </div>
+  <div class="mkapi-section classes">
+      <div class="mkapi-section-name classes">
+          <span class="mkapi-section-name-body classes">Classes</span> 
+        </div>
+      <div class="mkapi-section-body classes"><ul class="mkapi-items">
+<li class="class"><code class="mkapi-item-name"><a href="../kindle.modules.pretrained#kindle.modules.pretrained.Pretrained">Pretrained</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Pretrained module.<a class="mkapi-src-link" href="../source/kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained" title="Source for kindle.modules.pretrained.Pretrained">&lt;/&gt;</a></span></li>
+
+<li class="class"><code class="mkapi-item-name"><a href="../kindle.modules.pretrained#kindle.modules.pretrained.PretrainedFeatureMap">PretrainedFeatureMap</a></code>
+
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Placeholder of the output of Pretrained module when features_only = True<a class="mkapi-src-link" href="../source/kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap" title="Source for kindle.modules.pretrained.PretrainedFeatureMap">&lt;/&gt;</a></span></li>
+
+
+</ul></div>
     </div>
   </div>
 
@@ -413,7 +456,7 @@
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../kindle.generator.poolings/" title="kindle.generator.poolings"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.modules.dwconv/" title="kindle.modules.dwconv"><span>Next</span></a></div>
+        <div class="next"><a href="../kindle.modules.pretrained/" title="kindle.modules.pretrained"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

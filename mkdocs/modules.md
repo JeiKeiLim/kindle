@@ -17,6 +17,8 @@
 |Identity|Identity|[]|
 |YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
+|Pretrained|timm.create_model|[model_name, features_only, pretrained]|
+|PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
 
 !!! Note
     nn.{module_name} is currently experimental. This might change in the future release. Use with caution.
@@ -112,3 +114,16 @@
 |verbose|bool|False||
 
 * yaml file path and argument configured in yaml module can not be passed through keyword argument.
+
+
+## Pretrained
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|model_name|str||Please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results) for supported models.|
+|features_only|bool|False|If True, return value of the module will be list of each feature maps.|
+|pretrained|bool|True|use pretrained weight|
+
+## PretrainedFeatureMap
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|feature_idx|int|-1|Index of the feature maps|

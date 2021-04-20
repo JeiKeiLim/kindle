@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>kindle.generator.conv &mdash; Kindle</title>
+    <title>kindle.generator.pretrained &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -63,7 +63,11 @@
     <li class="toctree-l2 current"><button class="section nav-item">kindle.generator</button>
 <ul class="subnav">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.pretrained</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorpretrainedpretrainedgenerator">PreTrainedGenerator</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorpretrainedpretrainedfeaturemapgenerator">PreTrainedFeatureMapGenerator</a></li>
+</ul></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -73,11 +77,7 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.generator.conv</a>
-<ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorconvconvgenerator">ConvGenerator</a></li>
-<li class="toctree-l4"><a class="nav-item toc" href="#kindlegeneratorconvdwconvgenerator">DWConvGenerator</a></li>
-</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.conv/">kindle.generator.conv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.identity/">kindle.generator.identity</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.poolings/">kindle.generator.poolings</a></li>
 </ul></li>
@@ -101,8 +101,8 @@
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../kindle.generator.custom_yaml_module/">&laquo; Previous</a></div>
-    <div class="next"><a href="../kindle.generator.identity/">Next &raquo;</a></div>
+    <div class="previous"><a href="../kindle.generator/">&laquo; Previous</a></div>
+    <div class="next"><a href="../kindle.generator.flatten/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -117,19 +117,20 @@
     <li>API &raquo; </li><li>kindle.generator</li>
 </ul>
 </nav>
-                <div id="content"><div class="mkapi-node" id="kindle.generator.conv">
+                <div id="content"><div class="mkapi-node" id="kindle.generator.pretrained">
 <div class='mkapi-object-container'>
   <div class="mkapi-object module plain top">
     <div class="mkapi-object-kind module top">module</div>
-    <h1 id="kindlegeneratorconv" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">conv</span></h1>
+    <h1 id="kindlegeneratorpretrained" class="mkapi-object-body module top"><span class="mkapi-object-prefix"><a href="../kindle.generator/#kindle.generator">kindle.generator</a>.</span><span class="mkapi-object-name">pretrained</span></h1>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv" title="Source for kindle.generator.conv">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained" title="Source for kindle.generator.pretrained">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
 <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Conv module generator.</p>
+      <div class="mkapi-section-body"><p>Pretrained generator module.</p>
+<p>Generate pre-trained module that is served from https://github.com/rwightman/pytorch-image-models</p>
 <ul>
 <li>Author: Jongkuk Lim</li>
 <li>Contact: lim.jeikei@gmail.com</li>
@@ -140,13 +141,13 @@
           <span class="mkapi-section-name-body classes">Classes</span> 
         </div>
       <div class="mkapi-section-body classes"><ul class="mkapi-items">
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.conv.ConvGenerator">ConvGenerator</a></code>
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedGenerator">PreTrainedGenerator</a></code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Conv2d generator for parsing module.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator" title="Source for kindle.generator.conv.ConvGenerator">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Generate Pretrained module.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator" title="Source for kindle.generator.pretrained.PreTrainedGenerator">&lt;/&gt;</a></span></li>
 
-<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.conv.DWConvGenerator">DWConvGenerator</a></code>
+<li class="class"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedFeatureMapGenerator">PreTrainedFeatureMapGenerator</a></code>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Depth-wise convolution generator for parsing module.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.DWConvGenerator" title="Source for kindle.generator.conv.DWConvGenerator">&lt;/&gt;</a></span></li>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Generate PreTrainedFeatureMap.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -155,14 +156,14 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.generator.conv.ConvGenerator">
+<div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedGenerator">
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlegeneratorconvconvgenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.conv">kindle.generator.conv</a>.</code><code class="mkapi-object-name">ConvGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlegeneratorpretrainedpretrainedgenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.pretrained">kindle.generator.pretrained</a>.</code><code class="mkapi-object-name">PreTrainedGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator" title="Source for kindle.generator.conv.ConvGenerator">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator" title="Source for kindle.generator.pretrained.PreTrainedGenerator">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -175,7 +176,7 @@
 </div>
     </div>
   <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Conv2d generator for parsing module.</p></div>
+      <div class="mkapi-section-body"><p>Generate Pretrained module.</p></div>
     </div>
   <div class="mkapi-section attributes">
       <div class="mkapi-section-name attributes">
@@ -183,24 +184,12 @@
         </div>
       <div class="mkapi-section-body attributes"><ul class="mkapi-items">
 
-<li class="readonly-property"><code class="mkapi-item-name">base_module</code>
-<span class="mkapi-item-type">(Module)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns module class from kindle.common_modules based on the class name.<span id="kindle.generator.conv.ConvGenerator.base_module"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.base_module" title="Source for kindle.generator.conv.ConvGenerator.base_module">&lt;/&gt;</a></span></li>
-
-
-<li class="readonly-property"><code class="mkapi-item-name">in_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get in channel size.<span id="kindle.generator.conv.ConvGenerator.in_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.in_channel" title="Source for kindle.generator.conv.ConvGenerator.in_channel">&lt;/&gt;</a></span></li>
 
 
 
 <li class="readonly-property"><code class="mkapi-item-name">name</code>
 <span class="mkapi-item-type">(str)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
-
-<li class="readonly-property"><code class="mkapi-item-name">out_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get out channel size.<span id="kindle.generator.conv.ConvGenerator.out_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.out_channel" title="Source for kindle.generator.conv.ConvGenerator.out_channel">&lt;/&gt;</a></span></li>
 
 
 
@@ -211,9 +200,13 @@
           <span class="mkapi-section-name-body methods">Methods</span> 
         </div>
       <div class="mkapi-section-body methods"><ul class="mkapi-items">
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.conv.ConvGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator.__call__" title="Source for kindle.generator.pretrained.PreTrainedGenerator.__call__">&lt;/&gt;</a></span></li>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.__call__" title="Source for kindle.generator.conv.ConvGenerator.__call__">&lt;/&gt;</a></span></li>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape">compute_out_shape</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Union(list of int, list of list of int))</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Compute output shape when {size} is given.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape" title="Source for kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -223,14 +216,35 @@
   <div class="mkapi-members">
   
     <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.generator.conv.ConvGenerator.__call__">
+      <div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape">
 <div class='mkapi-object-container'>
   <div class="mkapi-object method code">
     <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlegeneratorconvconvgeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code></h3>
+    <h3 id="kindlegeneratorpretrainedpretrainedgeneratorcompute_out_shape" class="mkapi-object-body method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Union(list of int, list of list of int)</span></h3>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.__call__" title="Source for kindle.generator.conv.ConvGenerator.__call__">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape" title="Source for kindle.generator.pretrained.PreTrainedGenerator.compute_out_shape">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Compute output shape when {size} is given.</p>
+<p>Args: input size to compute output shape.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedGenerator.__call__">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlegeneratorpretrainedpretrainedgeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Module</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedGenerator.__call__" title="Source for kindle.generator.pretrained.PreTrainedGenerator.__call__">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -246,14 +260,14 @@
 
 </div>
 
-<div class="mkapi-node" id="kindle.generator.conv.DWConvGenerator">
+<div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedFeatureMapGenerator">
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlegeneratorconvdwconvgenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.conv">kindle.generator.conv</a>.</code><code class="mkapi-object-name">DWConvGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlegeneratorpretrainedpretrainedfeaturemapgenerator" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.generator.pretrained">kindle.generator.pretrained</a>.</code><code class="mkapi-object-name">PreTrainedFeatureMapGenerator</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">*args</code>, <code class="mkapi-object-signature">**kwargs</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.DWConvGenerator" title="Source for kindle.generator.conv.DWConvGenerator">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -262,13 +276,11 @@
           <span class="mkapi-section-name-body bases">Bases</span> 
         </div>
       <div class="mkapi-section-body bases">
-<span class="mkapi-base"><a href="./#kindle.generator.conv.ConvGenerator">kindle.generator.conv.ConvGenerator</a></span>
-
 <span class="mkapi-base"><a href="../kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract">kindle.generator.base_generator.GeneratorAbstract</a></span>
 </div>
     </div>
   <div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Depth-wise convolution generator for parsing module.</p></div>
+      <div class="mkapi-section-body"><p>Generate PreTrainedFeatureMap.</p></div>
     </div>
   <div class="mkapi-section attributes">
       <div class="mkapi-section-name attributes">
@@ -276,24 +288,12 @@
         </div>
       <div class="mkapi-section-body attributes"><ul class="mkapi-items">
 
-<li class="readonly-property"><code class="mkapi-item-name">base_module</code>
-<span class="mkapi-item-type">(Module)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns module class from kindle.common_modules based on the class name.<span id="kindle.generator.conv.ConvGenerator.base_module"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.base_module" title="Source for kindle.generator.conv.ConvGenerator.base_module">&lt;/&gt;</a></span></li>
-
-
-<li class="readonly-property"><code class="mkapi-item-name">in_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get in channel size.<span id="kindle.generator.conv.ConvGenerator.in_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.in_channel" title="Source for kindle.generator.conv.ConvGenerator.in_channel">&lt;/&gt;</a></span></li>
 
 
 
 <li class="readonly-property"><code class="mkapi-item-name">name</code>
 <span class="mkapi-item-type">(str)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Module name.<span id="kindle.generator.base_generator.GeneratorAbstract.name"></span><a class="mkapi-src-link" href="../source/kindle.generator.base_generator/#kindle.generator.base_generator.GeneratorAbstract.name" title="Source for kindle.generator.base_generator.GeneratorAbstract.name">&lt;/&gt;</a></span></li>
-
-<li class="readonly-property"><code class="mkapi-item-name">out_channel</code>
-<span class="mkapi-item-type">(int)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get out channel size.<span id="kindle.generator.conv.ConvGenerator.out_channel"></span><a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.out_channel" title="Source for kindle.generator.conv.ConvGenerator.out_channel">&lt;/&gt;</a></span></li>
 
 
 
@@ -304,9 +304,13 @@
           <span class="mkapi-section-name-body methods">Methods</span> 
         </div>
       <div class="mkapi-section-body methods"><ul class="mkapi-items">
-<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.conv.ConvGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__">__call__</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(Module)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__">&lt;/&gt;</a></span></li>
 
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Returns nn.Module component.<a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.__call__" title="Source for kindle.generator.conv.ConvGenerator.__call__">&lt;/&gt;</a></span></li>
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape">compute_out_shape</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(list of int)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Compute output shape when {size} is given.<a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape">&lt;/&gt;</a></span></li>
 
 
 </ul></div>
@@ -316,14 +320,35 @@
   <div class="mkapi-members">
   
     <div class="mkapi-member">
-      <div class="mkapi-node" id="kindle.generator.conv.ConvGenerator.__call__">
+      <div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape">
 <div class='mkapi-object-container'>
   <div class="mkapi-object method code">
     <div class="mkapi-object-kind method">method</div>
-    <h3 id="kindlegeneratorconvconvgeneratorcall_1" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code></h3>
+    <h3 id="kindlegeneratorpretrainedpretrainedfeaturemapgeneratorcompute_out_shape" class="mkapi-object-body method"><code class="mkapi-object-name">compute_out_shape</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">size</code>, <code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; list of int</span></h3>
   </div>
   <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.generator.conv/#kindle.generator.conv.ConvGenerator.__call__" title="Source for kindle.generator.conv.ConvGenerator.__call__">&lt;/&gt;</a>
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator.compute_out_shape">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Compute output shape when {size} is given.</p>
+<p>Args: input size to compute output shape.</p></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindlegeneratorpretrainedpretrainedfeaturemapgeneratorcall" class="mkapi-object-body method"><code class="mkapi-object-name">__call__</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">repeat=1</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; Module</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.generator.pretrained/#kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__" title="Source for kindle.generator.pretrained.PreTrainedFeatureMapGenerator.__call__">&lt;/&gt;</a>
   </div>
 </div>
 <div class="mkapi-docstring">
@@ -340,8 +365,8 @@
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../kindle.generator.custom_yaml_module/" title="kindle.generator.custom_yaml_module"><span>Previous</span></a></div>
-        <div class="next"><a href="../kindle.generator.identity/" title="kindle.generator.identity"><span>Next</span></a></div>
+        <div class="previous"><a href="../kindle.generator/" title="kindle.generator"><span>Previous</span></a></div>
+        <div class="next"><a href="../kindle.generator.flatten/" title="kindle.generator.flatten"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

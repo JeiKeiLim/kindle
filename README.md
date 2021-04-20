@@ -120,8 +120,12 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |Identity|Identity|[]|
 |YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
+|Pretrained|timm.create_model|[model_name, features_only, pretrained]|
+|PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
+
 
 * **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
+* For the supported model of **Pretrained** module, please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results)
 
 
 # Custom module support
@@ -319,6 +323,6 @@ Model Summary: 29 layers, 138,568 parameters, 138,568 gradients
 # Planned features
 * ~~Custom module support~~
 * ~~Custom module with yaml support~~
+* ~~Use pre-trained model~~
 * Graphical model file generator
-* Use pre-trained model
 * More modules!

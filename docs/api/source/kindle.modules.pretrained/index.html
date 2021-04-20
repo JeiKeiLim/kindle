@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.modules.poolings &mdash; Kindle</title>
+    <title>kindle.modules.pretrained &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -114,29 +114,75 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">poolings</span>
-<span id="kindle.modules.poolings"></span><a class="mkapi-docs-link" href="../../kindle.modules.poolings">DOCS</a>
+<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">pretrained</span>
+<span id="kindle.modules.pretrained"></span><a class="mkapi-docs-link" href="../../kindle.modules.pretrained">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module generator related to pooling operations.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Pretrained module.</span>
+
+<span class="sd">Pre-trained model downloaded from https://github.com/rwightman/pytorch-image-models</span>
+<span class="sd">Please refer to https://rwightman.github.io/pytorch-image-models/ for the supported model overview.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">import</span> <span class="nn">timm</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
 
-<span class="k">class</span> <span class="nc">GlobalAvgPool</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">):</span><span id="kindle.modules.poolings.GlobalAvgPool"></span><a class="mkapi-docs-link" title="kindle.modules.poolings.GlobalAvgPool" href="../../kindle.modules.poolings/#kindle.modules.poolings.GlobalAvgPool">DOCS</a>
-    <span class="sd">&quot;&quot;&quot;Global average pooling module.</span>
+<span class="k">class</span> <span class="nc">Pretrained</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.pretrained.Pretrained"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.Pretrained" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Pretrained module.</span>
 
-<span class="sd">    Arguments: []</span>
+<span class="sd">    Please refer to https://rwightman.github.io/pytorch-image-models/ for the supported</span>
+<span class="sd">    model overview.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">features_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize Pretrained instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: name of the model from timm.list_models(pretrained=True)</span>
+<span class="sd">            features_only: if True, return value of the module will be list of each feature maps.</span>
+<span class="sd">            pretrained: use pretrained weight.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">timm</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span> <span class="n">features_only</span><span class="o">=</span><span class="n">features_only</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span><span id="kindle.modules.pretrained.Pretrained.forward"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.Pretrained.forward" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained.forward">DOCS</a>
+        <span class="sd">&quot;&quot;&quot;Forward pretrained network.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            if self.features_only is True, List of torch.Tensor will be returned.</span>
+<span class="sd">            which each array contains corresponding feature map of pooling layer.</span>
+<span class="sd">            Otherwise, torch.Tensor will be returned which is output of the last layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PretrainedFeatureMap</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.pretrained.PretrainedFeatureMap"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.PretrainedFeatureMap" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Placeholder of the output of Pretrained module when features_only = True&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize PretrainedFeatureMap.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feature_idx: index of the feature maps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_idx</span> <span class="o">=</span> <span class="n">feature_idx</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span><span id="kindle.modules.pretrained.PretrainedFeatureMap.forward"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.PretrainedFeatureMap.forward" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap.forward">DOCS</a>
+        <span class="sd">&quot;&quot;&quot;Bypass input of x[self.feature_idx].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_idx</span><span class="p">]</span>
 </code></pre></div>
 </div>
 </div></div>
