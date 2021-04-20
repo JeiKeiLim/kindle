@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>kindle.modules.activation &mdash; Kindle</title>
+    <title>kindle.version &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -115,44 +115,18 @@
                 <div id="content"><div class="mkapi-node">
 <h1 id="" class="mkapi-object mkapi-object-code plain">
 <span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
-<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">activation</span>
-<span id="kindle.modules.activation"></span><a class="mkapi-docs-link" href="../../kindle.modules.activation">DOCS</a>
+<span class="mkapi-object-prefix">kindle.</span><span class="mkapi-object-name">version</span>
+<span id="kindle.version"></span><a class="mkapi-docs-link" href="../../kindle.version">DOCS</a>
 </h1>
 
 <div class="mkapi-code">
-<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Module Description.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Kindle version description.</span>
 
 <span class="sd">- Author: Jongkuk Lim</span>
 <span class="sd">- Contact: lim.jeikei@gmail.com</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">ast</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
-
-
-<span class="k">class</span> <span class="nc">Activation</span><span class="p">:</span><span id="kindle.modules.activation.Activation"></span><a class="mkapi-docs-link" title="kindle.modules.activation.Activation" href="../../kindle.modules.activation/#kindle.modules.activation.Activation">DOCS</a>
-    <span class="sd">&quot;&quot;&quot;Convert string activation name to the activation class.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">act_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert string activation name to the activation class.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            act_type: Activation name.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            nn.Identity if {type} is None.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">act_type</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Softmax&quot;</span> <span class="k">else</span> <span class="p">[]</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)()</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.3.0&quot;</span>
 </code></pre></div>
 </div>
 </div></div>

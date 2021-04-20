@@ -16,4 +16,13 @@ from kindle.model import Model
 from kindle.trainer import TorchTrainer
 from kindle.utils import ModelProfiler
 
-__all__ = ["modules", "generator", "Model", "TorchTrainer", "ModelProfiler"]
+from .version import __version__
+
+__all__ = [
+    "modules",
+    "generator",
+    "Model",
+    "TorchTrainer",
+    "ModelProfiler",
+    "__version__",
+]

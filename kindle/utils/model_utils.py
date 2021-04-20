@@ -13,31 +13,11 @@ from typing import (TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple,
 import numpy as np
 import torch
 import torch.nn as nn
+from tabulate import tabulate
 from tqdm import tqdm
 
 if TYPE_CHECKING:
     from kindle.generator.base_generator import GeneratorAbstract
-
-
-def split_str_line(msg: str, line_limit: int = 30) -> List[str]:
-    """Split string with a maximum length of the line.
-
-    Ex) split_str_line("hello world", line_limit=5)
-        will return ["hello", " worl", "d"]
-
-    Args:
-        msg: message to split.
-        line_limit: limit length of the line.
-
-    Returns:
-        list of the split message.
-    """
-    msg_list = []
-    for j in range(0, len(msg), line_limit):
-        end_idx = j + line_limit
-        msg_list.append(msg[j:end_idx])
-
-    return msg_list
 
 
 class ModelProfiler:
@@ -247,26 +227,31 @@ class ModelInfoLogger:
     def __init__(self, log_shapes: bool = False) -> None:
         """Initialize ModelInfoLogger instance."""
         self.log_shapes = log_shapes
-        self.model_log_msg: List[str] = []
+        self.model_log_msg: List[Any] = []
 
     @property
-    def head(self) -> str:
+    def head(self) -> List[str]:
         """Head message that contains column names."""
-        log = (
-            f"{'idx':>3} | {'from':>10} | {'n':>3} | {'params':>8} |"
-            f" {'module':>19} | {'arguments':>35} |"
-            f" {'in_channel':>10} | {'out_channel':>11} |"
-        )
+        log = [
+            "idx",
+            "from",
+            "n",
+            "params",
+            "module",
+            "arguments",
+            "in_channel",
+            "out_channel",
+        ]
         if self.log_shapes:
-            log += f" {'in shape':>15} | {'out shape':>15} |"
-        log += f"\n{len(log) * '-'}"
+            log.append("in_shape")
+            log.append("out_shape")
 
         return log
 
     @property
     def info(self) -> str:
         """Model information containing head and messages."""
-        return self.head + "\n" + "\n".join(self.model_log_msg)
+        return tabulate(self.model_log_msg, self.head, tablefmt="presto")
 
     def add(
         self,
@@ -305,37 +290,21 @@ class ModelInfoLogger:
 
             args_str = args_str[:-2]
 
-        args_str_list = split_str_line(args_str, line_limit=35)
-
         log = [
-            f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
-            f" {module.n_params:8,d} | {module.name:>19} | {args_str_list[0]:>35} |"
-            f" {module_generator.in_channel:>10} | {str(module_generator.out_channel):>11} |"
+            f"{i:3d}",
+            idx,
+            repeat,
+            f"{module.n_params:,d}",
+            module.name,
+            args_str,
+            module_generator.in_channel,
+            module_generator.out_channel,
         ]
-        for j in range(1, len(args_str_list)):
-            log.append(
-                f"{'':>3} | {'':>10} | {'':>3} |"
-                f" {'':>8} | {'':>19} | {args_str_list[j]:>35} |"
-                f" {'':>10} | {'':>11} |"
-            )
 
         if self.log_shapes and in_size is not None and out_size is not None:
             in_size_str = str(in_size).replace("\n", ",")
-            in_size_str_list = split_str_line(in_size_str, line_limit=15)
 
-            log[0] += f" {in_size_str_list[0]:>15} | {str(out_size):>15} |"
+            log.append(in_size_str)
+            log.append(out_size)
 
-            for j in range(1, len(in_size_str_list)):
-                append_msg = f" {in_size_str_list[j]:>15} | {'':>15} |"
-                if j < len(log):
-                    log[j] += append_msg
-                else:
-                    append_msg = (
-                        f"{'':>3} | {'':>10} | {'':>3} |"
-                        f" {'':>8} | {'':>19} | {'':>35} |"
-                        f" {'':>10} | {'':>11} |"
-                    ) + append_msg
-
-                    log.append(append_msg)
-
-        self.model_log_msg.append("\n".join(log))
+        self.model_log_msg.append(log)

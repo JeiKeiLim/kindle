@@ -7,7 +7,6 @@ width_multiple: 1.0
 pretrained: mobilenetv3_small_100
 
 backbone:
-    # Example model in PyTorch Tutorial (https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)
     # [from, repeat, module, args]
     [
         [-1, 1, UpSample, []],
