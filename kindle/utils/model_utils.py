@@ -254,7 +254,7 @@ class ModelInfoLogger:
         """Head message that contains column names."""
         log = (
             f"{'idx':>3} | {'from':>10} | {'n':>3} | {'params':>8} |"
-            f" {'module':>15} | {'arguments':>35} |"
+            f" {'module':>19} | {'arguments':>35} |"
             f" {'in_channel':>10} | {'out_channel':>11} |"
         )
         if self.log_shapes:
@@ -309,13 +309,13 @@ class ModelInfoLogger:
 
         log = [
             f"{i:3d} | {str(idx):>10} | {repeat:3d} |"
-            f" {module.n_params:8,d} | {module.name:>15} | {args_str_list[0]:>35} |"
-            f" {module_generator.in_channel:>10} | {module_generator.out_channel:>11} |"
+            f" {module.n_params:8,d} | {module.name:>19} | {args_str_list[0]:>35} |"
+            f" {module_generator.in_channel:>10} | {str(module_generator.out_channel):>11} |"
         ]
         for j in range(1, len(args_str_list)):
             log.append(
                 f"{'':>3} | {'':>10} | {'':>3} |"
-                f" {'':>8} | {'':>15} | {args_str_list[j]:>35} |"
+                f" {'':>8} | {'':>19} | {args_str_list[j]:>35} |"
                 f" {'':>10} | {'':>11} |"
             )
 
@@ -332,7 +332,7 @@ class ModelInfoLogger:
                 else:
                     append_msg = (
                         f"{'':>3} | {'':>10} | {'':>3} |"
-                        f" {'':>8} | {'':>15} | {'':>35} |"
+                        f" {'':>8} | {'':>19} | {'':>35} |"
                         f" {'':>10} | {'':>11} |"
                     ) + append_msg
 

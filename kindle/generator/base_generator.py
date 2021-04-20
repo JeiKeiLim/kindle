@@ -113,7 +113,7 @@ class GeneratorAbstract(ABC):
 
     @property
     @abstractmethod
-    def out_channel(self) -> int:
+    def out_channel(self) -> Union[int, List[int]]:
         """Out channel of the module."""
 
     @property
@@ -122,7 +122,9 @@ class GeneratorAbstract(ABC):
         """In channel of the module."""
 
     @abstractmethod
-    def compute_out_shape(self, size: np.ndarray, repeat: int = 1) -> List[int]:
+    def compute_out_shape(
+        self, size: np.ndarray, repeat: int = 1
+    ) -> Union[List[int], List[List[int]]]:
         """Compute output shape when {size} is given.
 
         Args: input size to compute output shape.
