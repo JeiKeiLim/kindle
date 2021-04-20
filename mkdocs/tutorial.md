@@ -279,3 +279,82 @@ idx |       from |   n |   params |          module |                           
   7 |         -1 |   1 |      850 |          Linear |                                [10] |         84 |          10 |            [84] |            [10] |
 Model Summary: 29 layers, 138,568 parameters, 138,568 gradients
 ```
+
+## 4. Utilize pretrained model
+Pre-trained model from [timm](https://github.com/rwightman/pytorch-image-models) can be loaded in kindle yaml config file.
+Please refer to [https://rwightman.github.io/pytorch-image-models/results/](https://rwightman.github.io/pytorch-image-models/results/) for supported models.
+
+### Example
+* In this example, we load pretrained efficient-b0 model. Then we extract each feature map layer to apply convolution layer.  
+
+
+**1. pretrained_model.yaml**
+```yaml
+input_size: [32, 32]
+input_channel: 3
+
+depth_multiple: 1.0
+width_multiple: 1.0
+
+pretrained: mobilenetv3_small_100
+
+backbone:
+    # [from, repeat, module, args]
+    [
+        [-1, 1, UpSample, []],
+        [-1, 1, PreTrained, [efficientnet_b0, True]],
+        [1, 1, PreTrainedFeatureMap, [-3]],
+        [-1, 1, Conv, [8, 1], {activation: LeakyReLU}],
+        [-1, 1, MaxPool, [2]],
+
+        [1, 1, PreTrainedFeatureMap, [-2]],
+        [-1, 1, Conv, [8, 1], {activation: LeakyReLU}],
+        [[-1, -3], 1, Concat, []],
+        [-1, 1, MaxPool, [2]],
+
+        [1, 1, PreTrainedFeatureMap, [-1]],
+        [-1, 1, Conv, [8, 1], {activation: LeakyReLU}],
+        [[-1, -3], 1, Concat, []],
+
+        [-1, 1, Flatten, []],
+        [-1, 1, Linear, [120, ReLU]],
+        [-1, 1, Linear, [84, ReLU]],
+    ]
+
+head:
+  [
+    [-1, 1, Linear, [10]]
+  ]
+```
+
+* When `PreTrained` module has `features_only = True` argument, the output of the module will be list of each feature map.
+* `PreTrainedFeatureMap` module simply bypass `feature_idx` output of `PreTrained`. 
+
+**2. Build a model**
+```python
+from kindle import Model
+
+model = Model("pretrained_model.yaml"), verbose=True)
+```
+
+```shell
+   idx | from     |   n | params    | module               | arguments                     |   in_channel | out_channel            | in_shape                                                           | out_shape
+-------+----------+-----+-----------+----------------------+-------------------------------+--------------+------------------------+--------------------------------------------------------------------+--------------------------------------------------------------------
+     0 | -1       |   1 | 0         | UpSample             | []                            |            3 | 3                      | [3, 32, 32]                                                        | [3, 64, 64]
+     1 | -1       |   1 | 3,595,388 | PreTrained           | ['efficientnet_b0', True]     |            3 | [16, 24, 40, 112, 320] | [3 64 64]                                                          | [[16, 32, 32], [24, 16, 16], [40, 8, 8], [112, 4, 4], [320, 2, 2]]
+     2 | 1        |   1 | 0         | PreTrainedFeatureMap | [-3]                          |           40 | 40                     | [[16, 32, 32], [24, 16, 16], [40, 8, 8], [112, 4, 4], [320, 2, 2]] | [40, 8, 8]
+     3 | -1       |   1 | 336       | Conv                 | [8, 1], activation: LeakyReLU |           40 | 8                      | [40, 8, 8]                                                         | [8, 8, 8]
+     4 | -1       |   1 | 0         | MaxPool              | [2]                           |            8 | 8                      | [8, 8, 8]                                                          | [8, 4, 4]
+     5 | 1        |   1 | 0         | PreTrainedFeatureMap | [-2]                          |          112 | 112                    | [[16, 32, 32], [24, 16, 16], [40, 8, 8], [112, 4, 4], [320, 2, 2]] | [112, 4, 4]
+     6 | -1       |   1 | 912       | Conv                 | [8, 1], activation: LeakyReLU |          112 | 8                      | [112, 4, 4]                                                        | [8, 4, 4]
+     7 | [-1, -3] |   1 | 0         | Concat               | []                            |           -1 | 16                     | [list([8, 4, 4]) list([8, 4, 4])]                                  | [16, 4, 4]
+     8 | -1       |   1 | 0         | MaxPool              | [2]                           |           16 | 16                     | [16, 4, 4]                                                         | [16, 2, 2]
+     9 | 1        |   1 | 0         | PreTrainedFeatureMap | [-1]                          |          320 | 320                    | [[16, 32, 32], [24, 16, 16], [40, 8, 8], [112, 4, 4], [320, 2, 2]] | [320, 2, 2]
+    10 | -1       |   1 | 2,576     | Conv                 | [8, 1], activation: LeakyReLU |          320 | 8                      | [320, 2, 2]                                                        | [8, 2, 2]
+    11 | [-1, -3] |   1 | 0         | Concat               | []                            |           -1 | 24                     | [list([8, 2, 2]) list([16, 2, 2])]                                 | [24, 2, 2]
+    12 | -1       |   1 | 0         | Flatten              | []                            |           -1 | 96                     | [24, 2, 2]                                                         | [96]
+    13 | -1       |   1 | 11,640    | Linear               | [120, 'ReLU']                 |           96 | 120                    | [96]                                                               | [120]
+    14 | -1       |   1 | 10,164    | Linear               | [84, 'ReLU']                  |          120 | 84                     | [120]                                                              | [84]
+    15 | -1       |   1 | 850       | Linear               | [10]                          |           84 | 10                     | [84]                                                               | [10]
+Model Summary: 250 layers, 3,621,866 parameters, 3,621,866 gradients
+```

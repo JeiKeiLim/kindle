@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>kindle.version &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../tutorial/">Tutorial</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../modules/">Modules</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.version/">kindle.version</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.trainer/">kindle.trainer</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.utils</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.nn/">kindle.generator.nn</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.upsample/">kindle.generator.upsample</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.identity/">kindle.generator.identity</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.add/">kindle.modules.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.activation/">kindle.modules.activation</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node">
+<h1 id="" class="mkapi-object mkapi-object-code plain">
+<span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
+<span class="mkapi-object-prefix">kindle.</span><span class="mkapi-object-name">version</span>
+<span id="kindle.version"></span><a class="mkapi-docs-link" href="../../kindle.version">DOCS</a>
+</h1>
+
+<div class="mkapi-code">
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Kindle version description.</span>
+
+<span class="sd">- Author: Jongkuk Lim</span>
+<span class="sd">- Contact: lim.jeikei@gmail.com</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.3.0&quot;</span>
+</code></pre></div>
+</div>
+</div></div>
+                <footer>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="../../../js/mkapi.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>

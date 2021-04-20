@@ -61,10 +61,20 @@ class TestModelParser:
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
         assert count_model_params(model) == 20148
 
+    def test_pretrained(self, verbose: bool = False):
+        """Test show case model."""
+        model = Model(
+            os.path.join("tests", "test_configs", "pretrained_example.yaml"),
+            verbose=verbose,
+        )
+        assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
+        assert count_model_params(model) == 3621866
+
 
 if __name__ == "__main__":
     tester = TestModelParser()
-    tester.test_nn_model(verbose=True)
-    tester.test_show_case(verbose=True)
-    tester.test_gap_model(verbose=True)
-    tester.test_example(verbose=True)
+    tester.test_pretrained(verbose=True)
+    # tester.test_nn_model(verbose=True)
+    # tester.test_show_case(verbose=True)
+    # tester.test_gap_model(verbose=True)
+    # tester.test_example(verbose=True)

@@ -51,6 +51,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.version/">kindle.version</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.model/">kindle.model</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.trainer/">kindle.trainer</a></li>
 </ul></li>
@@ -59,7 +60,6 @@
     <li class="toctree-l3"><a class="nav-item" href="../kindle.utils/">kindle.utils</a></li>
     <li class="toctree-l3 current"><a class="nav-item current" href="./">kindle.utils.model_utils</a>
 <ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#kindleutilsmodel_utilssplit_str_line">split_str_line</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindleutilsmodel_utilsmodelprofiler">ModelProfiler</a></li>
 <li class="toctree-l4"><a class="nav-item toc" href="#kindleutilsmodel_utilsmodelinfologger">ModelInfoLogger</a></li>
 </ul></li>
@@ -68,6 +68,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.flatten/">kindle.generator.flatten</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.add/">kindle.generator.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.generator.concat/">kindle.generator.concat</a></li>
@@ -84,6 +85,7 @@
     <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
 <ul class="subnav hide">
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.add/">kindle.modules.add</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../kindle.modules.concat/">kindle.modules.concat</a></li>
@@ -149,60 +151,6 @@
 
 
 </ul></div>
-    </div>
-  <div class="mkapi-section functions">
-      <div class="mkapi-section-name functions">
-          <span class="mkapi-section-name-body functions">Functions</span> 
-        </div>
-      <div class="mkapi-section-body functions"><ul class="mkapi-items">
-<li class="function"><code class="mkapi-item-name"><a href="#kindle.utils.model_utils.split_str_line">split_str_line</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code>, <code class="mkapi-object-signature">line_limit</code><code class="mkapi-object-parenthesis">)</code>
-<span class="mkapi-item-type">(list of str)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Split string with a maximum length of the line.<a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.split_str_line" title="Source for kindle.utils.model_utils.split_str_line">&lt;/&gt;</a></span></li>
-
-
-</ul></div>
-    </div>
-  </div>
-
-</div>
-
-<div class="mkapi-node" id="kindle.utils.model_utils.split_str_line">
-<div class='mkapi-object-container'>
-  <div class="mkapi-object function code top">
-    <div class="mkapi-object-kind function top">function</div>
-    <h2 id="kindleutilsmodel_utilssplit_str_line" class="mkapi-object-body function top"><code class="mkapi-object-prefix"><a href="#kindle.utils.model_utils">kindle.utils.model_utils</a>.</code><code class="mkapi-object-name">split_str_line</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">msg</code>, <code class="mkapi-object-signature">line_limit=30</code><code class="mkapi-object-parenthesis">)</code></h2>
-  </div>
-  <div class="mkapi-src-link">
-    <a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.split_str_line" title="Source for kindle.utils.model_utils.split_str_line">&lt;/&gt;</a>
-  </div>
-</div>
-<div class="mkapi-docstring">
-<div class="mkapi-section">
-      <div class="mkapi-section-body"><p>Split string with a maximum length of the line.</p>
-<p>Ex) split_str_line("hello world", line_limit=5)
-    will return ["hello", " worl", "d"]</p></div>
-    </div>
-  <div class="mkapi-section parameters">
-      <div class="mkapi-section-name parameters">
-          <span class="mkapi-section-name-body parameters">Parameters</span> 
-        </div>
-      <div class="mkapi-section-body parameters"><ul class="mkapi-items">
-<li><code class="mkapi-item-name">msg</code>
-<span class="mkapi-item-type">(str)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">message to split.</span></li>
-
-<li><code class="mkapi-item-name">line_limit</code>
-<span class="mkapi-item-type">(int, optional)</span>
-<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">limit length of the line.</span></li>
-
-
-</ul></div>
-    </div>
-  <div class="mkapi-section returns">
-      <div class="mkapi-section-name returns">
-          <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(list of str)</span>
-        </div>
-      <div class="mkapi-section-body returns"><p>list of the split message.</p></div>
     </div>
   </div>
 
@@ -369,7 +317,7 @@ Ex) First index element is the slowest module index.<span id="kindle.utils.model
         </div>
       <div class="mkapi-section-body attributes"><ul class="mkapi-items">
 <li class="readonly-property"><code class="mkapi-item-name">head</code>
-<span class="mkapi-item-type">(str)</span>
+<span class="mkapi-item-type">(list of str)</span>
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Head message that contains column names.<span id="kindle.utils.model_utils.ModelInfoLogger.head"></span><a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.ModelInfoLogger.head" title="Source for kindle.utils.model_utils.ModelInfoLogger.head">&lt;/&gt;</a></span></li>
 
 <li class="readonly-property"><code class="mkapi-item-name">info</code>

@@ -111,8 +111,26 @@ def test_model_gap_model():
     assert test_accuracy > 0.30 and test_loss < 2.1
 
 
+def test_model_pretrained(force: bool = False):
+    if not torch.cuda.is_available() and not force:
+        return
+
+    epochs = 1
+
+    model, trainer = get_trainer(
+        os.path.join("tests", "test_configs", "pretrained_example.yaml")
+    )
+    train_loader, test_loader = prepare_cifar10()
+    trainer.train(train_loader, n_epoch=epochs)
+    test_loss, test_accuracy = trainer.test(test_loader)
+
+    print(test_loss, test_accuracy)
+    assert test_accuracy > 0.50 and test_loss < 1.4
+
+
 if __name__ == "__main__":
-    test_model_nn_model()
-    test_model_showcase()
+    test_model_pretrained(force=True)
+    # test_model_nn_model()
+    # test_model_showcase()
     # test_model_example()
     # test_model_gap_model()

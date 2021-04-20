@@ -17,6 +17,8 @@ from kindle.generator.nn import TorchNNModuleGenerator
 from kindle.generator.poolings import (AvgPoolGenerator,
                                        GlobalAvgPoolGenerator,
                                        MaxPoolGenerator)
+from kindle.generator.pretrained import (PreTrainedFeatureMapGenerator,
+                                         PreTrainedGenerator)
 from kindle.generator.upsample import UpSampleGenerator
 
 __all__ = [
@@ -36,4 +38,6 @@ __all__ = [
     "UpSampleGenerator",
     "IdentityGenerator",
     "TorchNNModuleGenerator",
+    "PreTrainedGenerator",
+    "PreTrainedFeatureMapGenerator",
 ]

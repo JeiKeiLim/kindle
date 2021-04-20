@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>kindle.modules.pretrained &mdash; Kindle</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/mkapi-common.css">
+    <link rel="stylesheet" href="../../../css/mkapi-ivory.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> Kindle</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../tutorial/">Tutorial</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../modules/">Modules</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">API</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">kindle</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle/">kindle</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.version/">kindle.version</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.model/">kindle.model</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.trainer/">kindle.trainer</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.utils</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils/">kindle.utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.model_utils/">kindle.utils.model_utils</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.utils.torch_utils/">kindle.utils.torch_utils</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.generator</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator/">kindle.generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.pretrained/">kindle.generator.pretrained</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.flatten/">kindle.generator.flatten</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.add/">kindle.generator.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.concat/">kindle.generator.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.nn/">kindle.generator.nn</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.linear/">kindle.generator.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.upsample/">kindle.generator.upsample</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.base_generator/">kindle.generator.base_generator</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.bottleneck/">kindle.generator.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.custom_yaml_module/">kindle.generator.custom_yaml_module</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.conv/">kindle.generator.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.identity/">kindle.generator.identity</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.generator.poolings/">kindle.generator.poolings</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">kindle.modules</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules/">kindle.modules</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.pretrained/">kindle.modules.pretrained</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.dwconv/">kindle.modules.dwconv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.add/">kindle.modules.add</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.concat/">kindle.modules.concat</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.linear/">kindle.modules.linear</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.activation/">kindle.modules.activation</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.bottleneck/">kindle.modules.bottleneck</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.conv/">kindle.modules.conv</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../kindle.modules.poolings/">kindle.modules.poolings</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
+    </div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> Kindle</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    
+</ul>
+</nav>
+                <div id="content"><div class="mkapi-node">
+<h1 id="" class="mkapi-object mkapi-object-code plain">
+<span class="mkapi-object-kind mkapi-object-kind-code">SOURCE CODE</span>
+<span class="mkapi-object-prefix">kindle.modules.</span><span class="mkapi-object-name">pretrained</span>
+<span id="kindle.modules.pretrained"></span><a class="mkapi-docs-link" href="../../kindle.modules.pretrained">DOCS</a>
+</h1>
+
+<div class="mkapi-code">
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Pretrained module.</span>
+
+<span class="sd">Pre-trained model downloaded from https://github.com/rwightman/pytorch-image-models</span>
+<span class="sd">Please refer to https://rwightman.github.io/pytorch-image-models/ for the supported model overview.</span>
+
+<span class="sd">- Author: Jongkuk Lim</span>
+<span class="sd">- Contact: lim.jeikei@gmail.com</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">timm</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+
+<span class="k">class</span> <span class="nc">Pretrained</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.pretrained.Pretrained"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.Pretrained" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Pretrained module.</span>
+
+<span class="sd">    Please refer to https://rwightman.github.io/pytorch-image-models/ for the supported</span>
+<span class="sd">    model overview.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">features_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize Pretrained instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: name of the model from timm.list_models(pretrained=True)</span>
+<span class="sd">            features_only: if True, return value of the module will be list of each feature maps.</span>
+<span class="sd">            pretrained: use pretrained weight.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">timm</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span> <span class="n">features_only</span><span class="o">=</span><span class="n">features_only</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span><span id="kindle.modules.pretrained.Pretrained.forward"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.Pretrained.forward" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained.forward">DOCS</a>
+        <span class="sd">&quot;&quot;&quot;Forward pretrained network.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            if self.features_only is True, List of torch.Tensor will be returned.</span>
+<span class="sd">            which each array contains corresponding feature map of pooling layer.</span>
+<span class="sd">            Otherwise, torch.Tensor will be returned which is output of the last layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PretrainedFeatureMap</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.pretrained.PretrainedFeatureMap"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.PretrainedFeatureMap" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap">DOCS</a>
+    <span class="sd">&quot;&quot;&quot;Placeholder of the output of Pretrained module when features_only = True&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize PretrainedFeatureMap.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feature_idx: index of the feature maps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_idx</span> <span class="o">=</span> <span class="n">feature_idx</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span><span id="kindle.modules.pretrained.PretrainedFeatureMap.forward"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.PretrainedFeatureMap.forward" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap.forward">DOCS</a>
+        <span class="sd">&quot;&quot;&quot;Bypass input of x[self.feature_idx].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_idx</span><span class="p">]</span>
+</code></pre></div>
+</div>
+</div></div>
+                <footer>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="../../../js/mkapi.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>

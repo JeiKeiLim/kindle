@@ -9,4 +9,6 @@ dependencies:
   - pytorch=1.7.1
   - torchvision=0.8.2
   - pip:
+      - tabulate==0.8.9
+      - timm==0.4.5
       - tqdm==4.56.0
