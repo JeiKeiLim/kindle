@@ -13,6 +13,8 @@ plugins:
   - mkapi
 
 markdown_extensions:
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
