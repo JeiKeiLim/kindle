@@ -18,10 +18,12 @@ def test_profiler():
 
     model = Model(os.path.join("tests", "test_configs", "example.yaml"), verbose=True)
     model.to(device)
-    profiler = model.profile(n_run=1000, batch_size=32)
+    profiler = model.profile(n_run=100, batch_size=32, input_size=(224, 224))
+    mac = profiler.get_macs(verbose=True)
 
     profiler.print_result(sort_by_rank=True)
 
+    assert mac == 1616970
     assert profiler.result_array.sum() != 0
 
 

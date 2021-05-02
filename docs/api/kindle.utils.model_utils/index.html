@@ -43,6 +43,7 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../functionality/">Functionality</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../tutorial/">Tutorial</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../usages/">Usages</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../modules/">Modules</a></li>
@@ -213,6 +214,10 @@ Ex) First index element is the slowest module index.<span id="kindle.utils.model
           <span class="mkapi-section-name-body methods">Methods</span> 
         </div>
       <div class="mkapi-section-body methods"><ul class="mkapi-items">
+<li class="method"><code class="mkapi-item-name"><a href="#kindle.utils.model_utils.ModelProfiler.get_macs">get_macs</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">verbose</code><code class="mkapi-object-parenthesis">)</code>
+<span class="mkapi-item-type">(float)</span>
+<span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Get MACs information using ptflops.<a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.get_macs" title="Source for kindle.utils.model_utils.ModelProfiler.get_macs">&lt;/&gt;</a></span></li>
+
 <li class="method"><code class="mkapi-item-name"><a href="#kindle.utils.model_utils.ModelProfiler.print_result">print_result</a></code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">sort_by_rank</code><code class="mkapi-object-parenthesis">)</code>
 
 <span class="mkapi-item-dash">&mdash;</span> <span class="mkapi-item-description">Print profiling result.<a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.print_result" title="Source for kindle.utils.model_utils.ModelProfiler.print_result">&lt;/&gt;</a></span></li>
@@ -254,6 +259,29 @@ Ex) First index element is the slowest module index.<span id="kindle.utils.model
 
 
 </ul></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  
+    <div class="mkapi-member">
+      <div class="mkapi-node" id="kindle.utils.model_utils.ModelProfiler.get_macs">
+<div class='mkapi-object-container'>
+  <div class="mkapi-object method code">
+    <div class="mkapi-object-kind method">method</div>
+    <h3 id="kindleutilsmodel_utilsmodelprofilerget_macs" class="mkapi-object-body method"><code class="mkapi-object-name">get_macs</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">verbose=False</code><code class="mkapi-object-parenthesis">)</code><span class="mkapi-item-type"> &#x2192; float</span></h3>
+  </div>
+  <div class="mkapi-src-link">
+    <a class="mkapi-src-link" href="../source/kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.get_macs" title="Source for kindle.utils.model_utils.ModelProfiler.get_macs">&lt;/&gt;</a>
+  </div>
+</div>
+<div class="mkapi-docstring">
+<div class="mkapi-section">
+      <div class="mkapi-section-body"><p>Get MACs information using ptflops.</p>
+<p>This might not be correct as it is stated at
+(https://github.com/sovrasov/flops-counter.pytorch)</p>
+<p>Please use with caution.</p></div>
     </div>
   </div>
 

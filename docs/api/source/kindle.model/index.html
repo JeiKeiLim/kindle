@@ -43,6 +43,7 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../functionality/">Functionality</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../tutorial/">Tutorial</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../modules/">Modules</a></li>
@@ -167,9 +168,6 @@
         <span class="n">n_augment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Forward the model.</span>
-
-<span class="sd">        For the time being, this method will only call self.forward_once. Later, we plan</span>
-<span class="sd">        to add Test Time Augment.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            x: model input. When augment_func is given,</span>

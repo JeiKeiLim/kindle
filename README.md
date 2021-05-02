@@ -24,6 +24,9 @@ Kindle builds a model with no code but yaml file which its method is inspired fr
 - [Custom module support](#custom-module-support)
   - [Custom module with yaml](#custom-module-with-yaml)
   - [Custom module from source](#custom-module-from-source)
+- [PretrainedModel support](#pretrained-model-support)
+- [Model profiler](#model-profiler)
+- [Test Time Augmentation](#test-time-augmentation)
 
 # Installation
 ## Install with pip
@@ -138,9 +141,25 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Pretrained model support
 * Pre-trained model from [timm](https://github.com/rwightman/pytorch-image-models) can be loaded in kindle yaml config file. Please refer to [https://limjk.ai/kindle/tutorial/#4-utilize-pretrained-model](https://limjk.ai/kindle/tutorial/#4-utilize-pretrained-model) for further detail.
 
+# Model profiler
+* Kindle provides model profiling option for each layers and calculating MACs.
+* Please refer to https://limjk.ai/kindle/functionality/#1-model-profiling for further detail.
+
+# Test Time Augmentation
+* Kindle model supports TTA with easy usability. Just pass the model input and augmentation function.
+* Please refer to https://limjk.ai/functionality/#3-test-time-augmentation for further detail.
+
+
+# Recent changes
+|Version|Description|Date|
+|-------|-----------|----|
+|0.3.1|Calculating MACs in profiler|2021. 05. 02|
+|0.3.0|Add PreTrained support|2021. 04. 20|
+
 # Planned features
 * ~~Custom module support~~
 * ~~Custom module with yaml support~~
 * ~~Use pre-trained model~~
 * Graphical model file generator
+* Ensemble model
 * More modules!

@@ -13,6 +13,7 @@ from typing import (TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple,
 import numpy as np
 import torch
 import torch.nn as nn
+from ptflops import get_model_complexity_info
 from tabulate import tabulate
 from tqdm import tqdm
 
@@ -120,6 +121,23 @@ class ModelProfiler:
 
         if verbose:
             self.print_result()
+
+    def get_macs(self, verbose: bool = False) -> float:
+        """Get MACs information using ptflops.
+
+        This might not be correct as it is stated at
+        (https://github.com/sovrasov/flops-counter.pytorch)
+
+        Please use with caution.
+        """
+        macs, _ = get_model_complexity_info(
+            model=self.model,
+            input_res=self.input_size[1:],
+            as_strings=False,
+            print_per_layer_stat=verbose,
+            verbose=verbose,
+        )
+        return macs
 
     def print_result(  # pylint: disable=too-many-locals
         self, sort_by_rank: bool = False
