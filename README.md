@@ -24,6 +24,9 @@ Kindle builds a model with no code but yaml file which its method is inspired fr
 - [Custom module support](#custom-module-support)
   - [Custom module with yaml](#custom-module-with-yaml)
   - [Custom module from source](#custom-module-from-source)
+- [PretrainedModel support](#pretrained-model-support)
+- [Model profiler](#model-profiler)
+- [Test Time Augmentation](#test-time-augmentation)
 
 # Installation
 ## Install with pip
@@ -158,5 +161,5 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 * ~~Custom module with yaml support~~
 * ~~Use pre-trained model~~
 * Graphical model file generator
-* Ensemble model 
+* Ensemble model
 * More modules!
