@@ -46,9 +46,6 @@ class Model(nn.Module):
     ) -> Union[torch.Tensor, List[torch.Tensor]]:
         """Forward the model.
 
-        For the time being, this method will only call self.forward_once. Later, we plan
-        to add Test Time Augment.
-
         Args:
             x: model input. When augment_func is given,
                 {X} can be either torch.Tensor or np.ndarray.

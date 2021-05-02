@@ -47,6 +47,7 @@
 <ul class="subnav">
 <li class="toctree-l2"><a class="nav-item toc" href="#1-model-profiling">1. Model Profiling</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#2-get-macs">2. Get MACs</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#3-test-time-augmentation">3. Test Time Augmentation</a></li>
 </ul></li>
                     <li class="toctree-l1"><a class="nav-item" href="../tutorial/">Tutorial</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../usages/">Usages</a></li>
@@ -127,7 +128,6 @@
 <li>Please refer to <a href="https://limjk.ai/kindle/api/kindle.utils.model_utils/#kindleutilsmodel_utilsmodelprofiler">API reference page</a> for the detailed information.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
-
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;model.yaml&quot;</span><span class="p">)</span>
 
@@ -225,7 +225,59 @@ Running <span class="nb">time</span>
   <span class="o">)</span>
 <span class="o">)</span>
 <span class="m">1</span>,616,970 MACs
-</code></pre></div></div>
+</code></pre></div>
+<h2 id="3-test-time-augmentation">3. Test Time Augmentation</h2>
+<ul>
+<li>Kindle model supports TTA with simple usage.</li>
+<li>Reference document: <a href="https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward">https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward</a></li>
+</ul>
+<h3 id="tta-with-explicit-functions">TTA with explicit functions</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
+
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_flip_lr</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_flip_ud</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_random_scale</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="n">ratio</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">xr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">h1</span><span class="p">,</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">h2</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+
+        <span class="n">xr</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">w1</span> <span class="o">-</span> <span class="n">w2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h1</span> <span class="o">-</span> <span class="n">h2</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xr</span>
+
+<span class="n">aug_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">aug_flip_lr</span><span class="p">,</span> <span class="n">aug_flip_ud</span><span class="p">,</span> <span class="n">aug_random_scale</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;model.yaml&quot;</span><span class="p">)</span>
+
+<span class="n">model_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="n">model_out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">model_in</span><span class="p">,</span> <span class="n">augment_func</span><span class="o">=</span><span class="n">aug_funcs</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>model_out</code> in the above code contains <strong>4</strong> elements which are outputs of the model with each 3 augmentations and original <code>model_in</code>.</li>
+</ul>
+<h3 id="tta-with-repeating-one-augmentation-function">TTA with repeating one augmentation function</h3>
+<ul>
+<li>If a single augmentation function is given to <code>augment_func</code>, TTA will consider as random augmentation and run the network repeating <code>n_augment</code> times. </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">model_out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">model_in</span><span class="p">,</span> <span class="n">augment_func</span><span class="o">=</span><span class="n">aug_random_scale</span><span class="p">,</span> <span class="n">n_augment</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>model_out</code> in the above code contains <strong>6</strong> elements which are outputs of the model with 5 <code>aug_random_scale</code> applied and original <code>model_in</code>.</li>
+</ul></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href=".." title="Home"><span>Previous</span></a></div>

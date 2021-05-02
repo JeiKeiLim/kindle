@@ -169,9 +169,6 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Forward the model.</span>
 
-<span class="sd">        For the time being, this method will only call self.forward_once. Later, we plan</span>
-<span class="sd">        to add Test Time Augment.</span>
-
 <span class="sd">        Args:</span>
 <span class="sd">            x: model input. When augment_func is given,</span>
 <span class="sd">                {X} can be either torch.Tensor or np.ndarray.</span>

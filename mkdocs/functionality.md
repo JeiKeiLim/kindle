@@ -8,7 +8,6 @@
 ```python
 from kindle import Model
 
-
 model = Model("model.yaml")
 
 profiler = model.profile(n_run=100, batch_size=32, input_size=(224, 224), verbose=True)
@@ -114,3 +113,56 @@ Model(
 )
 1,616,970 MACs
 ```
+
+## 3. Test Time Augmentation
+- Kindle model supports TTA with simple usage.
+- Reference document: [https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward](https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward)
+
+### TTA with explicit functions
+```python
+import torch
+import torch.nn.functional as F
+import numpy as np
+
+from kindle import Model
+
+
+@torch.no_grad()
+def aug_flip_lr(x: torch.Tensor) -> torch.Tensor:
+    return torch.flip(x, dims=[-1])
+
+@torch.no_grad()
+def aug_flip_ud(x: torch.Tensor) -> torch.Tensor:
+    return torch.flip(x, dims=[-2])
+
+@torch.no_grad()
+def aug_random_scale(x: torch.Tensor) -> torch.Tensor:
+    ratio = np.random.uniform(0.8, 1.2)
+    xr = F.interpolate(x, scale_factor=ratio)
+
+    if xr.shape[2:] != x.shape[2:]:
+        h1, w1 = x.shape[2:]
+        h2, w2 = xr.shape[2:]
+
+        xr = F.pad(xr, [0, w1 - w2, 0, h1 - h2], value=0)
+
+    return xr
+
+aug_funcs = [aug_flip_lr, aug_flip_ud, aug_random_scale]
+model = Model("model.yaml")
+
+model_in = torch.rand(1, 3, 32, 32)
+model_out = model(model_in, augment_func=aug_funcs)
+```
+
+- `model_out` in the above code contains **4** elements which are outputs of the model with each 3 augmentations and original `model_in`.
+
+
+### TTA with repeating one augmentation function
+- If a single augmentation function is given to `augment_func`, TTA will consider as random augmentation and run the network repeating `n_augment` times. 
+
+```python
+model_out = model(model_in, augment_func=aug_random_scale, n_augment = 5)
+```
+
+- `model_out` in the above code contains **6** elements which are outputs of the model with 5 `aug_random_scale` applied and original `model_in`.

@@ -140,7 +140,11 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 
 # Model profiler
 * Kindle provides model profiling option for each layers and calculating MACs.
-* Please refer to https://limjk.ai/kindle/functionality for further detail.
+* Please refer to https://limjk.ai/kindle/functionality/#1-model-profiling for further detail.
+
+# Test Time Augmentation
+* Kindle model supports TTA with easy usability. Just pass the model input and augmentation function.
+* Please refer to https://limjk.ai/functionality/#3-test-time-augmentation for further detail.
 
 
 # Recent changes
@@ -154,4 +158,5 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 * ~~Custom module with yaml support~~
 * ~~Use pre-trained model~~
 * Graphical model file generator
+* Ensemble model 
 * More modules!
