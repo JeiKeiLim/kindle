@@ -43,6 +43,7 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../../functionality/">Functionality</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../tutorial/">Tutorial</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../usages/">Usages</a></li>
                     <li class="toctree-l1"><a class="nav-item" href="../../../modules/">Modules</a></li>
@@ -135,6 +136,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">ptflops</span> <span class="kn">import</span> <span class="n">get_model_complexity_info</span>
 <span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
@@ -242,6 +244,23 @@
 
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_result</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_macs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span><span id="kindle.utils.model_utils.ModelProfiler.get_macs"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.get_macs" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.get_macs">DOCS</a>
+        <span class="sd">&quot;&quot;&quot;Get MACs information using ptflops.</span>
+
+<span class="sd">        This might not be correct as it is stated at</span>
+<span class="sd">        (https://github.com/sovrasov/flops-counter.pytorch)</span>
+
+<span class="sd">        Please use with caution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">macs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_model_complexity_info</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">input_res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+            <span class="n">as_strings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">print_per_layer_stat</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">macs</span>
 
     <span class="k">def</span> <span class="nf">print_result</span><span class="p">(</span>  <span class="c1"># pylint: disable=too-many-locals</span><span id="kindle.utils.model_utils.ModelProfiler.print_result"></span><a class="mkapi-docs-link" title="kindle.utils.model_utils.ModelProfiler.print_result" href="../../kindle.utils.model_utils/#kindle.utils.model_utils.ModelProfiler.print_result">DOCS</a>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sort_by_rank</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>

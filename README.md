@@ -138,6 +138,17 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Pretrained model support
 * Pre-trained model from [timm](https://github.com/rwightman/pytorch-image-models) can be loaded in kindle yaml config file. Please refer to [https://limjk.ai/kindle/tutorial/#4-utilize-pretrained-model](https://limjk.ai/kindle/tutorial/#4-utilize-pretrained-model) for further detail.
 
+# Model profiler
+* Kindle provides model profiling option for each layers and calculating MACs.
+* Please refer to https://limjk.ai/kindle/functionality for further detail.
+
+
+# Recent changes
+|Version|Description|Date|
+|-------|-----------|----|
+|0.3.1|Calculating MACs in profiler|2021. 05. 02|
+|0.3.0|Add PreTrained support|2021. 04. 20|
+
 # Planned features
 * ~~Custom module support~~
 * ~~Custom module with yaml support~~
