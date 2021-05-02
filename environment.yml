@@ -11,4 +11,5 @@ dependencies:
   - pip:
       - tabulate==0.8.9
       - timm==0.4.5
+      - ptflops==0.6.4
       - tqdm==4.56.0

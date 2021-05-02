@@ -24,6 +24,7 @@ setuptools.setup(
         "tqdm>=4.56.0",
         "PyYAML>=5.3.1",
         "torch>=1.7.1",
+        "ptflops>=0.6.4",
         "timm>=0.4.5",
         "tabulate>=0.8.9",
     ],

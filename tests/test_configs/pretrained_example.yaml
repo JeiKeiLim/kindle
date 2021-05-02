@@ -4,8 +4,6 @@ input_channel: 3
 depth_multiple: 1.0
 width_multiple: 1.0
 
-pretrained: mobilenetv3_small_100
-
 backbone:
     # [from, repeat, module, args]
     [

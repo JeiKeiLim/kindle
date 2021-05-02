@@ -1,5 +1,7 @@
 """PyTorch trainer module.
 
+** This module is experimental and tend to be removed and changed in the future. **
+
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
