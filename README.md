@@ -123,7 +123,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |Identity|Identity|[]|
 |YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
-|Pretrained|timm.create_model|[model_name, features_only, pretrained]|
+|Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
 
 * **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
@@ -153,6 +153,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.3.2|Fix PreTrained to work without PreTrainedFeatureMap|2021. 06. 03|
 |0.3.1|Calculating MACs in profiler|2021. 05. 02|
 |0.3.0|Add PreTrained support|2021. 04. 20|
 

@@ -1,0 +1,22 @@
+input_size: [32, 32]
+input_channel: 3
+
+depth_multiple: 1.0
+width_multiple: 1.0
+
+backbone:
+    # [from, repeat, module, args]
+    [
+        [-1, 1, UpSample, []],
+        [-1, 1, PreTrained, [efficientnet_b0, False]],
+
+        [-1, 1, Flatten, []],
+        [-1, 1, Linear, [120, ReLU]],
+        [-1, 1, Linear, [84, ReLU]],
+    ]
+
+head:
+  [
+    [-1, 1, Linear, [10]]
+  ]
+

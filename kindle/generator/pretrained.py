@@ -27,7 +27,7 @@ class PreTrainedGenerator(GeneratorAbstract):
         temp_in_shape = np.array([self.in_channel, 128, 128])
         out_shape = self.compute_out_shape(temp_in_shape)
 
-        if self.kwargs["features_only"] is True:
+        if isinstance(out_shape[0], list):
             return [o_shape[0] for o_shape in out_shape if isinstance(o_shape, list)]
 
         return out_shape[0]
@@ -42,10 +42,10 @@ class PreTrainedGenerator(GeneratorAbstract):
         module = self(repeat=repeat)
         module_out = module(torch.zeros([1, *list(size)]))
 
-        if self.kwargs["features_only"] is True:
-            return [list(m_out.shape[1:]) for m_out in module_out]
+        if isinstance(module_out, torch.Tensor):
+            return list(module_out.shape[1:])
 
-        return list(module_out.shape[1:])
+        return [list(m_out.shape[1:]) for m_out in module_out]
 
     @property
     def kwargs(self) -> Dict[str, Any]:

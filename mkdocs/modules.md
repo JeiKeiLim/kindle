@@ -17,7 +17,7 @@
 |Identity|Identity|[]|
 |YamlModule|Custom module from yaml file|['yaml/file/path', arg0, arg1, ...]|
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
-|Pretrained|timm.create_model|[model_name, features_only, pretrained]|
+|Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
 
 !!! Note
@@ -67,7 +67,7 @@
 
 * Please refer to [https://pytorch.org/docs/stable/generated/torch.nn.AvgPool2d.html](https://pytorch.org/docs/stable/generated/torch.nn.AvgPool2d.html) for further detail.
 
-## MaxPool 
+## MaxPool
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |kernel_size|int|||
@@ -87,7 +87,7 @@
 
 * Please refer to [https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html) for further detail.
 
-## Concat 
+## Concat
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |dimension|int|1||
@@ -98,7 +98,7 @@
 |out_channels|int|||
 |activation|str or None|None||
 
-## UpSample 
+## UpSample
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |size|int or None|None||
@@ -120,7 +120,8 @@
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |model_name|str||Please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results) for supported models.|
-|features_only|bool|False|If True, return value of the module will be list of each feature maps.|
+|ues_feature_maps|bool|False|If True, return value of the module will be list of each feature maps. `List[torch.Tensor]` (features_only must be True in this case). Otherwise, returns last feature map.|
+|features_only|bool|True|If True, skip classification layer and use feature layers only. `torch.Tensor`|
 |pretrained|bool|True|use pretrained weight|
 
 
