@@ -21,17 +21,25 @@ class Pretrained(nn.Module):
     """
 
     def __init__(
-        self, model_name: str, features_only: bool = False, pretrained: bool = True
+        self,
+        model_name: str,
+        use_feature_maps: bool = False,
+        features_only: bool = True,
+        pretrained: bool = True,
     ) -> None:
         """Initialize Pretrained instance.
 
         Args:
             model_name: name of the model from timm.list_models(pretrained=True)
-            features_only: if True, return value of the module will be list of each feature maps.
+            use_feature_maps: if True, return value of the module will be list of each feature maps
+                            (features_only must be True in this case).
+                            Otherwise, returns last feature map.
+            features_only: if True, skip classification layer and use feature layers only.
             pretrained: use pretrained weight.
         """
         super().__init__()
 
+        self.pass_last = not use_feature_maps and features_only
         self.module = timm.create_model(
             model_name=model_name, pretrained=pretrained, features_only=features_only
         )
@@ -40,11 +48,14 @@ class Pretrained(nn.Module):
         """Forward pretrained network.
 
         Returns:
-            if self.features_only is True, List of torch.Tensor will be returned.
+            if use_feature_maps is True, List of torch.Tensor will be returned.
             which each array contains corresponding feature map of pooling layer.
             Otherwise, torch.Tensor will be returned which is output of the last layer.
         """
-        return self.module(x)
+
+        y = self.module(x)
+
+        return y[-1] if self.pass_last else y
 
 
 class PretrainedFeatureMap(nn.Module):

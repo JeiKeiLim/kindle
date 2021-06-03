@@ -163,7 +163,7 @@ Please refer to https://rwightman.github.io/pytorch-image-models/ for the suppor
 <div class='mkapi-object-container'>
   <div class="mkapi-object class code top">
     <div class="mkapi-object-kind class top">class</div>
-    <h2 id="kindlemodulespretrainedpretrained" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.modules.pretrained">kindle.modules.pretrained</a>.</code><code class="mkapi-object-name">Pretrained</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model_name</code>, <code class="mkapi-object-signature">features_only=False</code>, <code class="mkapi-object-signature">pretrained=True</code><code class="mkapi-object-parenthesis">)</code></h2>
+    <h2 id="kindlemodulespretrainedpretrained" class="mkapi-object-body class top"><code class="mkapi-object-prefix"><a href="#kindle.modules.pretrained">kindle.modules.pretrained</a>.</code><code class="mkapi-object-name">Pretrained</code><code class="mkapi-object-parenthesis">(</code><code class="mkapi-object-signature">model_name</code>, <code class="mkapi-object-signature">use_feature_maps=False</code>, <code class="mkapi-object-signature">features_only=True</code>, <code class="mkapi-object-signature">pretrained=True</code><code class="mkapi-object-parenthesis">)</code></h2>
   </div>
   <div class="mkapi-src-link">
     <a class="mkapi-src-link" href="../source/kindle.modules.pretrained/#kindle.modules.pretrained.Pretrained" title="Source for kindle.modules.pretrained.Pretrained">&lt;/&gt;</a>
@@ -1550,7 +1550,7 @@ strings are acceptable.</p></div>
       <div class="mkapi-section-name returns">
           <span class="mkapi-section-name-body returns">Returns</span> <span class="mkapi-item-type">(Union(tensor, list of tensor))</span>
         </div>
-      <div class="mkapi-section-body returns"><p>if self.features_only is True, List of torch.Tensor will be returned.
+      <div class="mkapi-section-body returns"><p>if use_feature_maps is True, List of torch.Tensor will be returned.
 which each array contains corresponding feature map of pooling layer.
 Otherwise, torch.Tensor will be returned which is output of the last layer.</p></div>
     </div>

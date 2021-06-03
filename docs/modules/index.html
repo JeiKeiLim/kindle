@@ -214,7 +214,7 @@
 <tr>
 <td>Pretrained</td>
 <td>timm.create_model</td>
-<td>[model_name, features_only, pretrained]</td>
+<td>[model_name, use_feature_maps, features_only, pretrained]</td>
 </tr>
 <tr>
 <td>PreTrainedFeatureMap</td>
@@ -624,10 +624,16 @@
 <td>Please refer to <a href="https://rwightman.github.io/pytorch-image-models/results">https://rwightman.github.io/pytorch-image-models/results</a> for supported models.</td>
 </tr>
 <tr>
-<td>features_only</td>
+<td>ues_feature_maps</td>
 <td>bool</td>
 <td>False</td>
-<td>If True, return value of the module will be list of each feature maps.</td>
+<td>If True, return value of the module will be list of each feature maps. <code>List[torch.Tensor]</code> (features_only must be True in this case). Otherwise, returns last feature map.</td>
+</tr>
+<tr>
+<td>features_only</td>
+<td>bool</td>
+<td>True</td>
+<td>If True, skip classification layer and use feature layers only. <code>torch.Tensor</code></td>
 </tr>
 <tr>
 <td>pretrained</td>
