@@ -144,17 +144,25 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">features_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">use_feature_maps</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">features_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Initialize Pretrained instance.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            model_name: name of the model from timm.list_models(pretrained=True)</span>
-<span class="sd">            features_only: if True, return value of the module will be list of each feature maps.</span>
+<span class="sd">            use_feature_maps: if True, return value of the module will be list of each feature maps</span>
+<span class="sd">                            (features_only must be True in this case).</span>
+<span class="sd">                            Otherwise, returns last feature map.</span>
+<span class="sd">            features_only: if True, skip classification layer and use feature layers only.</span>
 <span class="sd">            pretrained: use pretrained weight.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">pass_last</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">use_feature_maps</span> <span class="ow">and</span> <span class="n">features_only</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">timm</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span>
             <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span> <span class="n">features_only</span><span class="o">=</span><span class="n">features_only</span>
         <span class="p">)</span>
@@ -163,11 +171,14 @@
         <span class="sd">&quot;&quot;&quot;Forward pretrained network.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            if self.features_only is True, List of torch.Tensor will be returned.</span>
+<span class="sd">            if use_feature_maps is True, List of torch.Tensor will be returned.</span>
 <span class="sd">            which each array contains corresponding feature map of pooling layer.</span>
 <span class="sd">            Otherwise, torch.Tensor will be returned which is output of the last layer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pass_last</span> <span class="k">else</span> <span class="n">y</span>
 
 
 <span class="k">class</span> <span class="nc">PretrainedFeatureMap</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span><span id="kindle.modules.pretrained.PretrainedFeatureMap"></span><a class="mkapi-docs-link" title="kindle.modules.pretrained.PretrainedFeatureMap" href="../../kindle.modules.pretrained/#kindle.modules.pretrained.PretrainedFeatureMap">DOCS</a>
