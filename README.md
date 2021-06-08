@@ -37,6 +37,12 @@ You can install `kindle` by pip.
 $ pip install kindle
 ```
 
+### Install `kindle` for PyTorch under 1.7.1 (not tested)
+```shell
+pip install kindle --no-deps
+pip install tqdm ptflops timm tabulate
+```
+
 ## Install from source
 Please visit [Install from source wiki page](https://github.com/JeiKeiLim/kindle/wiki/Install-from-source)
 
