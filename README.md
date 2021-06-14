@@ -1,4 +1,4 @@
-# Kindle - PyTorch no-code model builder
+# Kindle - Making a PyTorch model easier than ever!
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kindle)
 ![PyTorch Version](https://img.shields.io/badge/PyTorch-1.7.1-informational)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JeiKeiLim/kindle/format-lint-test)
@@ -11,7 +11,7 @@
 
 Kindle is an easy model build package for [PyTorch](https://pytorch.org). Building a deep learning model became so simple that almost all model can be made by copy and paste from other existing model codes. So why code? when we can simply build a model with yaml markup file.
 
-Kindle builds a model with no code but yaml file which its method is inspired from [YOLOv5](https://github.com/ultralytics/yolov5).
+Kindle builds a model with yaml file which its method is inspired from [YOLOv5](https://github.com/ultralytics/yolov5).
 
 # Contents
 - [Installation](#installation)

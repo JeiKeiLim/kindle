@@ -12,7 +12,7 @@ setuptools.setup(
     name="kindle",
     version=kindle.__version__,
     packages=setuptools.find_packages(),
-    description="PyTorch no-code model builder.",
+    description="Kindle - Making a PyTorch model easier than ever!",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     license=open("LICENSE").read().replace("\n", " "),
