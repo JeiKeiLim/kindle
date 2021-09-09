@@ -13,9 +13,11 @@ setuptools.setup(
     version=kindle.__version__,
     packages=setuptools.find_packages(),
     description="Kindle - Making a PyTorch model easier than ever!",
-    long_description=open("README.md").read(),
+    long_description=open("README.md").read(),  # pylint: disable=consider-using-with
     long_description_content_type="text/markdown",
-    license=open("LICENSE").read().replace("\n", " "),
+    license=open("LICENSE")  # pylint: disable=consider-using-with
+    .read()
+    .replace("\n", " "),
     author="Jongkuk Lim",
     author_email="lim.jeikei@gmail.com",
     url="https://github.com/JeiKeiLim/kindle",

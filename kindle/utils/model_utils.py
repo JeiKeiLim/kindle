@@ -12,9 +12,9 @@ from typing import (TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple,
 
 import numpy as np
 import torch
-import torch.nn as nn
 from ptflops import get_model_complexity_info
 from tabulate import tabulate
+from torch import nn
 from tqdm import tqdm
 
 if TYPE_CHECKING:

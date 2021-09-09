@@ -8,7 +8,7 @@ This module can be used for the reusability of the input layer.
 from typing import Any, Dict, List
 
 import numpy as np
-import torch.nn as nn
+from torch import nn
 
 from kindle.generator.base_generator import GeneratorAbstract
 

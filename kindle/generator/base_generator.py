@@ -118,7 +118,7 @@ class GeneratorAbstract(ABC):
 
     @property
     @abstractmethod
-    def in_channel(self) -> int:
+    def in_channel(self) -> Union[int, List[int]]:
         """In channel of the module."""
 
     @abstractmethod

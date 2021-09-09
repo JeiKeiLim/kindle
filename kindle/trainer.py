@@ -10,8 +10,7 @@ from typing import Optional, Tuple, Union
 
 import numpy as np
 import torch
-import torch.nn as nn
-import torch.optim as optim
+from torch import nn, optim
 from torch.utils.data.dataloader import DataLoader
 from torch.utils.data.sampler import SequentialSampler, SubsetRandomSampler
 from tqdm import tqdm
