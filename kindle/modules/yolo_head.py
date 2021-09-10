@@ -4,7 +4,8 @@
 - Contact: lim.jeikei@gmail.com
 """
 
-from typing import List, Tuple, Union
+import math
+from typing import List, Optional, Tuple, Union
 
 import torch
 from torch import nn
@@ -46,7 +47,7 @@ class YOLOHead(nn.Module):
         )
         self.stride = torch.tensor(strides)
 
-        # TODO(jeikeilim): Add initialize biases
+        # TODO(jeikeilim): Add add NMS layer
 
     def forward(
         self, x: List[torch.Tensor]
@@ -95,6 +96,42 @@ class YOLOHead(nn.Module):
             return (torch.cat(preds, 1),)
 
         return (torch.cat(preds, 1), x)
+
+    def initialize_biases(
+        self,
+        class_frequency: Optional[torch.Tensor] = None,
+        n_object_per_image: Tuple[int, int] = (8, 640),
+        class_probability: float = 0.6,
+    ) -> None:
+        """Initialize biases for objectness and class probabilities.
+
+        Args:
+        class_frequency: Class histogram values. If this is provided,
+            class biases will be initialized by
+            initial bias + log(class_frequency / class_frequency.sum())
+
+        n_object_per_image: Number of object per image. (Number of object, per image).
+            objectness biases will be initialized by
+            initial bias + log(n_object / (per_image / stride) ** 2)
+
+        class_probability: Global class probability.
+            This will be ignored if class_frequency is provided.
+            Otherwise, class biasese will be initialized by
+            initial bias + log(class_probability / (n_classes - 0.99))
+        """
+
+        for conv, stride in zip(self.conv, self.stride):
+            bias = conv.bias.view(self.n_anchors, -1)
+            bias.data[:, 4] += math.log(
+                n_object_per_image[0] / (n_object_per_image[1] / stride) ** 2
+            )
+
+            if class_frequency is None:
+                bias.data[:, 5:] += math.log(
+                    class_probability / (self.n_classes - 0.99)
+                )
+            else:
+                bias.data[:, 5:] += torch.log(class_frequency / class_frequency.sum())
 
     @staticmethod
     def _make_grid(width: int = 20, height: int = 20) -> torch.Tensor:
