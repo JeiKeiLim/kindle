@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 from torch import nn
@@ -18,7 +18,7 @@ class YOLOHeadGenerator(GeneratorAbstract):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.in_shape: Optional[np.ndarray] = None
+        self.in_shape: Optional[Union[np.ndarray, List[List[int]]]] = None
         self.input_size: Optional[List[int]] = None
 
     @property
