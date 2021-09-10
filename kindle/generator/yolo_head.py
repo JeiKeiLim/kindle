@@ -18,7 +18,7 @@ class YOLOHeadGenerator(GeneratorAbstract):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.in_shape: Optional[List[List[int]]] = None
+        self.in_shape: Optional[np.ndarray] = None
         self.input_size: Optional[List[int]] = None
 
     @property
