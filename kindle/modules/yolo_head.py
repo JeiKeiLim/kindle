@@ -46,6 +46,8 @@ class YOLOHead(nn.Module):
         )
         self.stride = torch.tensor(strides)
 
+        # TODO(jeikeilim): Add initialize biases
+
     def forward(
         self, x: List[torch.Tensor]
     ) -> Union[

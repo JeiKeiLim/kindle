@@ -139,7 +139,7 @@ class ModelParser:
         if isinstance(cfg, dict):
             self.cfg = cfg
         else:
-            with open(cfg) as f:
+            with open(cfg, encoding="utf-8") as f:
                 self.cfg = yaml.load(f, Loader=yaml.FullLoader)
 
         self.input_size = None

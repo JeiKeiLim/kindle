@@ -8,16 +8,20 @@ import setuptools
 
 import kindle
 
+with open("README", encoding="utf-8") as f:
+    long_description = f.read()
+
+with open("LICENSE", encoding="utf-8") as f:
+    license_content = f.read().replace("\n", " ")
+
 setuptools.setup(
     name="kindle",
     version=kindle.__version__,
     packages=setuptools.find_packages(),
     description="Kindle - Making a PyTorch model easier than ever!",
-    long_description=open("README.md").read(),  # pylint: disable=consider-using-with
+    long_description=long_description,
     long_description_content_type="text/markdown",
-    license=open("LICENSE")  # pylint: disable=consider-using-with
-    .read()
-    .replace("\n", " "),
+    license=license_content,
     author="Jongkuk Lim",
     author_email="lim.jeikei@gmail.com",
     url="https://github.com/JeiKeiLim/kindle",

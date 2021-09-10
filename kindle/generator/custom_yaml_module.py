@@ -47,7 +47,7 @@ class YamlModuleGenerator(GeneratorAbstract):
     def __init__(self, *args, **kwargs) -> None:
         """Initialize YamlModuleGenerator."""
         super().__init__(*args, **kwargs)
-        with open(self.args[0], "r") as f:
+        with open(self.args[0], "r", encoding="utf-8") as f:
             self.cfg = yaml.load(f, yaml.SafeLoader)
 
         for i in range(1, len(self.args)):
