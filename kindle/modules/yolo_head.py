@@ -47,7 +47,7 @@ class YOLOHead(nn.Module):
         )
         self.stride = torch.tensor(strides)
 
-        # TODO(jeikeilim): Add add NMS layer
+        # TODO(jeikeilim): Consider what to do with NMS layer
 
     def forward(
         self, x: List[torch.Tensor]
