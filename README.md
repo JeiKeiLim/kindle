@@ -117,10 +117,13 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |------|----------|---------|
 |Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
+|Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
+|BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
+|SPP|Spatial Pyramid Pooling|[out_channels, [kernel_size1, kernel_size2, ...], activation]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[out_channels, activation]|

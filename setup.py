@@ -8,7 +8,7 @@ import setuptools
 
 import kindle
 
-with open("README", encoding="utf-8") as f:
+with open("README.md", encoding="utf-8") as f:
     long_description = f.read()
 
 with open("LICENSE", encoding="utf-8") as f:

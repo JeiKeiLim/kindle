@@ -75,3 +75,12 @@ class ConvGenerator(GeneratorAbstract):
 
 class DWConvGenerator(ConvGenerator):
     """Depth-wise convolution generator for parsing module."""
+
+
+class FocusGenerator(ConvGenerator):
+    """Focus convolution generator."""
+
+    @property
+    def in_channel(self) -> int:
+        """Get in channel size."""
+        return self.in_channels[self.from_idx] * 4  # type: ignore

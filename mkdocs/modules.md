@@ -5,10 +5,13 @@
 |------|----------|---------|
 |Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
+|Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
+|BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
+|SPP|Spatial Pyramid Pooling|[out_channels, [kernel_size1, kernel_size2, ...], activation]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[out_channels, activation]|
@@ -47,7 +50,26 @@
 
 - DWConv is identical to Conv but with force grouped convolution.
 
+## Focus
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|kernel_size|int| |(n, n) kernel size|
+|stride|int|1|Conv stride|
+|padding|int|None|Conv padding. If None, auto-padding will be applied which generates same width and height of the input|
+|groups|int|1|Group convolution size. If 1, no group convolution|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
+
 ## Bottleneck
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|shortcut|bool|True|Use shortcut. Only applied when in_channels and out_channels are same.
+|groups|int|1|Group convolution size. If 1, no group convolution|
+|expansion|int|0.5|Expansion(squeeze) ratio.|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
+
+## BottleneckCSP
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |out_channels|int| |Conv channels|
@@ -79,6 +101,13 @@
 |ceil_mode|bool|False||
 
 * Please refer to [https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html](https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html) for further detail.
+
+## SPP
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|kernel_sizes|List[int]| |List of (n, n) kernel size|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## Flatten
 |Argument name|Type|Default value|Description|
