@@ -135,6 +135,8 @@ class YOLOHead(nn.Module):
             else:
                 bias.data[:, 5:] += torch.log(class_frequency / class_frequency.sum())
 
+            conv.bias = nn.Parameter(bias.view(-1), requires_grad=True)
+
     @staticmethod
     def _make_grid(width: int = 20, height: int = 20) -> torch.Tensor:
         """Make grid."""
