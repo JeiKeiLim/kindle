@@ -61,6 +61,35 @@ class Conv(nn.Module):
         """Forward."""
         return self.activation(self.batch_norm(self.conv(x)))
 
-    def fusefoward(self, x: torch.Tensor) -> torch.Tensor:
+    def fuseforward(self, x: torch.Tensor) -> torch.Tensor:
         """Fuse forward."""
         return self.activation(self.conv(x))
+
+
+class Focus(Conv):
+    """Focus module from YOLOv5.
+
+    Arguments: [channel, kernel_size, stride, padding, groups, activation]
+    """
+
+    @classmethod
+    def __reduce_focus(cls, x: torch.Tensor) -> torch.Tensor:
+        """Run reduce image by half."""
+
+        return torch.cat(
+            [
+                x[..., ::2, ::2],
+                x[..., 1::2, ::2],
+                x[..., ::2, 1::2],
+                x[..., 1::2, 1::2],
+            ],
+            1,
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Reduce image size and run convolution."""
+        return super().forward(self.__reduce_focus(x))
+
+    def fuseforward(self, x: torch.Tensor) -> torch.Tensor:
+        """Reduce image size and run convolution with batchnorm fused."""
+        return super().fuseforward(self.__reduce_focus(x))

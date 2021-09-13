@@ -206,6 +206,16 @@ class ModelProfiler:
             f" - {'STD':>5} : {total_time_std:8.2f} {t_unit_std:<2}\n"
         )
 
+    def get_parameter_numbers(self) -> int:
+        """Get total number of parameters.
+
+        Returns:
+            Total number of parameters.
+        """
+        # TODO(jeikeilim): return the number of parameter list of each layers.
+        n_param = sum([x.numel() for x in self.model.parameters()])
+        return n_param
+
     @classmethod
     def _time_convert(cls, x: float) -> Tuple[float, str]:
         """Convert time units.

@@ -117,10 +117,13 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |------|----------|---------|
 |Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
+|Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
+|BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
+|SPP|Spatial Pyramid Pooling|[out_channels, [kernel_size1, kernel_size2, ...], activation]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[out_channels, activation]|
@@ -160,7 +163,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
-|0.4.0|Add YOLOHead|2021. 09. 13|
+|0.4.1|Add YOLOHead, SPP, BottleneckCSP, and Focus modules|2021. 09. 13|
 |0.3.2|Fix PreTrained to work without PreTrainedFeatureMap|2021. 06. 03|
 |0.3.1|Calculating MACs in profiler|2021. 05. 02|
 |0.3.0|Add PreTrained support|2021. 04. 20|

@@ -87,8 +87,15 @@ def test_yolo_head():
     assert out_tensor[1][1].shape == (1, 3, 30, 24, 15)
     assert out_tensor[1][2].shape == (1, 3, 15, 12, 15)
 
+    profiler = model.profile()
+    n_param = profiler.get_parameter_numbers()
+    n_macs = profiler.get_macs()
+
+    assert n_param == 7279367
+    assert n_macs == 1355246656
+
 
 if __name__ == "__main__":
-    # test_yolo_head()
+    test_yolo_head()
     # test_yolo_head_initialize_bias()
     test_yolo_head_initialize_bias_class_probability()

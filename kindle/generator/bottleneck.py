@@ -53,3 +53,13 @@ class BottleneckGenerator(GeneratorAbstract):
     def __call__(self, repeat: int = 1):
         module = self.base_module(**self.kwargs)
         return self._get_module(module)
+
+
+class BottleneckCSPGenerator(BottleneckGenerator):
+    """BottleneckCSP block generator."""
+
+    def __call__(self, repeat: int = 1):
+        kwargs = self.kwargs
+        kwargs["n_repeat"] = repeat
+        module = self.base_module(**kwargs)
+        return self._get_module(module)

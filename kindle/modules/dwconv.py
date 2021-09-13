@@ -60,6 +60,6 @@ class DWConv(nn.Module):
         """Forward."""
         return self.activation(self.batch_norm(self.conv(x)))
 
-    def fusefoward(self, x: torch.Tensor) -> torch.Tensor:
+    def fuseforward(self, x: torch.Tensor) -> torch.Tensor:
         """Fuse forward."""
         return self.activation(self.conv(x))

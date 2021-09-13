@@ -3,14 +3,14 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 import numpy as np
 import torch
 from torch import nn
 
 from kindle.generator.base_generator import GeneratorAbstract
-from kindle.modules.poolings import GlobalAvgPool
+from kindle.modules.poolings import SPP, GlobalAvgPool
 
 
 class MaxPoolGenerator(GeneratorAbstract):
@@ -59,6 +59,46 @@ class MaxPoolGenerator(GeneratorAbstract):
 
 class AvgPoolGenerator(MaxPoolGenerator):
     """Average pooling module generator."""
+
+
+class SPPGenerator(GeneratorAbstract):
+    """Spatial Pyramid Pooling module generator."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def in_channel(self) -> int:
+        """Get in channel size."""
+        # error: Value of type "Optional[List[int]]" is not indexable
+        return self.in_channels[self.from_idx]  # type: ignore
+
+    @property
+    def out_channel(self) -> int:
+        return self._get_divisible_channel(self.args[0] * self.width_multiply)
+
+    @property
+    def kwargs(self) -> Dict[str, Any]:
+        out_channels = self._get_divisible_channel(self.args[0] * self.width_multiply)
+        args = [self.in_channel, out_channels, *self.args[1:]]
+        kwargs = self._get_kwargs(SPP, args)
+
+        return kwargs
+
+    @torch.no_grad()
+    def compute_out_shape(
+        self, size: Union[list, np.ndarray], repeat: int = 1
+    ) -> List[int]:
+        module: nn.Module = self(repeat=repeat)
+        module.eval()
+        module_out: torch.Tensor = module(torch.zeros([1, *list(size)]))
+        return list(module_out.shape[-3:])
+
+    def __call__(self, repeat: int = 1):
+        kwargs = self.kwargs
+        module = SPP(**kwargs)
+
+        return self._get_module(module)
 
 
 class GlobalAvgPoolGenerator(GeneratorAbstract):

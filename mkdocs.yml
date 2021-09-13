@@ -7,10 +7,11 @@ nav:
     - Tutorial: tutorial.md
     - Usages: usages.md
     - Modules: modules.md
-      # - API: mkapi/api/kindle
+    # - API: mkapi/api/kindle
 
 plugins:
   - search
+  # - mkapi
 
 markdown_extensions:
   - admonition
