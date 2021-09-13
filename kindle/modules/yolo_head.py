@@ -42,6 +42,8 @@ class YOLOHead(nn.Module):
         self.register_buffer(
             "anchor_grid", anchor_buf.clone().view(self.n_layers, 1, -1, 1, 1, 2)
         )  # (n_layers, 1, n_anchors, 1, 1, 2)
+
+        # TODO(jeikeilim): Conv type can be choosable.
         self.conv = nn.ModuleList(
             nn.Conv2d(x, self.n_outputs * self.n_anchors, 1) for x in n_channels
         )

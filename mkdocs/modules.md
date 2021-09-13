@@ -19,6 +19,7 @@
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
+|YOLOHead|YOLOv5 head module|[n_classes, anchors]|
 
 !!! Note
     nn.{module_name} is currently experimental. This might change in the future release. Use with caution.
@@ -133,3 +134,16 @@
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |feature_idx|int|-1|Index of the feature maps|
+
+
+## YOLOHead
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|n_classes|int||Number of classes to detect|
+|anchors|List[List[float]]||Anchor lists. Each list represents each layer's anchor and each components in the list represents anchor size of [w1, h1, w2, h2, ...]|
+
+!!! Note Example
+    [[-3, -2, -1], 1, YOLOHead, [80, [[100, 200, 200, 100, 200, 200], [50, 100, 100, 50, 100, 100], [10, 20, 20, 10, 20, 20]]]]
+
+    This represents that YOLOHead takes inputs from previous 3 layers, detects 80 classes with 3 layers of 3 anchors.
+

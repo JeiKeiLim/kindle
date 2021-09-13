@@ -131,6 +131,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
+|YOLOHead|YOLOv5 head module|[n_classes, anchors]|
 
 * **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
 * For the supported model of **Pretrained** module, please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results)
@@ -159,6 +160,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.0|Add YOLOHead|2021. 09. 13|
 |0.3.2|Fix PreTrained to work without PreTrainedFeatureMap|2021. 06. 03|
 |0.3.1|Calculating MACs in profiler|2021. 05. 02|
 |0.3.0|Add PreTrained support|2021. 04. 20|
