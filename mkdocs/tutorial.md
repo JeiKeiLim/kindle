@@ -358,3 +358,79 @@ model = Model("pretrained_model.yaml"), verbose=True)
     15 | -1       |   1 | 850       | Linear               | [10]                          |           84 | 10                     | [84]                                                               | [10]
 Model Summary: 250 layers, 3,621,866 parameters, 3,621,866 gradients
 ```
+
+## 5. Make object detectiong model using YOLOHead
+* You can build YOLO with simple configuration.
+* In this example, we made a neck to bypass the feature maps to the YOLOHead but you can build your own detection neck layers.
+
+!!! Note input_size 
+    In order to compute stride size automatically, you will need to provide arbitrary `input_size`.
+    However, the model can take any input sizes as the model is allowed to take.
+
+**1. yolo_sample.yaml**
+```yaml
+input_size: [256, 256]
+input_channel: 3
+
+depth_multiple: 1.0
+width_multiple: 1.0
+
+anchors: &anchors
+   - [10,13, 16,30, 33,23]  # P3/8
+   - [30,61, 62,45, 59,119]  # P4
+   - [116,90, 156,198, 373,326]  # P5/32
+
+n_classes: &n_classes
+  10
+
+backbone:
+    # [from, repeat, module, args]
+    [
+        [-1, 1, PreTrained, [efficientnet_b0, True]],
+        [0, 1, PreTrainedFeatureMap, [-3]],
+        [0, 1, PreTrainedFeatureMap, [-2]],
+        [0, 1, PreTrainedFeatureMap, [-1]],
+    ]
+
+head:
+  [
+    [[-3, -2, -1], 1, YOLOHead, [*n_classes, *anchors]]
+  ]
+```
+
+**2. Build a model**
+```python
+from kindle import Model
+
+model = Model("yolo_sample.yaml", verbose=True)
+```
+
+```shell
+   idx | from         |   n | params    | module               | arguments                                                                                  | in_channel     | out_channel            | in_shape                                                                 | out_shape
+-------+--------------+-----+-----------+----------------------+--------------------------------------------------------------------------------------------+----------------+------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------
+     0 | -1           |   1 | 3,595,388 | PreTrained           | ['efficientnet_b0', True]                                                                  | 3              | [16, 24, 40, 112, 320] | [3, 256, 256]                                                            | [[16, 128, 128], [24, 64, 64], [40, 32, 32], [112, 16, 16], [320, 8, 8]]
+     1 | 0            |   1 | 0         | PreTrainedFeatureMap | [-3]                                                                                       | 40             | 40                     | [[16 128 128], [24 64 64], [40 32 32], [112 16 16], [320 8 8]]           | [40, 32, 32]
+     2 | 0            |   1 | 0         | PreTrainedFeatureMap | [-2]                                                                                       | 112            | 112                    | [[16, 128, 128], [24, 64, 64], [40, 32, 32], [112, 16, 16], [320, 8, 8]] | [112, 16, 16]
+     3 | 0            |   1 | 0         | PreTrainedFeatureMap | [-1]                                                                                       | 320            | 320                    | [[16, 128, 128], [24, 64, 64], [40, 32, 32], [112, 16, 16], [320, 8, 8]] | [320, 8, 8]
+     4 | [-3, -2, -1] |   1 | 21,375    | YOLOHead             | [10, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]]] | [40, 112, 320] | [15, 15, 15]           | [list([40, 32, 32]) list([112, 16, 16]) list([320, 8, 8])]               | [[-1, 15], [-1, 15], [-1, 15]]
+Model Summary: 228 layers, 3,616,763 parameters, 3,616,763 gradients
+```
+
+**3. Initialize biases**
+
+* Generally, object detection is better trained when biases is initialized with sample or class distribution.
+
+```python
+from kindle import Model
+
+# Initialize biases if classs histogram exists and assume that generally 3 objects are shown up each bounding boxes in 100 images.
+model = Model("yolo_sample.yaml", verbose=True)
+model.model[-1].initialize_biases(class_probability=YOUR_CLASS_HISTOGRAM, n_object_per_image=(3, 100))
+
+# Initialize biases if class histogram does not exists and assuming each class has 60% probability chance to show.
+model = Model("yolo_sample.yaml", verbose=True)
+model.model[-1].initialize_biases(class_frequency=0.6, n_object_per_image=(3, 100))
+```
+
+!!! Note
+	Initializing bias method is currently experimental and prone to change in near future.

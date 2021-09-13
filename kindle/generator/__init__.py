@@ -20,6 +20,7 @@ from kindle.generator.poolings import (AvgPoolGenerator,
 from kindle.generator.pretrained import (PreTrainedFeatureMapGenerator,
                                          PreTrainedGenerator)
 from kindle.generator.upsample import UpSampleGenerator
+from kindle.generator.yolo_head import YOLOHeadGenerator
 
 __all__ = [
     "ModuleGenerator",
@@ -40,4 +41,5 @@ __all__ = [
     "TorchNNModuleGenerator",
     "PreTrainedGenerator",
     "PreTrainedFeatureMapGenerator",
+    "YOLOHeadGenerator",
 ]

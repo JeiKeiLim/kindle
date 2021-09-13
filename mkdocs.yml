@@ -7,11 +7,10 @@ nav:
     - Tutorial: tutorial.md
     - Usages: usages.md
     - Modules: modules.md
-    - API: mkapi/api/kindle
+      # - API: mkapi/api/kindle
 
 plugins:
   - search
-  - mkapi
 
 markdown_extensions:
   - admonition
@@ -19,6 +18,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
+  - mkautodoc
 
 theme: ivory
 docs_dir: mkdocs

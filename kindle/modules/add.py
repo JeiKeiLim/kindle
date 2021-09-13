@@ -13,7 +13,7 @@ from torch import nn
 class Add(nn.Module):
     """Add module for Kindle."""
 
-    def __init_(self):
+    def __init__(self):  # pylint: disable=useless-super-delegation
         """Initialize module."""
         super().__init__()
 

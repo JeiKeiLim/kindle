@@ -11,11 +11,12 @@ from typing import Callable, Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
 import torch
-import torch.nn as nn
 import yaml
+from torch import nn
 
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.flatten import FlattenGenerator
+from kindle.generator.yolo_head import YOLOHeadGenerator
 from kindle.utils.model_utils import ModelInfoLogger, ModelProfiler
 
 
@@ -138,7 +139,7 @@ class ModelParser:
         if isinstance(cfg, dict):
             self.cfg = cfg
         else:
-            with open(cfg) as f:
+            with open(cfg, encoding="utf-8") as f:
                 self.cfg = yaml.load(f, Loader=yaml.FullLoader)
 
         self.input_size = None
@@ -179,7 +180,7 @@ class ModelParser:
         if self.verbose:
             print(msg)
 
-    def _parse_model(  # pylint: disable=too-many-locals
+    def _parse_model(  # pylint: disable=too-many-locals, too-many-branches, too-many-statements
         self,
     ) -> Tuple[nn.Sequential, List[int]]:
         """Parse model."""
@@ -227,6 +228,9 @@ class ModelParser:
                     module_generator.in_shape = in_sizes[idx]  # type: ignore
                 else:
                     module_generator.in_shape = [in_channels[idx], 1, 1]  # type: ignore
+            elif isinstance(module_generator, YOLOHeadGenerator):
+                module_generator.in_shape = [in_sizes[idx_shape] for idx_shape in idx]
+                module_generator.input_size = self.input_size  # type: ignore
 
             module = module_generator(repeat=repeat)
             module.module_idx, module.from_idx = i, idx
