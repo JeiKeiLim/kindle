@@ -47,9 +47,12 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#supported-modules-summary">Supported Modules Summary</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#conv">Conv</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#dwconv">DWConv</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#focus">Focus</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#bottleneck">Bottleneck</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#bottleneckcsp">BottleneckCSP</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#avgpool">AvgPool</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#maxpool">MaxPool</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#spp">SPP</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#flatten">Flatten</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#concat">Concat</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#linear">Linear</a></li>
@@ -102,8 +105,18 @@
 <td>[out_channels, kernel_size, stride, padding, activation]</td>
 </tr>
 <tr>
+<td>Focus</td>
+<td>Reshape x -&gt; Conv -&gt; Concat</td>
+<td>[out_channels, kernel_size, stride, padding, activation]</td>
+</tr>
+<tr>
 <td>Bottleneck</td>
 <td>Expansion ConvBNAct -&gt; ConvBNAct</td>
+<td>[out_channels, shortcut, groups, expansion, activation]</td>
+</tr>
+<tr>
+<td>BottleneckCSP</td>
+<td>CSP Bottleneck</td>
 <td>[out_channels, shortcut, groups, expansion, activation]</td>
 </tr>
 <tr>
@@ -120,6 +133,11 @@
 <td>GlobalAvgPool</td>
 <td>Global Average Pooling</td>
 <td>[]</td>
+</tr>
+<tr>
+<td>SPP</td>
+<td>Spatial Pyramid Pooling</td>
+<td>[out_channels, [kernel_size1, kernel_size2, ...], activation]</td>
 </tr>
 <tr>
 <td>Flatten</td>
@@ -280,7 +298,99 @@
 <ul>
 <li>DWConv is identical to Conv but with force grouped convolution.</li>
 </ul>
+<h2 id="focus">Focus</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td></td>
+<td>(n, n) kernel size</td>
+</tr>
+<tr>
+<td>stride</td>
+<td>int</td>
+<td>1</td>
+<td>Conv stride</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>int</td>
+<td>None</td>
+<td>Conv padding. If None, auto-padding will be applied which generates same width and height of the input</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>int</td>
+<td>1</td>
+<td>Group convolution size. If 1, no group convolution</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="bottleneck">Bottleneck</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>shortcut</td>
+<td>bool</td>
+<td>True</td>
+<td>Use shortcut. Only applied when in_channels and out_channels are same.</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>int</td>
+<td>1</td>
+<td>Group convolution size. If 1, no group convolution</td>
+</tr>
+<tr>
+<td>expansion</td>
+<td>int</td>
+<td>0.5</td>
+<td>Expansion(squeeze) ratio.</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bottleneckcsp">BottleneckCSP</h2>
 <table>
 <thead>
 <tr>
@@ -427,6 +537,37 @@
 <ul>
 <li>Please refer to <a href="https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html">https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html</a> for further detail.</li>
 </ul>
+<h2 id="spp">SPP</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>kernel_sizes</td>
+<td>List[int]</td>
+<td></td>
+<td>List of (n, n) kernel size</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="flatten">Flatten</h2>
 <table>
 <thead>
