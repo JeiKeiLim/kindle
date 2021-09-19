@@ -58,6 +58,21 @@ def get_trainer(path: str) -> Tuple[Model, TorchTrainer]:
     return model, trainer
 
 
+def validate_fused_model(
+    model: Model, trainer: TorchTrainer, test_loader: DataLoader
+) -> Tuple[bool, float, float]:
+    model.eval()
+    test_loss, test_accuracy = trainer.test(test_loader)
+
+    model.fuse().eval()
+    test_loss_fused, test_accuracy_fused = trainer.test(test_loader)
+
+    is_loss_close = np.isclose(test_loss, test_loss_fused)
+    is_accuracy_close = np.isclose(test_accuracy, test_accuracy_fused)
+
+    return (is_loss_close and is_accuracy_close), test_accuracy, test_loss
+
+
 def test_model_example():
     epochs = 1
     model, trainer = get_trainer(os.path.join("tests", "test_configs", "example.yaml"))
@@ -65,9 +80,12 @@ def test_model_example():
     train_loader, test_loader = prepare_cifar10()
 
     trainer.train(train_loader, n_epoch=epochs)
-    test_loss, test_accuracy = trainer.test(test_loader)
 
-    print(test_loss, test_accuracy)
+    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+        model, trainer, test_loader
+    )
+
+    assert is_fused_valid
     assert test_accuracy > 0.33 and test_loss < 1.8
 
 
@@ -79,9 +97,13 @@ def test_model_showcase():
     )
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    test_loss, test_accuracy = trainer.test(test_loader)
 
+    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+        model, trainer, test_loader
+    )
     print(test_loss, test_accuracy)
+
+    assert is_fused_valid
     assert test_accuracy > 0.18 and test_loss < 2.3
 
 
@@ -91,9 +113,12 @@ def test_model_nn_model():
     model, trainer = get_trainer(os.path.join("tests", "test_configs", "nn_model.yaml"))
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    test_loss, test_accuracy = trainer.test(test_loader)
+    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+        model, trainer, test_loader
+    )
 
     print(test_loss, test_accuracy)
+    assert is_fused_valid
     assert test_accuracy > 0.18 and test_loss < 2.3
 
 
@@ -105,9 +130,12 @@ def test_model_gap_model():
     )
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    test_loss, test_accuracy = trainer.test(test_loader)
+    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+        model, trainer, test_loader
+    )
 
     print(test_loss, test_accuracy)
+    assert is_fused_valid
     assert test_accuracy > 0.30 and test_loss < 2.1
 
 
@@ -122,15 +150,18 @@ def test_model_pretrained(force: bool = False):
     )
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    test_loss, test_accuracy = trainer.test(test_loader)
+    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+        model, trainer, test_loader
+    )
 
     print(test_loss, test_accuracy)
+    assert is_fused_valid
     assert test_accuracy > 0.50 and test_loss < 1.4
 
 
 if __name__ == "__main__":
-    test_model_pretrained(force=True)
+    # test_model_pretrained(force=True)
     # test_model_nn_model()
     # test_model_showcase()
-    # test_model_example()
+    test_model_example()
     # test_model_gap_model()

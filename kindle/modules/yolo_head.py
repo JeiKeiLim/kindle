@@ -33,6 +33,13 @@ class YOLOHead(nn.Module):
         self.n_layers = len(anchors)
         # Number of anchors per a layer
         self.n_anchors = len(anchors[0]) // 2
+
+        # YOLOv5 compatability
+        self.nc = self.n_classes  # pylint: disable=invalid-name
+        self.no = self.n_outputs  # pylint: disable=invalid-name
+        self.nl = self.n_layers  # pylint: disable=invalid-name
+        self.na = self.n_anchors  # pylint: disable=invalid-name
+
         self.grid = [
             torch.zeros(1) for _ in range(self.n_layers)
         ]  # Grid initialization

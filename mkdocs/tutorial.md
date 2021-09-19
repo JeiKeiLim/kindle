@@ -427,9 +427,9 @@ head:
 
 **2. Build a model**
 ```python
-from kindle import Model
+from kindle import YOLOModel
 
-model = Model("yolo_sample.yaml", verbose=True)
+model = YOLOModel("yolo_sample.yaml", verbose=True)
 ```
 
 ```shell
@@ -468,15 +468,15 @@ Model Summary: 281 layers, 7,279,367 parameters, 7,279,367 gradients
 * Generally, object detection is better trained when biases is initialized with sample or class distribution.
 
 ```python
-from kindle import Model
+from kindle import YOLOModel
 
 # Initialize biases if classs histogram exists and assume that generally 3 objects are shown up each bounding boxes in 100 images.
-model = Model("yolo_sample.yaml", verbose=True)
-model.model[-1].initialize_biases(class_probability=YOUR_CLASS_HISTOGRAM, n_object_per_image=(3, 100))
+model = YOLOModel("yolo_sample.yaml", verbose=True)
+model.initialize_biases(class_probability=YOUR_CLASS_HISTOGRAM, n_object_per_image=(3, 100))
 
 # Initialize biases if class histogram does not exists and assuming each class has 60% probability chance to show.
 model = Model("yolo_sample.yaml", verbose=True)
-model.model[-1].initialize_biases(class_frequency=0.6, n_object_per_image=(3, 100))
+model.initialize_biases(class_frequency=0.6, n_object_per_image=(3, 100))
 ```
 
 !!! Note

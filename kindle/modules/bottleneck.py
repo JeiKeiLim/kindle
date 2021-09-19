@@ -43,7 +43,9 @@ class Bottleneck(nn.Module):
         expansion_channel = int(out_channels * expansion)
 
         self.conv1 = Conv(in_channels, expansion_channel, 1, 1, activation=activation)
-        self.conv2 = Conv(expansion_channel, out_channels, 3, 1, groups=groups)
+        self.conv2 = Conv(
+            expansion_channel, out_channels, 3, 1, groups=groups, activation=activation
+        )
         self.shortcut = shortcut and in_channels == out_channels
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -105,6 +107,7 @@ class BottleneckCSP(nn.Module):
                     shortcut=shortcut,
                     groups=groups,
                     expansion=1.0,
+                    activation=activation,
                 )
                 for _ in range(n_repeat)
             ]

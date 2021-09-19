@@ -9,6 +9,7 @@ from typing import List, Tuple, Union
 
 import numpy as np
 import torch
+from torch import nn
 from torch.utils.data.sampler import SubsetRandomSampler
 
 
@@ -35,38 +36,6 @@ def split_dataset_index(
     valid_sampler = SubsetRandomSampler(valid_idx)
 
     return train_sampler, valid_sampler
-
-
-def model_info(model, verbose=False):
-    """Print out model info."""
-    n_p = sum(x.numel() for x in model.parameters())  # number parameters
-    n_g = sum(
-        x.numel() for x in model.parameters() if x.requires_grad
-    )  # number gradients
-    if verbose:
-        print(
-            "%5s %40s %9s %12s %20s %10s %10s"
-            % ("layer", "name", "gradient", "parameters", "shape", "mu", "sigma")
-        )
-        for i, (name, param) in enumerate(model.named_parameters()):
-            name = name.replace("module_list.", "")
-            print(
-                "%5g %40s %9s %12g %20s %10.3g %10.3g"
-                % (
-                    i,
-                    name,
-                    param.requires_grad,
-                    param.numel(),
-                    list(param.shape),
-                    param.mean(),
-                    param.std(),
-                )
-            )
-
-    print(
-        f"Model Summary: {len(list(model.modules()))} layers, "
-        f"{n_p:,d} parameters, {n_g:,d} gradients"
-    )
 
 
 def make_divisible(n_channel: Union[int, float], divisor: int = 8) -> int:
@@ -99,3 +68,59 @@ def count_model_params(
 ) -> int:
     """Count model's parameters."""
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def fuse_conv_and_batch_norm(conv: nn.Conv2d, batch_norm: nn.BatchNorm2d) -> nn.Conv2d:
+    """Fuse convolution and batchnorm layers.
+
+    https://tehnokv.com/posts/fusing-batchnorm-and-conv/
+
+    Args:
+        conv: convolution module.
+        batch_norm: Batch normalization module directly connected to the conv module.
+
+    Return:
+        Fused conv with batch norm.
+    """
+
+    fused_conv = (
+        nn.Conv2d(
+            conv.in_channels,
+            conv.out_channels,
+            kernel_size=conv.kernel_size,  # type: ignore
+            stride=conv.stride,  # type: ignore
+            padding=conv.padding,  # type: ignore
+            groups=conv.groups,
+            bias=True,
+        )
+        .requires_grad_(False)
+        .to(conv.weight.device)
+    )
+
+    # Fusing weight
+    w_conv = conv.weight.clone().view(conv.out_channels, -1)
+    w_batch_norm = torch.diag(
+        batch_norm.weight.div(
+            torch.sqrt(batch_norm.eps + batch_norm.running_var)  # type: ignore
+        )
+    )
+    fused_conv.weight.copy_(
+        torch.mm(w_batch_norm, w_conv).view(fused_conv.weight.size())
+    )
+
+    # Fusing bias
+    if conv.bias is None:
+        b_conv = torch.zeros(conv.weight.size(0), device=conv.weight.device)
+    else:
+        b_conv = conv.bias
+
+    b_batch_norm = batch_norm.bias - batch_norm.weight.mul(
+        batch_norm.running_mean  # type: ignore
+    ).div(
+        torch.sqrt(batch_norm.running_var + batch_norm.eps)  # type: ignore
+    )
+    fused_conv.bias.copy_(  # type: ignore
+        torch.mm(w_batch_norm, b_conv.reshape(-1, 1)).reshape(-1) + b_batch_norm
+    )
+
+    return fused_conv
