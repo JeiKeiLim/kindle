@@ -12,7 +12,7 @@ So why code? when we can simply build a model with yaml markup file.
 """
 
 from kindle import generator, modules
-from kindle.model import Model
+from kindle.model import Model, YOLOModel
 from kindle.trainer import TorchTrainer
 from kindle.utils import ModelProfiler
 
@@ -22,6 +22,7 @@ __all__ = [
     "modules",
     "generator",
     "Model",
+    "YOLOModel",
     "TorchTrainer",
     "ModelProfiler",
     "__version__",

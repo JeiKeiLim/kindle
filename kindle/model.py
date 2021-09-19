@@ -162,6 +162,9 @@ class YOLOModel(Model):
         self._yolo_init()
         self.initialize_biases = self.model[-1].initialize_biases
 
+        # YOLOv5 compatability
+        self.stride = self.model[-1].stride
+
     def _yolo_init(self) -> None:
         """Initialize model for YOLO training."""
 

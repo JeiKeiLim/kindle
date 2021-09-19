@@ -5,7 +5,7 @@ channels:
   - pytorch
 
 dependencies:
-  - python=3.8
+  - python=3.7.7
   - black=20.8b1
   - mypy=0.800
   - flake8=3.8.4
@@ -25,4 +25,5 @@ dependencies:
     - mkdocs==1.1.2
     - mkapi==1.0.14
     - mkdocs-ivory==0.4.6
+    - mkautodoc==0.1.0
     - pymdown-extensions==8.1.1

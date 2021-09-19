@@ -43,7 +43,7 @@ class ModelProfiler:
         self.model = model
         self.n_run = n_run
         self.input_size: Tuple[int, ...] = (
-            batch_size,
+            batch_size,  # type: ignore
             self.model.model_parser.cfg["input_channel"],  # type: ignore
         )
 
