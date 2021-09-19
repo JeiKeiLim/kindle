@@ -21,7 +21,7 @@ jobs:
         with:
           activate-environment: torch-kindle
           environment-file: environment.yml
-          python-version: 3.8
+          python-version: 3.7
           auto-activate-base: false
       - shell: bash -l {0}
         run: |
