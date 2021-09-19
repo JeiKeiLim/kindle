@@ -72,77 +72,76 @@
 <h2 id="automl-with-optuna">AutoML with Optuna</h2>
 <p><a href="https://github.com/jeikeilim/kindle">Kindle</a> offers the easiest way to build your own deep learning architecture. Beyond building a model, AutoML became easier with <a href="https://github.com/jeikeilim/kindle">Kindle</a> and <a href="https://optuna.org">Optuna</a> or other optimization frameworks.</p>
 <h3 id="example-code">Example code</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
-<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data.sampler</span> <span class="kn">import</span> <span class="n">SubsetRandomSampler</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<pre class="highlight"><code class="language-python">import torch
+from torch import nn, optim
+from torchvision import datasets, transforms
+from torch.utils.data.sampler import SubsetRandomSampler
+from torch.utils.data import DataLoader
 
-<span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">TorchTrainer</span>
-<span class="kn">import</span> <span class="nn">optuna</span>
+from kindle import Model, TorchTrainer
+import optuna
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-    <span class="n">preprocess</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))]</span>
-    <span class="p">)</span>
-    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
-        <span class="s2">&quot;./data/cifar10&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">preprocess</span>
-    <span class="p">)</span>
-    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
-        <span class="s2">&quot;./data/cifar10&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">preprocess</span>
-    <span class="p">)</span>
-    <span class="n">subset_sampler</span> <span class="o">=</span> <span class="n">SubsetRandomSampler</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+if __name__ == "__main__":
+    device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+    preprocess = transforms.Compose(
+        [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+    )
+    train_dataset = datasets.CIFAR10(
+        "./data/cifar10", train=True, download=True, transform=preprocess
+    )
+    test_dataset = datasets.CIFAR10(
+        "./data/cifar10", train=False, download=True, transform=preprocess
+    )
+    subset_sampler = SubsetRandomSampler(np.arange(0, len(train_dataset), 2))
 
-    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">:</span> <span class="n">optuna</span><span class="o">.</span><span class="n">Trial</span><span class="p">):</span>
-        <span class="n">model_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input_size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
-                     <span class="s2">&quot;input_channel&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-                     <span class="s2">&quot;depth_multiple&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-                     <span class="s2">&quot;width_multiple&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
-        <span class="n">conv_type</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_categorical</span><span class="p">(</span><span class="s2">&quot;conv_type&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Conv&quot;</span><span class="p">,</span> <span class="s2">&quot;DWConv&quot;</span><span class="p">])</span>
-        <span class="n">kernel_size</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;kernel_size&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">n_channel_01</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;n_channel_01&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-        <span class="n">n_channel_02</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;n_channel_02&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    def objective(trial: optuna.Trial):
+        model_cfg = {"input_size": [32, 32],
+                     "input_channel": 3,
+                     "depth_multiple": 1.0,
+                     "width_multiple": 1.0}
+        conv_type = trial.suggest_categorical("conv_type", ["Conv", "DWConv"])
+        kernel_size = trial.suggest_int("kernel_size", 3, 7, step=2)
+        n_channel_01 = trial.suggest_int("n_channel_01", 8, 64, step=8)
+        n_channel_02 = trial.suggest_int("n_channel_02", 8, 128, step=8)
 
-        <span class="n">linear_activation</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_categorical</span><span class="p">(</span><span class="s2">&quot;linear_activation&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;ReLU&quot;</span><span class="p">,</span> <span class="s2">&quot;SiLU&quot;</span><span class="p">])</span>
-        <span class="n">n_channel_03</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;n_channel_03&quot;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-        <span class="n">n_channel_04</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;n_channel_04&quot;</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-        <span class="n">n_repeat</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;n_repeat&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        linear_activation = trial.suggest_categorical("linear_activation", ["ReLU", "SiLU"])
+        n_channel_03 = trial.suggest_int("n_channel_03", 64, 256, step=8)
+        n_channel_04 = trial.suggest_int("n_channel_04", 32, 128, step=8)
+        n_repeat = trial.suggest_int("n_repeat", 1, 3)
 
-        <span class="n">backbone</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_repeat</span><span class="p">,</span> <span class="n">conv_type</span><span class="p">,</span> <span class="p">[</span><span class="n">n_channel_01</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;MaxPool&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_repeat</span><span class="p">,</span> <span class="n">conv_type</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n_channel_02</span><span class="p">),</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;MaxPool&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Flatten&quot;</span><span class="p">,</span> <span class="p">[]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">n_channel_03</span><span class="p">,</span> <span class="n">linear_activation</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">n_channel_04</span><span class="p">,</span> <span class="n">linear_activation</span><span class="p">]],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]],</span>
-        <span class="p">]</span>
-        <span class="n">model_cfg</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;backbone&quot;</span><span class="p">:</span> <span class="n">backbone</span><span class="p">})</span>
+        backbone = [
+            [-1, n_repeat, conv_type, [n_channel_01, kernel_size, 1]],
+            [-1, 1, "MaxPool", [2]],
+            [-1, n_repeat, conv_type, [int(n_channel_02), kernel_size, 1]],
+            [-1, 1, "MaxPool", [2]],
+            [-1, 1, "Flatten", []],
+            [-1, 1, "Linear", [n_channel_03, linear_activation]],
+            [-1, 1, "Linear", [n_channel_04, linear_activation]],
+            [-1, 1, "Linear", [10]],
+        ]
+        model_cfg.update({"backbone": backbone})
 
-        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">model_cfg</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
-        <span class="n">epochs</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        model = Model(model_cfg, verbose=True)
+        batch_size = trial.suggest_int("batch_size", 8, 256)
+        epochs = trial.suggest_int("epochs", 5, 20)
 
-        <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
-            <span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">subset_sampler</span>
-        <span class="p">)</span>
-        <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+        train_loader = DataLoader(
+            train_dataset, batch_size=batch_size, sampler=subset_sampler
+        )
+        test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
-        <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+        criterion = nn.CrossEntropyLoss()
+        optimizer = optim.Adam(model.parameters())
 
-        <span class="n">trainer</span> <span class="o">=</span> <span class="n">TorchTrainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">n_epoch</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="o">=</span><span class="n">test_loader</span><span class="p">)</span>
-        <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span>
+        trainer = TorchTrainer(model, criterion, optimizer, device=device)
+        trainer.train(train_loader, n_epoch=epochs, test_dataloader=test_loader)
+        test_loss, test_accuracy = trainer.test(test_loader)
 
-        <span class="k">return</span> <span class="n">test_loss</span>
+        return test_loss
 
-    <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">study_name</span><span class="o">=</span><span class="s2">&quot;Sample AutoML&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;minimize&quot;</span><span class="p">)</span>
-    <span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">)</span>
-</code></pre></div></div>
+    study = optuna.create_study(study_name="Sample AutoML", direction="minimize")
+    study.optimize(objective)</code></pre></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../tutorial/" title="Tutorial"><span>Previous</span></a></div>

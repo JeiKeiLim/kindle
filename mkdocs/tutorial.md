@@ -39,7 +39,7 @@ Kindle builds a PyTorch model with yaml file.
 
 
 ### Example
-```yaml
+```
 input_size: [32, 32]
 input_channel: 3
 
@@ -93,7 +93,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 You can make your own custom module with yaml file.
 
 **1. custom_module.yaml**
-```yaml
+```
 args: [96, 32]
 
 module:
@@ -111,7 +111,7 @@ module:
 * Arguments of yaml module can be defined as arg0, arg1 ...
 
 **2. model_with_custom_module.yaml**
-```yaml
+```
 input_size: [32, 32]
 input_channel: 3
 
@@ -156,7 +156,7 @@ Model Summary: 36 layers, 206,902 parameters, 206,902 gradients
 You can make your own custom module from the source.
 
 **1. custom_module_model.yaml**
-```yaml
+```
 input_size: [32, 32]
 input_channel: 3
 
@@ -289,7 +289,7 @@ Please refer to [https://rwightman.github.io/pytorch-image-models/results/](http
 
 
 **1. pretrained_model.yaml**
-```yaml
+```
 input_size: [32, 32]
 input_channel: 3
 
@@ -368,7 +368,7 @@ Model Summary: 250 layers, 3,621,866 parameters, 3,621,866 gradients
     However, the model can take any input sizes as the model is allowed to take.
 
 **1. yolo_sample.yaml**
-```yaml
+```
 input_size: [256, 256]
 input_channel: 3
 
