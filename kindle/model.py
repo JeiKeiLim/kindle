@@ -17,7 +17,9 @@ from torch import nn
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.flatten import FlattenGenerator
 from kindle.generator.yolo_head import YOLOHeadGenerator
+from kindle.modules import Conv, DWConv, Focus, YOLOHead
 from kindle.utils.model_utils import ModelInfoLogger, ModelProfiler
+from kindle.utils.torch_utils import fuse_conv_and_batch_norm
 
 
 class Model(nn.Module):
@@ -84,6 +86,32 @@ class Model(nn.Module):
 
         return y
 
+    def fuse(self, verbose: bool = False) -> nn.Module:
+        """Fuse Conv - BatchNorm2d layers."""
+
+        if verbose:
+            print("Fusing layers ", end="")
+
+        for module in self.model.modules():
+            dot_str = "."
+
+            if isinstance(module, (Conv, DWConv, Focus)) and hasattr(
+                module, "batch_norm"
+            ):
+                module.conv = fuse_conv_and_batch_norm(module.conv, module.batch_norm)
+                delattr(module, "batch_norm")
+                module.forward = module.fuseforward  # type: ignore
+
+                dot_str = ","
+
+            if verbose:
+                print(dot_str, end="", flush=True)
+
+        if verbose:
+            print(" Done!")
+
+        return self
+
     def profile(self, verbose: bool = True, **kwargs) -> ModelProfiler:
         """Run model profiler.
 
@@ -118,6 +146,39 @@ class Model(nn.Module):
             y.append(x if module.module_idx in self.output_save else None)
 
         return x
+
+
+class YOLOModel(Model):
+    """YOLO model."""
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+
+        assert isinstance(self.model[-1], YOLOHead), (
+            "YOLOHead must have YOLOHead at the end! "
+            f"Current last layer: {self.model[-1].name} "
+        )
+
+        self._yolo_init()
+        self.initialize_biases = self.model[-1].initialize_biases
+
+        # YOLOv5 compatability
+        self.stride = self.model[-1].stride
+
+    def _yolo_init(self) -> None:
+        """Initialize model for YOLO training."""
+
+        # Initialize batch norm
+        for module in self.model.modules():
+            module_type = type(module)
+
+            if module_type is nn.Conv2d:
+                pass
+            elif module_type is nn.BatchNorm2d:
+                module.eps = 1e-3  # type: ignore
+                module.momentum = 0.03  # type: ignore
+            elif module_type in (nn.LeakyReLU, nn.ReLU, nn.ReLU6):
+                module.inplace = True  # type: ignore
 
 
 class ModelParser:
