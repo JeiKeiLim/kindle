@@ -163,6 +163,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.4|Fix YOLOHead module issue with anchor scaling|2021. 10. 08|
 |0.4.2|Add YOLOModel, and ConvBN fusion, and Fix activation apply issue|2021. 09. 19|
 |0.4.1|Add YOLOHead, SPP, BottleneckCSP, and Focus modules|2021. 09. 13|
 |0.3.2|Fix PreTrained to work without PreTrainedFeatureMap|2021. 06. 03|
