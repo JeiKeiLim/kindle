@@ -8,6 +8,7 @@
 |Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
 |Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
 |BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
+|C3|CSP Bottleneck with 3 Conv|[out_channels, shortcut, groups, expansion, activation]
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
@@ -70,6 +71,15 @@
 |activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## BottleneckCSP
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|shortcut|bool|True|Use shortcut. Only applied when in_channels and out_channels are same.
+|groups|int|1|Group convolution size. If 1, no group convolution|
+|expansion|int|0.5|Expansion(squeeze) ratio.|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
+
+## C3
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |out_channels|int| |Conv channels|
