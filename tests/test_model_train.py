@@ -67,8 +67,14 @@ def validate_fused_model(
     model.fuse().eval()
     test_loss_fused, test_accuracy_fused = trainer.test(test_loader)
 
-    is_loss_close = np.isclose(test_loss, test_loss_fused)
-    is_accuracy_close = np.isclose(test_accuracy, test_accuracy_fused)
+    is_loss_close = (
+        np.isclose(test_loss, test_loss_fused, rtol=0.001)
+        or test_loss_fused < test_loss
+    )
+    is_accuracy_close = (
+        np.isclose(test_accuracy, test_accuracy_fused, rtol=0.001)
+        or test_accuracy_fused > test_accuracy
+    )
 
     return (is_loss_close and is_accuracy_close), test_accuracy, test_loss
 

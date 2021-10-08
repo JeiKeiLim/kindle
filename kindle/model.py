@@ -27,7 +27,7 @@ class Model(nn.Module):
 
     def __init__(
         self,
-        cfg: Union[str, Dict[str, Type]],
+        cfg: Union[str, Dict[str, type]],
         verbose: bool = False,
     ) -> None:
         """Parse model from the model config file.
@@ -151,8 +151,22 @@ class Model(nn.Module):
 class YOLOModel(Model):
     """YOLO model."""
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        cfg: Union[str, Dict[str, type]],
+        verbose: bool = False,
+        init_bias=False,
+        **kwargs,
+    ) -> None:
+        """Parse YOLOModel from the model config file.
+
+        Args:
+            cfg: yaml file path or dictionary type of the model.
+            verbose: print the model parsing information.
+            init_bias: Initialize bias.
+            kwargs: Keyword arguments for the YOLOHead.initialize_biases
+        """
+        super().__init__(cfg, verbose=verbose)
 
         assert isinstance(self.model[-1], YOLOHead), (
             "YOLOHead must have YOLOHead at the end! "
@@ -161,6 +175,9 @@ class YOLOModel(Model):
 
         self._yolo_init()
         self.initialize_biases = self.model[-1].initialize_biases
+
+        if init_bias:
+            self.initialize_biases(**kwargs)
 
         # YOLOv5 compatability
         self.stride = self.model[-1].stride

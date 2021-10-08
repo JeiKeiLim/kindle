@@ -55,6 +55,7 @@ class YOLOHead(nn.Module):
             nn.Conv2d(x, self.n_outputs * self.n_anchors, 1) for x in n_channels
         )
         self.stride = torch.tensor(strides)
+        self.anchors /= self.stride.view(-1, 1, 1)  # pylint: disable=no-member
 
         # TODO(jeikeilim): Consider what to do with NMS layer
 
