@@ -3,8 +3,6 @@
 - Author: Jongkuk Lim
 - Contact: lim.jeikei@gmail.com
 """
-from __future__ import annotations
-
 import os
 import time
 from typing import (TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple,
