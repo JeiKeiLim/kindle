@@ -134,7 +134,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
-|YOLOHead|YOLOv5 head module|[n_classes, anchors]|
+|YOLOHead|YOLOv5 head module|[n_classes, anchors, out_xyxy]|
 
 * **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
 * For the supported model of **Pretrained** module, please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results)
@@ -163,6 +163,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.6|Add YOLOHead to choose coordinates format.|2021. 10. 09|
 |0.4.5|Add C3 Module|2021. 10. 08|
 |0.4.4|Fix YOLOHead module issue with anchor scaling|2021. 10. 08|
 |0.4.2|Add YOLOModel, and ConvBN fusion, and Fix activation apply issue|2021. 09. 19|

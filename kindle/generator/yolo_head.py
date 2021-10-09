@@ -41,7 +41,15 @@ class YOLOHeadGenerator(GeneratorAbstract):
 
     @property
     def kwargs(self) -> Dict[str, Any]:
-        kwargs = self._get_kwargs(YOLOHead, self.args)
+        args = self.args
+
+        out_xyxy = False
+        if len(args) == 3:
+            out_xyxy = args[2]
+            args = args[:2]
+
+        kwargs = self._get_kwargs(YOLOHead, args)
+        kwargs["out_xyxy"] = out_xyxy
         return kwargs
 
     def __call__(self, repeat: int = 1) -> nn.Module:
