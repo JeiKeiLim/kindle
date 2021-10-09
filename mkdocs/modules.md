@@ -23,7 +23,7 @@
 |nn.{module_name}|PyTorch torch.nn.* module|Please refer to [https://pytorch.org/docs/stable/nn.html](https://pytorch.org/docs/stable/nn.html)|
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
-|YOLOHead|YOLOv5 head module|[n_classes, anchors]|
+|YOLOHead|YOLOv5 head module|[n_classes, anchors, out_xyxy]|
 
 !!! Note
     nn.{module_name} is currently experimental. This might change in the future release. Use with caution.
@@ -180,6 +180,7 @@
 |-------------|----|-------------|-----------|
 |n_classes|int||Number of classes to detect|
 |anchors|List[List[float]]||Anchor lists. Each list represents each layer's anchor and each components in the list represents anchor size of [w1, h1, w2, h2, ...]|
+|out_xyxy|bool|False|Return coordinates as xyxy format. (For older version of yolov5 compatability)|
 
 !!! Note Example
     [[-3, -2, -1], 1, YOLOHead, [80, [[100, 200, 200, 100, 200, 200], [50, 100, 100, 50, 100, 100], [10, 20, 20, 10, 20, 20]]]]

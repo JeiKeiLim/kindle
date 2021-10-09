@@ -139,9 +139,36 @@ def test_yolo_head_fused():
         )
 
 
+def test_yolo_head_xyxy():
+    model = YOLOModel(
+        os.path.join("tests", "test_configs", "yolo_samplev2.yaml"),
+        verbose=True,
+        init_bias=True,
+    )
+
+    in_tensor = torch.rand((1, 3, 480, 380))
+    model.eval()
+    model.model[-1].out_xyxy = False
+    out_tensor_xywh = model(in_tensor)
+    model.model[-1].out_xyxy = True
+    out_tensor_xyxy = model(in_tensor)
+
+    xywh = out_tensor_xywh[0][0, :, :4]
+    xyxy = out_tensor_xyxy[0][0, :, :4]
+
+    x1y1_from_xywh = xywh[:, :2] - (xywh[:, 2:4] / 2)
+    x2y2_from_xywh = xywh[:, :2] + (xywh[:, 2:4] / 2)
+    wh_from_xyxy = xyxy[:, 2:] - xyxy[:, :2]
+    cxcy_from_xyxy = xyxy[:, :2] + (wh_from_xyxy / 2)
+
+    assert torch.isclose(torch.cat((x1y1_from_xywh, x2y2_from_xywh), -1), xyxy).all()
+    assert torch.isclose(torch.cat((cxcy_from_xyxy, wh_from_xyxy), -1), xywh).all()
+
+
 if __name__ == "__main__":
     # test_yolo_head()
     # test_yolo_head_initialize_bias()
     # test_yolo_head_initialize_bias_class_probability()
     # test_yolo_head_fused()
-    test_yolo_model_v2()
+    # test_yolo_model_v2()
+    test_yolo_head_xyxy()

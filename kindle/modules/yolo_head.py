@@ -22,9 +22,20 @@ class YOLOHead(nn.Module):
         anchors: Tuple[Tuple[float, ...]],
         n_channels: Tuple[int, ...],
         strides: Tuple[float, ...],
+        out_xyxy: bool = False,
     ) -> None:
+        """Initialize YOLOHead.
+
+        Args:
+            n_classes: number of classes.
+            anchors: anchor arrays. (n_layer, n_anchor*2).
+            out_xyxy: return coordinates as xyxy format (For older yolov5 compatability)
+            n_channels: number of in channels from the feature map.
+            strides: stride sizes from the feature map.
+        """
         super().__init__()
 
+        self.out_xyxy = out_xyxy
         # Number of classes
         self.n_classes = n_classes
         # Number of outputs per anchor
@@ -96,9 +107,19 @@ class YOLOHead(nn.Module):
                 y = x[i].sigmoid()
                 box_xy = (y[..., 0:2] * 2.0 - 0.5 + self.grid[i]) * self.stride[i]
                 box_wh = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # type: ignore
-                box_xyxy = self._xywh2xyxy(box_xy, box_wh).view(batch_size, -1, 4)
-                score = y[..., 4:].float().view(batch_size, -1, self.n_classes + 1)
-                preds.append(torch.cat([box_xyxy, score], -1))
+
+                if self.out_xyxy:
+                    box_xyxy = self._xywh2xyxy(box_xy, box_wh).view(batch_size, -1, 4)
+                    y = torch.cat(
+                        (box_xyxy, y[..., 4:].view(batch_size, -1, self.n_outputs - 4)),
+                        -1,
+                    )
+                else:
+                    y = torch.cat((box_xy, box_wh, y[..., 4:]), -1).view(
+                        batch_size, -1, self.n_outputs
+                    )
+
+                preds.append(y)
 
         if self.training:
             return x
