@@ -198,7 +198,7 @@
 <tr>
 <td>YOLOHead</td>
 <td>YOLOv5 head module</td>
-<td>[n_classes, anchors]</td>
+<td>[n_classes, anchors, out_xyxy]</td>
 </tr>
 </tbody>
 </table>
@@ -831,6 +831,12 @@
 <td>List[List[float]]</td>
 <td></td>
 <td>Anchor lists. Each list represents each layer's anchor and each components in the list represents anchor size of [w1, h1, w2, h2, ...]</td>
+</tr>
+<tr>
+<td>out_xyxy</td>
+<td>bool</td>
+<td>False</td>
+<td>Return coordinates as xyxy format. (For older version of yolov5 compatability)</td>
 </tr>
 </tbody>
 </table>
