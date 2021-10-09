@@ -77,138 +77,145 @@
 <li>Kindle model provides profiling option.</li>
 <li>Please refer to <a href="https://limjk.ai/kindle/api/kindle.utils.model_utils/#kindleutilsmodel_utilsmodelprofiler">API reference page</a> for the detailed information.</li>
 </ul>
-<pre class="highlight"><code class="language-python">from kindle import Model
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
 
-model = Model("model.yaml")
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;model.yaml&quot;</span><span class="p">)</span>
 
-profiler = model.profile(n_run=100, batch_size=32, input_size=(224, 224), verbose=True)</code></pre>
+<span class="n">profiler</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="n">n_run</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>Above code will print the profiling result as following.</li>
 </ul>
-<pre class="highlight"><code class="language-shell">Profiling result by 100 times running. Sorted by running order.
+<div class="highlight"><pre><span></span><code>Profiling result by <span class="m">100</span> <span class="nb">times</span> running. Sorted by running order.
 ------------------------------------------------------------------------------------------------------
- idx |                 Name | Time(Mean) |  Time(Std) | Time(Total) | Rank |   Ratio |        Params |
+ idx <span class="p">|</span>                 Name <span class="p">|</span> Time<span class="o">(</span>Mean<span class="o">)</span> <span class="p">|</span>  Time<span class="o">(</span>Std<span class="o">)</span> <span class="p">|</span> Time<span class="o">(</span>Total<span class="o">)</span> <span class="p">|</span> Rank <span class="p">|</span>   Ratio <span class="p">|</span>        Params <span class="p">|</span>
 ------------------------------------------------------------------------------------------------------
-   0 |                 Conv |    1.40 ms |  566.86 μs |   139.69 ms |    1 |  36.08% |           616 |
-   1 |              MaxPool |  410.78 μs |  136.45 μs |    41.08 ms |    3 |  10.61% |             0 |
-   2 |            nn.Conv2d |  980.33 μs |  459.86 μs |    98.03 ms |    2 |  25.32% |         3,200 |
-   3 |       nn.BatchNorm2d |  277.48 μs |  141.98 μs |    27.75 ms |    5 |   7.17% |            32 |
-   4 |              nn.ReLU |  109.23 μs |   43.48 μs |    10.92 ms |    7 |   2.82% |             0 |
-   5 |              MaxPool |  242.73 μs |   80.28 μs |    24.27 ms |    6 |   6.27% |             0 |
-   6 |              Flatten |   18.18 μs |   16.98 μs |     1.82 ms |   10 |   0.47% |             0 |
-   7 |               Linear |  294.72 μs |  192.97 μs |    29.47 ms |    4 |   7.61% |       123,000 |
-   8 |               Linear |   94.48 μs |   44.85 μs |     9.45 ms |    8 |   2.44% |        10,164 |
-   9 |               Linear |   46.44 μs |   26.23 μs |     4.64 ms |    9 |   1.20% |           850 |
+   <span class="m">0</span> <span class="p">|</span>                 Conv <span class="p">|</span>    <span class="m">1</span>.40 ms <span class="p">|</span>  <span class="m">566</span>.86 μs <span class="p">|</span>   <span class="m">139</span>.69 ms <span class="p">|</span>    <span class="m">1</span> <span class="p">|</span>  <span class="m">36</span>.08% <span class="p">|</span>           <span class="m">616</span> <span class="p">|</span>
+   <span class="m">1</span> <span class="p">|</span>              MaxPool <span class="p">|</span>  <span class="m">410</span>.78 μs <span class="p">|</span>  <span class="m">136</span>.45 μs <span class="p">|</span>    <span class="m">41</span>.08 ms <span class="p">|</span>    <span class="m">3</span> <span class="p">|</span>  <span class="m">10</span>.61% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">2</span> <span class="p">|</span>            nn.Conv2d <span class="p">|</span>  <span class="m">980</span>.33 μs <span class="p">|</span>  <span class="m">459</span>.86 μs <span class="p">|</span>    <span class="m">98</span>.03 ms <span class="p">|</span>    <span class="m">2</span> <span class="p">|</span>  <span class="m">25</span>.32% <span class="p">|</span>         <span class="m">3</span>,200 <span class="p">|</span>
+   <span class="m">3</span> <span class="p">|</span>       nn.BatchNorm2d <span class="p">|</span>  <span class="m">277</span>.48 μs <span class="p">|</span>  <span class="m">141</span>.98 μs <span class="p">|</span>    <span class="m">27</span>.75 ms <span class="p">|</span>    <span class="m">5</span> <span class="p">|</span>   <span class="m">7</span>.17% <span class="p">|</span>            <span class="m">32</span> <span class="p">|</span>
+   <span class="m">4</span> <span class="p">|</span>              nn.ReLU <span class="p">|</span>  <span class="m">109</span>.23 μs <span class="p">|</span>   <span class="m">43</span>.48 μs <span class="p">|</span>    <span class="m">10</span>.92 ms <span class="p">|</span>    <span class="m">7</span> <span class="p">|</span>   <span class="m">2</span>.82% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">5</span> <span class="p">|</span>              MaxPool <span class="p">|</span>  <span class="m">242</span>.73 μs <span class="p">|</span>   <span class="m">80</span>.28 μs <span class="p">|</span>    <span class="m">24</span>.27 ms <span class="p">|</span>    <span class="m">6</span> <span class="p">|</span>   <span class="m">6</span>.27% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">6</span> <span class="p">|</span>              Flatten <span class="p">|</span>   <span class="m">18</span>.18 μs <span class="p">|</span>   <span class="m">16</span>.98 μs <span class="p">|</span>     <span class="m">1</span>.82 ms <span class="p">|</span>   <span class="m">10</span> <span class="p">|</span>   <span class="m">0</span>.47% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">7</span> <span class="p">|</span>               Linear <span class="p">|</span>  <span class="m">294</span>.72 μs <span class="p">|</span>  <span class="m">192</span>.97 μs <span class="p">|</span>    <span class="m">29</span>.47 ms <span class="p">|</span>    <span class="m">4</span> <span class="p">|</span>   <span class="m">7</span>.61% <span class="p">|</span>       <span class="m">123</span>,000 <span class="p">|</span>
+   <span class="m">8</span> <span class="p">|</span>               Linear <span class="p">|</span>   <span class="m">94</span>.48 μs <span class="p">|</span>   <span class="m">44</span>.85 μs <span class="p">|</span>     <span class="m">9</span>.45 ms <span class="p">|</span>    <span class="m">8</span> <span class="p">|</span>   <span class="m">2</span>.44% <span class="p">|</span>        <span class="m">10</span>,164 <span class="p">|</span>
+   <span class="m">9</span> <span class="p">|</span>               Linear <span class="p">|</span>   <span class="m">46</span>.44 μs <span class="p">|</span>   <span class="m">26</span>.23 μs <span class="p">|</span>     <span class="m">4</span>.64 ms <span class="p">|</span>    <span class="m">9</span> <span class="p">|</span>   <span class="m">1</span>.20% <span class="p">|</span>           <span class="m">850</span> <span class="p">|</span>
 ------------------------------------------------------------------------------------------------------
-Running time
- - Total :   387.13 ms
- -  Mean :     3.87 ms
- -   STD :     1.45 ms</code></pre>
+Running <span class="nb">time</span>
+ - Total :   <span class="m">387</span>.13 ms
+ -  Mean :     <span class="m">3</span>.87 ms
+ -   STD :     <span class="m">1</span>.45 ms
+</code></pre></div>
 <h3 id="profiling-by-time-consumption-order">Profiling by time consumption order</h3>
 <ul>
 <li>Profiling result can be sorted by running times.</li>
 </ul>
-<pre class="highlight"><code class="language-python">profiler.print_result(sort_by_rank=True)</code></pre>
-<pre class="highlight"><code class="language-shell">Profiling result by 100 times running. Sorted by time consumption.
+<div class="highlight"><pre><span></span><code><span class="n">profiler</span><span class="o">.</span><span class="n">print_result</span><span class="p">(</span><span class="n">sort_by_rank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Profiling result by <span class="m">100</span> <span class="nb">times</span> running. Sorted by <span class="nb">time</span> consumption.
 ------------------------------------------------------------------------------------------------------
- idx |                 Name | Time(Mean) |  Time(Std) | Time(Total) | Rank |   Ratio |        Params |
+ idx <span class="p">|</span>                 Name <span class="p">|</span> Time<span class="o">(</span>Mean<span class="o">)</span> <span class="p">|</span>  Time<span class="o">(</span>Std<span class="o">)</span> <span class="p">|</span> Time<span class="o">(</span>Total<span class="o">)</span> <span class="p">|</span> Rank <span class="p">|</span>   Ratio <span class="p">|</span>        Params <span class="p">|</span>
 ------------------------------------------------------------------------------------------------------
-   0 |                 Conv |    1.40 ms |  566.86 μs |   139.69 ms |    1 |  36.08% |           616 |
-   2 |            nn.Conv2d |  980.33 μs |  459.86 μs |    98.03 ms |    2 |  25.32% |         3,200 |
-   1 |              MaxPool |  410.78 μs |  136.45 μs |    41.08 ms |    3 |  10.61% |             0 |
-   7 |               Linear |  294.72 μs |  192.97 μs |    29.47 ms |    4 |   7.61% |       123,000 |
-   3 |       nn.BatchNorm2d |  277.48 μs |  141.98 μs |    27.75 ms |    5 |   7.17% |            32 |
-   5 |              MaxPool |  242.73 μs |   80.28 μs |    24.27 ms |    6 |   6.27% |             0 |
-   4 |              nn.ReLU |  109.23 μs |   43.48 μs |    10.92 ms |    7 |   2.82% |             0 |
-   8 |               Linear |   94.48 μs |   44.85 μs |     9.45 ms |    8 |   2.44% |        10,164 |
-   9 |               Linear |   46.44 μs |   26.23 μs |     4.64 ms |    9 |   1.20% |           850 |
-   6 |              Flatten |   18.18 μs |   16.98 μs |     1.82 ms |   10 |   0.47% |             0 |
+   <span class="m">0</span> <span class="p">|</span>                 Conv <span class="p">|</span>    <span class="m">1</span>.40 ms <span class="p">|</span>  <span class="m">566</span>.86 μs <span class="p">|</span>   <span class="m">139</span>.69 ms <span class="p">|</span>    <span class="m">1</span> <span class="p">|</span>  <span class="m">36</span>.08% <span class="p">|</span>           <span class="m">616</span> <span class="p">|</span>
+   <span class="m">2</span> <span class="p">|</span>            nn.Conv2d <span class="p">|</span>  <span class="m">980</span>.33 μs <span class="p">|</span>  <span class="m">459</span>.86 μs <span class="p">|</span>    <span class="m">98</span>.03 ms <span class="p">|</span>    <span class="m">2</span> <span class="p">|</span>  <span class="m">25</span>.32% <span class="p">|</span>         <span class="m">3</span>,200 <span class="p">|</span>
+   <span class="m">1</span> <span class="p">|</span>              MaxPool <span class="p">|</span>  <span class="m">410</span>.78 μs <span class="p">|</span>  <span class="m">136</span>.45 μs <span class="p">|</span>    <span class="m">41</span>.08 ms <span class="p">|</span>    <span class="m">3</span> <span class="p">|</span>  <span class="m">10</span>.61% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">7</span> <span class="p">|</span>               Linear <span class="p">|</span>  <span class="m">294</span>.72 μs <span class="p">|</span>  <span class="m">192</span>.97 μs <span class="p">|</span>    <span class="m">29</span>.47 ms <span class="p">|</span>    <span class="m">4</span> <span class="p">|</span>   <span class="m">7</span>.61% <span class="p">|</span>       <span class="m">123</span>,000 <span class="p">|</span>
+   <span class="m">3</span> <span class="p">|</span>       nn.BatchNorm2d <span class="p">|</span>  <span class="m">277</span>.48 μs <span class="p">|</span>  <span class="m">141</span>.98 μs <span class="p">|</span>    <span class="m">27</span>.75 ms <span class="p">|</span>    <span class="m">5</span> <span class="p">|</span>   <span class="m">7</span>.17% <span class="p">|</span>            <span class="m">32</span> <span class="p">|</span>
+   <span class="m">5</span> <span class="p">|</span>              MaxPool <span class="p">|</span>  <span class="m">242</span>.73 μs <span class="p">|</span>   <span class="m">80</span>.28 μs <span class="p">|</span>    <span class="m">24</span>.27 ms <span class="p">|</span>    <span class="m">6</span> <span class="p">|</span>   <span class="m">6</span>.27% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">4</span> <span class="p">|</span>              nn.ReLU <span class="p">|</span>  <span class="m">109</span>.23 μs <span class="p">|</span>   <span class="m">43</span>.48 μs <span class="p">|</span>    <span class="m">10</span>.92 ms <span class="p">|</span>    <span class="m">7</span> <span class="p">|</span>   <span class="m">2</span>.82% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
+   <span class="m">8</span> <span class="p">|</span>               Linear <span class="p">|</span>   <span class="m">94</span>.48 μs <span class="p">|</span>   <span class="m">44</span>.85 μs <span class="p">|</span>     <span class="m">9</span>.45 ms <span class="p">|</span>    <span class="m">8</span> <span class="p">|</span>   <span class="m">2</span>.44% <span class="p">|</span>        <span class="m">10</span>,164 <span class="p">|</span>
+   <span class="m">9</span> <span class="p">|</span>               Linear <span class="p">|</span>   <span class="m">46</span>.44 μs <span class="p">|</span>   <span class="m">26</span>.23 μs <span class="p">|</span>     <span class="m">4</span>.64 ms <span class="p">|</span>    <span class="m">9</span> <span class="p">|</span>   <span class="m">1</span>.20% <span class="p">|</span>           <span class="m">850</span> <span class="p">|</span>
+   <span class="m">6</span> <span class="p">|</span>              Flatten <span class="p">|</span>   <span class="m">18</span>.18 μs <span class="p">|</span>   <span class="m">16</span>.98 μs <span class="p">|</span>     <span class="m">1</span>.82 ms <span class="p">|</span>   <span class="m">10</span> <span class="p">|</span>   <span class="m">0</span>.47% <span class="p">|</span>             <span class="m">0</span> <span class="p">|</span>
 ------------------------------------------------------------------------------------------------------
-Running time
- - Total :   387.13 ms
- -  Mean :     3.87 ms
- -   STD :     1.45 ms</code></pre>
+Running <span class="nb">time</span>
+ - Total :   <span class="m">387</span>.13 ms
+ -  Mean :     <span class="m">3</span>.87 ms
+ -   STD :     <span class="m">1</span>.45 ms
+</code></pre></div>
 <h2 id="2-get-macs">2. Get MACs</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Multiply–accumulate_operation">MACs</a> is Multiply-accumulate operation which represents computational expense.</li>
 <li>Approximately 1 MACs = 0.5 * FLOPs</li>
 <li>Kindle is using <a href="https://github.com/sovrasov/flops-counter.pytorch">ptflops</a> for computing MACs.</li>
 </ul>
-<pre class="highlight"><code class="language-python">mac = profiler.get_macs(verbose=True)
-print(f"{mac:,0d} MACs")</code></pre>
-<pre class="highlight"><code class="language-shell">Model(
-  0.138 M, 100.000% Params, 0.002 GMac, 100.000% MACs, 
-  (model): Sequential(
-    0.138 M, 100.000% Params, 0.002 GMac, 100.000% MACs, 
-    (0): Conv(
-      0.001 M, 0.447% Params, 0.001 GMac, 39.517% MACs, 
-      (conv): Conv2d(0.001 M, 0.435% Params, 0.001 GMac, 37.997% MACs, 3, 8, kernel_size=(5, 5), stride=(1, 1), padding=[2], bias=False)
-      (batch_norm): BatchNorm2d(0.0 M, 0.012% Params, 0.0 GMac, 1.013% MACs, 8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (activation): LeakyReLU(0.0 M, 0.000% Params, 0.0 GMac, 0.507% MACs, negative_slope=0.01)
-    )
-    (1): MaxPool2d(0.0 M, 0.000% Params, 0.0 GMac, 0.507% MACs, kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (2): Conv2d(0.003 M, 2.321% Params, 0.001 GMac, 50.663% MACs, 8, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), bias=False)
-    (3): BatchNorm2d(0.0 M, 0.023% Params, 0.0 GMac, 0.507% MACs, 16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (4): ReLU(0.0 M, 0.000% Params, 0.0 GMac, 0.253% MACs, inplace=True)
-    (5): MaxPool2d(0.0 M, 0.000% Params, 0.0 GMac, 0.253% MACs, kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (6): Flatten(0.0 M, 0.000% Params, 0.0 GMac, 0.000% MACs, start_dim=1, end_dim=-1)
-    (7): Linear(
-      0.123 M, 89.220% Params, 0.0 GMac, 7.614% MACs, 
-      (linear): Linear(0.123 M, 89.220% Params, 0.0 GMac, 7.607% MACs, in_features=1024, out_features=120, bias=True)
-      (activation): ReLU(0.0 M, 0.000% Params, 0.0 GMac, 0.007% MACs, )
-    )
-    (8): Linear(
-      0.01 M, 7.373% Params, 0.0 GMac, 0.634% MACs, 
-      (linear): Linear(0.01 M, 7.373% Params, 0.0 GMac, 0.629% MACs, in_features=120, out_features=84, bias=True)
-      (activation): ReLU(0.0 M, 0.000% Params, 0.0 GMac, 0.005% MACs, )
-    )
-    (9): Linear(
-      0.001 M, 0.617% Params, 0.0 GMac, 0.053% MACs, 
-      (linear): Linear(0.001 M, 0.617% Params, 0.0 GMac, 0.053% MACs, in_features=84, out_features=10, bias=True)
-      (activation): Identity(0.0 M, 0.000% Params, 0.0 GMac, 0.000% MACs, )
-    )
-  )
-)
-1,616,970 MACs</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">mac</span> <span class="o">=</span> <span class="n">profiler</span><span class="o">.</span><span class="n">get_macs</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mac</span><span class="si">:</span><span class="s2">,0d</span><span class="si">}</span><span class="s2"> MACs&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model<span class="o">(</span>
+  <span class="m">0</span>.138 M, <span class="m">100</span>.000% Params, <span class="m">0</span>.002 GMac, <span class="m">100</span>.000% MACs, 
+  <span class="o">(</span>model<span class="o">)</span>: Sequential<span class="o">(</span>
+    <span class="m">0</span>.138 M, <span class="m">100</span>.000% Params, <span class="m">0</span>.002 GMac, <span class="m">100</span>.000% MACs, 
+    <span class="o">(</span><span class="m">0</span><span class="o">)</span>: Conv<span class="o">(</span>
+      <span class="m">0</span>.001 M, <span class="m">0</span>.447% Params, <span class="m">0</span>.001 GMac, <span class="m">39</span>.517% MACs, 
+      <span class="o">(</span>conv<span class="o">)</span>: Conv2d<span class="o">(</span><span class="m">0</span>.001 M, <span class="m">0</span>.435% Params, <span class="m">0</span>.001 GMac, <span class="m">37</span>.997% MACs, <span class="m">3</span>, <span class="m">8</span>, <span class="nv">kernel_size</span><span class="o">=(</span><span class="m">5</span>, <span class="m">5</span><span class="o">)</span>, <span class="nv">stride</span><span class="o">=(</span><span class="m">1</span>, <span class="m">1</span><span class="o">)</span>, <span class="nv">padding</span><span class="o">=[</span><span class="m">2</span><span class="o">]</span>, <span class="nv">bias</span><span class="o">=</span>False<span class="o">)</span>
+      <span class="o">(</span>batch_norm<span class="o">)</span>: BatchNorm2d<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.012% Params, <span class="m">0</span>.0 GMac, <span class="m">1</span>.013% MACs, <span class="m">8</span>, <span class="nv">eps</span><span class="o">=</span>1e-05, <span class="nv">momentum</span><span class="o">=</span><span class="m">0</span>.1, <span class="nv">affine</span><span class="o">=</span>True, <span class="nv">track_running_stats</span><span class="o">=</span>True<span class="o">)</span>
+      <span class="o">(</span>activation<span class="o">)</span>: LeakyReLU<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.507% MACs, <span class="nv">negative_slope</span><span class="o">=</span><span class="m">0</span>.01<span class="o">)</span>
+    <span class="o">)</span>
+    <span class="o">(</span><span class="m">1</span><span class="o">)</span>: MaxPool2d<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.507% MACs, <span class="nv">kernel_size</span><span class="o">=</span><span class="m">2</span>, <span class="nv">stride</span><span class="o">=</span><span class="m">2</span>, <span class="nv">padding</span><span class="o">=</span><span class="m">0</span>, <span class="nv">dilation</span><span class="o">=</span><span class="m">1</span>, <span class="nv">ceil_mode</span><span class="o">=</span>False<span class="o">)</span>
+    <span class="o">(</span><span class="m">2</span><span class="o">)</span>: Conv2d<span class="o">(</span><span class="m">0</span>.003 M, <span class="m">2</span>.321% Params, <span class="m">0</span>.001 GMac, <span class="m">50</span>.663% MACs, <span class="m">8</span>, <span class="m">16</span>, <span class="nv">kernel_size</span><span class="o">=(</span><span class="m">5</span>, <span class="m">5</span><span class="o">)</span>, <span class="nv">stride</span><span class="o">=(</span><span class="m">1</span>, <span class="m">1</span><span class="o">)</span>, <span class="nv">padding</span><span class="o">=(</span><span class="m">2</span>, <span class="m">2</span><span class="o">)</span>, <span class="nv">bias</span><span class="o">=</span>False<span class="o">)</span>
+    <span class="o">(</span><span class="m">3</span><span class="o">)</span>: BatchNorm2d<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.023% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.507% MACs, <span class="m">16</span>, <span class="nv">eps</span><span class="o">=</span>1e-05, <span class="nv">momentum</span><span class="o">=</span><span class="m">0</span>.1, <span class="nv">affine</span><span class="o">=</span>True, <span class="nv">track_running_stats</span><span class="o">=</span>True<span class="o">)</span>
+    <span class="o">(</span><span class="m">4</span><span class="o">)</span>: ReLU<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.253% MACs, <span class="nv">inplace</span><span class="o">=</span>True<span class="o">)</span>
+    <span class="o">(</span><span class="m">5</span><span class="o">)</span>: MaxPool2d<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.253% MACs, <span class="nv">kernel_size</span><span class="o">=</span><span class="m">2</span>, <span class="nv">stride</span><span class="o">=</span><span class="m">2</span>, <span class="nv">padding</span><span class="o">=</span><span class="m">0</span>, <span class="nv">dilation</span><span class="o">=</span><span class="m">1</span>, <span class="nv">ceil_mode</span><span class="o">=</span>False<span class="o">)</span>
+    <span class="o">(</span><span class="m">6</span><span class="o">)</span>: Flatten<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.000% MACs, <span class="nv">start_dim</span><span class="o">=</span><span class="m">1</span>, <span class="nv">end_dim</span><span class="o">=</span>-1<span class="o">)</span>
+    <span class="o">(</span><span class="m">7</span><span class="o">)</span>: Linear<span class="o">(</span>
+      <span class="m">0</span>.123 M, <span class="m">89</span>.220% Params, <span class="m">0</span>.0 GMac, <span class="m">7</span>.614% MACs, 
+      <span class="o">(</span>linear<span class="o">)</span>: Linear<span class="o">(</span><span class="m">0</span>.123 M, <span class="m">89</span>.220% Params, <span class="m">0</span>.0 GMac, <span class="m">7</span>.607% MACs, <span class="nv">in_features</span><span class="o">=</span><span class="m">1024</span>, <span class="nv">out_features</span><span class="o">=</span><span class="m">120</span>, <span class="nv">bias</span><span class="o">=</span>True<span class="o">)</span>
+      <span class="o">(</span>activation<span class="o">)</span>: ReLU<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.007% MACs, <span class="o">)</span>
+    <span class="o">)</span>
+    <span class="o">(</span><span class="m">8</span><span class="o">)</span>: Linear<span class="o">(</span>
+      <span class="m">0</span>.01 M, <span class="m">7</span>.373% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.634% MACs, 
+      <span class="o">(</span>linear<span class="o">)</span>: Linear<span class="o">(</span><span class="m">0</span>.01 M, <span class="m">7</span>.373% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.629% MACs, <span class="nv">in_features</span><span class="o">=</span><span class="m">120</span>, <span class="nv">out_features</span><span class="o">=</span><span class="m">84</span>, <span class="nv">bias</span><span class="o">=</span>True<span class="o">)</span>
+      <span class="o">(</span>activation<span class="o">)</span>: ReLU<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.005% MACs, <span class="o">)</span>
+    <span class="o">)</span>
+    <span class="o">(</span><span class="m">9</span><span class="o">)</span>: Linear<span class="o">(</span>
+      <span class="m">0</span>.001 M, <span class="m">0</span>.617% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.053% MACs, 
+      <span class="o">(</span>linear<span class="o">)</span>: Linear<span class="o">(</span><span class="m">0</span>.001 M, <span class="m">0</span>.617% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.053% MACs, <span class="nv">in_features</span><span class="o">=</span><span class="m">84</span>, <span class="nv">out_features</span><span class="o">=</span><span class="m">10</span>, <span class="nv">bias</span><span class="o">=</span>True<span class="o">)</span>
+      <span class="o">(</span>activation<span class="o">)</span>: Identity<span class="o">(</span><span class="m">0</span>.0 M, <span class="m">0</span>.000% Params, <span class="m">0</span>.0 GMac, <span class="m">0</span>.000% MACs, <span class="o">)</span>
+    <span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+<span class="m">1</span>,616,970 MACs
+</code></pre></div>
 <h2 id="3-test-time-augmentation">3. Test Time Augmentation</h2>
 <ul>
 <li>Kindle model supports TTA with simple usage.</li>
 <li>Reference document: <a href="https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward">https://limjk.ai/kindle/api/kindle.model/#kindle.model.Model.forward</a></li>
 </ul>
 <h3 id="tta-with-explicit-functions">TTA with explicit functions</h3>
-<pre class="highlight"><code class="language-python">import torch
-import torch.nn.functional as F
-import numpy as np
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-from kindle import Model
+<span class="kn">from</span> <span class="nn">kindle</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
-@torch.no_grad()
-def aug_flip_lr(x: torch.Tensor) -&gt; torch.Tensor:
-    return torch.flip(x, dims=[-1])
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_flip_lr</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-@torch.no_grad()
-def aug_flip_ud(x: torch.Tensor) -&gt; torch.Tensor:
-    return torch.flip(x, dims=[-2])
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_flip_ud</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
-@torch.no_grad()
-def aug_random_scale(x: torch.Tensor) -&gt; torch.Tensor:
-    ratio = np.random.uniform(0.8, 1.2)
-    xr = F.interpolate(x, scale_factor=ratio)
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">aug_random_scale</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="n">ratio</span><span class="p">)</span>
 
-    if xr.shape[2:] != x.shape[2:]:
-        h1, w1 = x.shape[2:]
-        h2, w2 = xr.shape[2:]
+    <span class="k">if</span> <span class="n">xr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">h1</span><span class="p">,</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">h2</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
 
-        xr = F.pad(xr, [0, w1 - w2, 0, h1 - h2], value=0)
+        <span class="n">xr</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">w1</span> <span class="o">-</span> <span class="n">w2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h1</span> <span class="o">-</span> <span class="n">h2</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    return xr
+    <span class="k">return</span> <span class="n">xr</span>
 
-aug_funcs = [aug_flip_lr, aug_flip_ud, aug_random_scale]
-model = Model("model.yaml")
+<span class="n">aug_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">aug_flip_lr</span><span class="p">,</span> <span class="n">aug_flip_ud</span><span class="p">,</span> <span class="n">aug_random_scale</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;model.yaml&quot;</span><span class="p">)</span>
 
-model_in = torch.rand(1, 3, 32, 32)
-model_out = model(model_in, augment_func=aug_funcs)</code></pre>
+<span class="n">model_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="n">model_out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">model_in</span><span class="p">,</span> <span class="n">augment_func</span><span class="o">=</span><span class="n">aug_funcs</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><code>model_out</code> in the above code contains <strong>4</strong> elements which are outputs of the model with each 3 augmentations and original <code>model_in</code>.</li>
 </ul>
@@ -216,7 +223,8 @@ model_out = model(model_in, augment_func=aug_funcs)</code></pre>
 <ul>
 <li>If a single augmentation function is given to <code>augment_func</code>, TTA will consider as random augmentation and run the network repeating <code>n_augment</code> times. </li>
 </ul>
-<pre class="highlight"><code class="language-python">model_out = model(model_in, augment_func=aug_random_scale, n_augment = 5)</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">model_out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">model_in</span><span class="p">,</span> <span class="n">augment_func</span><span class="o">=</span><span class="n">aug_random_scale</span><span class="p">,</span> <span class="n">n_augment</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><code>model_out</code> in the above code contains <strong>6</strong> elements which are outputs of the model with 5 <code>aug_random_scale</code> applied and original <code>model_in</code>.</li>
 </ul></div>

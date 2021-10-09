@@ -50,6 +50,7 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#focus">Focus</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#bottleneck">Bottleneck</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#bottleneckcsp">BottleneckCSP</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#c3">C3</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#avgpool">AvgPool</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#maxpool">MaxPool</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#spp">SPP</a></li>
@@ -117,6 +118,11 @@
 <tr>
 <td>BottleneckCSP</td>
 <td>CSP Bottleneck</td>
+<td>[out_channels, shortcut, groups, expansion, activation]</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>CSP Bottleneck with 3 Conv</td>
 <td>[out_channels, shortcut, groups, expansion, activation]</td>
 </tr>
 <tr>
@@ -391,6 +397,49 @@
 </tbody>
 </table>
 <h2 id="bottleneckcsp">BottleneckCSP</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>shortcut</td>
+<td>bool</td>
+<td>True</td>
+<td>Use shortcut. Only applied when in_channels and out_channels are same.</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>int</td>
+<td>1</td>
+<td>Group convolution size. If 1, no group convolution</td>
+</tr>
+<tr>
+<td>expansion</td>
+<td>int</td>
+<td>0.5</td>
+<td>Expansion(squeeze) ratio.</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="c3">C3</h2>
 <table>
 <thead>
 <tr>

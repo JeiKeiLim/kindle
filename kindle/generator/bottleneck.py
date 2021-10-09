@@ -63,3 +63,7 @@ class BottleneckCSPGenerator(BottleneckGenerator):
         kwargs["n_repeat"] = repeat
         module = self.base_module(**kwargs)
         return self._get_module(module)
+
+
+class C3Generator(BottleneckCSPGenerator):
+    """BottleneckC3 block generator."""
