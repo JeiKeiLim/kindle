@@ -115,9 +115,10 @@ class YOLOHead(nn.Module):
                         -1,
                     )
                 else:
-                    y = torch.cat((box_xy, box_wh, y[..., 4:]), -1).view(
-                        batch_size, -1, self.n_outputs
-                    )
+                    box_xy = box_xy.view(batch_size, -1, 2)
+                    box_wh = box_wh.view(batch_size, -1, 2)
+                    score = y[..., 4:].view(batch_size, -1, self.n_classes + 1)
+                    y = torch.cat((box_xy, box_wh, score), -1)
 
                 preds.append(y)
 
