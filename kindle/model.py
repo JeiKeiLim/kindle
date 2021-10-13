@@ -7,6 +7,7 @@ and generates PyTorch model accordingly.
 - Contact: lim.jeikei@gmail.com
 """
 
+import inspect
 from typing import Callable, Dict, List, Optional, Tuple, Type, Union
 
 import numpy as np
@@ -85,6 +86,47 @@ class Model(nn.Module):
             y = self.forward_once(x)
 
         return y
+
+    def export(
+        self, export_activations=("SiLU", "Hardswish", "Mish"), verbose: bool = False
+    ) -> nn.Module:
+        """Make model to export friendly version.
+
+        This method will call export() method in every child modules,
+        convert activations into export-friendly version,
+        and fuse conv-batch_norm itself.
+
+        Args:
+            export_activations: Activation name list to convert themselves
+                into export-friendly version.
+            verbose: print logs
+
+        Return:
+            self
+        """
+        self.fuse(verbose=verbose)
+        for module in self.model.modules():
+            if hasattr(module, "export") and inspect.ismethod(module.export):
+                # Check if the module has export method
+                if verbose:
+                    print(f"Calling {module.name} export()")
+                module.export()  # type: ignore
+
+            if hasattr(module, "activation"):
+                for activation in export_activations:
+                    if isinstance(module.activation, getattr(nn, activation)):
+                        if verbose:
+                            print(
+                                f"Converting {module.activation} activation"
+                                " in {module.__class__.__name__} to export friendly version."
+                            )
+                        module.activation = getattr(
+                            __import__("kindle.modules.activation", fromlist=[""]),
+                            activation,
+                        )()
+                        break
+
+        return self
 
     def fuse(self, verbose: bool = False) -> nn.Module:
         """Fuse Conv - BatchNorm2d layers."""

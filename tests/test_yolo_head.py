@@ -165,10 +165,28 @@ def test_yolo_head_xyxy():
     assert torch.isclose(torch.cat((cxcy_from_xyxy, wh_from_xyxy), -1), xywh).all()
 
 
+def test_yolo_head_export():
+    model = YOLOModel(
+        os.path.join("tests", "test_configs", "yolo_samplev2.yaml"),
+        verbose=True,
+        init_bias=True,
+    )
+
+    in_tensor = torch.rand((1, 3, 480, 380))
+    model.eval()
+    out_tensor = model(in_tensor)
+    model.export(verbose=True)
+
+    out_tensor_export = model(in_tensor)
+
+    assert torch.all(torch.isclose(out_tensor[0], out_tensor_export[0], rtol=1e-6))
+
+
 if __name__ == "__main__":
     # test_yolo_head()
     # test_yolo_head_initialize_bias()
     # test_yolo_head_initialize_bias_class_probability()
     # test_yolo_head_fused()
     # test_yolo_model_v2()
-    test_yolo_head_xyxy()
+    # test_yolo_head_xyxy()
+    test_yolo_head_export()

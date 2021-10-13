@@ -50,7 +50,7 @@ class Conv(nn.Module):
             out_channels,
             kernel_size,
             stride,
-            padding=autopad(kernel_size, padding),  # type: ignore
+            padding=autopad((kernel_size, kernel_size), padding),  # type: ignore
             groups=groups,
             bias=False,
         )

@@ -14,7 +14,7 @@ from torch import nn
 class YOLOHead(nn.Module):
     """YOLOv5 head module."""
 
-    export: bool = False
+    is_export: bool = False
 
     def __init__(  # pylint: disable=not-callable
         self,
@@ -54,6 +54,8 @@ class YOLOHead(nn.Module):
         self.grid = [
             torch.zeros(1) for _ in range(self.n_layers)
         ]  # Grid initialization
+
+        self.anchor_grid: torch.Tensor
 
         anchor_buf = torch.tensor(anchors).float().view(self.n_layers, -1, 2)
         self.register_buffer("anchors", anchor_buf)  # (n_layer, n_anchors, 2)
@@ -115,18 +117,32 @@ class YOLOHead(nn.Module):
                         -1,
                     )
                 else:
-                    y = torch.cat((box_xy, box_wh, y[..., 4:]), -1).view(
-                        batch_size, -1, self.n_outputs
-                    )
+                    box_xy = box_xy.view(batch_size, -1, 2)
+                    box_wh = box_wh.view(batch_size, -1, 2)
+                    score = y[..., 4:].view(batch_size, -1, self.n_classes + 1)
+                    y = torch.cat((box_xy, box_wh, score), -1)
 
                 preds.append(y)
 
         if self.training:
             return x
-        if self.export:
+        if self.is_export:
             return (torch.cat(preds, 1),)
 
         return (torch.cat(preds, 1), x)
+
+    def export(self) -> nn.Module:
+        """Make YOLOHead module to export friendly version."""
+        self.is_export = True
+
+        # Somehow, ONNX can't compute shapes for registered buffer.
+        anchor_grid: torch.Tensor = self.anchor_grid
+        delattr(self, "anchor_grid")
+        self.anchor_grid = (  # pylint: disable=attribute-defined-outside-init
+            anchor_grid.clone()
+        )
+
+        return self
 
     def initialize_biases(
         self,
