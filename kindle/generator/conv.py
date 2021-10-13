@@ -31,7 +31,7 @@ class ConvGenerator(GeneratorAbstract):
 
     @property
     def base_module(self) -> nn.Module:
-        """Returns module class from kindle.common_modules based on the class name."""
+        """Returns module class from kindle.modules based on the class name."""
         return getattr(__import__("kindle.modules", fromlist=[""]), self.name)
 
     @property

@@ -18,7 +18,8 @@ from kindle.generator.linear import LinearGenerator
 from kindle.generator.nn import TorchNNModuleGenerator
 from kindle.generator.poolings import (AvgPoolGenerator,
                                        GlobalAvgPoolGenerator,
-                                       MaxPoolGenerator, SPPGenerator)
+                                       MaxPoolGenerator, SPPFGenerator,
+                                       SPPGenerator)
 from kindle.generator.pretrained import (PreTrainedFeatureMapGenerator,
                                          PreTrainedGenerator)
 from kindle.generator.upsample import UpSampleGenerator
@@ -40,6 +41,7 @@ __all__ = [
     "GlobalAvgPoolGenerator",
     "MaxPoolGenerator",
     "SPPGenerator",
+    "SPPFGenerator",
     "YamlModuleGenerator",
     "AddGenerator",
     "UpSampleGenerator",

@@ -10,7 +10,7 @@ import torch
 from torch import nn
 
 from kindle.generator.base_generator import GeneratorAbstract
-from kindle.modules.poolings import SPP, GlobalAvgPool
+from kindle.modules.poolings import GlobalAvgPool
 
 
 class MaxPoolGenerator(GeneratorAbstract):
@@ -78,10 +78,15 @@ class SPPGenerator(GeneratorAbstract):
         return self._get_divisible_channel(self.args[0] * self.width_multiply)
 
     @property
+    def base_module(self) -> nn.Module:
+        """Returns module class from kindle.modules based on the class name."""
+        return getattr(__import__("kindle.modules", fromlist=[""]), self.name)
+
+    @property
     def kwargs(self) -> Dict[str, Any]:
         out_channels = self._get_divisible_channel(self.args[0] * self.width_multiply)
         args = [self.in_channel, out_channels, *self.args[1:]]
-        kwargs = self._get_kwargs(SPP, args)
+        kwargs = self._get_kwargs(self.base_module, args)
 
         return kwargs
 
@@ -96,9 +101,13 @@ class SPPGenerator(GeneratorAbstract):
 
     def __call__(self, repeat: int = 1):
         kwargs = self.kwargs
-        module = SPP(**kwargs)
+        module = self.base_module(**kwargs)
 
         return self._get_module(module)
+
+
+class SPPFGenerator(SPPGenerator):
+    """Spatial Pyramid Pooling - Fast module generator."""
 
 
 class GlobalAvgPoolGenerator(GeneratorAbstract):

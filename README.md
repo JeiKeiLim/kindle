@@ -124,6 +124,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
 |SPP|Spatial Pyramid Pooling|[out_channels, [kernel_size1, kernel_size2, ...], activation]|
+|SPPF|Spatial Pyramid Pooling - Fast|[out_channels, kernel_size, activation]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[out_channels, activation]|
@@ -163,6 +164,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.11|Add SPPF module in yolov5 v6.0|2021. 10. 13|
 |0.4.10|Fix ONNX export padding issue.|2021. 10. 13|
 |0.4.6|Add YOLOHead to choose coordinates format.|2021. 10. 09|
 |0.4.5|Add C3 Module|2021. 10. 08|

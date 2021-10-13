@@ -58,13 +58,14 @@ def get_trainer(path: str) -> Tuple[Model, TorchTrainer]:
     return model, trainer
 
 
-def validate_fused_model(
+def validate_export_model(
     model: Model, trainer: TorchTrainer, test_loader: DataLoader
 ) -> Tuple[bool, float, float]:
     model.eval()
     test_loss, test_accuracy = trainer.test(test_loader)
 
-    model.fuse().eval()
+    # model.fuse().eval()
+    model.export().eval()
     test_loss_fused, test_accuracy_fused = trainer.test(test_loader)
 
     is_loss_close = (
@@ -87,7 +88,7 @@ def test_model_example():
 
     trainer.train(train_loader, n_epoch=epochs)
 
-    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+    is_fused_valid, test_accuracy, test_loss = validate_export_model(
         model, trainer, test_loader
     )
 
@@ -104,7 +105,7 @@ def test_model_showcase():
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
 
-    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+    is_fused_valid, test_accuracy, test_loss = validate_export_model(
         model, trainer, test_loader
     )
     print(test_loss, test_accuracy)
@@ -119,7 +120,7 @@ def test_model_nn_model():
     model, trainer = get_trainer(os.path.join("tests", "test_configs", "nn_model.yaml"))
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+    is_fused_valid, test_accuracy, test_loss = validate_export_model(
         model, trainer, test_loader
     )
 
@@ -136,7 +137,7 @@ def test_model_gap_model():
     )
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+    is_fused_valid, test_accuracy, test_loss = validate_export_model(
         model, trainer, test_loader
     )
 
@@ -156,7 +157,7 @@ def test_model_pretrained(force: bool = False):
     )
     train_loader, test_loader = prepare_cifar10()
     trainer.train(train_loader, n_epoch=epochs)
-    is_fused_valid, test_accuracy, test_loss = validate_fused_model(
+    is_fused_valid, test_accuracy, test_loss = validate_export_model(
         model, trainer, test_loader
     )
 
