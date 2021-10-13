@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#avgpool">AvgPool</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#maxpool">MaxPool</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#spp">SPP</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#sppf">SPPF</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#flatten">Flatten</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#concat">Concat</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#linear">Linear</a></li>
@@ -144,6 +145,11 @@
 <td>SPP</td>
 <td>Spatial Pyramid Pooling</td>
 <td>[out_channels, [kernel_size1, kernel_size2, ...], activation]</td>
+</tr>
+<tr>
+<td>SPPF</td>
+<td>Spatial Pyramid Pooling - Fast</td>
+<td>[out_channels, kernel_size, activation]</td>
 </tr>
 <tr>
 <td>Flatten</td>
@@ -606,8 +612,39 @@
 <tr>
 <td>kernel_sizes</td>
 <td>List[int]</td>
-<td></td>
+<td>[5, 9, 13]</td>
 <td>List of (n, n) kernel size</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>"ReLU"</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sppf">SPPF</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td></td>
+<td>Conv channels</td>
+</tr>
+<tr>
+<td>kernel_sizes</td>
+<td>int</td>
+<td>5</td>
+<td>Kernel size. Default value(5) is equivalent (5, 9, 13) kernel sizes in SPP</td>
 </tr>
 <tr>
 <td>activation</td>
