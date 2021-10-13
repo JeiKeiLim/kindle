@@ -118,7 +118,7 @@ class Model(nn.Module):
                         if verbose:
                             print(
                                 f"Converting {module.activation} activation"
-                                " in {module.__class__.__name__} to export friendly version."
+                                f" in {module.__class__.__name__} to export friendly version."
                             )
                         module.activation = getattr(
                             __import__("kindle.modules.activation", fromlist=[""]),
