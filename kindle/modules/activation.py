@@ -6,6 +6,8 @@
 import ast
 from typing import Union
 
+import torch
+import torch.nn.functional as F
 from torch import nn
 
 
@@ -31,3 +33,33 @@ class Activation:
             return getattr(nn, self.name)(*self.args)
 
         return ast.literal_eval(self.name)()
+
+
+class SiLU(nn.Module):
+    """Export-friendly version of nn.SiLU()
+
+    SiLU https://arxiv.org/pdf/1606.08415.pdf
+    """
+
+    @staticmethod
+    def forward(x: torch.Tensor) -> torch.Tensor:
+        """Forward SiLU activation."""
+        return x * torch.sigmoid(x)
+
+
+class Hardswish(nn.Module):
+    """Export-friendly version of nn.Hardswish()"""
+
+    @staticmethod
+    def forward(x: torch.Tensor) -> torch.Tensor:
+        """Forward Hardswish activation."""
+        return x * F.hardtanh(x + 3, 0.0, 6.0) / 6.0
+
+
+class Mish(nn.Module):
+    """Mish https://github.com/digantamisra98/Mish."""
+
+    @staticmethod
+    def forward(x: torch.Tensor) -> torch.Tensor:
+        """Forward Mish activation."""
+        return x * F.softplus(x).tanh()
