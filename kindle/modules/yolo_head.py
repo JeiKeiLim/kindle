@@ -102,12 +102,12 @@ class YOLOHead(nn.Module):
 
             if not self.training:
                 if self.grid[i].shape[2:4] != x[i].shape[2:4]:
-                    self.grid[i] = self._make_grid(width, height).to(x[i].device)
-                else:
-                    self.grid[i] = self.grid[i].to(x[i].device)
+                    self.grid[i] = self._make_grid(width, height)
 
                 y = x[i].sigmoid()
-                box_xy = (y[..., 0:2] * 2.0 - 0.5 + self.grid[i]) * self.stride[i]
+                box_xy = (
+                    y[..., 0:2] * 2.0 - 0.5 + self.grid[i].to(x[i].device)
+                ) * self.stride[i]
                 box_wh = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # type: ignore
 
                 if self.out_xyxy:

@@ -163,7 +163,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
-|0.4.9|Fix ONNX export padding issue.|2021. 10. 13|
+|0.4.10|Fix ONNX export padding issue.|2021. 10. 13|
 |0.4.6|Add YOLOHead to choose coordinates format.|2021. 10. 09|
 |0.4.5|Add C3 Module|2021. 10. 08|
 |0.4.4|Fix YOLOHead module issue with anchor scaling|2021. 10. 08|
