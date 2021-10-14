@@ -33,7 +33,7 @@ class TestModelParser:
             os.path.join("tests", "test_configs", "show_case.yaml"),
             verbose=verbose,
         )
-        assert count_model_params(model) == 185298
+        assert count_model_params(model) == 185666
         assert model(TestModelParser.INPUT).shape == torch.Size([1, 10])
         assert self._validate_export_model(model)
 
@@ -99,8 +99,8 @@ class TestModelParser:
 if __name__ == "__main__":
     tester = TestModelParser()
     # tester.test_pretrained2(verbose=True)
-    tester.test_pretrained(verbose=True)
+    # tester.test_pretrained(verbose=True)
     # tester.test_nn_model(verbose=True)
-    # tester.test_show_case(verbose=True)
+    tester.test_show_case(verbose=True)
     # tester.test_gap_model(verbose=True)
     # tester.test_example(verbose=True)
