@@ -6,9 +6,10 @@
 |Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
 |Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
-|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
+|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]|
 |BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
-|C3|CSP Bottleneck with 3 Conv|[out_channels, shortcut, groups, expansion, activation]
+|C3|CSP Bottleneck with 3 Conv|[out_channels, shortcut, groups, expansion, activation]|
+|MV2Block|MobileNet v2 block|[out_channels, stride, expand_ratio, activation]|
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
@@ -68,7 +69,7 @@
 |out_channels|int| |Conv channels|
 |shortcut|bool|True|Use shortcut. Only applied when in_channels and out_channels are same.
 |groups|int|1|Group convolution size. If 1, no group convolution|
-|expansion|int|0.5|Expansion(squeeze) ratio.|
+|expansion|float|0.5|Expansion(squeeze) ratio.|
 |activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## BottleneckCSP
@@ -77,7 +78,7 @@
 |out_channels|int| |Conv channels|
 |shortcut|bool|True|Use shortcut. Only applied when in_channels and out_channels are same.
 |groups|int|1|Group convolution size. If 1, no group convolution|
-|expansion|int|0.5|Expansion(squeeze) ratio.|
+|expansion|float|0.5|Expansion(squeeze) ratio.|
 |activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## C3
@@ -87,6 +88,14 @@
 |shortcut|bool|True|Use shortcut. Only applied when in_channels and out_channels are same.
 |groups|int|1|Group convolution size. If 1, no group convolution|
 |expansion|int|0.5|Expansion(squeeze) ratio.|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
+
+## MV2Block
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|stride|int|1|Stride value. (1 or 2 only)|
+|expand_ratio|int|4|Expansion ratio.|
 |activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## AvgPool
