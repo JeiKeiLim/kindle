@@ -114,7 +114,9 @@ class Model(nn.Module):
 
             if hasattr(module, "activation"):
                 for activation in export_activations:
-                    if isinstance(module.activation, getattr(nn, activation)):
+                    if hasattr(nn, activation) and isinstance(
+                        module.activation, getattr(nn, activation)
+                    ):
                         if verbose:
                             print(
                                 f"Converting {module.activation} activation"

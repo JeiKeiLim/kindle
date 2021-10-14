@@ -7,7 +7,7 @@ from kindle.modules.concat import Concat
 from kindle.modules.conv import Conv, Focus
 from kindle.modules.dwconv import DWConv
 from kindle.modules.linear import Linear
-from kindle.modules.poolings import SPP, GlobalAvgPool
+from kindle.modules.poolings import SPP, SPPF, GlobalAvgPool
 from kindle.modules.yolo_head import YOLOHead
 
 __all__ = [
@@ -22,6 +22,7 @@ __all__ = [
     "Linear",
     "GlobalAvgPool",
     "SPP",
+    "SPPF",
     "Activation",
     "YOLOHead",
 ]

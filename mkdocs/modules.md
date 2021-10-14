@@ -13,6 +13,7 @@
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
 |SPP|Spatial Pyramid Pooling|[out_channels, [kernel_size1, kernel_size2, ...], activation]|
+|SPPF|Spatial Pyramid Pooling - Fast|[out_channels, kernel_size, activation]|
 |Flatten|Flatten|[]|
 |Concat|Concatenation|[dimension]|
 |Linear|Linear|[out_channels, activation]|
@@ -116,7 +117,14 @@
 |Argument name|Type|Default value|Description|
 |-------------|----|-------------|-----------|
 |out_channels|int| |Conv channels|
-|kernel_sizes|List[int]| |List of (n, n) kernel size|
+|kernel_sizes|List[int]|[5, 9, 13]|List of (n, n) kernel size|
+|activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
+
+## SPPF
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|out_channels|int| |Conv channels|
+|kernel_sizes|int|5|Kernel size. Default value(5) is equivalent (5, 9, 13) kernel sizes in SPP|
 |activation|str or None|"ReLU"|If None, no activation(Identity) is applied.|
 
 ## Flatten
