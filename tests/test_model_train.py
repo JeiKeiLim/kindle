@@ -169,6 +169,6 @@ def test_model_pretrained(force: bool = False):
 if __name__ == "__main__":
     # test_model_pretrained(force=True)
     # test_model_nn_model()
-    # test_model_showcase()
-    test_model_example()
+    test_model_showcase()
+    # test_model_example()
     # test_model_gap_model()

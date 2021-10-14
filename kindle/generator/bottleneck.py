@@ -67,3 +67,7 @@ class BottleneckCSPGenerator(BottleneckGenerator):
 
 class C3Generator(BottleneckCSPGenerator):
     """BottleneckC3 block generator."""
+
+
+class MV2BlockGenerator(BottleneckGenerator):
+    """MobileNet v2 block generator."""

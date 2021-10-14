@@ -2,7 +2,7 @@
 
 from kindle.modules.activation import Activation
 from kindle.modules.add import Add
-from kindle.modules.bottleneck import C3, Bottleneck, BottleneckCSP
+from kindle.modules.bottleneck import C3, Bottleneck, BottleneckCSP, MV2Block
 from kindle.modules.concat import Concat
 from kindle.modules.conv import Conv, Focus
 from kindle.modules.dwconv import DWConv
@@ -15,6 +15,7 @@ __all__ = [
     "Bottleneck",
     "BottleneckCSP",
     "C3",
+    "MV2Block",
     "Concat",
     "Conv",
     "DWConv",

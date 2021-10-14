@@ -118,8 +118,10 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |Conv|Conv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, groups, activation]|
 |DWConv|DWConv -> BatchNorm -> Activation|[out_channels, kernel_size, stride, padding, activation]|
 |Focus|Reshape x -> Conv -> Concat|[out_channels, kernel_size, stride, padding, activation]|
-|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]
+|Bottleneck|Expansion ConvBNAct -> ConvBNAct|[out_channels, shortcut, groups, expansion, activation]|
 |BottleneckCSP|CSP Bottleneck|[out_channels, shortcut, groups, expansion, activation]
+|C3|CSP Bottleneck with 3 Conv|[out_channels, shortcut, groups, expansion, activation]|
+|MV2Block|MobileNet v2 block|[out_channels, stride, expand_ratio, activation]|
 |AvgPool|Average pooling|[kernel_size, stride, padding]|
 |MaxPool|Max pooling|[kernel_size, stride, padding]|
 |GlobalAvgPool|Global Average Pooling|[]|
@@ -164,6 +166,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.12|Add MV2Block module|2021. 10. 14|
 |0.4.11|Add SPPF module in yolov5 v6.0|2021. 10. 13|
 |0.4.10|Fix ONNX export padding issue.|2021. 10. 13|
 |0.4.6|Add YOLOHead to choose coordinates format.|2021. 10. 09|

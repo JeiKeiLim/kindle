@@ -7,7 +7,8 @@
 from kindle.generator.add import AddGenerator
 from kindle.generator.base_generator import GeneratorAbstract, ModuleGenerator
 from kindle.generator.bottleneck import (BottleneckCSPGenerator,
-                                         BottleneckGenerator, C3Generator)
+                                         BottleneckGenerator, C3Generator,
+                                         MV2BlockGenerator)
 from kindle.generator.concat import ConcatGenerator
 from kindle.generator.conv import (ConvGenerator, DWConvGenerator,
                                    FocusGenerator)
@@ -31,6 +32,7 @@ __all__ = [
     "BottleneckGenerator",
     "BottleneckCSPGenerator",
     "C3Generator",
+    "MV2BlockGenerator",
     "ConcatGenerator",
     "ConvGenerator",
     "DWConvGenerator",

@@ -4,7 +4,7 @@
 - Contact: lim.jeikei@gmail.com
 """
 
-from typing import Union
+from typing import List, Union
 
 import torch
 from torch import nn
@@ -184,3 +184,68 @@ class C3(nn.Module):
         return self.conv3(
             torch.cat((self.bottleneck_c3(self.conv1(x)), self.conv2(x)), dim=1)
         )
+
+
+class MV2Block(nn.Module):
+    """MobileNet v2 block."""
+
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        stride: int = 1,
+        expand_ratio: int = 4,
+        activation: Union[str, None] = "ReLU",
+    ) -> None:
+        """MobileNet v2 block.
+
+        https://github.com/pytorch/vision/blob/972ca657416c5896ba6e0f5fe7c0d0f3e99e1087/torchvision/models/mobilenetv2.py
+
+        Args:
+            in_channels: number of incoming channels
+            out_channels: number of outgoing channels
+            stride: stride.
+            expand_ratio: expansion ratio.
+            activation: Name of the activation to use in convolution.
+        """
+        super().__init__()
+        self.stride = stride
+        assert stride in [1, 2]
+
+        hidden_dim = int(round(in_channels * expand_ratio))
+        self.use_res_connect = self.stride == 1 and in_channels == out_channels
+
+        layers: List[nn.Module] = []
+        if expand_ratio != 1:
+            # pw
+            layers.append(
+                Conv(in_channels, hidden_dim, kernel_size=1, activation=activation)
+            )
+
+        layers.extend(
+            [
+                # dw
+                Conv(
+                    hidden_dim,
+                    hidden_dim,
+                    kernel_size=3,
+                    stride=stride,
+                    groups=hidden_dim,
+                    activation=activation,
+                ),
+                # pw-linear
+                # TODO(jeikeilim): Add fuse forward here.
+                nn.Conv2d(hidden_dim, out_channels, 1, 1, 0, bias=False),
+                nn.BatchNorm2d(out_channels),
+            ]
+        )
+
+        self.conv = nn.Sequential(*layers)
+        self.out_channels = out_channels
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward MobileNet v2 block."""
+        if self.use_res_connect:
+            return x + self.conv(x)
+
+        return self.conv(x)
