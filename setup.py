@@ -33,6 +33,7 @@ setuptools.setup(
         "ptflops>=0.6.4",
         "timm>=0.4.5",
         "tabulate>=0.8.9",
+        "einops>=0.3.2",
     ],
     classifiers=[
         "Programming Language :: Python :: 3.6",

@@ -64,6 +64,7 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#pretrained">Pretrained</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#pretrainedfeaturemap">PretrainedFeatureMap</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#yolohead">YOLOHead</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#mobilevitblock">MobileViTBlock</a></li>
 </ul></li>
                 </ul>
             </nav>
@@ -211,6 +212,11 @@
 <td>YOLOHead</td>
 <td>YOLOv5 head module</td>
 <td>[n_classes, anchors, out_xyxy]</td>
+</tr>
+<tr>
+<td>MobileViTBlock</td>
+<td>MobileVit Block(experimental)</td>
+<td>[conv_channels, mlp_channels, depth, kernel_size, patch_size, dropout, activation]</td>
 </tr>
 </tbody>
 </table>
@@ -924,7 +930,62 @@
 <p class="admonition-title">Note</p>
 <p>[[-3, -2, -1], 1, YOLOHead, [80, [[100, 200, 200, 100, 200, 200], [50, 100, 100, 50, 100, 100], [10, 20, 20, 10, 20, 20]]]]</p>
 <p>This represents that YOLOHead takes inputs from previous 3 layers, detects 80 classes with 3 layers of 3 anchors.</p>
-</div></div>
+</div>
+<h2 id="mobilevitblock">MobileViTBlock</h2>
+<table>
+<thead>
+<tr>
+<th>Argument name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conv_channels</td>
+<td>int</td>
+<td></td>
+<td>number of channels in convolution</td>
+</tr>
+<tr>
+<td>mlp_channels</td>
+<td>int</td>
+<td></td>
+<td>number of channels in MLP</td>
+</tr>
+<tr>
+<td>depth</td>
+<td>int</td>
+<td></td>
+<td>depth of the transformer</td>
+</tr>
+<tr>
+<td>kernel_size</td>
+<td>int</td>
+<td>3</td>
+<td>(n, n) kernel size</td>
+</tr>
+<tr>
+<td>patch_size</td>
+<td>int or tuple</td>
+<td>2</td>
+<td>patch size to use in transformer.</td>
+</tr>
+<tr>
+<td>dropout</td>
+<td>float</td>
+<td>0.0</td>
+<td>Dropout probability used in Attention and MLP</td>
+</tr>
+<tr>
+<td>activation</td>
+<td>str or None</td>
+<td>SiLU</td>
+<td>If None, no activation(Identity) is applied.</td>
+</tr>
+</tbody>
+</table></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../usages/" title="Usages"><span>Previous</span></a></div>
