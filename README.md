@@ -138,6 +138,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
 |YOLOHead|YOLOv5 head module|[n_classes, anchors, out_xyxy]|
+|MobileViTBlock|MobileVit Block(experimental)|[conv_channels, mlp_channels, depth, kernel_size, patch_size, dropout, activation]
 
 * **nn.{module_name}** is currently experimental. This might change in the future release. Use with caution.
 * For the supported model of **Pretrained** module, please refer to [https://rwightman.github.io/pytorch-image-models/results](https://rwightman.github.io/pytorch-image-models/results)
@@ -166,6 +167,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.13|Add MobileViTBlock module|2021. 10. 18|
 |0.4.12|Add MV2Block module|2021. 10. 14|
 |0.4.11|Add SPPF module in yolov5 v6.0|2021. 10. 13|
 |0.4.10|Fix ONNX export padding issue.|2021. 10. 13|

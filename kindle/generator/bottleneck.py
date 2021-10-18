@@ -71,3 +71,19 @@ class C3Generator(BottleneckCSPGenerator):
 
 class MV2BlockGenerator(BottleneckGenerator):
     """MobileNet v2 block generator."""
+
+    def __call__(self, repeat: int = 1):
+        kwargs = self.kwargs
+        if repeat > 1:
+            module = []
+            out_channels = kwargs["out_channels"]
+
+            for _ in range(repeat):
+                module.append(self.base_module(**kwargs))
+                kwargs["stride"] = 1
+                kwargs["in_channels"] = out_channels
+                kwargs["out_channels"] = out_channels
+        else:
+            module = self.base_module(**kwargs)
+
+        return self._get_module(module)

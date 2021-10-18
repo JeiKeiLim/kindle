@@ -26,6 +26,7 @@
 |Pretrained|timm.create_model|[model_name, use_feature_maps, features_only, pretrained]|
 |PreTrainedFeatureMap|Bypass feature layer map from `Pretrained`|[feature_idx]|
 |YOLOHead|YOLOv5 head module|[n_classes, anchors, out_xyxy]|
+|MobileViTBlock|MobileVit Block(experimental)|[conv_channels, mlp_channels, depth, kernel_size, patch_size, dropout, activation]
 
 !!! Note
     nn.{module_name} is currently experimental. This might change in the future release. Use with caution.
@@ -203,4 +204,16 @@
     [[-3, -2, -1], 1, YOLOHead, [80, [[100, 200, 200, 100, 200, 200], [50, 100, 100, 50, 100, 100], [10, 20, 20, 10, 20, 20]]]]
 
     This represents that YOLOHead takes inputs from previous 3 layers, detects 80 classes with 3 layers of 3 anchors.
+
+## MobileViTBlock
+|Argument name|Type|Default value|Description|
+|-------------|----|-------------|-----------|
+|conv_channels|int| |number of channels in convolution|
+|mlp_channels|int| |number of channels in MLP|
+|depth|int| |depth of the transformer|
+|kernel_size|int| 3 |(n, n) kernel size|
+|patch_size|int or tuple| 2 |patch size to use in transformer.|
+|dropout|float|0.0|Dropout probability used in Attention and MLP|
+|activation|str or None|SiLU|If None, no activation(Identity) is applied.|
+
 

@@ -183,19 +183,22 @@ def test_yolo_head_export():
 
 
 def test_yolo_model_v3():
+    device = (
+        torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+    )
     model = YOLOModel(
         os.path.join("tests", "test_configs", "yolo_samplev3.yaml"),
         verbose=True,
         init_bias=True,
-    )
-    in_tensor = torch.rand((1, 3, 480, 380))
+    ).to(device)
+    in_tensor = torch.rand((1, 3, 512, 512)).to(device)
 
     out_tensor = model(in_tensor)
-    assert out_tensor[0].shape == (1, 3, 60, 48, 15)
-    assert out_tensor[1].shape == (1, 3, 30, 24, 15)
-    assert out_tensor[2].shape == (1, 3, 15, 12, 15)
+    assert out_tensor[0].shape == (1, 3, 64, 64, 15)
+    assert out_tensor[1].shape == (1, 3, 32, 32, 15)
+    assert out_tensor[2].shape == (1, 3, 16, 16, 15)
 
-    profiler = model.profile(n_run=1)
+    profiler = model.profile(n_run=100)
     n_param = profiler.get_parameter_numbers()
     n_macs = profiler.get_macs()
 
@@ -203,8 +206,32 @@ def test_yolo_model_v3():
     assert n_macs == 1316629568
 
 
+def test_yolo_model_mobilevit():
+    device = (
+        torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+    )
+    model = YOLOModel(
+        os.path.join("tests", "test_configs", "yolo_mobilevit_sample.yaml"),
+        verbose=True,
+        init_bias=True,
+    ).to(device)
+    in_tensor = torch.rand((1, 3, 512, 512)).to(device)
+
+    out_tensor = model(in_tensor)
+    assert out_tensor[0].shape == (1, 3, 64, 64, 15)
+    assert out_tensor[1].shape == (1, 3, 32, 32, 15)
+    assert out_tensor[2].shape == (1, 3, 16, 16, 15)
+
+    profiler = model.profile(n_run=100)
+    n_param = profiler.get_parameter_numbers()
+    n_macs = profiler.get_macs()
+
+    assert n_param == 4910455
+    assert n_macs == 1747833760
+
+
 if __name__ == "__main__":
-    test_yolo_head()
+    # test_yolo_head()
     # test_yolo_head_initialize_bias()
     # test_yolo_head_initialize_bias_class_probability()
     # test_yolo_head_fused()
@@ -212,3 +239,4 @@ if __name__ == "__main__":
     # test_yolo_head_xyxy()
     # test_yolo_head_export()
     test_yolo_model_v3()
+    test_yolo_model_mobilevit()
