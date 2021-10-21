@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
     <title>Tutorial &mdash; Kindle</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
-    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
     <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
@@ -26,11 +26,11 @@
             <div class="home">
                 <div class="title">
                     <button class="hamburger"></button>
-                    <a href=".." class="site-name"> Kindle</a>
+                    <a href="." class="site-name"> Kindle</a>
                 </div>
                 <div class="search">
                     <div role="search">
-    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
         <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
     </form>
 </div>
@@ -38,9 +38,9 @@
             </div>
             <nav class="nav">
                 <ul class="root">
-                    <li class="toctree-l1"><a class="nav-item" href="..">Home</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../functionality/">Functionality</a></li>
-                    <li class="toctree-l1 current"><a class="nav-item current" href="./">Tutorial</a>
+                    <li class="toctree-l1"><a class="nav-item" href="index.html">Home</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="functionality.html">Functionality</a></li>
+                    <li class="toctree-l1 current"><a class="nav-item current" href="tutorial.html">Tutorial</a>
 <ul class="subnav">
 <li class="toctree-l2"><a class="nav-item toc" href="#1-building-a-pytorch-model-with-yaml">1. Building a PyTorch model with yaml</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#2-design-custom-module-with-yaml">2. Design Custom Module with YAML</a></li>
@@ -48,23 +48,23 @@
 <li class="toctree-l2"><a class="nav-item toc" href="#4-utilize-pretrained-model">4. Utilize pretrained model</a></li>
 <li class="toctree-l2"><a class="nav-item toc" href="#5-make-object-detectiong-model-using-yolohead">5. Make object detectiong model using YOLOHead</a></li>
 </ul></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../usages/">Usages</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../modules/">Modules</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="usages.html">Usages</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="modules.html">Modules</a></li>
                 </ul>
             </nav>
             <div class="repo">
     <div class="link">
         <a href="https://github.com/JeiKeiLim/kindle/" class="fa fa-github"> GitHub</a>
     </div>
-    <div class="previous"><a href="../functionality/">&laquo; Previous</a></div>
-    <div class="next"><a href="../usages/">Next &raquo;</a></div>
+    <div class="previous"><a href="functionality.html">&laquo; Previous</a></div>
+    <div class="next"><a href="usages.html">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
         <main>
             <div class="home-top">
                 <button class="hamburger"></button>
-                <a href=".." class="site-name"> Kindle</a>
+                <a href="." class="site-name"> Kindle</a>
             </div>
             <div id="main">
                 <nav class="breadcrumbs">
@@ -121,9 +121,9 @@ When <code>input_size</code> is not provided, Kindle assumes that the model can 
 <li>
 <p><code>repeat</code>: Repeat number of the module. Ex) When Conv module has <code>repeat: 2</code>, this module will perform Conv operation twice (Input -&gt; Conv -&gt; Conv). </p>
 </li>
-<li><code>module_name</code>: Name of the module. Pre-built modules are descried <a href="../modules/">here</a>.</li>
-<li><code>module_arguments</code>: Arguments of the module. Each module takes pre-defined arguments. Pre-built module arguments are descried <a href="../modules/">here</a>.</li>
-<li><code>module_keyword_arguments</code>: Keyword argument of the module. Pre-built module keyword arguments are descried <a href="../modules/">here</a>.</li>
+<li><code>module_name</code>: Name of the module. Pre-built modules are descried <a href="modules.html">here</a>.</li>
+<li><code>module_arguments</code>: Arguments of the module. Each module takes pre-defined arguments. Pre-built module arguments are descried <a href="modules.html">here</a>.</li>
+<li><code>module_keyword_arguments</code>: Keyword argument of the module. Pre-built module keyword arguments are descried <a href="modules.html">here</a>.</li>
 </ul>
 </li>
 </ul>
@@ -547,8 +547,8 @@ Model Summary: <span class="m">281</span> layers, <span class="m">7</span>,087,8
 </div></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../functionality/" title="Functionality"><span>Previous</span></a></div>
-        <div class="next"><a href="../usages/" title="Usages"><span>Next</span></a></div>
+        <div class="previous"><a href="functionality.html" title="Functionality"><span>Previous</span></a></div>
+        <div class="next"><a href="usages.html" title="Usages"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>
@@ -560,9 +560,9 @@ Model Summary: <span class="m">281</span> layers, <span class="m">7</span>,087,8
             </div>
         </main>
     </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme.js"></script>
-    <script src="../search/main.js"></script>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js"></script>
+    <script src="search/main.js"></script>
 </body>
 
 </html>

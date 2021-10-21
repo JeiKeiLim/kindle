@@ -31,17 +31,17 @@ jobs:
       # Install requirements
       - name: Install requirements
         shell: bash -l {0}
-        run: make dev
+        run: ./run_check.sh init-dev
 
       - name: Formatting check
         shell: bash -l {0}
-        run: make format
+        run: ./run_check.sh format
 
       - name: Linting check
         shell: bash -l {0}
-        run: make lint
+        run: ./run_check.sh lint
       
       - name: Unit test
         shell: bash -l {0}
-        run: make test
+        run: ./run_check.sh test
 

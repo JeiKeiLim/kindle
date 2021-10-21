@@ -40,7 +40,7 @@ $ pip install kindle
 ### Install `kindle` for PyTorch under 1.7.1 (not tested)
 ```shell
 pip install kindle --no-deps
-pip install tqdm ptflops timm tabulate
+pip install tqdm ptflops timm tabulate einops
 ```
 
 ## Install from source
@@ -167,7 +167,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
-|0.4.13|Add MobileViTBlock module|2021. 10. 18|
+|0.4.14|Add MobileViTBlock module|2021. 10. 18|
 |0.4.12|Add MV2Block module|2021. 10. 14|
 |0.4.11|Add SPPF module in yolov5 v6.0|2021. 10. 13|
 |0.4.10|Fix ONNX export padding issue.|2021. 10. 13|
