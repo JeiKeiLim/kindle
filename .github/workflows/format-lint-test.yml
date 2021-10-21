@@ -31,7 +31,7 @@ jobs:
       # Install requirements
       - name: Install requirements
         shell: bash -l {0}
-        run: ./run_check.sh init
+        run: ./run_check.sh init-dev
 
       - name: Formatting check
         shell: bash -l {0}
