@@ -40,7 +40,7 @@ $ pip install kindle
 ### Install `kindle` for PyTorch under 1.7.1 (not tested)
 ```shell
 pip install kindle --no-deps
-pip install tqdm ptflops timm tabulate
+pip install tqdm ptflops timm tabulate einops
 ```
 
 ## Install from source
