@@ -38,9 +38,10 @@ CMD_LIST[clean]="rm -r .mypy_cache .pytest_cache"
 CMD_LIST[build]="mkdir -p dist && \
                  touch dist/empty && \
                  rm dist/* && \
+                 rm dist/empty && \
                  python3 setup.py sdist bdist_wheel && \
                  python3 -m twine check dist/*"
-CMD_LIST[deploy]="python3 -m twine uploade dist/*"
+CMD_LIST[deploy]="python3 -m twine upload dist/*"
 
 exitCode=0
 for _arg in $@
