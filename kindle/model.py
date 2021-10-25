@@ -142,7 +142,16 @@ class Model(nn.Module):
             if isinstance(module, (Conv, DWConv, Focus)) and hasattr(
                 module, "batch_norm"
             ):
-                module.conv = fuse_conv_and_batch_norm(module.conv, module.batch_norm)
+                if isinstance(
+                    module, nn.Sequential
+                ):  # Tensor decomposed conv will be converted into nn.Sequential of 3 convs
+                    module.conv[-1] = fuse_conv_and_batch_norm(  # type: ignore
+                        module.conv[-1], module.batch_norm  # type: ignore
+                    )
+                else:
+                    module.conv = fuse_conv_and_batch_norm(
+                        module.conv, module.batch_norm
+                    )
                 delattr(module, "batch_norm")
                 module.forward = module.fuseforward  # type: ignore
 

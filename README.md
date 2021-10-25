@@ -167,6 +167,7 @@ Model Summary: 20 layers, 137,862 parameters, 137,862 gradients
 # Recent changes
 |Version|Description|Date|
 |-------|-----------|----|
+|0.4.15|Fix decomposed conv fuse|2021. 10. 25|
 |0.4.14|Add MobileViTBlock module|2021. 10. 18|
 |0.4.12|Add MV2Block module|2021. 10. 14|
 |0.4.11|Add SPPF module in yolov5 v6.0|2021. 10. 13|
