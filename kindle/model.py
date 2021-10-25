@@ -21,6 +21,7 @@ from kindle.generator.yolo_head import YOLOHeadGenerator
 from kindle.modules import Conv, DWConv, Focus, YOLOHead
 from kindle.utils.model_utils import ModelInfoLogger, ModelProfiler
 from kindle.utils.torch_utils import fuse_conv_and_batch_norm
+from kindle.version import __version__ as KINDLE_VERSION
 
 
 class Model(nn.Module):
@@ -41,6 +42,7 @@ class Model(nn.Module):
         self.model_parser = ModelParser(cfg=cfg, verbose=verbose)
         self.model = self.model_parser.model
         self.output_save = self.model_parser.output_save
+        self.kindle_version = KINDLE_VERSION
 
     def forward(
         self,
@@ -143,7 +145,7 @@ class Model(nn.Module):
                 module, "batch_norm"
             ):
                 if isinstance(
-                    module, nn.Sequential
+                    module.conv, nn.Sequential
                 ):  # Tensor decomposed conv will be converted into nn.Sequential of 3 convs
                     module.conv[-1] = fuse_conv_and_batch_norm(  # type: ignore
                         module.conv[-1], module.batch_norm  # type: ignore
