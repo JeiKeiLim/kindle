@@ -23,6 +23,7 @@ class YOLOHead(nn.Module):
         n_channels: Tuple[int, ...],
         strides: Tuple[float, ...],
         out_xyxy: bool = False,
+        inplace: bool = True,
     ) -> None:
         """Initialize YOLOHead.
 
@@ -35,6 +36,7 @@ class YOLOHead(nn.Module):
         """
         super().__init__()
 
+        self.inplace = inplace
         self.out_xyxy = out_xyxy
         # Number of classes
         self.n_classes = n_classes
@@ -55,13 +57,12 @@ class YOLOHead(nn.Module):
             torch.zeros(1) for _ in range(self.n_layers)
         ]  # Grid initialization
 
-        self.anchor_grid: torch.Tensor
+        self.anchor_grid: List[torch.Tensor] = [
+            torch.zeros(1) for _ in range(self.n_layers)
+        ]
 
         anchor_buf = torch.tensor(anchors).float().view(self.n_layers, -1, 2)
         self.register_buffer("anchors", anchor_buf)  # (n_layer, n_anchors, 2)
-        self.register_buffer(
-            "anchor_grid", anchor_buf.clone().view(self.n_layers, 1, -1, 1, 1, 2)
-        )  # (n_layers, 1, n_anchors, 1, 1, 2)
 
         # TODO(jeikeilim): Conv type can be choosable.
         self.conv = nn.ModuleList(
@@ -102,27 +103,28 @@ class YOLOHead(nn.Module):
 
             if not self.training:
                 if self.grid[i].shape[2:4] != x[i].shape[2:4]:
-                    self.grid[i] = self._make_grid(width, height)
+                    self.grid[i], self.anchor_grid[i] = self._make_grid(
+                        width, height, i
+                    )
 
                 y = x[i].sigmoid()
-                box_xy = (
-                    y[..., 0:2] * 2.0 - 0.5 + self.grid[i].to(x[i].device)
-                ) * self.stride[i]
-                box_wh = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # type: ignore
+                if self.inplace:
+                    y[..., 0:2] = (
+                        y[..., 0:2] * 2.0 - 0.5 + self.grid[i]
+                    ) * self.stride[i]
+                    y[..., 2:4] = (y[..., 2:4] * 2.0) ** 2 * self.anchor_grid[i]
+                else:
+                    box_xy = (y[..., 0:2] * 2.0 - 0.5 + self.grid[i]) * self.stride[i]
+                    box_wh = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # type: ignore
+                    y = torch.cat((box_xy, box_wh, y[..., 4:]), -1)
 
                 if self.out_xyxy:
-                    box_xyxy = self._xywh2xyxy(box_xy, box_wh).view(batch_size, -1, 4)
-                    y = torch.cat(
-                        (box_xyxy, y[..., 4:].view(batch_size, -1, self.n_outputs - 4)),
-                        -1,
+                    half_wh = y[..., 2:4] / 2.0
+                    y[..., 0:2], y[..., 2:4] = (
+                        y[..., 0:2] - half_wh,
+                        y[..., 0:2] + half_wh,
                     )
-                else:
-                    box_xy = box_xy.view(batch_size, -1, 2)
-                    box_wh = box_wh.view(batch_size, -1, 2)
-                    score = y[..., 4:].view(batch_size, -1, self.n_classes + 1)
-                    y = torch.cat((box_xy, box_wh, score), -1)
-
-                preds.append(y)
+                preds.append(y.view(batch_size, -1, self.n_outputs))
 
         if self.training:
             return x
@@ -134,13 +136,6 @@ class YOLOHead(nn.Module):
     def export(self) -> nn.Module:
         """Make YOLOHead module to export friendly version."""
         self.is_export = True
-
-        # Somehow, ONNX can't compute shapes for registered buffer.
-        anchor_grid: torch.Tensor = self.anchor_grid
-        delattr(self, "anchor_grid")
-        self.anchor_grid = (  # pylint: disable=attribute-defined-outside-init
-            anchor_grid.clone()
-        )
 
         return self
 
@@ -182,11 +177,37 @@ class YOLOHead(nn.Module):
 
             conv.bias = nn.Parameter(bias.view(-1), requires_grad=True)
 
-    @staticmethod
-    def _make_grid(width: int = 20, height: int = 20) -> torch.Tensor:
-        """Make grid."""
-        y_grid, x_grid = torch.meshgrid([torch.arange(height), torch.arange(width)])
-        return torch.stack((x_grid, y_grid), 2).view((1, 1, height, width, 2)).float()
+    def _make_grid(
+        self, width: int = 20, height: int = 20, idx: int = 0
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Make grid.
+
+        Args:
+            width: width size of the grid.
+            height: height size of the grid.
+            idx: index number of the grid anchor.
+
+        Return:
+            grid and anchor_grid
+        """
+        anchor = self.anchors[idx]  # type: ignore  # pylint: disable=no-member
+        device = anchor.device
+
+        y_grid, x_grid = torch.meshgrid(
+            [torch.arange(height, device=device), torch.arange(width, device=device)]
+        )
+        grid = (
+            torch.stack((x_grid, y_grid), 2)
+            .expand((1, self.n_anchors, height, width, 2))
+            .float()
+        )
+        anchor_grid = (
+            (anchor.clone() * self.stride[idx])
+            .view((1, self.n_anchors, 1, 1, 2))
+            .expand((1, self.n_anchors, height, width, 2))
+            .float()
+        )
+        return grid, anchor_grid
 
     @staticmethod
     def _xywh2xyxy(  # pylint: disable=invalid-name
